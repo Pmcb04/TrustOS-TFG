@@ -1,0 +1,7 @@
+1. Un asset al menos tiene que tener una propiedad inmutable llamada location
+
+2. El hijo ni el padre de un asset no puede ser el mismo
+
+3. El padre del primer substep corresponde al padre del step padre, el hijo del ultimo substep corresponde al hijo del step padre 
+
+4. Los usuarios implicados en un Tranfer tiene que ser el owner de ese Trasfer y el usuario al que se va a transferir

@@ -1,0 +1,123 @@
+@gmf
+@namespace(uri="http://www.example.org/TraceabilityMM", prefix="TraceabilityMM")
+package TraceabilityMM;
+
+@gmf.node(label="assetID", border.width="0", border.color="220,31,31", border.style="solid")
+@"http://www.obeo.fr/dsl/dnc/archetype"(archetype="MomentInterval")
+class Rol extends Asset {
+
+  @gmf.link(target.decoration="arrow", style="dash", color="220,31,31")
+  ref Permission[+] permissions;
+
+  @gmf.link(target.decoration="arrow", style="dash", color="220,31,31")
+  ref Node[+] access;
+}
+
+@gmf.node(label="assetID", border.width="0", border.color="0,38,174", border.style="solid")
+@"http://www.obeo.fr/dsl/dnc/archetype"(archetype="Description")
+class TransactionConf extends Asset {
+}
+
+@emf.gen(fileExtensions="trustd")
+@gmf.diagram(label="name", diagram.extension="trust", model.extension="trustd")
+@"http://www.obeo.fr/dsl/dnc/archetype"(archetype="Role")
+class System {
+  attr String name;
+  val Asset[*] assets;
+  val Rol[*] roles;
+  val Permission[*] permissions;
+  val Node[*] nodes;
+}
+
+@gmf.node(label="name", label.icon="false", figure="svg", svg.uri="platform:/plugin/TFG-TrustOS-Traceability/icons/SVG/permission.svg")
+@"http://www.obeo.fr/dsl/dnc/archetype"(archetype="MomentInterval")
+class Permission {
+
+  @gmf.link(target.decoration="arr Lens: Enable/Disable Info in errorow", style="dash", color="141,28,167")
+  ref Property[+] property;
+  attr String name;
+}
+
+@gmf.node(label="name", label.icon="false", figure="svg", svg.uri="platform:/plugin/TFG-TrustOS-Traceability/icons/SVG/view.svg")
+@"http://www.obeo.fr/dsl/dnc/archetype"(archetype="MomentInterval")
+class View extends Permission {
+  attr boolean view_all;
+}
+
+@gmf.node(label="name", label.icon="false", figure="svg", svg.uri="platform:/plugin/TFG-TrustOS-Traceability/icons/SVG/create.svg")
+@"http://www.obeo.fr/dsl/dnc/archetype"(archetype="MomentInterval")
+class Create extends Permission {
+}
+
+@gmf.node(label="name", label.icon="false", figure="svg", svg.uri="platform:/plugin/TFG-TrustOS-Traceability/icons/SVG/edit.svg")
+@"http://www.obeo.fr/dsl/dnc/archetype"(archetype="MomentInterval")
+class Edit extends Permission {
+  attr boolean edit_all;
+}
+
+@gmf.node(label="assetID", border.width="0", border.color="0,174,101", border.style="solid")
+@"http://www.obeo.fr/dsl/dnc/archetype"(archetype="Description")
+class ProductConf extends Asset {
+}
+
+@gmf.node(label="name", label.icon="false", figure="svg", svg.uri="platform:/plugin/TFG-TrustOS-Traceability/icons/SVG/transaction.svg")
+@"http://www.obeo.fr/dsl/dnc/archetype"(archetype="Description")
+class Transaction extends Node {
+
+  @gmf.link(target.decoration="arrow", style="dash", color="0,38,174")
+  ref TransactionConf[1] transactionconf;
+  ref Product[*]#next previous;
+
+  @gmf.link(source="previous", source.decoration="closedarrow", target="next", target.decoration="filledclosedarrow", style="solid")
+  ref Product[+]#previous next;
+  
+  @gmf.link(target.decoration="arrow", style="dash", color="0,38,174")
+  ref Transaction[*] subtransaction;
+}
+
+@gmf.node(label="name", label.icon="false", figure="svg", svg.uri="platform:/plugin/TFG-TrustOS-Traceability/icons/SVG/product.svg")
+@"http://www.obeo.fr/dsl/dnc/archetype"(archetype="Description")
+class Product extends Node {
+
+  @gmf.link(target.decoration="arrow", style="dash", color="0,174,101")
+  ref ProductConf[1] productconf;
+
+  @gmf.link(source="previous", source.decoration="closedarrow", target="next", target.decoration="filledclosedarrow", style="solid")
+  ref Transaction[*]#previous next;
+  ref Transaction[*]#next previous;
+}
+
+enum EType {
+  String = 0;
+  Number = 1;
+  Boolean = 2;
+}
+
+@gmf.node(label="name", label.icon="false", figure="svg", svg.uri="platform:/plugin/TFG-TrustOS-Traceability/icons/SVG/attribute.svg")
+class Attribute extends Property {
+  attr EType[1] type;
+}
+
+@gmf.node(label="name", border.width="0", border.color="236,239,66", border.style="solid")
+class Object extends Property {
+
+  @gmf.compartment(collapsible="true", layout="free")
+  val Property[2..*] properties;
+}
+
+abstract class Node {
+  attr String name;
+}
+
+abstract class Asset {
+  id attr String[1] assetID;
+
+  @gmf.compartment(collapsible="true", layout="free")
+  val Property[*] properties;
+}
+
+abstract class Property {
+  attr String[1] name;
+  attr boolean mutable = true;
+}
+

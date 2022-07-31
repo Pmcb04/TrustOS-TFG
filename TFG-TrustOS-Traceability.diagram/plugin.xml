@@ -1,0 +1,826 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?eclipse version="3.0"?>
+<!--
+
+-->
+<plugin>
+
+   <extension point="org.eclipse.team.core.fileTypes" id="repo-ftype">
+      <?gmfgen generated="true"?>
+      <fileTypes type="text" extension="trust"/>
+   </extension>
+
+   <extension point="org.eclipse.emf.ecore.extension_parser" id="resource-factory">
+      <?gmfgen generated="true"?>
+      <parser
+         type="trust"
+         class="org.eclipse.gmf.runtime.emf.core.resources.GMFResourceFactory">
+      </parser>
+   </extension>
+
+   <extension point="org.eclipse.ui.editors" id="gmf-editor">
+      <?gmfgen generated="true"?>
+      <editor
+         id="TraceabilityMM.diagram.part.TraceabilityMMDiagramEditorID"
+         name="%editorName"
+         icon="icons/obj16/TraceabilityMMDiagramFile.gif"
+         extensions="trust"
+         default="true"
+         class="TraceabilityMM.diagram.part.TraceabilityMMDiagramEditor"
+         matchingStrategy="TraceabilityMM.diagram.part.TraceabilityMMMatchingStrategy"
+         contributorClass="TraceabilityMM.diagram.part.TraceabilityMMDiagramActionBarContributor">
+      </editor>
+   </extension>
+   
+   <extension point="org.eclipse.ui.contexts" id="ui-context">
+      <?gmfgen generated="true"?>
+      <context
+         description="%context.description"
+         id="TraceabilityMM.diagram.ui.diagramContext"
+         name="%context.name"
+         parentId="org.eclipse.gmf.runtime.diagram.ui.diagramContext">
+      </context>
+   </extension>
+
+   <extension point="org.eclipse.ui.newWizards" id="creation-wizard">
+      <?gmfgen generated="true"?>
+  	  <wizard
+  	     name="%newWizardName"
+  	     icon="icons/obj16/TraceabilityMMDiagramFile.gif"
+  	     category="org.eclipse.ui.Examples"
+  	     class="TraceabilityMM.diagram.part.TraceabilityMMCreationWizard"
+  	     id="TraceabilityMM.diagram.part.TraceabilityMMCreationWizardID">
+  	  	 <description>%newWizardDesc</description>  
+      </wizard>
+   </extension>
+
+   <extension point="org.eclipse.ui.popupMenus" id="init-diagram-action">
+      <?gmfgen generated="true"?>
+      <objectContribution
+            id="TFG-TrustOS-Traceability.diagram.InitDiagram"
+            nameFilter="*.trustd"
+            objectClass="org.eclipse.core.resources.IFile">
+         <action
+               label="%initDiagramActionLabel"
+               class="TraceabilityMM.diagram.part.TraceabilityMMInitDiagramFileAction"
+               menubarPath="additions"
+               enablesFor="1"
+               id="TFG-TrustOS-Traceability.diagram.InitDiagramAction">
+         </action>
+      </objectContribution>
+   </extension>
+	
+   <extension point="org.eclipse.gmf.runtime.common.ui.services.action.globalActionHandlerProviders" id="global-actions">
+      <?gmfgen generated="true"?>
+      <GlobalActionHandlerProvider
+         class="org.eclipse.gmf.runtime.diagram.ui.providers.DiagramGlobalActionHandlerProvider"
+         id="TraceabilityMMPresentation">
+         <Priority name="Lowest"/>
+         <ViewId id="TraceabilityMM.diagram.part.TraceabilityMMDiagramEditorID">
+            <ElementType class="org.eclipse.gmf.runtime.diagram.ui.editparts.IGraphicalEditPart">
+               <GlobalActionId actionId="delete"/>
+            </ElementType>
+            <ElementType class="org.eclipse.gmf.runtime.diagram.ui.editparts.DiagramEditPart">
+               <GlobalActionId actionId="save"/>
+            </ElementType>
+            <ElementType class="org.eclipse.gmf.runtime.diagram.ui.editparts.IGraphicalEditPart">
+               <GlobalActionId actionId="save">
+               </GlobalActionId>
+            </ElementType>        
+         </ViewId>
+      </GlobalActionHandlerProvider>
+      <GlobalActionHandlerProvider
+         class="org.eclipse.gmf.runtime.diagram.ui.printing.render.providers.DiagramWithPrintGlobalActionHandlerProvider"
+         id="TraceabilityMMPresentationPrint">
+         <Priority name="Lowest"/>
+         <ViewId id="TraceabilityMM.diagram.part.TraceabilityMMDiagramEditorID">
+            <ElementType class="org.eclipse.gmf.runtime.diagram.ui.editparts.IGraphicalEditPart">
+               <GlobalActionId actionId="print"/>
+            </ElementType>
+         </ViewId>
+      </GlobalActionHandlerProvider>
+      <GlobalActionHandlerProvider
+         class="org.eclipse.gmf.runtime.diagram.ui.providers.ide.providers.DiagramIDEGlobalActionHandlerProvider"
+         id="TraceabilityMMPresentationIDE">
+         <Priority name="Lowest"/>
+         <ViewId id="TraceabilityMM.diagram.part.TraceabilityMMDiagramEditorID">
+            <ElementType class="org.eclipse.gmf.runtime.diagram.ui.editparts.IGraphicalEditPart">
+               <GlobalActionId actionId="bookmark"/>
+            </ElementType>
+         </ViewId>
+      </GlobalActionHandlerProvider>
+      <GlobalActionHandlerProvider
+            class="org.eclipse.gmf.runtime.diagram.ui.render.providers.DiagramUIRenderGlobalActionHandlerProvider"
+            id="TraceabilityMMRender">
+         <Priority name="Lowest"/>
+         <ViewId id="TraceabilityMM.diagram.part.TraceabilityMMDiagramEditorID">
+            <ElementType class="org.eclipse.gmf.runtime.diagram.ui.editparts.IGraphicalEditPart">
+               <GlobalActionId actionId="cut"/>
+               <GlobalActionId actionId="copy"/>
+               <GlobalActionId actionId="paste"/>
+            </ElementType>
+         </ViewId>
+      </GlobalActionHandlerProvider>
+   </extension>
+
+
+   <extension point="org.eclipse.gmf.runtime.common.ui.services.markerNavigationProviders" id="markers-navigation">
+      <?gmfgen generated="true"?>
+      <MarkerNavigationProvider class="TraceabilityMM.diagram.providers.TraceabilityMMMarkerNavigationProvider">
+         <MarkerType name="TFG-TrustOS-Traceability.diagram.diagnostic"/>
+         <Priority name="Lowest"/>
+      </MarkerNavigationProvider>
+   </extension>
+
+   <extension id="diagnostic" name="TraceabilityMM Plugin problems" point="org.eclipse.core.resources.markers">
+      <?gmfgen generated="true"?>
+      <super type="org.eclipse.core.resources.problemmarker"/>
+      <super type="org.eclipse.gmf.runtime.common.ui.services.marker"/>
+      <persistent value="true"/>
+   </extension>   
+
+   <extension id="validationDecoratorProvider" name="ValidationDecorations" point="org.eclipse.gmf.runtime.diagram.ui.decoratorProviders">
+      <?gmfgen generated="true"?>
+      <decoratorProvider class="TraceabilityMM.diagram.providers.TraceabilityMMValidationDecoratorProvider">
+         <Priority name="Lowest"/>
+         <object class="org.eclipse.gmf.runtime.diagram.ui.editparts.IPrimaryEditPart(org.eclipse.gmf.runtime.diagram.ui)" id="PRIMARY_VIEW"/>
+         <context decoratorTargets="PRIMARY_VIEW"/>
+      </decoratorProvider>
+   </extension>
+
+   <extension point="org.eclipse.core.runtime.preferences" id="prefs">
+      <?gmfgen generated="true"?>
+      <initializer class="TraceabilityMM.diagram.preferences.DiagramPreferenceInitializer"/>
+   </extension>
+
+   <extension point="org.eclipse.ui.preferencePages" id="prefpages">
+      <?gmfgen generated="true"?>
+      <page
+            id="TFG-TrustOS-Traceability.diagram.general"
+            name="%prefpage.TFG-TrustOS-Traceability.diagram.general"
+            class="TraceabilityMM.diagram.preferences.DiagramGeneralPreferencePage">
+      </page>
+      <page
+            id="TFG-TrustOS-Traceability.diagram.appearance"
+            name="%prefpage.TFG-TrustOS-Traceability.diagram.appearance"
+            category="TFG-TrustOS-Traceability.diagram.general"
+            class="TraceabilityMM.diagram.preferences.DiagramAppearancePreferencePage">
+      </page>
+      <page
+            id="TFG-TrustOS-Traceability.diagram.connections"
+            name="%prefpage.TFG-TrustOS-Traceability.diagram.connections"
+            category="TFG-TrustOS-Traceability.diagram.general"
+            class="TraceabilityMM.diagram.preferences.DiagramConnectionsPreferencePage">
+      </page>
+      <page
+            id="TFG-TrustOS-Traceability.diagram.printing"
+            name="%prefpage.TFG-TrustOS-Traceability.diagram.printing"
+            category="TFG-TrustOS-Traceability.diagram.general"
+            class="TraceabilityMM.diagram.preferences.DiagramPrintingPreferencePage">
+      </page>
+      <page
+            id="TFG-TrustOS-Traceability.diagram.rulersAndGrid"
+            name="%prefpage.TFG-TrustOS-Traceability.diagram.rulersAndGrid"
+            category="TFG-TrustOS-Traceability.diagram.general"
+            class="TraceabilityMM.diagram.preferences.DiagramRulersAndGridPreferencePage">
+      </page>
+   </extension>
+
+   <extension point="org.eclipse.ui.views.properties.tabbed.propertyContributor" id="prop-contrib">
+      <?gmfgen generated="true"?>
+      <propertyContributor
+            contributorId="TFG-TrustOS-Traceability.diagram"
+            labelProvider="TraceabilityMM.diagram.sheet.TraceabilityMMSheetLabelProvider">
+         <propertyCategory category="domain"/>
+         <propertyCategory category="visual"/>
+         <propertyCategory category="extra"/>
+      </propertyContributor>
+   </extension>
+
+   <extension point="org.eclipse.ui.views.properties.tabbed.propertyTabs" id="proptabs">
+      <?gmfgen generated="true"?>   
+      <propertyTabs contributorId="TFG-TrustOS-Traceability.diagram">
+         <propertyTab
+             category="visual"
+             id="property.tab.AppearancePropertySection"
+             label="%tab.appearance"/>
+          <propertyTab
+             category="visual"
+             id="property.tab.DiagramPropertySection"
+             label="%tab.diagram"/>
+          <propertyTab
+             category="domain"
+             id="property.tab.domain"
+             label="%tab.domain"/>
+      </propertyTabs>
+   </extension>
+
+   <extension point="org.eclipse.ui.views.properties.tabbed.propertySections" id="propsections">
+      <?gmfgen generated="true"?>   
+      <propertySections contributorId="TFG-TrustOS-Traceability.diagram">
+         <propertySection id="property.section.ConnectorAppearancePropertySection" 
+            filter="org.eclipse.gmf.runtime.diagram.ui.properties.filters.ConnectionEditPartPropertySectionFilter" 
+            class="org.eclipse.gmf.runtime.diagram.ui.properties.sections.appearance.ConnectionAppearancePropertySection" 
+            tab="property.tab.AppearancePropertySection">
+         </propertySection>
+         <propertySection id="property.section.ShapeColorAndFontPropertySection" 
+            filter="org.eclipse.gmf.runtime.diagram.ui.properties.filters.ShapeEditPartPropertySectionFilter" 
+            class="org.eclipse.gmf.runtime.diagram.ui.properties.sections.appearance.ShapeColorsAndFontsPropertySection" 
+            tab="property.tab.AppearancePropertySection">
+         </propertySection> 
+         <propertySection id="property.section.DiagramColorsAndFontsPropertySection" 
+            filter="org.eclipse.gmf.runtime.diagram.ui.properties.filters.DiagramEditPartPropertySectionFilter" 
+            class="org.eclipse.gmf.runtime.diagram.ui.properties.sections.appearance.DiagramColorsAndFontsPropertySection" 
+            tab="property.tab.AppearancePropertySection">
+         </propertySection>     
+         <propertySection id="property.section.RulerGridPropertySection" 
+            filter="org.eclipse.gmf.runtime.diagram.ui.properties.filters.DiagramEditPartPropertySectionFilter" 
+            class="org.eclipse.gmf.runtime.diagram.ui.properties.sections.grid.RulerGridPropertySection" 
+            tab="property.tab.DiagramPropertySection">
+         </propertySection>     
+         <propertySection
+            id="property.section.domain" 
+            tab="property.tab.domain"
+            class="TraceabilityMM.diagram.sheet.TraceabilityMMPropertySection">
+            <input type="org.eclipse.gmf.runtime.notation.View"/>
+            <input type="org.eclipse.gef.EditPart"/>
+            <input type="TraceabilityMM.diagram.navigator.TraceabilityMMAbstractNavigatorItem"/>
+         </propertySection>
+      </propertySections>
+   </extension>
+
+   <extension point="org.eclipse.gmf.runtime.diagram.core.viewProviders" id="view-provider">
+      <?gmfgen generated="true"?>
+      <viewProvider class="TraceabilityMM.diagram.providers.TraceabilityMMViewProvider">
+         <Priority name="Lowest"/>
+         <object id="referencing-diagrams" class="org.eclipse.gmf.runtime.notation.Diagram">
+            <method name="getType()" value="trustd"/>
+         </object>
+         <context viewClass="org.eclipse.gmf.runtime.notation.Node" containerViews="referencing-diagrams"/>
+         <context viewClass="org.eclipse.gmf.runtime.notation.Diagram" semanticHints="TraceabilityMM"/>
+         <context viewClass="org.eclipse.gmf.runtime.notation.Node" semanticHints="2001,2002,2003,2004,2005,2006,2007,2010,2009,3001,3002,3003,3004"/>
+         <context viewClass="org.eclipse.gmf.runtime.notation.Edge" semanticHints="4004,4005,4006,4007,4003,4009,4008,4002"/>
+      </viewProvider>
+   </extension>
+
+   <extension point="org.eclipse.gmf.runtime.diagram.ui.editpartProviders" id="ep-provider">
+      <?gmfgen generated="true"?>
+      <editpartProvider class="TraceabilityMM.diagram.providers.TraceabilityMMEditPartProvider">
+         <Priority name="Lowest"/>
+         <object class="org.eclipse.gmf.runtime.notation.Diagram" id="generated-diagram">
+            <method name="getType()" value="TraceabilityMM"/>
+         </object>
+         <object class="org.eclipse.gmf.runtime.notation.Node" id="generated-nodes">
+            <method name="getType()" value="2001,2002,2003,2004,2005,2006,2007,2010,2009,3001,3002,3003,3004"/>
+         </object>
+         <object class="org.eclipse.gmf.runtime.notation.Edge" id="generated-links">
+            <method name="getType()" value="4004,4005,4006,4007,4003,4009,4008,4002"/>
+         </object>
+         <object class="org.eclipse.gmf.runtime.notation.Node" id="generated-labels">
+            <method name="getType()" value="5001,5002,5003,5004,5005,5006,5007,5010,5009,5011,5012,5013,5014"/>
+         </object>
+         <object class="org.eclipse.gmf.runtime.notation.Node" id="generated-compartments">
+            <method name="getType()" value="7001,7004,7005,7002,7003"/>
+         </object>
+         <context views="generated-diagram,generated-nodes,generated-links,generated-labels,generated-compartments"/>
+      </editpartProvider>
+   </extension>
+
+   
+   <extension point="org.eclipse.gmf.runtime.emf.ui.modelingAssistantProviders" id="modelassist-provider">
+      <?gmfgen generated="true"?>
+      <modelingAssistantProvider class="TraceabilityMM.diagram.providers.assistants.TraceabilityMMModelingAssistantProviderOfSystemEditPart">
+         <Priority name="Lowest"/>
+         <object class="TraceabilityMM.diagram.edit.parts.SystemEditPart" id="System_1000"/>
+         <context elements="System_1000"/>
+      </modelingAssistantProvider>
+            <modelingAssistantProvider class="TraceabilityMM.diagram.providers.assistants.TraceabilityMMModelingAssistantProviderOfRolEditPart">
+         <Priority name="Lowest"/>
+         <object class="TraceabilityMM.diagram.edit.parts.RolEditPart" id="Rol_2001"/>
+         <context elements="Rol_2001"/>
+      </modelingAssistantProvider>
+            <modelingAssistantProvider class="TraceabilityMM.diagram.providers.assistants.TraceabilityMMModelingAssistantProviderOfTransactionConfEditPart">
+         <Priority name="Lowest"/>
+         <object class="TraceabilityMM.diagram.edit.parts.TransactionConfEditPart" id="TransactionConf_2002"/>
+         <context elements="TransactionConf_2002"/>
+      </modelingAssistantProvider>
+            <modelingAssistantProvider class="TraceabilityMM.diagram.providers.assistants.TraceabilityMMModelingAssistantProviderOfProductConfEditPart">
+         <Priority name="Lowest"/>
+         <object class="TraceabilityMM.diagram.edit.parts.ProductConfEditPart" id="ProductConf_2003"/>
+         <context elements="ProductConf_2003"/>
+      </modelingAssistantProvider>
+            <modelingAssistantProvider class="TraceabilityMM.diagram.providers.assistants.TraceabilityMMModelingAssistantProviderOfViewEditPart">
+         <Priority name="Lowest"/>
+         <object class="TraceabilityMM.diagram.edit.parts.ViewEditPart" id="View_2004"/>
+         <context elements="View_2004"/>
+      </modelingAssistantProvider>
+            <modelingAssistantProvider class="TraceabilityMM.diagram.providers.assistants.TraceabilityMMModelingAssistantProviderOfCreateEditPart">
+         <Priority name="Lowest"/>
+         <object class="TraceabilityMM.diagram.edit.parts.CreateEditPart" id="Create_2005"/>
+         <context elements="Create_2005"/>
+      </modelingAssistantProvider>
+            <modelingAssistantProvider class="TraceabilityMM.diagram.providers.assistants.TraceabilityMMModelingAssistantProviderOfEditEditPart">
+         <Priority name="Lowest"/>
+         <object class="TraceabilityMM.diagram.edit.parts.EditEditPart" id="Edit_2006"/>
+         <context elements="Edit_2006"/>
+      </modelingAssistantProvider>
+            <modelingAssistantProvider class="TraceabilityMM.diagram.providers.assistants.TraceabilityMMModelingAssistantProviderOfTransactionEditPart">
+         <Priority name="Lowest"/>
+         <object class="TraceabilityMM.diagram.edit.parts.TransactionEditPart" id="Transaction_2007"/>
+         <context elements="Transaction_2007"/>
+      </modelingAssistantProvider>
+            <modelingAssistantProvider class="TraceabilityMM.diagram.providers.assistants.TraceabilityMMModelingAssistantProviderOfProductEditPart">
+         <Priority name="Lowest"/>
+         <object class="TraceabilityMM.diagram.edit.parts.ProductEditPart" id="Product_2010"/>
+         <context elements="Product_2010"/>
+      </modelingAssistantProvider>
+            <modelingAssistantProvider class="TraceabilityMM.diagram.providers.assistants.TraceabilityMMModelingAssistantProviderOfPermissionEditPart">
+         <Priority name="Lowest"/>
+         <object class="TraceabilityMM.diagram.edit.parts.PermissionEditPart" id="Permission_2009"/>
+         <context elements="Permission_2009"/>
+      </modelingAssistantProvider>
+            <modelingAssistantProvider class="TraceabilityMM.diagram.providers.assistants.TraceabilityMMModelingAssistantProviderOfAttributeEditPart">
+         <Priority name="Lowest"/>
+         <object class="TraceabilityMM.diagram.edit.parts.AttributeEditPart" id="Attribute_3001"/>
+         <context elements="Attribute_3001"/>
+      </modelingAssistantProvider>
+            <modelingAssistantProvider class="TraceabilityMM.diagram.providers.assistants.TraceabilityMMModelingAssistantProviderOfObjectEditPart">
+         <Priority name="Lowest"/>
+         <object class="TraceabilityMM.diagram.edit.parts.ObjectEditPart" id="Object_3002"/>
+         <context elements="Object_3002"/>
+      </modelingAssistantProvider>
+            <modelingAssistantProvider class="TraceabilityMM.diagram.providers.assistants.TraceabilityMMModelingAssistantProviderOfAttribute2EditPart">
+         <Priority name="Lowest"/>
+         <object class="TraceabilityMM.diagram.edit.parts.Attribute2EditPart" id="Attribute_3003"/>
+         <context elements="Attribute_3003"/>
+      </modelingAssistantProvider>
+            <modelingAssistantProvider class="TraceabilityMM.diagram.providers.assistants.TraceabilityMMModelingAssistantProviderOfObject2EditPart">
+         <Priority name="Lowest"/>
+         <object class="TraceabilityMM.diagram.edit.parts.Object2EditPart" id="Object_3004"/>
+         <context elements="Object_3004"/>
+      </modelingAssistantProvider>
+      
+   </extension>
+
+
+   <extension point="org.eclipse.gmf.runtime.common.ui.services.iconProviders" id="icon-provider">
+      <?gmfgen generated="true"?>
+      <IconProvider class="TraceabilityMM.diagram.providers.TraceabilityMMIconProvider">
+         <Priority name="Low"/>
+      </IconProvider>
+   </extension>
+
+   <extension point="org.eclipse.gmf.runtime.common.ui.services.parserProviders" id="parser-provider">
+      <?gmfgen generated="true"?>
+      <ParserProvider class="TraceabilityMM.diagram.providers.TraceabilityMMParserProvider">
+         <Priority name="Lowest"/>
+      </ParserProvider>
+   </extension>
+
+   <extension point="org.eclipse.gmf.runtime.diagram.ui.decoratorProviders" id="decorator-provider">
+      <?gmfgen generated="true"?>
+      <decoratorProvider class="TraceabilityMM.diagram.providers.TraceabilityMMShortcutsDecoratorProvider">
+         <Priority name="Lowest"/>
+         <object class="org.eclipse.gmf.runtime.notation.Node(org.eclipse.gmf.runtime.notation)" id="generated-top-nodes">
+            <method name="getType()" value="2001,2002,2003,2004,2005,2006,2007,2010,2009"/>
+         </object>
+         <context decoratorTargets="generated-top-nodes"/>
+      </decoratorProvider>
+   </extension>
+
+   <extension point="org.eclipse.gmf.runtime.emf.type.core.elementTypes" id="element-types">
+      <?gmfgen generated="true"?>
+      <metamodel nsURI="http://www.example.org/TraceabilityMM">
+         <metamodelType
+               id="TFG-TrustOS-Traceability.diagram.System_1000"
+               name="%metatype.name.System_1000"
+               kind="org.eclipse.gmf.runtime.emf.type.core.IHintedType"
+               eclass="System"
+               edithelper="TraceabilityMM.diagram.edit.helpers.SystemEditHelper">
+            <param name="semanticHint" value="1000"/>
+         </metamodelType>
+      </metamodel>
+      <metamodel nsURI="http://www.example.org/TraceabilityMM">
+         <metamodelType
+               id="TFG-TrustOS-Traceability.diagram.Rol_2001"
+               name="%metatype.name.Rol_2001"
+               kind="org.eclipse.gmf.runtime.emf.type.core.IHintedType"
+               eclass="Rol"
+               edithelper="TraceabilityMM.diagram.edit.helpers.RolEditHelper">
+            <param name="semanticHint" value="2001"/>
+         </metamodelType>
+      </metamodel>
+      <metamodel nsURI="http://www.example.org/TraceabilityMM">
+         <metamodelType
+               id="TFG-TrustOS-Traceability.diagram.TransactionConf_2002"
+               name="%metatype.name.TransactionConf_2002"
+               kind="org.eclipse.gmf.runtime.emf.type.core.IHintedType"
+               eclass="TransactionConf"
+               edithelper="TraceabilityMM.diagram.edit.helpers.TransactionConfEditHelper">
+            <param name="semanticHint" value="2002"/>
+         </metamodelType>
+      </metamodel>
+      <metamodel nsURI="http://www.example.org/TraceabilityMM">
+         <metamodelType
+               id="TFG-TrustOS-Traceability.diagram.ProductConf_2003"
+               name="%metatype.name.ProductConf_2003"
+               kind="org.eclipse.gmf.runtime.emf.type.core.IHintedType"
+               eclass="ProductConf"
+               edithelper="TraceabilityMM.diagram.edit.helpers.ProductConfEditHelper">
+            <param name="semanticHint" value="2003"/>
+         </metamodelType>
+      </metamodel>
+      <metamodel nsURI="http://www.example.org/TraceabilityMM">
+         <metamodelType
+               id="TFG-TrustOS-Traceability.diagram.View_2004"
+               name="%metatype.name.View_2004"
+               kind="org.eclipse.gmf.runtime.emf.type.core.IHintedType"
+               eclass="View"
+               edithelper="TraceabilityMM.diagram.edit.helpers.ViewEditHelper">
+            <param name="semanticHint" value="2004"/>
+         </metamodelType>
+      </metamodel>
+      <metamodel nsURI="http://www.example.org/TraceabilityMM">
+         <metamodelType
+               id="TFG-TrustOS-Traceability.diagram.Create_2005"
+               name="%metatype.name.Create_2005"
+               kind="org.eclipse.gmf.runtime.emf.type.core.IHintedType"
+               eclass="Create"
+               edithelper="TraceabilityMM.diagram.edit.helpers.CreateEditHelper">
+            <param name="semanticHint" value="2005"/>
+         </metamodelType>
+      </metamodel>
+      <metamodel nsURI="http://www.example.org/TraceabilityMM">
+         <metamodelType
+               id="TFG-TrustOS-Traceability.diagram.Edit_2006"
+               name="%metatype.name.Edit_2006"
+               kind="org.eclipse.gmf.runtime.emf.type.core.IHintedType"
+               eclass="Edit"
+               edithelper="TraceabilityMM.diagram.edit.helpers.EditEditHelper">
+            <param name="semanticHint" value="2006"/>
+         </metamodelType>
+      </metamodel>
+      <metamodel nsURI="http://www.example.org/TraceabilityMM">
+         <metamodelType
+               id="TFG-TrustOS-Traceability.diagram.Transaction_2007"
+               name="%metatype.name.Transaction_2007"
+               kind="org.eclipse.gmf.runtime.emf.type.core.IHintedType"
+               eclass="Transaction"
+               edithelper="TraceabilityMM.diagram.edit.helpers.TransactionEditHelper">
+            <param name="semanticHint" value="2007"/>
+         </metamodelType>
+      </metamodel>
+      <metamodel nsURI="http://www.example.org/TraceabilityMM">
+         <metamodelType
+               id="TFG-TrustOS-Traceability.diagram.Product_2010"
+               name="%metatype.name.Product_2010"
+               kind="org.eclipse.gmf.runtime.emf.type.core.IHintedType"
+               eclass="Product"
+               edithelper="TraceabilityMM.diagram.edit.helpers.ProductEditHelper">
+            <param name="semanticHint" value="2010"/>
+         </metamodelType>
+      </metamodel>
+      <metamodel nsURI="http://www.example.org/TraceabilityMM">
+         <metamodelType
+               id="TFG-TrustOS-Traceability.diagram.Permission_2009"
+               name="%metatype.name.Permission_2009"
+               kind="org.eclipse.gmf.runtime.emf.type.core.IHintedType"
+               eclass="Permission"
+               edithelper="TraceabilityMM.diagram.edit.helpers.PermissionEditHelper">
+            <param name="semanticHint" value="2009"/>
+         </metamodelType>
+      </metamodel>
+      <metamodel nsURI="http://www.example.org/TraceabilityMM">
+         <metamodelType
+               id="TFG-TrustOS-Traceability.diagram.Attribute_3001"
+               name="%metatype.name.Attribute_3001"
+               kind="org.eclipse.gmf.runtime.emf.type.core.IHintedType"
+               eclass="Attribute"
+               edithelper="TraceabilityMM.diagram.edit.helpers.AttributeEditHelper">
+            <param name="semanticHint" value="3001"/>
+         </metamodelType>
+      </metamodel>
+      <metamodel nsURI="http://www.example.org/TraceabilityMM">
+         <metamodelType
+               id="TFG-TrustOS-Traceability.diagram.Object_3002"
+               name="%metatype.name.Object_3002"
+               kind="org.eclipse.gmf.runtime.emf.type.core.IHintedType"
+               eclass="Object"
+               edithelper="TraceabilityMM.diagram.edit.helpers.ObjectEditHelper">
+            <param name="semanticHint" value="3002"/>
+         </metamodelType>
+      </metamodel>
+      <metamodel nsURI="http://www.example.org/TraceabilityMM">
+         <specializationType
+               id="TFG-TrustOS-Traceability.diagram.Attribute_3003"
+               name="%metatype.name.Attribute_3003"
+               kind="org.eclipse.gmf.runtime.emf.type.core.IHintedType">
+            <specializes id="TFG-TrustOS-Traceability.diagram.Attribute_3001"/>
+            <param name="semanticHint" value="3003"/>
+         </specializationType>
+      </metamodel>
+      <metamodel nsURI="http://www.example.org/TraceabilityMM">
+         <specializationType
+               id="TFG-TrustOS-Traceability.diagram.Object_3004"
+               name="%metatype.name.Object_3004"
+               kind="org.eclipse.gmf.runtime.emf.type.core.IHintedType">
+            <specializes id="TFG-TrustOS-Traceability.diagram.Object_3002"/>
+            <param name="semanticHint" value="3004"/>
+         </specializationType>
+      </metamodel>
+      <metamodel nsURI="http://www.example.org/TraceabilityMM">
+         <specializationType
+               id="TFG-TrustOS-Traceability.diagram.RolPermissions_4004"
+               name="%metatype.name.RolPermissions_4004"
+               kind="org.eclipse.gmf.runtime.emf.type.core.IHintedType">
+            <specializes id="org.eclipse.gmf.runtime.emf.type.core.null"/>
+            <param name="semanticHint" value="4004"/>
+         </specializationType>
+      </metamodel>
+      <metamodel nsURI="http://www.example.org/TraceabilityMM">
+         <specializationType
+               id="TFG-TrustOS-Traceability.diagram.RolAccess_4005"
+               name="%metatype.name.RolAccess_4005"
+               kind="org.eclipse.gmf.runtime.emf.type.core.IHintedType">
+            <specializes id="org.eclipse.gmf.runtime.emf.type.core.null"/>
+            <param name="semanticHint" value="4005"/>
+         </specializationType>
+      </metamodel>
+      <metamodel nsURI="http://www.example.org/TraceabilityMM">
+         <specializationType
+               id="TFG-TrustOS-Traceability.diagram.PermissionProperty_4006"
+               name="%metatype.name.PermissionProperty_4006"
+               kind="org.eclipse.gmf.runtime.emf.type.core.IHintedType">
+            <specializes id="org.eclipse.gmf.runtime.emf.type.core.null"/>
+            <param name="semanticHint" value="4006"/>
+         </specializationType>
+      </metamodel>
+      <metamodel nsURI="http://www.example.org/TraceabilityMM">
+         <specializationType
+               id="TFG-TrustOS-Traceability.diagram.TransactionTransactionconf_4007"
+               name="%metatype.name.TransactionTransactionconf_4007"
+               kind="org.eclipse.gmf.runtime.emf.type.core.IHintedType">
+            <specializes id="org.eclipse.gmf.runtime.emf.type.core.null"/>
+            <param name="semanticHint" value="4007"/>
+         </specializationType>
+      </metamodel>
+      <metamodel nsURI="http://www.example.org/TraceabilityMM">
+         <specializationType
+               id="TFG-TrustOS-Traceability.diagram.TransactionNext_4003"
+               name="%metatype.name.TransactionNext_4003"
+               kind="org.eclipse.gmf.runtime.emf.type.core.IHintedType">
+            <specializes id="org.eclipse.gmf.runtime.emf.type.core.null"/>
+            <param name="semanticHint" value="4003"/>
+         </specializationType>
+      </metamodel>
+      <metamodel nsURI="http://www.example.org/TraceabilityMM">
+         <specializationType
+               id="TFG-TrustOS-Traceability.diagram.TransactionSubtransaction_4009"
+               name="%metatype.name.TransactionSubtransaction_4009"
+               kind="org.eclipse.gmf.runtime.emf.type.core.IHintedType">
+            <specializes id="org.eclipse.gmf.runtime.emf.type.core.null"/>
+            <param name="semanticHint" value="4009"/>
+         </specializationType>
+      </metamodel>
+      <metamodel nsURI="http://www.example.org/TraceabilityMM">
+         <specializationType
+               id="TFG-TrustOS-Traceability.diagram.ProductProductconf_4008"
+               name="%metatype.name.ProductProductconf_4008"
+               kind="org.eclipse.gmf.runtime.emf.type.core.IHintedType">
+            <specializes id="org.eclipse.gmf.runtime.emf.type.core.null"/>
+            <param name="semanticHint" value="4008"/>
+         </specializationType>
+      </metamodel>
+      <metamodel nsURI="http://www.example.org/TraceabilityMM">
+         <specializationType
+               id="TFG-TrustOS-Traceability.diagram.ProductNext_4002"
+               name="%metatype.name.ProductNext_4002"
+               kind="org.eclipse.gmf.runtime.emf.type.core.IHintedType">
+            <specializes id="org.eclipse.gmf.runtime.emf.type.core.null"/>
+            <param name="semanticHint" value="4002"/>
+         </specializationType>
+      </metamodel>
+   </extension>
+
+   <extension point="org.eclipse.gmf.runtime.emf.type.core.elementTypeBindings" id="element-types-bindings">
+      <?gmfgen generated="true"?>
+      <clientContext id="TFG-TrustOS-Traceability.diagram.TypeContext">
+         <enablement>
+            <test
+               property="org.eclipse.gmf.runtime.emf.core.editingDomain"
+               value="TFG-TrustOS-Traceability.diagram.EditingDomain"/>
+         </enablement>
+      </clientContext> 
+      <binding context="TFG-TrustOS-Traceability.diagram.TypeContext">
+         <elementType ref="TFG-TrustOS-Traceability.diagram.System_1000"/>
+         <elementType ref="TFG-TrustOS-Traceability.diagram.Rol_2001"/>
+         <elementType ref="TFG-TrustOS-Traceability.diagram.TransactionConf_2002"/>
+         <elementType ref="TFG-TrustOS-Traceability.diagram.ProductConf_2003"/>
+         <elementType ref="TFG-TrustOS-Traceability.diagram.View_2004"/>
+         <elementType ref="TFG-TrustOS-Traceability.diagram.Create_2005"/>
+         <elementType ref="TFG-TrustOS-Traceability.diagram.Edit_2006"/>
+         <elementType ref="TFG-TrustOS-Traceability.diagram.Transaction_2007"/>
+         <elementType ref="TFG-TrustOS-Traceability.diagram.Product_2010"/>
+         <elementType ref="TFG-TrustOS-Traceability.diagram.Permission_2009"/>
+         <elementType ref="TFG-TrustOS-Traceability.diagram.Attribute_3001"/>
+         <elementType ref="TFG-TrustOS-Traceability.diagram.Object_3002"/>
+         <elementType ref="TFG-TrustOS-Traceability.diagram.Attribute_3003"/>
+         <elementType ref="TFG-TrustOS-Traceability.diagram.Object_3004"/>
+         <elementType ref="TFG-TrustOS-Traceability.diagram.RolPermissions_4004"/>
+         <elementType ref="TFG-TrustOS-Traceability.diagram.RolAccess_4005"/>
+         <elementType ref="TFG-TrustOS-Traceability.diagram.PermissionProperty_4006"/>
+         <elementType ref="TFG-TrustOS-Traceability.diagram.TransactionTransactionconf_4007"/>
+         <elementType ref="TFG-TrustOS-Traceability.diagram.TransactionNext_4003"/>
+         <elementType ref="TFG-TrustOS-Traceability.diagram.TransactionSubtransaction_4009"/>
+         <elementType ref="TFG-TrustOS-Traceability.diagram.ProductProductconf_4008"/>
+         <elementType ref="TFG-TrustOS-Traceability.diagram.ProductNext_4002"/>
+         <advice ref="org.eclipse.gmf.runtime.diagram.core.advice.notationDepdendents"/>
+      </binding>
+   </extension>
+	   <extension point="org.eclipse.core.expressions.propertyTesters" id="navigator-proptest.isURIEditorInput">
+      <?gmfgen generated="true"?>
+       <propertyTester
+           id="TFG-TrustOS-Traceability.diagram.URIEditorInputPropertyTester"
+           type="org.eclipse.emf.common.ui.URIEditorInput"
+           namespace="TFG-TrustOS-Traceability.diagram"
+           properties="isURIEditorInput"
+           class="TraceabilityMM.diagram.part.TraceabilityMMUriEditorInputTester">
+       </propertyTester>
+   </extension>
+
+	   <extension point="org.eclipse.core.expressions.propertyTesters" id="navigator-proptest.isShortcut">
+      <?gmfgen generated="true"?>
+       <propertyTester
+           id="TFG-TrustOS-Traceability.diagram.ShortcutPropertyTester"
+           type="org.eclipse.gmf.runtime.notation.View"
+           namespace="TFG-TrustOS-Traceability.diagram"
+           properties="isShortcut"
+           class="TraceabilityMM.diagram.part.TraceabilityMMShortcutPropertyTester">
+       </propertyTester>
+   </extension>
+
+	   <extension point="org.eclipse.ui.navigator.viewer" id="navigator-viewbinding">
+      <?gmfgen generated="true"?>
+      <viewerContentBinding viewerId="org.eclipse.ui.navigator.ProjectExplorer">
+         <includes>
+            <contentExtension pattern="TFG-TrustOS-Traceability.diagram.resourceContent"/>
+			<contentExtension pattern="TFG-TrustOS-Traceability.diagram.domainResourceContent"/>
+            <contentExtension pattern="TFG-TrustOS-Traceability.diagram.navigatorLinkHelper"/>
+         </includes>
+      </viewerContentBinding>
+      <viewerActionBinding viewerId="org.eclipse.ui.navigator.ProjectExplorer">
+         <includes>
+            <actionExtension pattern="TFG-TrustOS-Traceability.diagram.navigatorActionProvider"/>
+         </includes>
+      </viewerActionBinding>
+   </extension>
+
+   <extension point="org.eclipse.ui.navigator.navigatorContent" id="navigator-content">
+      <?gmfgen generated="true"?>
+      <navigatorContent
+            id="TFG-TrustOS-Traceability.diagram.resourceContent" 
+            name="%navigatorContentName" 
+            priority="normal" 
+            contentProvider="TraceabilityMM.diagram.navigator.TraceabilityMMNavigatorContentProvider" 
+            labelProvider="TraceabilityMM.diagram.navigator.TraceabilityMMNavigatorLabelProvider"
+            icon="icons/obj16/TraceabilityMMDiagramFile.gif"
+            activeByDefault="true">
+         <triggerPoints>
+            <or>
+	           <and>
+    	          <instanceof value="org.eclipse.core.resources.IFile"/>
+        	      <test property="org.eclipse.core.resources.extension" value="trust"/>
+               </and>
+               <instanceof value="TraceabilityMM.diagram.navigator.TraceabilityMMAbstractNavigatorItem"/>
+           	   <adapt type="org.eclipse.gmf.runtime.notation.View">
+           	      <test property="TFG-TrustOS-Traceability.diagram.isShortcut"/>
+           	   </adapt>
+            </or>
+         </triggerPoints>
+         <possibleChildren>
+            <or>
+         	   <instanceof value="TraceabilityMM.diagram.navigator.TraceabilityMMAbstractNavigatorItem"/>
+           	   <adapt type="org.eclipse.gmf.runtime.notation.View">
+           	      <test property="TFG-TrustOS-Traceability.diagram.isShortcut"/>
+           	   </adapt>
+            </or>
+         </possibleChildren>
+         <commonSorter 
+               id="TFG-TrustOS-Traceability.diagram.navigatorSorter" 
+               class="TraceabilityMM.diagram.navigator.TraceabilityMMNavigatorSorter">
+            <parentExpression>
+               <or>
+	              <and>
+    	             <instanceof value="org.eclipse.core.resources.IFile"/>
+        	         <test property="org.eclipse.core.resources.extension" value="trust"/>
+                  </and>
+                  <instanceof value="TraceabilityMM.diagram.navigator.TraceabilityMMAbstractNavigatorItem"/>
+               </or>
+            </parentExpression>
+         </commonSorter>
+      </navigatorContent>
+      <navigatorContent
+            id="TFG-TrustOS-Traceability.diagram.domainResourceContent" 
+            name="%domainNavigatorContentName" 
+            priority="normal" 
+            contentProvider="TraceabilityMM.diagram.navigator.TraceabilityMMDomainNavigatorContentProvider" 
+            labelProvider="TraceabilityMM.diagram.navigator.TraceabilityMMDomainNavigatorLabelProvider"
+            icon="icons/obj16/TraceabilityMMDiagramFile.gif"
+            activeByDefault="true">
+         <triggerPoints>
+            <or>
+	           <and>
+    	          <instanceof value="org.eclipse.core.resources.IFile"/>
+        	      <test property="org.eclipse.core.resources.extension" value="trustd"/>
+               </and>
+               <instanceof value="TraceabilityMM.diagram.navigator.TraceabilityMMDomainNavigatorItem"/>
+            </or>
+         </triggerPoints>
+         <possibleChildren>
+            <instanceof value="TraceabilityMM.diagram.navigator.TraceabilityMMDomainNavigatorItem"/>
+         </possibleChildren>
+      </navigatorContent>
+      <actionProvider
+            id="TFG-TrustOS-Traceability.diagram.navigatorActionProvider"
+            class="TraceabilityMM.diagram.navigator.TraceabilityMMNavigatorActionProvider">
+         <enablement>
+            <or>
+               <instanceof value="TraceabilityMM.diagram.navigator.TraceabilityMMAbstractNavigatorItem"/>
+           	   <adapt type="org.eclipse.gmf.runtime.notation.View">
+           	      <test property="TFG-TrustOS-Traceability.diagram.isShortcut"/>
+           	   </adapt>
+            </or>
+         </enablement>
+      </actionProvider>
+   </extension>
+   
+	   <extension point="org.eclipse.ui.navigator.linkHelper" id="navigator-linkhelper">
+      <?gmfgen generated="true"?>
+      <linkHelper
+            id="TFG-TrustOS-Traceability.diagram.navigatorLinkHelper"
+            class="TraceabilityMM.diagram.navigator.TraceabilityMMNavigatorLinkHelper">
+         <editorInputEnablement>
+            <and>
+               <instanceof value="org.eclipse.emf.common.ui.URIEditorInput"/>
+               <test property="TFG-TrustOS-Traceability.diagram.isURIEditorInput"/>
+            </and>
+         </editorInputEnablement>
+         <selectionEnablement>
+            <instanceof value="TraceabilityMM.diagram.navigator.TraceabilityMMAbstractNavigatorItem"/>
+         </selectionEnablement>
+      </linkHelper>
+   </extension>
+   <extension point="org.eclipse.ui.commands" id="update-cmd">
+      <?gmfgen generated="true"?>
+      <command
+         categoryId="org.eclipse.ui.category.edit"
+         defaultHandler="TraceabilityMM.diagram.part.TraceabilityMMDiagramUpdateCommand"
+         description="%update.diagram.description"
+         id="TraceabilityMM.diagram.updateDiagram"
+         name="%update.diagram.name"/>
+   </extension>
+   
+   <extension point="org.eclipse.ui.bindings" id="update-cmd-binding">
+      <?gmfgen generated="true"?>
+      <key 
+         commandId="TraceabilityMM.diagram.updateDiagram"
+         contextId="TraceabilityMM.diagram.ui.diagramContext"
+         schemeId="org.eclipse.ui.defaultAcceleratorConfiguration"
+         sequence="F5"/>
+   </extension>
+
+   <extension point="org.eclipse.ui.menus" id="context-menus">
+      <?gmfgen generated="true"?>
+      <!-- menuContribution locationURI="menu:org.eclipse.ui.main.menu?after=">
+      </menuContribution>
+      <menuContribution locationURI="toolbar:org.eclipse.ui.main.toolbar?after=">
+      </menuContribution -->
+      <menuContribution locationURI="popup:org.eclipse.gmf.runtime.diagram.ui.DiagramEditorContextMenu">
+         <command commandId="TFG-TrustOS-Traceability.diagram.LoadResourceAction">
+            <visibleWhen>
+               <and>
+                  <with variable="activePartId"><equals value="TraceabilityMM.diagram.part.TraceabilityMMDiagramEditorID"/></with>
+                  <with variable="selection"><iterate ifEmpty="false"> 
+                     <instanceof value="TraceabilityMM.diagram.edit.parts.SystemEditPart"/>
+                  </iterate></with>
+               </and>
+            </visibleWhen>
+         </command>
+      </menuContribution>
+   </extension>
+
+   <extension point="org.eclipse.ui.commands" id="menu-commands">
+      <?gmfgen generated="true"?>
+      <category id="TraceabilityMM.diagram.part.TraceabilityMMDiagramEditorID" name="%cmdcategory.name" description="%cmdcategory.desc"/>
+      <command id="TFG-TrustOS-Traceability.diagram.LoadResourceAction"
+         name="Load Resource"
+         categoryId="TraceabilityMM.diagram.part.TraceabilityMMDiagramEditorID"
+         defaultHandler="TraceabilityMM.diagram.part.LoadResourceAction"/>
+   </extension>
+
+   <extension point="org.eclipse.ui.handlers" id="menu-handlers">
+      <?gmfgen generated="true"?>
+   </extension>
+
+   <!-- optionally, specify keybindings -->
+</plugin>

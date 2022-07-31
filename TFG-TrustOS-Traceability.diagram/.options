@@ -1,0 +1,7 @@
+# Tracing options for the TFG-TrustOS-Traceability.diagram plug-in
+
+# Common issues
+TFG-TrustOS-Traceability.diagram/debug=false
+
+# Visual IDs
+TFG-TrustOS-Traceability.diagram/debug/visualID=false

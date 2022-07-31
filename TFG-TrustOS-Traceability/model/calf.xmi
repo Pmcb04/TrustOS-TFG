@@ -1,0 +1,117 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<TraceabilityMM:System
+    xmi:version="2.0"
+    xmlns:xmi="http://www.omg.org/XMI"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xmlns:TraceabilityMM="http://www.example.org/TraceabilityMM"
+    name="calf">
+  <assets xsi:type="TraceabilityMM:TransactionConf"
+      name="Farm">
+    <properties
+        name="year"/>
+  </assets>
+  <assets xsi:type="TraceabilityMM:TransactionConf"
+      name="Born calf">
+    <properties
+        name="birthday"/>
+  </assets>
+  <assets xsi:type="TraceabilityMM:TransactionConf"
+      name="vacunnate">
+    <properties
+        name="vaccine"/>
+    <properties
+        name="date"/>
+  </assets>
+  <assets xsi:type="TraceabilityMM:TransactionConf"
+      name="Sacrifice">
+    <properties
+        name="date"/>
+  </assets>
+  <assets xsi:type="TraceabilityMM:TransactionConf"
+      name="sell">
+    <properties
+        name="to"/>
+    <properties
+        name="from"/>
+  </assets>
+  <assets xsi:type="TraceabilityMM:ProductConf"
+      name="package">
+    <properties
+        name="date_packaged"/>
+    <properties
+        name="barcode"/>
+    <properties
+        name="day_of:expirity"/>
+  </assets>
+  <assets xsi:type="TraceabilityMM:ProductConf"
+      name="Calf">
+    <properties
+        name="weight"/>
+  </assets>
+  <assets xsi:type="TraceabilityMM:ProductConf"
+      name="steak">
+    <properties
+        name="date"/>
+    <properties
+        name="weight"/>
+  </assets>
+  <roles name="Rancher"
+      permissions="//@permission.0 //@permission.1 //@permission.2"/>
+  <roles name="Veterinarian"
+      permissions="//@permission.3 //@permission.4"/>
+  <roles name="Slaghterhouse"/>
+  <roles name="Seller"/>
+  <permission
+      property="//@assets.6/@properties.0"/>
+  <permission
+      property="//@assets.0/@properties.0"/>
+  <permission
+      property="//@assets.1/@properties.0"/>
+  <permission
+      xsi:type="TraceabilityMM:Edit"
+      property="//@assets.2/@properties.0"/>
+  <permission
+      xsi:type="TraceabilityMM:Edit"
+      property="//@assets.2/@properties.1"/>
+  <nodes xsi:type="TraceabilityMM:Product"
+      name="calf"
+      productconf="//@assets.6"/>
+  <nodes xsi:type="TraceabilityMM:Product"
+      name="Rib"
+      productconf="//@assets.7"
+      fathers="//@nodes.4"/>
+  <nodes xsi:type="TraceabilityMM:Product"
+      name="loin"
+      productconf="//@assets.7"
+      fathers="//@nodes.4"/>
+  <nodes xsi:type="TraceabilityMM:Transaction"
+      name="Farm"
+      transactionconf="//@assets.0"
+      sons="//@nodes.0">
+  </nodes>
+  <nodes xsi:type="TraceabilityMM:Transaction"
+      name="Sacrifice"
+      transactionconf="//@assets.3"
+      fathers="//@nodes.0"
+      sons="//@nodes.2 //@nodes.1"/>
+  <nodes xsi:type="TraceabilityMM:Transaction"
+      name="package_loin"
+      fathers="//@nodes.2"
+      sons="//@nodes.7"/>
+  <nodes xsi:type="TraceabilityMM:Transaction"
+      name="package_rib"
+      fathers="//@nodes.1"
+      sons="//@nodes.8"/>
+  <nodes xsi:type="TraceabilityMM:Product"
+      name="package_loin"
+      productconf="//@assets.5"
+      fathers="//@nodes.5"/>
+  <nodes xsi:type="TraceabilityMM:Product"
+      name="pacakge_rib"
+      productconf="//@assets.5"
+      fathers="//@nodes.6"/>
+  <nodes xsi:type="TraceabilityMM:Transaction"
+      name="Sell"
+      transactionconf="//@assets.4"
+      fathers="//@nodes.7 //@nodes.8"/>
+</TraceabilityMM:System>
