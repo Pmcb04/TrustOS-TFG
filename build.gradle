@@ -126,7 +126,7 @@ liquibase {
     activities {
         main {
             driver "org.mariadb.jdbc.Driver"
-            url "jdbc:mariadb://localhost:3306/back"
+            url "jdbc:mariadb://localhost:3306/test"
             username ""
             password ""
             changeLogFile "src/main/resources/config/liquibase/master.xml"
@@ -136,7 +136,7 @@ liquibase {
         }
         diffLog {
             driver "org.mariadb.jdbc.Driver"
-            url "jdbc:mariadb://localhost:3306/back"
+            url "jdbc:mariadb://localhost:3306/test"
             username ""
             password ""
             changeLogFile project.ext.diffChangelogFile
