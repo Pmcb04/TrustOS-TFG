@@ -19,7 +19,7 @@ import org.hibernate.annotations.BatchSize;
  */
 @Entity
 @Table(name = "jhi_user")
-public class User extends AbstractAuditingEntity implements Serializable {
+public class User extends AbstractAuditingEntity {
 
     private static final long serialVersionUID = 1L;
 
@@ -67,75 +67,128 @@ public class User extends AbstractAuditingEntity implements Serializable {
     @BatchSize(size = 20)
     private Set<Authority> authorities = new HashSet<>();
 
+    /**
+     * @return the id
+     */
     public String getId() {
         return id;
     }
 
+    /**
+     * @param id the id to set
+     */
     public void setId(String id) {
         this.id = id;
     }
 
+    /**
+     * @return the login
+     */
     public String getLogin() {
         return login;
     }
 
-    // Lowercase the login before saving it in database
+    /**
+     * @param login the login to set
+     */
     public void setLogin(String login) {
         this.login = StringUtils.lowerCase(login, Locale.ENGLISH);
     }
 
+    /**
+     * @return the firstName
+     */
     public String getFirstName() {
         return firstName;
     }
 
+    /**
+     * @param firstName the firstName to set
+     */
     public void setFirstName(String firstName) {
         this.firstName = firstName;
     }
 
+    /**
+     * @return the lastName
+     */
     public String getLastName() {
         return lastName;
     }
 
+    /**
+     * @param lastName the lastName to set
+     */
     public void setLastName(String lastName) {
         this.lastName = lastName;
     }
 
+    /**
+     * @return the email
+     */
     public String getEmail() {
         return email;
     }
 
+    /**
+     * @param email the email to set
+     */
     public void setEmail(String email) {
         this.email = email;
     }
 
-    public String getImageUrl() {
-        return imageUrl;
-    }
-
-    public void setImageUrl(String imageUrl) {
-        this.imageUrl = imageUrl;
-    }
-
+    /**
+     * @return the activated
+     */
     public boolean isActivated() {
         return activated;
     }
 
+    /**
+     * @param activated the activated to set
+     */
     public void setActivated(boolean activated) {
         this.activated = activated;
     }
 
+    /**
+     * @return the langKey
+     */
     public String getLangKey() {
         return langKey;
     }
 
+    /**
+     * @param langKey the langKey to set
+     */
     public void setLangKey(String langKey) {
         this.langKey = langKey;
     }
 
+    /**
+     * @return the imageUrl
+     */
+    public String getImageUrl() {
+        return imageUrl;
+    }
+
+    /**
+     * @param imageUrl the imageUrl to set
+     */
+    public void setImageUrl(String imageUrl) {
+        this.imageUrl = imageUrl;
+    }
+
+    /**
+     * @return the authorities
+     */
     public Set<Authority> getAuthorities() {
         return authorities;
     }
 
+    /**
+     * @param authorities the authorities to set
+     */
     public void setAuthorities(Set<Authority> authorities) {
         this.authorities = authorities;
     }
