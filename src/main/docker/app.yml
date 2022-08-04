@@ -7,8 +7,8 @@ services:
       - _JAVA_OPTIONS=-Xmx512m -Xms256m
       - SPRING_PROFILES_ACTIVE=prod,api-docs
       - MANAGEMENT_METRICS_EXPORT_PROMETHEUS_ENABLED=true
-      - SPRING_DATASOURCE_URL=jdbc:mariadb://back-mariadb:3306/back?useLegacyDatetimeCode=false&serverTimezone=UTC
-      - SPRING_LIQUIBASE_URL=jdbc:mariadb://back-mariadb:3306/back?useLegacyDatetimeCode=false&serverTimezone=UTC
+      - SPRING_DATASOURCE_URL=jdbc:mariadb://back-mariadb:3306/test?useLegacyDatetimeCode=false&serverTimezone=UTC
+      - SPRING_LIQUIBASE_URL=jdbc:mariadb://back-mariadb:3306/test?useLegacyDatetimeCode=false&serverTimezone=UTC
       - JHIPSTER_CACHE_REDIS_SERVER=redis://back-redis:6379
       - JHIPSTER_CACHE_REDIS_CLUSTER=false
       # - JHIPSTER_CACHE_REDIS_SERVER=redis://back-redis:6379
@@ -28,8 +28,8 @@ services:
     volumes:
       - ./config/mariadb:/etc/mysql/conf.d
     environment:
-      - MYSQL_ALLOW_EMPTY_PASSWORD=yes
-      - MYSQL_DATABASE=back
+      - MARIADB_DATABASE=test
+      - MARIADB_ALLOW_EMPTY_ROOT_PASSWORD=yes
     # If you want to expose these ports outside your dev PC,
     # remove the "127.0.0.1:" prefix
     ports:
