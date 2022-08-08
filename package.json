@@ -53,9 +53,6 @@
     "default_environment": "prod",
     "packaging": "jar"
   },
-  "dependencies": {
-    "gson": "^0.1.5"
-  },
   "devDependencies": {
     "generator-jhipster": "7.9.0",
     "husky": "7.0.4",

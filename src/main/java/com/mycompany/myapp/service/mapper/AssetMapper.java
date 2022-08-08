@@ -1,11 +1,13 @@
 package com.mycompany.myapp.service.mapper;
 
-import com.mycompany.myapp.domain.Asset;
-import com.mycompany.myapp.service.dto.AssetDTO;
 import java.util.List;
 import java.util.Objects;
 import java.util.stream.Collectors;
+
 import org.springframework.stereotype.Service;
+
+import com.mycompany.myapp.domain.trustos.Asset;
+import com.mycompany.myapp.service.dto.AssetDTO;
 
 /**
  * Mapper for the entity {@link Asset} and its DTO called {@link AssetDTO}.
@@ -26,7 +28,8 @@ public class AssetMapper {
         } else {
             Asset asset = new Asset();
             asset.setAssetID(assetDto.getAssetID());
-            asset.setHash(assetDto.getHash());
+            asset.setData(assetDto.getData());
+            asset.setMetadata(assetDto.getMetadata());
             return asset;
         }
     }

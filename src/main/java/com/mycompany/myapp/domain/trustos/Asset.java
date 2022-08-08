@@ -1,14 +1,13 @@
-package com.mycompany.myapp.domain;
+package com.mycompany.myapp.domain.trustos;
 
 import java.util.Map;
-import javax.persistence.Entity;
+
 import javax.persistence.Id;
 import javax.validation.constraints.NotNull;
 
 /**
  * A Asset.
  */
-@Entity
 public class Asset {
 
     @NotNull
@@ -20,7 +19,7 @@ public class Asset {
     private Map<String, Object> metadata;
 
     @NotNull
-    private String timestamp;
+    private String datatime;
 
     @NotNull
     private String userOwner;
@@ -43,17 +42,45 @@ public class Asset {
     }
 
     /**
-     * @return the timestamp
+     * @return the data
      */
-    public String getTimestamp() {
-        return timestamp;
+    public Map<String, Object> getData() {
+        return data;
     }
 
     /**
-     * @param timestamp the timestamp to set
+     * @param data the data to set
      */
-    public void setTimestamp(String timestamp) {
-        this.timestamp = timestamp;
+    public void setData(Map<String, Object> data) {
+        this.data = data;
+    }
+
+    /**
+     * @return the metadata
+     */
+    public Map<String, Object> getMetadata() {
+        return metadata;
+    }
+
+    /**
+     * @param metadata the metadata to set
+     */
+    public void setMetadata(Map<String, Object> metadata) {
+        this.metadata = metadata;
+    }
+
+    /**
+     * @return the datatime
+     */
+    public String getDatatime() {
+        return datatime;
+    }
+
+    /**
+     * @param datatime the datatime to set
+     */
+    public void setDatatime(String datatime) {
+        this.datatime = datatime;
     }
 
     /**
@@ -96,7 +123,7 @@ public class Asset {
         result = prime * result + ((data == null) ? 0 : data.hashCode());
         result = prime * result + ((hash == null) ? 0 : hash.hashCode());
         result = prime * result + ((metadata == null) ? 0 : metadata.hashCode());
-        result = prime * result + ((timestamp == null) ? 0 : timestamp.hashCode());
+        result = prime * result + ((datatime == null) ? 0 : datatime.hashCode());
         result = prime * result + ((userOwner == null) ? 0 : userOwner.hashCode());
         return result;
     }
@@ -123,9 +150,9 @@ public class Asset {
         if (metadata == null) {
             if (other.metadata != null) return false;
         } else if (!metadata.equals(other.metadata)) return false;
-        if (timestamp == null) {
-            if (other.timestamp != null) return false;
-        } else if (!timestamp.equals(other.timestamp)) return false;
+        if (datatime == null) {
+            if (other.datatime != null) return false;
+        } else if (!datatime.equals(other.datatime)) return false;
         if (userOwner == null) {
             if (other.userOwner != null) return false;
         } else if (!userOwner.equals(other.userOwner)) return false;
@@ -147,8 +174,8 @@ public class Asset {
             hash +
             ", metadata=" +
             metadata +
-            ", timestamp=" +
-            timestamp +
+            ", datatime=" +
+            datatime +
             ", userOwner=" +
             userOwner +
             "]"
