@@ -8,6 +8,9 @@ import java.net.InetSocketAddress;
 import java.net.Proxy;
 import java.net.URL;
 
+import com.google.gson.JsonObject;
+import com.google.gson.JsonParser;
+
 public class TrustOS {
 
     private static final String PROXY_HOST_URI = "localhost";
@@ -19,17 +22,17 @@ public class TrustOS {
         GET,
     }
 
-    private static String readResponse(InputStream in) throws IOException {
+    private static JsonObject readResponse(InputStream in) throws IOException {
         StringBuffer out = new StringBuffer();
         byte[] b = new byte[4096];
         for (int n; (n = in.read(b)) != -1;) {
             out.append(new String(b, 0, n));
         }
         in.close();
-        return out.toString();
+        return JsonParser.parseString(out.toString()).getAsJsonObject();
     }
 
-    public String call(CallType callType, String url, Object jsonInput, String... token) {
+    public JsonObject call(CallType callType, String url, Object... other) {
         try {
             Proxy proxy = new Proxy(Proxy.Type.HTTP, new InetSocketAddress(PROXY_HOST_URI, PROXY_PORT));
 
@@ -37,28 +40,32 @@ public class TrustOS {
 
             HttpURLConnection conn = (HttpURLConnection) httpUrl.openConnection(proxy);
 
+            conn.setDoOutput(true);
             conn.setRequestMethod(callType.name());
             conn.setRequestProperty("Content-Type", "application/json");
-            if (token.length >= 1) {
-                conn.setRequestProperty("Authorization", "Bearer " + token[0]);
+
+            // token jwt
+            if (other.length >= 2) {
+                conn.setRequestProperty("Authorization", "Bearer " + other[1]);
             }
-            conn.setRequestProperty("Accept", "application/json");
-            conn.setDoOutput(true);
 
             // input json
-            try (OutputStream os = conn.getOutputStream()) {
-                byte[] input = jsonInput.toString().getBytes("utf-8");
-                os.write(input, 0, input.length);
+            if (other[0] != null && other.length >= 1) {
+                conn.setRequestProperty("Accept", "application/json");
+                try (OutputStream os = conn.getOutputStream()) {
+                    byte[] input = other[0].toString().getBytes("utf-8");
+                    os.write(input, 0, input.length);
+                }
             }
 
             conn.connect();
 
             if (conn.getResponseCode() == 200) {
-                String jsonOutput = readResponse((InputStream) conn.getContent());
+                JsonObject jsonOutput = readResponse((InputStream) conn.getContent());
+                System.out.println("PETICION RESPUESTA");
+                System.out.println(jsonOutput);
                 conn.disconnect();
                 return jsonOutput;
-            } else {
-                return "The method post method response " + conn.getResponseCode();
             }
         } catch (IOException e) {
             e.printStackTrace();

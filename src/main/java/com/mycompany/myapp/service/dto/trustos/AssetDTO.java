@@ -1,43 +1,43 @@
-package com.mycompany.myapp.service.dto;
+package com.mycompany.myapp.service.dto.trustos;
 
 import java.util.Map;
 
-import javax.persistence.Id;
-import javax.validation.constraints.NotNull;
-
-import com.mycompany.myapp.domain.trustos.Asset;
-
 public class AssetDTO {
 
-    @NotNull
-    @Id
-    private String assetID;
+    private String assetId;
 
     private Map<String, Object> data;
 
     private Map<String, Object> metadata;
 
     /**
-     * @param asset
+     * Empty constructor
      */
-    public AssetDTO(Asset asset) {
-        this.assetID = asset.getAssetID();
-        this.data = asset.getData();
-        this.metadata = asset.getMetadata();
+    public AssetDTO() {}
+
+    /**
+     * @param assetId
+     * @param data
+     * @param metadata
+     */
+    public AssetDTO(String assetId, Map<String, Object> data, Map<String, Object> metadata) {
+        this.assetId = assetId;
+        this.data = data;
+        this.metadata = metadata;
     }
 
     /**
-     * @return the assetID
+     * @return the assetId
      */
-    public String getAssetID() {
-        return assetID;
+    public String getAssetId() {
+        return assetId;
     }
 
     /**
-     * @param assetID the assetID to set
+     * @param assetId the assetId to set
      */
-    public void setAssetID(String assetID) {
-        this.assetID = assetID;
+    public void setAssetId(String assetId) {
+        this.assetId = assetId;
     }
 
     /**
@@ -74,6 +74,6 @@ public class AssetDTO {
 
     @Override
     public String toString() {
-        return "AssetDTO [assetID=" + assetID + ", data=" + data + ", metadata=" + metadata + "]";
+        return "AssetDTO [assetId=" + assetId + ", data=" + data + ", metadata=" + metadata + "]";
     }
 }

@@ -2,43 +2,42 @@ package com.mycompany.myapp.domain.trustos;
 
 import java.util.Map;
 
-import javax.persistence.Id;
-import javax.validation.constraints.NotNull;
-
 /**
  * A Asset.
  */
 public class Asset {
 
-    @NotNull
-    @Id
-    private String assetID;
+    private String assetId;
 
     private Map<String, Object> data;
 
     private Map<String, Object> metadata;
 
-    @NotNull
-    private String datatime;
+    private String datetime;
 
-    @NotNull
+    private String hfTxId;
+
     private String userOwner;
 
-    @NotNull
     private String hash;
 
     /**
-     * @return the assetID
+     * Empty constructor
      */
-    public String getAssetID() {
-        return assetID;
+    public Asset() {}
+
+    /**
+     * @return the assetId
+     */
+    public String getAssetId() {
+        return assetId;
     }
 
     /**
-     * @param assetID the assetID to set
+     * @param assetId the assetId to set
      */
-    public void setAssetID(String assetID) {
-        this.assetID = assetID;
+    public void setAssetId(String assetId) {
+        this.assetId = assetId;
     }
 
     /**
@@ -70,17 +69,31 @@ public class Asset {
     }
 
     /**
-     * @return the datatime
+     * @return the datetime
      */
-    public String getDatatime() {
-        return datatime;
+    public String getDatetime() {
+        return datetime;
     }
 
     /**
-     * @param datatime the datatime to set
+     * @param datetime the datetime to set
      */
-    public void setDatatime(String datatime) {
-        this.datatime = datatime;
+    public void setDatetime(String datetime) {
+        this.datetime = datetime;
+    }
+
+    /**
+     * @return the hfTxId
+     */
+    public String getHfTxId() {
+        return hfTxId;
+    }
+
+    /**
+     * @param hfTxId the hfTxId to set
+     */
+    public void setHfTxId(String hfTxId) {
+        this.hfTxId = hfTxId;
     }
 
     /**
@@ -119,11 +132,11 @@ public class Asset {
     public int hashCode() {
         final int prime = 31;
         int result = 1;
-        result = prime * result + ((assetID == null) ? 0 : assetID.hashCode());
+        result = prime * result + ((assetId == null) ? 0 : assetId.hashCode());
         result = prime * result + ((data == null) ? 0 : data.hashCode());
         result = prime * result + ((hash == null) ? 0 : hash.hashCode());
         result = prime * result + ((metadata == null) ? 0 : metadata.hashCode());
-        result = prime * result + ((datatime == null) ? 0 : datatime.hashCode());
+        result = prime * result + ((datetime == null) ? 0 : datetime.hashCode());
         result = prime * result + ((userOwner == null) ? 0 : userOwner.hashCode());
         return result;
     }
@@ -138,9 +151,9 @@ public class Asset {
         if (obj == null) return false;
         if (getClass() != obj.getClass()) return false;
         Asset other = (Asset) obj;
-        if (assetID == null) {
-            if (other.assetID != null) return false;
-        } else if (!assetID.equals(other.assetID)) return false;
+        if (assetId == null) {
+            if (other.assetId != null) return false;
+        } else if (!assetId.equals(other.assetId)) return false;
         if (data == null) {
             if (other.data != null) return false;
         } else if (!data.equals(other.data)) return false;
@@ -150,9 +163,9 @@ public class Asset {
         if (metadata == null) {
             if (other.metadata != null) return false;
         } else if (!metadata.equals(other.metadata)) return false;
-        if (datatime == null) {
-            if (other.datatime != null) return false;
-        } else if (!datatime.equals(other.datatime)) return false;
+        if (datetime == null) {
+            if (other.datetime != null) return false;
+        } else if (!datetime.equals(other.datetime)) return false;
         if (userOwner == null) {
             if (other.userOwner != null) return false;
         } else if (!userOwner.equals(other.userOwner)) return false;
@@ -166,16 +179,16 @@ public class Asset {
     @Override
     public String toString() {
         return (
-            "Asset [assetID=" +
-            assetID +
+            "Asset [assetId=" +
+            assetId +
             ", data=" +
             data +
             ", hash=" +
             hash +
             ", metadata=" +
             metadata +
-            ", datatime=" +
-            datatime +
+            ", datetime=" +
+            datetime +
             ", userOwner=" +
             userOwner +
             "]"
