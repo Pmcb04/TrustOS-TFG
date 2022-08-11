@@ -1,5 +1,5 @@
 import React from 'react'
-import { View, Text } from 'react-native'
+import { Text, View } from 'react-native'
 import styles from './asset.styles'
 
 interface Asset {
@@ -12,12 +12,12 @@ interface Asset {
 function Asset({ image, name, type, hash }: Asset) {
   return (
     <View style={styles.mainContainer}>
-      <View style={styles.image}>{image}</View>
       <View style={styles.properties}>
-        <Text style={styles.name}>{name}</Text>
+        <Text style={styles.name}>{name.substring(0, 20)}</Text>
         <Text style={styles.type}>{type}</Text>
-        <Text style={styles.hash}>{hash}</Text>
+        <Text style={styles.hash}>{hash.substring(0, 20)}</Text>
       </View>
+      <View style={styles.image}>{image}</View>
     </View>
   )
 }

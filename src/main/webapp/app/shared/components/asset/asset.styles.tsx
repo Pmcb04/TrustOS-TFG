@@ -4,13 +4,12 @@ import { Colors, Fonts } from '../../themes/index'
 
 export default StyleSheet.create({
   mainContainer: {
-    flexDirection: 'column',
+    flexDirection: 'row',
     borderRadius: 10,
     alignSelf: 'flex-start',
-    padding: 5,
+    padding: 15,
     minHeight: 170,
     minWidth: 250,
-    flex: 1,
     backgroundColor: Colors.white,
 
     shadowColor: Colors.black,
@@ -22,18 +21,15 @@ export default StyleSheet.create({
     shadowRadius: 6.27,
 
     elevation: 10,
-
-    margin: 40,
+    flex: 2,
   },
   image: {
-    alignSelf: 'center',
     opacity: 0.5,
+    flex: 1,
   },
   properties: {
-    flex: 0.5,
-    position: 'absolute',
-    bottom: 0,
-    padding: 15,
+    padding: 10,
+    flex: 1,
   },
   name: {
     fontSize: Fonts.size.h1,
