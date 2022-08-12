@@ -1,11 +1,15 @@
+import { StackScreenProps } from '@react-navigation/stack'
 import React from 'react'
 import { View } from 'react-native'
+import { RootStackParamList } from '../../navigation/RootStackParamList'
 import AssetList from '../../shared/components/asset-list/asset-list'
 
-function PruebaScreen() {
+type PruebaScreenProps = StackScreenProps<RootStackParamList, 'AssetDetails'>
+
+function PruebaScreen({ navigation }: PruebaScreenProps) {
   return (
     <View>
-      <AssetList></AssetList>
+      <AssetList navigation={navigation} />
     </View>
   )
 }

@@ -2,14 +2,14 @@ import React from 'react'
 import { Text, View } from 'react-native'
 import styles from './asset.styles'
 
-interface Asset {
+interface AssetProps {
   image: JSX.Element
   name: string
   type: string
   hash: string
 }
 
-function Asset({ image, name, type, hash }: Asset) {
+function Asset({ image, name, type, hash }: AssetProps) {
   return (
     <View style={styles.mainContainer}>
       <View style={styles.properties}>

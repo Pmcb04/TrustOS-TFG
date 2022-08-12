@@ -20,7 +20,8 @@ import NotFound from './not-found-screen'
 import OAuthRedirectScreen from './oauth-redirect-screen'
 import { ModalScreen } from './modal-screen'
 import { DrawerButton } from './drawer/drawer-button'
-import PginaPrincipal from '../modules/prueba/prueba-screen'
+import PruebaScreen from '../modules/prueba/prueba-screen'
+import AssetDetails from '../modules/asset-details/asset-details'
 
 export const drawerScreens = [
   {
@@ -37,7 +38,7 @@ export const drawerScreens = [
   {
     name: 'Prueba',
     route: 'prueba',
-    component: PginaPrincipal,
+    component: PruebaScreen,
     auth: false,
   },
   {
@@ -85,6 +86,7 @@ const linking = {
           },
         },
       },
+      AssetDetails: 'asset',
       ModalScreen: 'alert',
       OAuthRedirect: 'start',
       NotFound: '*',
@@ -185,6 +187,7 @@ function NavContainer(props) {
         />
         <Stack.Screen name="OAuthRedirect" component={OAuthRedirectScreen} options={{ title: 'Redirecting...' }} />
         <Stack.Screen name="NotFound" component={NotFound} options={{ title: 'Oops!' }} />
+        <Stack.Screen name="AssetDetails" component={AssetDetails} />
       </Stack.Navigator>
     </NavigationContainer>
   )
