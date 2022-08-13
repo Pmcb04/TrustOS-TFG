@@ -6,9 +6,10 @@ import Transaction from '../../themes/icons/transaction'
 import styles from './asset-list.styles'
 import { StackNavigationProp } from '@react-navigation/stack'
 import { RootStackParamList } from '../../../navigation/RootStackParamList'
+import { DataCard, Tag } from '@telefonica/mistica'
 
-const WIDTH_IMAGE = 250
-const HEIGHT_IMAGE = 170
+const WIDTH_IMAGE = 40
+const HEIGHT_IMAGE = 40
 
 // TODO cambiar por futura llamada a la api
 const DATA = [
@@ -90,7 +91,12 @@ const renderCategoryItem = (itemData: ListRenderItemInfo<Asset>, navigation: Sta
   return (
     <TouchableWithoutFeedback onPress={() => navigation.navigate('AssetDetails', { assetId: itemData.item.name })}>
       <View style={styles.item}>
-        <Asset image={itemData.item.image} name={itemData.item.name} type={itemData.item.type} hash={itemData.item.hash} />
+        <DataCard
+          headline={<Tag type="active">{itemData.item.type}</Tag>}
+          title={itemData.item.name}
+          description="Description"
+          icon={itemData.item.image}
+        />
       </View>
     </TouchableWithoutFeedback>
   )

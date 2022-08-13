@@ -67,6 +67,7 @@
     "@react-navigation/drawer": "5.12.5",
     "@react-navigation/native": "^5.9.4",
     "@react-navigation/stack": "5.14.5",
+    "@telefonica/mistica": "^12.0.0",
     "apisauce": "2.1.2",
     "expo": "~43.0.0",
     "expo-auth-session": "~3.4.2",

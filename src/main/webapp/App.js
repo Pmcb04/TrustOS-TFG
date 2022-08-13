@@ -3,9 +3,17 @@ import { Provider } from 'react-redux'
 import createStore from './app/shared/reducers'
 import * as SplashScreen from 'expo-splash-screen'
 
+import { ThemeContextProvider, getTelefonicaSkin } from '@telefonica/mistica'
+
 import NavContainer from './app/navigation/nav-container'
 
 const store = createStore()
+
+const misticaTheme = {
+  skin: getTelefonicaSkin(),
+  colorScheme: 'auto',
+  i18n: { locale: 'es-ES', phoneNumberFormattingRegionCode: 'ES' },
+}
 
 export default function App() {
   // prevent the splashscreen from disappearing until the redux store is completely ready (hidden in nav-container.js)
@@ -20,7 +28,9 @@ export default function App() {
 
   return displayApp ? (
     <Provider store={store}>
-      <NavContainer />
+      <ThemeContextProvider theme={misticaTheme}>
+        <NavContainer />
+      </ThemeContextProvider>
     </Provider>
   ) : null
 }
