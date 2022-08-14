@@ -1,12 +1,9 @@
 import React from 'react'
-import { FlatList, ListRenderItemInfo, View, TouchableWithoutFeedback } from 'react-native'
-import Asset from '../asset/asset'
+import { FlatList, View, TouchableWithoutFeedback } from 'react-native'
 import Product from '../../themes/icons/product'
 import Transaction from '../../themes/icons/transaction'
 import styles from './asset-list.styles'
-import { StackNavigationProp } from '@react-navigation/stack'
-import { RootStackParamList } from '../../../navigation/RootStackParamList'
-import { DataCard, Tag } from '@telefonica/mistica'
+import Asset from '../asset/asset'
 
 const WIDTH_IMAGE = 40
 const HEIGHT_IMAGE = 40
@@ -75,11 +72,7 @@ const DATA = [
   },
 ]
 
-interface AssetListProps {
-  navigation: StackNavigationProp<RootStackParamList, 'AssetDetails'>
-}
-
-function AssetList({ navigation }: AssetListProps) {
+function AssetList({ navigation }) {
   return (
     <View style={styles.container}>
       <FlatList data={DATA} keyExtractor={(item) => item.hash} numColumns={3} renderItem={(item) => renderCategoryItem(item, navigation)} />{' '}
@@ -87,16 +80,11 @@ function AssetList({ navigation }: AssetListProps) {
   )
 }
 
-const renderCategoryItem = (itemData: ListRenderItemInfo<Asset>, navigation: StackNavigationProp<RootStackParamList, 'AssetDetails'>) => {
+const renderCategoryItem = (itemData, navigation) => {
   return (
     <TouchableWithoutFeedback onPress={() => navigation.navigate('AssetDetails', { assetId: itemData.item.name })}>
       <View style={styles.item}>
-        <DataCard
-          headline={<Tag type="active">{itemData.item.type}</Tag>}
-          title={itemData.item.name}
-          description="Description"
-          icon={itemData.item.image}
-        />
+        <Asset name={itemData.item.name} type={itemData.item.type} image={itemData.item.image} hash={itemData.item.hash} />
       </View>
     </TouchableWithoutFeedback>
   )

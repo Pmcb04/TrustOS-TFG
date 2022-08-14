@@ -1,9 +1,10 @@
 import { StyleSheet } from 'react-native'
 
-import { Colors } from '../../shared/themes'
+import { ApplicationStyles, Colors } from '../../shared/themes'
 
 export default StyleSheet.create({
-  container: {
+  ...ApplicationStyles.screen,
+  mainContainer: {
     flex: 4,
     flexDirection: 'row',
     backgroundColor: 'white',
@@ -20,8 +21,6 @@ export default StyleSheet.create({
 
     borderRadius: 10,
     backgroundColor: Colors.white,
-
-    elevation: 10,
   },
   assetView: {
     flex: 1,

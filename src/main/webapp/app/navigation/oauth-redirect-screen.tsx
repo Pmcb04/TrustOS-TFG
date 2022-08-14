@@ -1,18 +1,18 @@
-import * as React from 'react';
-import { StyleSheet, View, ActivityIndicator } from "react-native";
+import * as React from 'react'
+import { StyleSheet, View, ActivityIndicator } from 'react-native'
 
 const OAuthRedirectScreen = () => {
-  const urlSearchParams = new URLSearchParams(window.location.search);
-  const params = Object.fromEntries(urlSearchParams.entries());
-  window.location.href = params.authUrl;
+  const urlSearchParams = new URLSearchParams(window.location.search)
+  const params = Object.fromEntries(urlSearchParams.entries())
+  window.location.href = params.authUrl
   return (
     <View style={styles.container}>
       <ActivityIndicator size="large" />
     </View>
-  );
-};
+  )
+}
 
-export default OAuthRedirectScreen;
+export default OAuthRedirectScreen
 
 const styles = StyleSheet.create({
   title: {
@@ -24,4 +24,4 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     padding: 8,
   },
-});
+})

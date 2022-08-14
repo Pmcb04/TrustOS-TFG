@@ -1,7 +1,5 @@
-import { StackScreenProps } from '@react-navigation/stack'
 import React from 'react'
 import { View } from 'react-native'
-import { RootStackParamList } from '../../navigation/RootStackParamList'
 import Product from '../../shared/themes/icons/product'
 import styles from './asset-details.styles'
 import {
@@ -21,6 +19,7 @@ import {
   ButtonLink,
   Text2,
 } from '@telefonica/mistica'
+import Asset from '../../shared/components/asset/asset'
 
 // TODO cambiar por futura llamada a la api
 const DATA = {
@@ -30,13 +29,11 @@ const DATA = {
   hash: 'b1d9f25b1bf78e25e443a6815b9763b7f7eda25d1dd06486ccfc2130b229dc93',
 }
 
-type AssetDetailsProps = StackScreenProps<RootStackParamList, 'AssetDetails'>
-
-function AssetDetails({ route }: AssetDetailsProps) {
+function AssetDetails({ route }) {
   const { assetId } = route.params
 
   return (
-    <View style={styles.container}>
+    <View style={[styles.container, styles.mainContainer]}>
       <View style={styles.properties}>
         <Stack space={16}>
           <DateField fullWidth name="date" label="Date" />
@@ -63,7 +60,7 @@ function AssetDetails({ route }: AssetDetailsProps) {
 
       <View style={styles.assetView}>
         <View style={styles.asset}>
-          <DataCard headline={<Tag type="active">{DATA.type}</Tag>} title={assetId} description="Description" icon={DATA.image} />
+          <Asset name={assetId} image={DATA.image} type={DATA.type} hash={DATA.hash} />
         </View>
 
         <Stack space={16}>
