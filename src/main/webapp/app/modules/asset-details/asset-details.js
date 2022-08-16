@@ -2,22 +2,19 @@ import React from 'react'
 import { View } from 'react-native'
 import Product from '../../shared/themes/icons/product'
 import styles from './asset-details.styles'
+import { connect } from 'react-redux'
 import {
   ButtonPrimary,
-  DataCard,
-  Tag,
   ButtonSecondary,
   IconCreditCardVisaFilled,
   IconEditPencilRegular,
   DateField,
   Select,
   TextField,
-  RadioGroup,
-  RadioButton,
   Stack,
-  PasswordField,
   ButtonLink,
   Text2,
+  ThemeContext,
 } from '@telefonica/mistica'
 import Asset from '../../shared/components/asset/asset'
 
@@ -31,30 +28,24 @@ const DATA = {
 
 function AssetDetails({ route }) {
   const { assetId } = route.params
+  const { colors } = React.useContext(ThemeContext)
 
   return (
     <View style={[styles.container, styles.mainContainer]}>
-      <View style={styles.properties}>
-        <Stack space={16}>
+      <View style={[styles.properties, { borderColor: colors.border }]}>
+        <Stack space={32}>
           <DateField fullWidth name="date" label="Date" />
           <Select
             fullWidth
             name="fruits"
             label="Choose a fruit"
+            value="orange"
             options={[
               { value: 'orange', text: 'Orange' },
               { value: 'banana', text: 'Banana' },
             ]}
           />
-
-          <TextField fullWidth name="name" label="Name" />
-          <PasswordField fullWidth name="password" label="Password" />
-          <RadioGroup name="juicy-fruit" aria-labelledby="label" defaultValue="banana">
-            <Stack space={16}>
-              <RadioButton value="banana">Banana</RadioButton>
-              <RadioButton value="apple">Apple</RadioButton>
-            </Stack>
-          </RadioGroup>
+          <TextField fullWidth name="name" label="Name" value="asdjajkshdjkhasjkdhhas" />
         </Stack>
       </View>
 
@@ -87,4 +78,6 @@ function AssetDetails({ route }) {
   )
 }
 
-export default AssetDetails
+const mapStateToProps = (state) => ({ account: state.account.account })
+const mapDispatchToProps = (dispatch) => ({})
+export default connect(mapStateToProps, mapDispatchToProps)(AssetDetails)

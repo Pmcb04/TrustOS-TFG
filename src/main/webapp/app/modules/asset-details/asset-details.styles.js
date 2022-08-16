@@ -1,5 +1,4 @@
 import { StyleSheet } from 'react-native'
-
 import { ApplicationStyles, Colors } from '../../shared/themes'
 
 export default StyleSheet.create({
@@ -11,15 +10,11 @@ export default StyleSheet.create({
   },
   properties: {
     flex: 3,
-
-    padding: 30,
-    margin: 15,
-
-    borderColor: 'gray',
     borderWidth: 0.5,
     borderStyle: 'solid',
-
     borderRadius: 10,
+    margin: 15,
+    padding: 30,
     backgroundColor: Colors.white,
   },
   assetView: {
