@@ -2,21 +2,25 @@ import React from 'react'
 import { View } from 'react-native'
 import Product from '../../shared/themes/icons/product'
 import styles from './asset-details.styles'
+import Asset from '../../shared/components/asset/asset'
 import { connect } from 'react-redux'
+import AssetDetailsActions from './asset-details.reducer'
 import {
   ButtonPrimary,
   ButtonSecondary,
-  IconCreditCardVisaFilled,
+  IconIdCardRegular,
   IconEditPencilRegular,
-  DateField,
-  Select,
+  IconBookmarkRegular,
+  Form,
   TextField,
   Stack,
   ButtonLink,
   Text2,
   ThemeContext,
+  EmailField,
+  Box,
 } from '@telefonica/mistica'
-import Asset from '../../shared/components/asset/asset'
+import { ScrollView } from 'react-native-gesture-handler'
 
 // TODO cambiar por futura llamada a la api
 const DATA = {
@@ -26,29 +30,33 @@ const DATA = {
   hash: 'b1d9f25b1bf78e25e443a6815b9763b7f7eda25d1dd06486ccfc2130b229dc93',
 }
 
-function AssetDetails({ route }) {
-  const { assetId } = route.params
+function AssetDetails(props) {
+  const { assetId } = props.route.params
+  const { editAsset, disabled_fields } = props
   const { colors } = React.useContext(ThemeContext)
 
   return (
     <View style={[styles.container, styles.mainContainer]}>
       <View style={[styles.properties, { borderColor: colors.border }]}>
-        <Stack space={32}>
-          <DateField fullWidth name="date" label="Date" />
-          <Select
-            fullWidth
-            name="fruits"
-            label="Choose a fruit"
-            value="orange"
-            options={[
-              { value: 'orange', text: 'Orange' },
-              { value: 'banana', text: 'Banana' },
-            ]}
-          />
-          <TextField fullWidth name="name" label="Name" value="asdjajkshdjkhasjkdhhas" />
-        </Stack>
+        <Form onSubmit={(formData) => console.log(formData)}>
+          <Stack space={16}>
+            <TextField disabled={disabled_fields} name="name" label="Name" />
+            <EmailField disabled={disabled_fields} name="email" label="e-mail" />
+            <TextField disabled={disabled_fields} name="name" label="Name" />
+            <EmailField disabled={disabled_fields} name="email" label="e-mail" />
+            <TextField disabled={disabled_fields} name="name" label="Name" />
+            <EmailField disabled={disabled_fields} name="email" label="e-mail" />
+            <TextField disabled={disabled_fields} name="name" label="Name" />
+            <EmailField disabled={disabled_fields} name="email" label="e-mail" />
+            <TextField disabled={disabled_fields} name="name" label="Name" />
+            <EmailField disabled={disabled_fields} name="email" label="e-mail" />
+            <TextField disabled={disabled_fields} name="name" label="Name" />
+            <EmailField disabled={disabled_fields} name="email" label="e-mail" />
+            <TextField disabled={disabled_fields} name="name" label="Name" />
+            <EmailField disabled={disabled_fields} name="email" label="e-mail" />
+          </Stack>
+        </Form>
       </View>
-
       <View style={styles.assetView}>
         <View style={styles.asset}>
           <Asset name={assetId} image={DATA.image} type={DATA.type} hash={DATA.hash} />
@@ -56,21 +64,32 @@ function AssetDetails({ route }) {
 
         <Stack space={16}>
           <View style={styles.buttons}>
-            <ButtonPrimary onPress={() => {}}>
-              <IconEditPencilRegular color="currentColor" />
-              Edit
-            </ButtonPrimary>
+            {disabled_fields ? (
+              <ButtonPrimary onPress={editAsset}>
+                <IconEditPencilRegular color="currentColor" />
+                Edit
+              </ButtonPrimary>
+            ) : (
+              <ButtonPrimary onPress={editAsset}>
+                <IconBookmarkRegular color="currentColor" />
+                Save
+              </ButtonPrimary>
+            )}
 
-            <ButtonSecondary onPress={() => {}}>
-              <IconCreditCardVisaFilled color="currentColor" />
+            <ButtonSecondary disabled={!disabled_fields} onPress={() => {}}>
+              <IconIdCardRegular color="currentColor" />
               Tranfer
             </ButtonSecondary>
           </View>
 
           <View style={styles.actions}>
             <Text2 medium>Acciones que puede realizar</Text2>
-            <ButtonLink onPress={() => {}}>Action 1</ButtonLink>
-            <ButtonLink onPress={() => {}}>Action 2</ButtonLink>
+            <ButtonLink disabled={!disabled_fields} onPress={() => {}}>
+              Action 2
+            </ButtonLink>
+            <ButtonLink disabled={!disabled_fields} onPress={() => {}}>
+              Action 1
+            </ButtonLink>
           </View>
         </Stack>
       </View>
@@ -78,6 +97,14 @@ function AssetDetails({ route }) {
   )
 }
 
-const mapStateToProps = (state) => ({ account: state.account.account })
-const mapDispatchToProps = (dispatch) => ({})
+const mapStateToProps = (state) => {
+  return {
+    disabled_fields: state.assetDetails.disabled_fields,
+  }
+}
+const mapDispatchToProps = (dispatch) => {
+  return {
+    editAsset: () => dispatch(AssetDetailsActions.assetDetailsEdit()),
+  }
+}
 export default connect(mapStateToProps, mapDispatchToProps)(AssetDetails)

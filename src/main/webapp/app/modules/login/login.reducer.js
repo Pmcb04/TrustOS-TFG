@@ -9,7 +9,7 @@ const { Types, Creators } = createActions({
   logoutRequest: null,
   logoutSuccess: null,
   loginLoad: [],
-  loginLoadSuccess: []
+  loginLoadSuccess: [],
 })
 
 export const LoginTypes = Types
@@ -22,7 +22,7 @@ export const INITIAL_STATE = Immutable({
   idToken: null,
   error: null,
   fetching: false,
-  loading: false
+  loading: false,
 })
 
 /* ------------- Reducers ------------- */
@@ -32,8 +32,8 @@ export const request = (state) => state.merge({ fetching: true, error: null })
 
 // we've successfully logged in
 export const success = (state, data) => {
-  const { authToken, idToken } = data;
-  return state.merge({ fetching: false, error: null, authToken, idToken });
+  const { authToken, idToken } = data
+  return state.merge({ fetching: false, error: null, authToken, idToken })
 }
 
 // we've had a problem logging in
@@ -45,10 +45,10 @@ export const load = (state) => state.merge({ loading: true })
 export const loadSuccess = (state) => state.merge({ loading: false })
 
 // we need to logout, meaning clear access tokens and account
-export const logoutRequest = (state) => state;
+export const logoutRequest = (state) => state
 
 // we've logged out
-export const logoutSuccess = state => INITIAL_STATE
+export const logoutSuccess = (state) => INITIAL_STATE
 
 /* ------------- Hookup Reducers To Types ------------- */
 
@@ -59,8 +59,7 @@ export const reducer = createReducer(INITIAL_STATE, {
   [Types.LOGIN_LOAD]: load,
   [Types.LOGIN_LOAD_SUCCESS]: loadSuccess,
   [Types.LOGOUT_REQUEST]: logoutRequest,
-  [Types.LOGOUT_SUCCESS]: logoutSuccess
-
+  [Types.LOGOUT_SUCCESS]: logoutSuccess,
 })
 
 /* ------------- Selectors ------------- */
