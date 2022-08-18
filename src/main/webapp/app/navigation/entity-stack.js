@@ -12,7 +12,7 @@ import EntitiesScreen from '../modules/entities/entities-screen'
 export const entityScreens = [
   {
     name: 'Entities',
-    route: '',
+    route: 'entities',
     component: EntitiesScreen,
     options: {
       headerLeft: DrawerButton,

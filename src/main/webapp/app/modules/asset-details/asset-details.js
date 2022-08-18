@@ -14,13 +14,12 @@ import {
   Form,
   TextField,
   Stack,
-  ButtonLink,
-  Text2,
+  DateField,
   ThemeContext,
-  EmailField,
-  Box,
+  IntegerField,
+  IconRouteRegular,
+  DecimalField,
 } from '@telefonica/mistica'
-import { ScrollView } from 'react-native-gesture-handler'
 
 // TODO cambiar por futura llamada a la api
 const DATA = {
@@ -40,20 +39,16 @@ function AssetDetails(props) {
       <View style={[styles.properties, { borderColor: colors.border }]}>
         <Form onSubmit={(formData) => console.log(formData)}>
           <Stack space={16}>
-            <TextField disabled={disabled_fields} name="name" label="Name" />
-            <EmailField disabled={disabled_fields} name="email" label="e-mail" />
-            <TextField disabled={disabled_fields} name="name" label="Name" />
-            <EmailField disabled={disabled_fields} name="email" label="e-mail" />
-            <TextField disabled={disabled_fields} name="name" label="Name" />
-            <EmailField disabled={disabled_fields} name="email" label="e-mail" />
-            <TextField disabled={disabled_fields} name="name" label="Name" />
-            <EmailField disabled={disabled_fields} name="email" label="e-mail" />
-            <TextField disabled={disabled_fields} name="name" label="Name" />
-            <EmailField disabled={disabled_fields} name="email" label="e-mail" />
-            <TextField disabled={disabled_fields} name="name" label="Name" />
-            <EmailField disabled={disabled_fields} name="email" label="e-mail" />
-            <TextField disabled={disabled_fields} name="name" label="Name" />
-            <EmailField disabled={disabled_fields} name="email" label="e-mail" />
+            <TextField disabled={disabled_fields} fullWidth name="name" label="Name" />
+            <TextField disabled={disabled_fields} fullWidth optional name="name" label="Name" />
+            <TextField disabled={disabled_fields} fullWidth multiline name="name" label="Name" />
+            <TextField disabled={disabled_fields} fullWidth optional multiline name="name" label="Name" />
+            <DateField disabled={disabled_fields} fullWidth name="date" label="Date" />
+            <DateField disabled={disabled_fields} fullWidth optional name="date" label="Date" />
+            <IntegerField disabled={disabled_fields} fullWidth name="integer" label="Integer" />
+            <IntegerField disabled={disabled_fields} fullWidth optional name="integer" label="Integer" />
+            <DecimalField disabled={disabled_fields} fullWidth name="decimal" label="Decimal" />
+            <DecimalField disabled={disabled_fields} fullWidth optional name="decimal" label="Decimal" />
           </Stack>
         </Form>
       </View>
@@ -80,16 +75,16 @@ function AssetDetails(props) {
               <IconIdCardRegular color="currentColor" />
               Tranfer
             </ButtonSecondary>
-          </View>
-
-          <View style={styles.actions}>
-            <Text2 medium>Acciones que puede realizar</Text2>
-            <ButtonLink disabled={!disabled_fields} onPress={() => {}}>
+            <ButtonSecondary disabled={!disabled_fields} onPress={() => {}}>
+              <IconRouteRegular color="currentColor" />
+              Traceability
+            </ButtonSecondary>
+            <ButtonSecondary disabled={!disabled_fields} onPress={() => {}}>
               Action 2
-            </ButtonLink>
-            <ButtonLink disabled={!disabled_fields} onPress={() => {}}>
+            </ButtonSecondary>
+            <ButtonSecondary disabled={!disabled_fields} onPress={() => {}}>
               Action 1
-            </ButtonLink>
+            </ButtonSecondary>
           </View>
         </Stack>
       </View>

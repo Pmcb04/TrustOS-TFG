@@ -20,7 +20,7 @@ import NotFound from './not-found-screen'
 import OAuthRedirectScreen from './oauth-redirect-screen'
 import { ModalScreen } from './modal-screen'
 import { DrawerButton } from './drawer/drawer-button'
-import PruebaScreen from '../modules/prueba/prueba-screen'
+import PruebaScreen from '../modules/my-assets/my-assets-screen'
 import AssetDetails from '../modules/asset-details/asset-details'
 
 export const drawerScreens = [
@@ -36,8 +36,8 @@ export const drawerScreens = [
     auth: false,
   },
   {
-    name: 'Prueba',
-    route: 'prueba',
+    name: 'Mis assets',
+    route: 'assets',
     component: PruebaScreen,
     auth: false,
   },
