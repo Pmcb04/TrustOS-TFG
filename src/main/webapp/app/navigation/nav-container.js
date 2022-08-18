@@ -11,6 +11,7 @@ import { connect } from 'react-redux'
 // import screens
 import HomeScreen from '../modules/home/home-screen'
 import LoginScreen from '../modules/login/login-screen'
+import ConfigurationScreen from '../modules/configuration/configuration-screen'
 import AccountActions from '../shared/reducers/account.reducer'
 import EntityStackScreen, { getEntityRoutes } from './entity-stack'
 import StorybookScreen from '../../storybook'
@@ -38,6 +39,12 @@ export const drawerScreens = [
     name: 'Prueba',
     route: 'prueba',
     component: PginaPrincipal,
+    auth: false,
+  },
+  {
+    name: 'Configuration',
+    route: 'configuration',
+    component: ConfigurationScreen,
     auth: false,
   },
   {
