@@ -1,7 +1,6 @@
 {
     "ENGLISH": "English",
     "SPAIN": "Spain",
-    "TITLE": "This is a title in english" ,
     "SEARCH": "Search",
     "CREATE": "Create",
     "FILTER": "Filter",
@@ -14,6 +13,7 @@
     "MY_ASSETS": "My assets",
     "CONFIGURATION": "Configuration",
     "SELECT_LANGUAGE": "Select your language",
-    "LANGUAGE": "Language"
+    "LANGUAGE": "Language",
+    "ACCOUNT": "Account"
 
 }

@@ -24,12 +24,22 @@ import { ModalScreen } from './modal-screen'
 import { DrawerButton } from './drawer/drawer-button'
 import PruebaScreen from '../modules/my-assets/my-assets-screen'
 import AssetDetailsScreen from '../modules/asset-details/asset-details-screen'
+import AccountScreen from '../modules/account/account-screen'
+
+// import icons
+import System from '../shared/themes/icons/system'
+import Product from '../shared/themes/icons/product'
+import Configuration from '../shared/themes/icons/configuration'
+import Rol from '../shared/themes/icons/rol'
 
 export const drawerScreens = [
   {
     name: i18n.t('HOME'),
     component: HomeScreen,
     auth: null,
+    options: {
+      drawerIcon: ({ focused, size }) => <System width={20} height={20} />,
+    },
   },
   {
     name: i18n.t('LOGIN'),
@@ -42,12 +52,27 @@ export const drawerScreens = [
     route: 'assets',
     component: PruebaScreen,
     auth: false,
+    options: {
+      drawerIcon: ({ focused, size }) => <Product width={20} height={20} />,
+    },
+  },
+  {
+    name: i18n.t('ACCOUNT'),
+    route: 'account',
+    component: AccountScreen,
+    auth: false,
+    options: {
+      drawerIcon: ({ focused, size }) => <Rol width={20} height={20} />,
+    },
   },
   {
     name: i18n.t('CONFIGURATION'),
     route: 'configuration',
     component: ConfigurationScreen,
     auth: false,
+    options: {
+      drawerIcon: ({ focused, size }) => <Configuration width={20} height={20} />,
+    },
   },
   {
     name: 'EntityStack',

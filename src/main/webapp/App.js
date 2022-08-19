@@ -7,6 +7,7 @@ import { ThemeContextProvider, getTelefonicaSkin } from '@telefonica/mistica'
 
 import NavContainer from './app/navigation/nav-container'
 import './app/config/i18-config'
+import InfoAccount from './app/shared/components/info-account/info-account'
 
 const store = createStore()
 
