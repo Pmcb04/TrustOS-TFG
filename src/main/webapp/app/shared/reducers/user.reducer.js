@@ -28,9 +28,8 @@ export const INITIAL_STATE = Immutable({
 export const allRequest = (state) =>
   state.merge({
     fetchingAll: true,
-    userList: []
+    userList: [],
   })
-
 
 // successful api lookup for all entities
 export const allSuccess = (state, action) => {
@@ -38,10 +37,9 @@ export const allSuccess = (state, action) => {
   return state.merge({
     fetchingAll: false,
     errorAll: null,
-    userList
+    userList,
   })
 }
-
 
 // Something went wrong fetching all entities.
 export const allFailure = (state, action) => {
@@ -49,10 +47,9 @@ export const allFailure = (state, action) => {
   return state.merge({
     fetchingAll: false,
     errorAll: error,
-    userList: []
+    userList: [],
   })
 }
-
 
 /* ------------- Hookup Reducers To Types ------------- */
 
