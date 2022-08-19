@@ -6,6 +6,7 @@ import * as SplashScreen from 'expo-splash-screen'
 import { ThemeContextProvider, getTelefonicaSkin } from '@telefonica/mistica'
 
 import NavContainer from './app/navigation/nav-container'
+import './app/config/i18-config'
 
 const store = createStore()
 

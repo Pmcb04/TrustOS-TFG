@@ -1,5 +1,19 @@
 {
-  "ENGLISH": "English",
-  "SPAIN": "Spain",
-  "TITLE": "This is a title in english" 
+    "ENGLISH": "English",
+    "SPAIN": "Spain",
+    "TITLE": "This is a title in english" ,
+    "SEARCH": "Search",
+    "CREATE": "Create",
+    "FILTER": "Filter",
+    "EDIT": "Edit",
+    "SAVE": "Save",
+    "TRANFER": "Tranfer",
+    "TRACEABILITY": "Traceability",
+    "HOME": "Home",
+    "LOGIN": "Login",
+    "MY_ASSETS": "My assets",
+    "CONFIGURATION": "Configuration",
+    "SELECT_LANGUAGE": "Select your language",
+    "LANGUAGE": "Language"
+
 }

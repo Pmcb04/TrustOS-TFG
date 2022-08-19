@@ -1,9 +1,8 @@
 import { StyleSheet } from 'react-native'
 
 export default StyleSheet.create({
-  button: {},
-  buttonOpen: {},
-  textStyle: {},
-  centeredView: {},
-  modalView: {},
+  mainContainer: {
+    margin: 20,
+    backgroundColor: 'white',
+  },
 })

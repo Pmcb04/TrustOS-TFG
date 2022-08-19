@@ -1,14 +1,19 @@
 import React from 'react'
 import { View } from 'react-native'
-import LanguagePicker from '../../shared/components/language-picker/language-picker'
+
 import { connect } from 'react-redux'
+import { Stack, ThemeContext } from '@telefonica/mistica'
 
 import styles from './configuration-screen.styles'
+import LanguagePicker from '../../shared/components/language-picker/language-picker'
 
-function ConfigurationScreen({ navigation }) {
+function ConfigurationScreen(props) {
+  const { colors } = React.useContext(ThemeContext)
   return (
-    <View>
-      <LanguagePicker />
+    <View style={[styles.container, styles.mainContainer, { backgroundColor: colors.backgroundContainer }]}>
+      <Stack space={16}>
+        <LanguagePicker />
+      </Stack>
     </View>
   )
 }

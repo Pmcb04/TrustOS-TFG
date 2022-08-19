@@ -1,5 +1,7 @@
 import React from 'react'
 import { View } from 'react-native'
+import { useTranslation } from 'react-i18next'
+
 import Product from '../../shared/themes/icons/product'
 import styles from './asset-details-screen.styles'
 import Asset from '../../shared/components/asset/asset'
@@ -33,6 +35,7 @@ function AssetDetailsScreen(props) {
   const { assetId } = props.route.params
   const { editAsset, disabled_fields } = props
   const { colors } = React.useContext(ThemeContext)
+  const { t } = useTranslation() //i18n instance
 
   return (
     <View style={[styles.container, styles.mainContainer]}>
@@ -63,22 +66,22 @@ function AssetDetailsScreen(props) {
             {disabled_fields ? (
               <ButtonPrimary onPress={editAsset}>
                 <IconEditPencilRegular color="currentColor" />
-                Edit
+                {t('EDIT')}
               </ButtonPrimary>
             ) : (
               <ButtonPrimary onPress={editAsset}>
                 <IconBookmarkRegular color="currentColor" />
-                Save
+                {t('SAVE')}
               </ButtonPrimary>
             )}
 
             <ButtonSecondary disabled={!disabled_fields} onPress={() => {}}>
               <IconIdCardRegular color="currentColor" />
-              Tranfer
+              {t('TRANFER')}
             </ButtonSecondary>
             <ButtonSecondary disabled={!disabled_fields} onPress={() => {}}>
               <IconRouteRegular color="currentColor" />
-              Traceability
+              {t('TRACEABILITY')}
             </ButtonSecondary>
             <ButtonSecondary disabled={!disabled_fields} onPress={() => {}}>
               Action 2
