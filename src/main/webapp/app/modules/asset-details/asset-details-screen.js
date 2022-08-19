@@ -1,10 +1,10 @@
 import React from 'react'
 import { View } from 'react-native'
 import Product from '../../shared/themes/icons/product'
-import styles from './asset-details.styles'
+import styles from './asset-details-screen.styles'
 import Asset from '../../shared/components/asset/asset'
 import { connect } from 'react-redux'
-import AssetDetailsActions from './asset-details.reducer'
+import AssetDetailsScreenActions from './asset-details-screen.reducer'
 import {
   ButtonPrimary,
   ButtonSecondary,
@@ -29,7 +29,7 @@ const DATA = {
   hash: 'b1d9f25b1bf78e25e443a6815b9763b7f7eda25d1dd06486ccfc2130b229dc93',
 }
 
-function AssetDetails(props) {
+function AssetDetailsScreen(props) {
   const { assetId } = props.route.params
   const { editAsset, disabled_fields } = props
   const { colors } = React.useContext(ThemeContext)
@@ -38,7 +38,8 @@ function AssetDetails(props) {
     <View style={[styles.container, styles.mainContainer]}>
       <View style={[styles.properties, { borderColor: colors.border }]}>
         <Form onSubmit={(formData) => console.log(formData)}>
-          <Stack space={16}>
+          <Stack fullWidth space={16}>
+            <TextField disabled fullWidth name="owner" label="Owner" />
             <TextField disabled={disabled_fields} fullWidth name="name" label="Name" />
             <TextField disabled={disabled_fields} fullWidth optional name="name" label="Name" />
             <TextField disabled={disabled_fields} fullWidth multiline name="name" label="Name" />
@@ -99,7 +100,7 @@ const mapStateToProps = (state) => {
 }
 const mapDispatchToProps = (dispatch) => {
   return {
-    editAsset: () => dispatch(AssetDetailsActions.assetDetailsEdit()),
+    editAsset: () => dispatch(AssetDetailsScreenActions.assetDetailsEdit()),
   }
 }
-export default connect(mapStateToProps, mapDispatchToProps)(AssetDetails)
+export default connect(mapStateToProps, mapDispatchToProps)(AssetDetailsScreen)

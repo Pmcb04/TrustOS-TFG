@@ -25,6 +25,9 @@ export default StyleSheet.create({
   buttons: {
     marginTop: 20,
   },
+  owner: {
+    margin: 20,
+  },
   actions: {
     alignItems: 'center',
   },

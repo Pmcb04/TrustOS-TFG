@@ -21,7 +21,7 @@ import OAuthRedirectScreen from './oauth-redirect-screen'
 import { ModalScreen } from './modal-screen'
 import { DrawerButton } from './drawer/drawer-button'
 import PruebaScreen from '../modules/my-assets/my-assets-screen'
-import AssetDetails from '../modules/asset-details/asset-details'
+import AssetDetailsScreen from '../modules/asset-details/asset-details-screen'
 
 export const drawerScreens = [
   {
@@ -187,7 +187,7 @@ function NavContainer(props) {
         />
         <Stack.Screen name="OAuthRedirect" component={OAuthRedirectScreen} options={{ title: 'Redirecting...' }} />
         <Stack.Screen name="NotFound" component={NotFound} options={{ title: 'Oops!' }} />
-        <Stack.Screen name="AssetDetails" component={AssetDetails} />
+        <Stack.Screen name="AssetDetails" component={AssetDetailsScreen} />
       </Stack.Navigator>
     </NavigationContainer>
   )
