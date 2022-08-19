@@ -7,6 +7,7 @@ import { createDrawerNavigator } from '@react-navigation/drawer'
 import { createStackNavigator } from '@react-navigation/stack'
 import { useReduxDevToolsExtension } from '@react-navigation/devtools'
 import { connect } from 'react-redux'
+import i18n from '../config/i18-config'
 
 // import screens
 import HomeScreen from '../modules/home/home-screen'
@@ -26,24 +27,24 @@ import AssetDetailsScreen from '../modules/asset-details/asset-details-screen'
 
 export const drawerScreens = [
   {
-    name: 'Home',
+    name: i18n.t('HOME'),
     component: HomeScreen,
     auth: null,
   },
   {
-    name: 'Login',
+    name: i18n.t('LOGIN'),
     route: 'login',
     component: LoginScreen,
     auth: false,
   },
   {
-    name: 'Mis assets',
+    name: i18n.t('MY_ASSETS'),
     route: 'assets',
     component: PruebaScreen,
     auth: false,
   },
   {
-    name: 'Configuration',
+    name: i18n.t('CONFIGURATION'),
     route: 'configuration',
     component: ConfigurationScreen,
     auth: false,

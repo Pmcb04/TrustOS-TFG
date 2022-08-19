@@ -75,7 +75,7 @@ const DATA = [
 function AssetList({ navigation }) {
   return (
     <View style={styles.container}>
-      <FlatList data={DATA} keyExtractor={(item) => item.hash} numColumns={3} renderItem={(item) => renderCategoryItem(item, navigation)} />{' '}
+      <FlatList data={DATA} keyExtractor={(item) => item.hash} numColumns={3} renderItem={(item) => renderCategoryItem(item, navigation)} />
     </View>
   )
 }
