@@ -7,98 +7,30 @@ import { createDrawerNavigator } from '@react-navigation/drawer'
 import { createStackNavigator } from '@react-navigation/stack'
 import { useReduxDevToolsExtension } from '@react-navigation/devtools'
 import { connect } from 'react-redux'
-import i18n from '../config/i18-config'
+
+import { drawerScreens } from './drawer-screens'
 
 // import screens
-import HomeScreen from '../modules/home/home-screen'
-import LoginScreen from '../modules/login/login-screen'
-import ConfigurationScreen from '../modules/configuration/configuration-screen'
+
 import AccountActions from '../shared/reducers/account.reducer'
-import EntityStackScreen, { getEntityRoutes } from './entity-stack'
-import StorybookScreen from '../../storybook'
+import { getEntityRoutes } from './entity-stack'
 import DrawerContent from './drawer/drawer-content'
 import { isReadyRef, navigationRef } from './nav-ref'
 import NotFound from './not-found-screen'
 import OAuthRedirectScreen from './oauth-redirect-screen'
 import { ModalScreen } from './modal-screen'
 import { DrawerButton } from './drawer/drawer-button'
-import PruebaScreen from '../modules/my-assets/my-assets-screen'
+
 import AssetDetailsScreen from '../modules/asset-details/asset-details-screen'
-import AccountScreen from '../modules/account/account-screen'
 
-// import icons
-import System from '../shared/themes/icons/system'
-import Product from '../shared/themes/icons/product'
-import Configuration from '../shared/themes/icons/configuration'
-import Rol from '../shared/themes/icons/rol'
-
-export const drawerScreens = [
-  {
-    name: i18n.t('HOME'),
-    component: HomeScreen,
-    auth: null,
-    options: {
-      drawerIcon: ({ focused, size }) => <System width={20} height={20} />,
-    },
-  },
-  {
-    name: i18n.t('LOGIN'),
-    route: 'login',
-    component: LoginScreen,
-    auth: false,
-  },
-  {
-    name: i18n.t('MY_ASSETS'),
-    route: 'assets',
-    component: PruebaScreen,
-    auth: false,
-    options: {
-      drawerIcon: ({ focused, size }) => <Product width={20} height={20} />,
-    },
-  },
-  {
-    name: i18n.t('ACCOUNT'),
-    route: 'account',
-    component: AccountScreen,
-    auth: false,
-    options: {
-      drawerIcon: ({ focused, size }) => <Rol width={20} height={20} />,
-    },
-  },
-  {
-    name: i18n.t('CONFIGURATION'),
-    route: 'configuration',
-    component: ConfigurationScreen,
-    auth: false,
-    options: {
-      drawerIcon: ({ focused, size }) => <Configuration width={20} height={20} />,
-    },
-  },
-  {
-    name: 'EntityStack',
-    isStack: true,
-    component: EntityStackScreen,
-    options: {
-      title: 'Entities',
-      headerShown: false,
-    },
-    auth: true,
-  },
-]
-if (__DEV__) {
-  drawerScreens.push({
-    name: 'Storybook',
-    route: 'storybook',
-    component: StorybookScreen,
-    auth: false,
-  })
-}
 export const getDrawerRoutes = () => {
   const routes = {}
-  drawerScreens.forEach((screen) => {
-    if (screen.route) {
-      routes[screen.name] = screen.route
-    }
+  drawerScreens.forEach((category) => {
+    category.settings.map((setting) => {
+      if (setting.route) {
+        routes[setting.title] = setting.route
+      }
+    })
   })
   return routes
 }
@@ -132,18 +64,21 @@ const Drawer = createDrawerNavigator()
 
 const getScreens = (props) => {
   const isAuthed = props.account !== null
-  return drawerScreens.map((screen, index) => {
-    if (screen.auth === null || screen.auth === undefined) {
-      return <Drawer.Screen name={screen.name} component={screen.component} options={screen.options} key={index} />
-    } else if (screen.auth === isAuthed) {
-      return <Drawer.Screen name={screen.name} component={screen.component} options={screen.options} key={index} />
-    }
-    return null
+  return drawerScreens.map((category, index) => {
+    return category.settings.map((setting) => {
+      if (setting.auth === null || setting.auth === undefined) {
+        return <Drawer.Screen name={setting.title} component={setting.component} options={setting.options} key={setting.title} />
+      } else if (setting.auth === isAuthed) {
+        return <Drawer.Screen name={setting.title} component={setting.component} options={setting.options} key={setting.title} />
+      }
+    })
   })
 }
 
 function NavContainer(props) {
   const { loaded, getAccount } = props
+  const dimensions = useWindowDimensions()
+  const moreDimension = dimensions.width >= 768
   const lastAppState = 'active'
 
   React.useEffect(() => {
@@ -170,7 +105,6 @@ function NavContainer(props) {
 
   useReduxDevToolsExtension(navigationRef)
 
-  const dimensions = useWindowDimensions()
   return !loaded ? (
     <View>
       <Text>Loading...</Text>
@@ -187,9 +121,9 @@ function NavContainer(props) {
           {() => (
             <Drawer.Navigator
               drawerContent={(p) => <DrawerContent {...p} />}
-              initialRouteName={drawerScreens[0].name}
-              drawerType={dimensions.width >= 768 ? 'permanent' : 'front'}
-              screenOptions={{ headerShown: true, headerLeft: DrawerButton }}>
+              initialRouteName={drawerScreens[0].title}
+              drawerType={moreDimension ? 'permanent' : 'slide'}
+              screenOptions={{ headerShown: !moreDimension, headerLeft: DrawerButton }}>
               {getScreens(props)}
             </Drawer.Navigator>
           )}

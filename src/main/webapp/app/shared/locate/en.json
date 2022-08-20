@@ -11,9 +11,12 @@
     "HOME": "Home",
     "LOGIN": "Login",
     "MY_ASSETS": "My assets",
-    "CONFIGURATION": "Configuration",
+    "CONFIGURATION": "Settings",
     "SELECT_LANGUAGE": "Select your language",
     "LANGUAGE": "Language",
-    "ACCOUNT": "Account"
-
+    "ACCOUNT": "Account",
+    "APPLICATION": "Application",
+    "PERSONAL_INFORMATION": "Personal information",
+    "STORYBOOK": "Storybook",
+    "DEV": "Develop"
 }

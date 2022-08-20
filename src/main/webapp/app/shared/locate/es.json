@@ -14,5 +14,9 @@
     "CONFIGURATION": "Configuración",
     "SELECT_LANGUAGE": "Seleccione su idioma",
     "LANGUAGE": "Idioma",
-    "ACCOUNT": "Cuenta"
+    "ACCOUNT": "Cuenta",
+    "APPLICATION": "Aplicación",
+    "PERSONAL_INFORMATION": "Información personal",
+    "STORYBOOK": "Storybook",
+    "DEV": "Desarrollo"
 }
