@@ -1,7 +1,6 @@
 {
     "ENGLISH": "Inglés",
     "SPAIN": "Español" ,
-    "TITLE": "Este es el título en español",
     "SEARCH": "Buscar",
     "CREATE": "Crear",
     "FILTER": "Filtrar",
@@ -14,5 +13,10 @@
     "MY_ASSETS": "Mis assets",
     "CONFIGURATION": "Configuración",
     "SELECT_LANGUAGE": "Seleccione su idioma",
-    "LANGUAGE": "Idioma"
+    "LANGUAGE": "Idioma",
+    "ACCOUNT": "Cuenta",
+    "APPLICATION": "Aplicación",
+    "PERSONAL_INFORMATION": "Información personal",
+    "STORYBOOK": "Storybook",
+    "DEV": "Desarrollo"
 }
