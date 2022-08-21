@@ -1,14 +1,14 @@
 import React from 'react'
-import i18n from '../config/i18-config'
+import i18n from '../../config/i18-config'
 
-import HomeScreen from '../modules/home/home-screen'
-import LoginScreen from '../modules/login/login-screen'
-import EntityStackScreen from './entity-stack'
-import StorybookScreen from '../../storybook'
+import HomeScreen from '../../modules/home/home-screen'
+import LoginScreen from '../../modules/login/login-screen'
+import EntityStackScreen from '../entity-stack'
+import StorybookScreen from '../../../storybook'
 
-import ConfigurationScreen from '../modules/configuration/configuration-screen'
-import AccountScreen from '../modules/account/account-screen'
-import MyAssetsScreen from '../modules/my-assets/my-assets-screen'
+import ConfigurationScreen from '../../modules/configuration/configuration-screen'
+import AccountScreen from '../../modules/account/account-screen'
+import MyAssetsScreen from '../../modules/my-assets/my-assets-screen'
 
 import { IconUserAccountRegular, IconHomeRegular, IconBoxRegular, IconSettingsRegular, IconAlertRegular } from '@telefonica/mistica'
 

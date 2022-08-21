@@ -8,7 +8,7 @@ import { createStackNavigator } from '@react-navigation/stack'
 import { useReduxDevToolsExtension } from '@react-navigation/devtools'
 import { connect } from 'react-redux'
 
-import { drawerScreens } from './drawer-screens'
+import { drawerScreens } from './drawer/drawer-screens'
 
 // import screens
 

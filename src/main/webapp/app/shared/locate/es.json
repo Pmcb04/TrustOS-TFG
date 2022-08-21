@@ -18,5 +18,10 @@
     "APPLICATION": "Aplicación",
     "PERSONAL_INFORMATION": "Información personal",
     "STORYBOOK": "Storybook",
-    "DEV": "Desarrollo"
+    "DEV": "Desarrollo",
+    "SELECT_THEME": "Seleccione el tema de la aplicación",
+    "THEME": "Tema",
+    "LIGHT": "Claro",
+    "DARK": "Oscuro",
+    "DEFAULT": "Por defecto"
 }
