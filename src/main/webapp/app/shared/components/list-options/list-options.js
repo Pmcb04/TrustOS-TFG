@@ -1,7 +1,7 @@
 import React from 'react'
 import { View } from 'react-native'
 import styles from './list-options.styles'
-import { drawerScreens } from '../../../navigation/drawer-screens'
+import { drawerScreens } from '../../../navigation/drawer/drawer-screens'
 
 import { Stack, Title1, NegativeBox, RowList, Row } from '@telefonica/mistica'
 

@@ -10,15 +10,18 @@ import './app/config/i18-config'
 
 const store = createStore()
 
+console.log(store.getState().appState.theme)
+
 const misticaTheme = {
   skin: getTelefonicaSkin(),
-  colorScheme: 'auto',
+  colorScheme: store.getState().appState.theme,
   i18n: { locale: 'es-ES', phoneNumberFormattingRegionCode: 'ES' },
 }
 
-export default function App() {
+function App(props) {
   // prevent the splashscreen from disappearing until the redux store is completely ready (hidden in nav-container.js)
   const [displayApp, setDisplayApp] = React.useState(false)
+
   React.useEffect(() => {
     if (!displayApp) {
       SplashScreen.preventAutoHideAsync()
@@ -35,3 +38,5 @@ export default function App() {
     </Provider>
   ) : null
 }
+
+export default App
