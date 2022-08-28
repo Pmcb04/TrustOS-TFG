@@ -16,10 +16,10 @@ const create = (baseURL = AppConfig.apiUrl) => {
     baseURL,
     // here are some default headers
     headers: {
-      'Cache-Control': 'no-cache'
+      'Cache-Control': 'no-cache',
     },
     // 10 second timeout...
-    timeout: 10000
+    timeout: 10000,
   })
 
   // ------
@@ -39,14 +39,22 @@ const create = (baseURL = AppConfig.apiUrl) => {
   const setAuthToken = (userAuth) => api.setHeader('Authorization', 'Bearer ' + userAuth)
   const removeAuthToken = () => api.deleteHeader('Authorization')
   // use an empty Authorization header in the auth-info request to prevent an invalid token from returning 401
-  const getOauthInfo = () => api.get('api/auth-info', {}, { headers: { Authorization: undefined } });
+  const getOauthInfo = () => api.get('api/auth-info', {}, { headers: { Authorization: undefined } })
   const getOauthIssuerInfo = (issuerUrl) => api.get(`${issuerUrl}/.well-known/openid-configuration`)
   const register = (user) => api.post('api/register', user)
-  const forgotPassword = (data) => api.post('api/account/reset-password/init', data, { headers: { 'Content-Type': 'text/plain', 'Accept': 'application/json, text/plain, */*' } })
+  const forgotPassword = (data) =>
+    api.post('api/account/reset-password/init', data, {
+      headers: { 'Content-Type': 'text/plain', Accept: 'application/json, text/plain, */*' },
+    })
 
   const getAccount = () => api.get('api/account')
   const updateAccount = (account) => api.post('api/account', account)
-  const changePassword = (currentPassword, newPassword) => api.post('api/account/change-password', { currentPassword, newPassword }, { headers: { 'Content-Type': 'application/json', 'Accept': 'application/json, text/plain, */*' } })
+  const changePassword = (currentPassword, newPassword) =>
+    api.post(
+      'api/account/change-password',
+      { currentPassword, newPassword },
+      { headers: { 'Content-Type': 'application/json', Accept: 'application/json, text/plain, */*' } },
+    )
 
   const getUser = (userId) => api.get('api/users/' + userId)
   const getAllUsers = (options) => api.get('api/users', options)
@@ -55,6 +63,12 @@ const create = (baseURL = AppConfig.apiUrl) => {
   const deleteUser = (userId) => api.delete('api/users/' + userId)
   // jhipster-react-native-api-method-needle
 
+  // trustOS api methods
+  const loginTrustOS = (account) => api.post('/trustos/login', account)
+  const setTrustOSToken = (trustOSAuth) => api.setHeader('Authorization', 'Bearer ' + trustOSAuth)
+  const removeTrustOSToken = () => api.deleteHeader('Authorization')
+  const getAssets = (isAuthorised) => api.get('/trustos/assets', {}, { params: { isAuthorised: isAuthorised } })
+  const getAsset = (isAuthorised, assetId) => api.get('/trustos/assets/' + assetId, {}, { params: { isAuthorised: isAuthorised } })
   // ------
   // STEP 3
   // ------
@@ -83,11 +97,17 @@ const create = (baseURL = AppConfig.apiUrl) => {
     forgotPassword,
     getAccount,
     updateAccount,
-    changePassword
+    changePassword,
+    // trustOS api methods
+    loginTrustOS,
+    setTrustOSToken,
+    removeTrustOSToken,
+    getAssets,
+    getAsset,
   }
 }
 
 // let's return back our create method as the default.
 export default {
-  create
+  create,
 }

@@ -81,6 +81,7 @@ public class SecurityConfiguration {
         //     .antMatchers(HttpMethod.OPTIONS, "/**").permitAll()
         //     .antMatchers("/swagger-ui/**").permitAll()
         //     .antMatchers("/test/**").permitAll()
+        //     .antMatchers("/trustos/**").permitAll()
         //     .antMatchers("/api/authenticate").permitAll()
         //     .antMatchers("/api/auth-info").permitAll()
         //     .antMatchers("/api/admin/**").hasAuthority(AuthoritiesConstants.ADMIN)

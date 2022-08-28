@@ -26,6 +26,11 @@ public class AssetService {
 
     private final String TRACK_URL = "/track";
 
+    /**
+     * Login in track module
+     *
+     * @param auth contain the id ans password of user
+     */
     public Message login(LoginTrustos auth) {
         return new Gson().fromJson(trustos.call(CallType.POST, TRACK_URL + "/login", gson.toJson(auth, LoginTrustos.class)), Message.class);
     }
@@ -60,6 +65,23 @@ public class AssetService {
             .fromJson(
                 trustos.call(CallType.GET, TRACK_URL + "/asset/" + assetId + "?isAuthorised=" + isAuthorised, null, token).get("output"),
                 Asset.class
+            );
+    }
+
+    /**
+     * Obtain a list of assets identifiers for a user
+     *
+     * @param isAuthorised obtain authorised assets
+     * @param token     jwt token to access the TrustOS platform
+     */
+    public String[] getAssets(boolean isAuthorised, String token) {
+        return new Gson()
+            .fromJson(
+                trustos
+                    .call(CallType.GET, TRACK_URL + "/assets/" + "?isAuthorised=" + isAuthorised, null, token)
+                    .getAsJsonObject("output")
+                    .getAsJsonArray("assetId"),
+                String[].class
             );
     }
 

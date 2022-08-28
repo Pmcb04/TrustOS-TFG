@@ -5,12 +5,14 @@ import { useTranslation } from 'react-i18next'
 
 import AssetList from '../../shared/components/asset-list/asset-list'
 import styles from './my-assets-screen.styles'
-import { SearchField, ButtonPrimary, ButtonSecondary, IconAddMoreRegular, IconFunnelRegular } from '@telefonica/mistica'
+import { SearchField, ButtonPrimary, ButtonSecondary, IconAddMoreRegular, IconFunnelRegular, ThemeContext } from '@telefonica/mistica'
 
 function MyAssetsScreen({ navigation }) {
   const { t } = useTranslation() //i18n instance
+  const { colors } = React.useContext(ThemeContext)
+
   return (
-    <View style={[styles.container, styles.mainContainer]}>
+    <View style={[styles.container, styles.mainContainer, { backgroundColor: colors.background }]}>
       <View style={styles.search}>
         <View style={styles.searchField}>
           <SearchField fullWidth name="search" label={t('SEARCH')} />

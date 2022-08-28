@@ -11,6 +11,7 @@ import { LoginTypes } from '../../modules/login/login.reducer'
 import { AccountTypes } from '../../shared/reducers/account.reducer'
 import { UserTypes } from '../../shared/reducers/user.reducer'
 // jhipster-react-native-saga-redux-import-needle
+import { AssetListTypes } from '../components/asset-list/asset-list.reducer'
 
 /* ------------- Sagas ------------- */
 
@@ -20,6 +21,7 @@ import { login, logout, loginLoad } from '../../modules/login/login.sagas'
 import { getAccount, updateAccount } from '../../shared/sagas/account.sagas'
 import UserSagas from '../../shared/sagas/user.sagas'
 // jhipster-react-native-saga-method-import-needle
+import { getAssets } from '../components/asset-list/asset-list.sagas'
 
 /* ------------- API ------------- */
 
@@ -45,5 +47,7 @@ export default function* root() {
 
     takeLatest(AccountTypes.ACCOUNT_REQUEST, getAccount, api),
     takeLatest(AccountTypes.ACCOUNT_UPDATE_REQUEST, updateAccount, api),
+
+    takeLatest(AssetListTypes.ASSET_LIST_REQUEST, getAssets, api),
   ])
 }
