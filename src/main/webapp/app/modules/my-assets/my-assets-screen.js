@@ -4,12 +4,24 @@ import { connect } from 'react-redux'
 import { useTranslation } from 'react-i18next'
 
 import AssetList from '../../shared/components/asset-list/asset-list'
+import AssetListActions from '../../shared/components/asset-list/asset-list.reducer'
 import styles from './my-assets-screen.styles'
-import { SearchField, ButtonPrimary, ButtonSecondary, IconAddMoreRegular, IconFunnelRegular, ThemeContext } from '@telefonica/mistica'
+import {
+  SearchField,
+  ButtonPrimary,
+  ButtonSecondary,
+  IconAddMoreRegular,
+  IconFunnelRegular,
+  ThemeContext,
+  ButtonLayout,
+} from '@telefonica/mistica'
 
-function MyAssetsScreen({ navigation }) {
+// FIXME cuando se recarga la pagina el state assets se encuentra vacio
+function MyAssetsScreen(props) {
   const { t } = useTranslation() //i18n instance
   const { colors } = React.useContext(ThemeContext)
+  const { navigation } = props
+  const { next, previous, index, numAssets, offset } = props
 
   return (
     <View style={[styles.container, styles.mainContainer, { backgroundColor: colors.background }]}>
@@ -30,11 +42,29 @@ function MyAssetsScreen({ navigation }) {
       </View>
       <View style={styles.list}>
         <AssetList navigation={navigation} />
+        {offset < numAssets ? (
+          <ButtonLayout align="center">
+            <ButtonPrimary small disabled={index === offset} onPress={previous}>
+              previous
+            </ButtonPrimary>
+            <ButtonPrimary small disabled={index >= numAssets} onPress={next}>
+              next
+            </ButtonPrimary>
+          </ButtonLayout>
+        ) : null}
       </View>
     </View>
   )
 }
 
-const mapStateToProps = (state) => ({ account: state.account.account })
-const mapDispatchToProps = (dispatch) => ({})
+const mapStateToProps = (state) => ({
+  index: state.assetList.index,
+  numAssets: state.assetList.numAssets,
+  offset: state.assetList.offset,
+  assets: state.assetList.assets,
+})
+const mapDispatchToProps = (dispatch) => ({
+  next: () => dispatch(AssetListActions.assetListLoadNextContent()),
+  previous: () => dispatch(AssetListActions.assetListLoadPreviousContent()),
+})
 export default connect(mapStateToProps, mapDispatchToProps)(MyAssetsScreen)

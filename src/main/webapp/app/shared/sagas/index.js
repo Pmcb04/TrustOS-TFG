@@ -21,7 +21,7 @@ import { login, logout, loginLoad } from '../../modules/login/login.sagas'
 import { getAccount, updateAccount } from '../../shared/sagas/account.sagas'
 import UserSagas from '../../shared/sagas/user.sagas'
 // jhipster-react-native-saga-method-import-needle
-import { getAssets } from '../components/asset-list/asset-list.sagas'
+import { getAssets, setOffset, loadNextAssets, loadPreviousAssets } from '../components/asset-list/asset-list.sagas'
 
 /* ------------- API ------------- */
 
@@ -30,6 +30,9 @@ import { getAssets } from '../components/asset-list/asset-list.sagas'
 const api = AppConfig.useFixtures ? FixtureAPI : API.create()
 
 /* ------------- Connect Types To Sagas ------------- */
+
+//  FIXME state para filtar la lista?
+const OFFSET = 50
 
 export default function* root() {
   yield all([
@@ -48,6 +51,12 @@ export default function* root() {
     takeLatest(AccountTypes.ACCOUNT_REQUEST, getAccount, api),
     takeLatest(AccountTypes.ACCOUNT_UPDATE_REQUEST, updateAccount, api),
 
+    // Asset list
+
     takeLatest(AssetListTypes.ASSET_LIST_REQUEST, getAssets, api),
+    takeLatest(AssetListTypes.ASSET_LIST_REQUEST, setOffset, OFFSET),
+
+    takeLatest(AssetListTypes.ASSET_LIST_LOAD_NEXT_CONTENT, loadNextAssets, api),
+    takeLatest(AssetListTypes.ASSET_LIST_LOAD_PREVIOUS_CONTENT, loadPreviousAssets, api),
   ])
 }
