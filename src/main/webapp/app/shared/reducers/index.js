@@ -15,7 +15,7 @@ export const reducers = combineReducers({
   login: require('../../modules/login/login.reducer').reducer,
 
   assetDetails: require('../../modules/asset-details/asset-details-screen.reducer').reducer,
-  assetList: require('../../shared/components/asset-list/asset-list.reducer').reducer,
+  myAssets: require('../../modules/my-assets/my-assets-screen.reducer').reducer,
 })
 
 export default () => {

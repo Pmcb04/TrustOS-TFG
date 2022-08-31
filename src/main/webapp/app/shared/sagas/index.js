@@ -11,7 +11,7 @@ import { LoginTypes } from '../../modules/login/login.reducer'
 import { AccountTypes } from '../../shared/reducers/account.reducer'
 import { UserTypes } from '../../shared/reducers/user.reducer'
 // jhipster-react-native-saga-redux-import-needle
-import { AssetListTypes } from '../components/asset-list/asset-list.reducer'
+import { AssetListTypes } from '../../modules/my-assets/my-assets-screen.reducer'
 
 /* ------------- Sagas ------------- */
 
@@ -21,7 +21,7 @@ import { login, logout, loginLoad } from '../../modules/login/login.sagas'
 import { getAccount, updateAccount } from '../../shared/sagas/account.sagas'
 import UserSagas from '../../shared/sagas/user.sagas'
 // jhipster-react-native-saga-method-import-needle
-import { getAssets, setOffset, loadNextAssets, loadPreviousAssets } from '../components/asset-list/asset-list.sagas'
+import { getAssets, setOffset, loadNextAssets, loadPreviousAssets, search } from '../../modules/my-assets/my-assets-screen.sagas'
 
 /* ------------- API ------------- */
 
@@ -32,7 +32,7 @@ const api = AppConfig.useFixtures ? FixtureAPI : API.create()
 /* ------------- Connect Types To Sagas ------------- */
 
 //  FIXME state para filtar la lista?
-const OFFSET = 50
+const OFFSET = 2
 
 export default function* root() {
   yield all([
@@ -52,11 +52,11 @@ export default function* root() {
     takeLatest(AccountTypes.ACCOUNT_UPDATE_REQUEST, updateAccount, api),
 
     // Asset list
-
-    takeLatest(AssetListTypes.ASSET_LIST_REQUEST, getAssets, api),
-    takeLatest(AssetListTypes.ASSET_LIST_REQUEST, setOffset, OFFSET),
-
-    takeLatest(AssetListTypes.ASSET_LIST_LOAD_NEXT_CONTENT, loadNextAssets, api),
-    takeLatest(AssetListTypes.ASSET_LIST_LOAD_PREVIOUS_CONTENT, loadPreviousAssets, api),
+    takeLatest(AssetListTypes.MY_ASSETS_REQUEST, getAssets, api),
+    takeLatest(AssetListTypes.MY_ASSETS_REQUEST, setOffset, OFFSET),
+    takeLatest(AssetListTypes.MY_ASSETS_SUCCESS, loadNextAssets, api),
+    takeLatest(AssetListTypes.MY_ASSETS_LOAD_NEXT_CONTENT, loadNextAssets, api),
+    takeLatest(AssetListTypes.MY_ASSETS_LOAD_PREVIOUS_CONTENT, loadPreviousAssets, api),
+    takeLatest(AssetListTypes.MY_ASSETS_SEARCH, search, api),
   ])
 }

@@ -3,16 +3,16 @@ import Immutable from 'seamless-immutable'
 /* ------------- Types and Action Creators ------------- */
 
 const { Types, Creators } = createActions({
-  assetListReset: [],
-  assetListInit: [],
-  assetListRequest: [],
-  assetListSuccess: ['assets'],
-  assetListFailure: ['error'],
-  assetListLoadNextContent: [],
-  assetListLoadPreviousContent: [],
-  assetListSetOffset: ['offset'],
-  assetListSetIndex: ['index'],
-  assetListSetAssetsLoaded: ['assetsLoaded'],
+  myAssetsReset: [],
+  myAssetsRequest: [],
+  myAssetsSuccess: ['assets'],
+  myAssetsFailure: ['error'],
+  myAssetsLoadNextContent: [],
+  myAssetsLoadPreviousContent: [],
+  myAssetsSetOffset: ['offset'],
+  myAssetsSetIndex: ['index'],
+  myAssetsSetAssetsLoaded: ['assetsLoaded'],
+  myAssetsSearch: ['search'],
 })
 
 export const AssetListTypes = Types
@@ -28,6 +28,7 @@ export const INITIAL_STATE = Immutable({
   error: null,
   index: 0,
   offset: 0,
+  search: '',
 })
 
 /* ------------- Reducers ------------- */
@@ -41,6 +42,7 @@ export const request = (state) =>
     numAssets: 0,
     assetsLoaded: null,
     index: 0,
+    search: null,
   })
 
 // state sucess request completed
@@ -74,23 +76,23 @@ export const setOffset = (state, { offset }) => state.merge({ offset })
 // set index to state
 export const setIndex = (state, { index }) => state.merge({ index })
 
+// search in assets
+export const setSearch = (state, { search }) => state.merge({ search })
+
 // reset the asset reducer
 export const reset = () => INITIAL_STATE
-
-// init asset list
-export const init = (state) => state
 
 /* ------------- Hookup Reducers To Types ------------- */
 
 export const reducer = createReducer(INITIAL_STATE, {
-  [Types.ASSET_LIST_REQUEST]: request,
-  [Types.ASSET_LIST_SUCCESS]: success,
-  [Types.ASSET_LIST_FAILURE]: failure,
-  [Types.ASSET_LIST_LOAD_NEXT_CONTENT]: loadNextContent,
-  [Types.ASSET_LIST_LOAD_PREVIOUS_CONTENT]: loadPreviousContent,
-  [Types.ASSET_LIST_SET_OFFSET]: setOffset,
-  [Types.ASSET_LIST_SET_INDEX]: setIndex,
-  [Types.ASSET_LIST_SET_ASSETS_LOADED]: setAssetsLoaded,
-  [Types.ASSET_LIST_RESET]: reset,
-  [Types.ASSET_LIST_INIT]: init,
+  [Types.MY_ASSETS_REQUEST]: request,
+  [Types.MY_ASSETS_SUCCESS]: success,
+  [Types.MY_ASSETS_FAILURE]: failure,
+  [Types.MY_ASSETS_LOAD_NEXT_CONTENT]: loadNextContent,
+  [Types.MY_ASSETS_LOAD_PREVIOUS_CONTENT]: loadPreviousContent,
+  [Types.MY_ASSETS_SET_OFFSET]: setOffset,
+  [Types.MY_ASSETS_SET_INDEX]: setIndex,
+  [Types.MY_ASSETS_SET_ASSETS_LOADED]: setAssetsLoaded,
+  [Types.MY_ASSETS_RESET]: reset,
+  [Types.MY_ASSETS_SEARCH]: setSearch,
 })
