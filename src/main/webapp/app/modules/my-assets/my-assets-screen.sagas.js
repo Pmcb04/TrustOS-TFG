@@ -5,6 +5,7 @@ export const selectIndex = (state) => state.myAssets.index
 export const selectOffset = (state) => state.myAssets.offset
 export const selectAssets = (state) => state.myAssets.assets
 export const selectSearch = (state) => state.myAssets.search
+export const selectChangeOffset = (state) => state.myAssets.changeOffset
 
 // TODO mover a el reducer para que pueda coger el estado de algun filtro
 const isAuthorised = false
@@ -33,8 +34,18 @@ export function* getAssets(api) {
   console.log('end')
 }
 
-export function* setOffset(offset) {
-  yield put(MyAssetsActions.myAssetsSetOffset(offset))
+export function* loadAssetsAgain(api) {
+  let assets = yield select(selectAssets)
+  const index = yield select(selectIndex)
+  const offset = yield select(selectOffset)
+  const newOffset = yield select(selectChangeOffset)
+  const newIndex = yield Math.floor((index * offset) / newOffset)
+  // calculate new index
+  const start = newIndex * newOffset
+  const end = newIndex * newOffset + newOffset
+  yield loadAssets(api, assets.slice(start, end))
+  yield put(MyAssetsActions.myAssetsSetOffset(newOffset))
+  yield put(MyAssetsActions.myAssetsSetIndex(newIndex))
 }
 
 function* loadAssets(api, assets) {
@@ -45,7 +56,7 @@ function* loadAssets(api, assets) {
     assets.map((assetId) => (assetId !== null && assetId !== '' ? call(api.getAsset, isAuthorised, assetId) : null)),
   )
   // for each reponse  check if it is diferent of null
-  response.forEach((asset, index) => {
+  response.forEach((asset) => {
     if (asset !== null) assetsLoaded.push(asset.data)
   })
 
@@ -59,10 +70,10 @@ export function* loadNextAssets(api) {
   const offset = yield select(selectOffset)
 
   // calculate new index
-  const start = index
-  const end = index + offset
+  const start = index * offset
+  const end = index * offset + offset
   yield loadAssets(api, assets.slice(start, end))
-  yield put(MyAssetsActions.myAssetsSetIndex(end))
+  yield put(MyAssetsActions.myAssetsSetIndex(index + 1))
 }
 
 export function* loadPreviousAssets(api) {
@@ -71,10 +82,10 @@ export function* loadPreviousAssets(api) {
   const offset = yield select(selectOffset)
 
   // calculate new index
-  const start = index - 2 * offset
-  const end = index - offset
+  let start = (index - 1) * offset - offset
+  let end = (index - 1) * offset
   yield loadAssets(api, assets.slice(start, end))
-  yield put(MyAssetsActions.myAssetsSetIndex(end))
+  yield put(MyAssetsActions.myAssetsSetIndex(index - 1))
 }
 
 export function* search(api) {

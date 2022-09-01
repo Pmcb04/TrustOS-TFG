@@ -10,7 +10,9 @@ const { Types, Creators } = createActions({
   myAssetsLoadNextContent: [],
   myAssetsLoadPreviousContent: [],
   myAssetsSetOffset: ['offset'],
+  myAssetsChangeOffset: ['changeOffset'],
   myAssetsSetIndex: ['index'],
+  myAssetsSetOrder: ['order'],
   myAssetsSetAssetsLoaded: ['assetsLoaded'],
   myAssetsSearch: ['search'],
 })
@@ -27,8 +29,10 @@ export const INITIAL_STATE = Immutable({
   fetching: false,
   error: null,
   index: 0,
-  offset: 0,
+  offset: 10,
+  changeOffset: 10,
   search: '',
+  order: 'natural',
 })
 
 /* ------------- Reducers ------------- */
@@ -51,6 +55,7 @@ export const success = (state, { assets }) =>
     fetching: false,
     error: null,
     assets,
+    index: 0, // TODO quitar cuando arreglemos el login
     numAssets: assets.length,
   })
 
@@ -64,6 +69,7 @@ export const failure = (state, { error }) =>
 
 // load next offset asset list
 export const loadNextContent = (state) => state
+
 // load previous offset asset list
 export const loadPreviousContent = (state) => state
 
@@ -76,8 +82,14 @@ export const setOffset = (state, { offset }) => state.merge({ offset })
 // set index to state
 export const setIndex = (state, { index }) => state.merge({ index })
 
+// set changeOffset to state
+export const setChangeOffset = (state, { changeOffset }) => state.merge({ changeOffset })
+
 // search in assets
 export const setSearch = (state, { search }) => state.merge({ search })
+
+// set order to state
+export const setOrder = (state, { order }) => state.merge({ order })
 
 // reset the asset reducer
 export const reset = () => INITIAL_STATE
@@ -91,7 +103,9 @@ export const reducer = createReducer(INITIAL_STATE, {
   [Types.MY_ASSETS_LOAD_NEXT_CONTENT]: loadNextContent,
   [Types.MY_ASSETS_LOAD_PREVIOUS_CONTENT]: loadPreviousContent,
   [Types.MY_ASSETS_SET_OFFSET]: setOffset,
+  [Types.MY_ASSETS_CHANGE_OFFSET]: setChangeOffset,
   [Types.MY_ASSETS_SET_INDEX]: setIndex,
+  [Types.MY_ASSETS_SET_ORDER]: setOrder,
   [Types.MY_ASSETS_SET_ASSETS_LOADED]: setAssetsLoaded,
   [Types.MY_ASSETS_RESET]: reset,
   [Types.MY_ASSETS_SEARCH]: setSearch,

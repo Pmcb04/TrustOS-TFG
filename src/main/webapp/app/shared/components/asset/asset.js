@@ -25,11 +25,11 @@ function Asset(props) {
   const { image, name, type, hash } = props
   return (
     <DataCard
-      headline={<Tag type="active">{type}</Tag>}
-      title={<Text4 color={colors.textPrimary}>{name}</Text4>}
+      headline={<Tag type="active">{type ? type : 'Asset'}</Tag>}
+      title={<Text4 color={colors.textPrimary}>{name.substring(0, 30)}</Text4>}
       subtitle={
         <Text1 color={colors.textSecondary} light>
-          {hash}
+          {hash.substring(0, 30)}
         </Text1>
       }
       icon={setImage(image)}

@@ -23,5 +23,14 @@
     "THEME": "Tema",
     "LIGHT": "Claro",
     "DARK": "Oscuro",
-    "DEFAULT": "Por defecto"
+    "DEFAULT": "Por defecto",
+    "NEXT": "Siguiente",
+    "PREVIOUS": "Anterior",
+    "ORDER": "Orden",
+    "ALPHABETIC": "Alfabetico (A-Z)",
+    "ALPHABETIC_REVERSE": "Alfabetico inverso (Z-A)",
+    "SHOW": "Mostrar",
+    "AUTHORIZATHED": "Autorizado",
+    "YES": "Si",
+    "NO": "No"
 }
