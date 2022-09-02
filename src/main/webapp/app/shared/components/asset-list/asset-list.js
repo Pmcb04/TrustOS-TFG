@@ -23,7 +23,13 @@ function AssetList(props) {
     return (
       <TouchableWithoutFeedback onPress={() => navigation.navigate('AssetDetails', { assetId: itemData.item.assetId })}>
         <View style={[styles.item, { flex: 1 / numColums }]}>
-          <Asset name={itemData.item.assetId} type={itemData.item.data.type} image={itemData.item.data.image} hash={itemData.item.hash} />
+          <Asset
+            name={itemData.item.assetId}
+            type={itemData.item.data.type}
+            image={itemData.item.data.image}
+            hash={itemData.item.hash}
+            authorizathed={true}
+          />
         </View>
       </TouchableWithoutFeedback>
     )

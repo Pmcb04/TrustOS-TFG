@@ -21,7 +21,14 @@ import { login, logout, loginLoad } from '../../modules/login/login.sagas'
 import { getAccount, updateAccount } from '../../shared/sagas/account.sagas'
 import UserSagas from '../../shared/sagas/user.sagas'
 // jhipster-react-native-saga-method-import-needle
-import { getAssets, loadAssetsAgain, loadNextAssets, loadPreviousAssets, search } from '../../modules/my-assets/my-assets-screen.sagas'
+import {
+  getAssets,
+  loadAssetsAgain,
+  loadNextAssets,
+  loadPreviousAssets,
+  search,
+  changeOrder,
+} from '../../modules/my-assets/my-assets-screen.sagas'
 
 /* ------------- API ------------- */
 
@@ -55,5 +62,6 @@ export default function* root() {
     takeLatest(AssetListTypes.MY_ASSETS_LOAD_NEXT_CONTENT, loadNextAssets, api),
     takeLatest(AssetListTypes.MY_ASSETS_LOAD_PREVIOUS_CONTENT, loadPreviousAssets, api),
     takeLatest(AssetListTypes.MY_ASSETS_SEARCH, search, api),
+    takeLatest(AssetListTypes.MY_ASSETS_SET_ORDER, changeOrder, api),
   ])
 }

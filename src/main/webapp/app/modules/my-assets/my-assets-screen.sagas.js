@@ -6,6 +6,8 @@ export const selectOffset = (state) => state.myAssets.offset
 export const selectAssets = (state) => state.myAssets.assets
 export const selectSearch = (state) => state.myAssets.search
 export const selectChangeOffset = (state) => state.myAssets.changeOffset
+export const selectOrder = (state) => state.myAssets.order
+export const selectAssetsLoaded = (state) => state.myAssets.assetsLoaded
 
 // TODO mover a el reducer para que pueda coger el estado de algun filtro
 const isAuthorised = false
@@ -39,18 +41,21 @@ export function* loadAssetsAgain(api) {
   const index = yield select(selectIndex)
   const offset = yield select(selectOffset)
   const newOffset = yield select(selectChangeOffset)
-  const newIndex = yield Math.floor((index * offset) / newOffset)
+
   // calculate new index
-  const start = newIndex * newOffset
-  const end = newIndex * newOffset + newOffset
-  yield loadAssets(api, assets.slice(start, end))
+  const start = (index - 1) * offset // 5
+  const newEnd = start + newOffset
+  const newIndex = yield Math.floor(newEnd / newOffset)
+  let newStart = (newIndex - 1) * newOffset
+  if (newStart < 0) newStart = 0
+
+  yield loadAssets(api, assets.slice(newStart, newEnd))
   yield put(MyAssetsActions.myAssetsSetOffset(newOffset))
   yield put(MyAssetsActions.myAssetsSetIndex(newIndex))
 }
 
 function* loadAssets(api, assets) {
   let assetsLoaded = []
-
   // set assets loaded
   const response = yield all(
     assets.map((assetId) => (assetId !== null && assetId !== '' ? call(api.getAsset, isAuthorised, assetId) : null)),
@@ -88,15 +93,27 @@ export function* loadPreviousAssets(api) {
   yield put(MyAssetsActions.myAssetsSetIndex(index - 1))
 }
 
+// BUG cuando se busca, los botones anterior y posterior deberian hacer caso a la busqueda no a los assets completos.
 export function* search(api) {
   let assets = yield select(selectAssets)
   const found = yield select(selectSearch)
   let assetsSearch = []
   // filter by search
-  yield assets.forEach((assetId) => {
-    if (assetId.toLowerCase().includes(found.toLowerCase())) {
-      assetsSearch.push(assetId)
-    }
-  })
-  yield loadAssets(api, assetsSearch)
+  if (found === null || found === '') {
+    yield loadAssetsAgain(api)
+  } else {
+    yield assets.forEach((assetId) => {
+      if (assetId.toLowerCase().includes(found.toLowerCase())) {
+        assetsSearch.push(assetId)
+      }
+    })
+    yield loadAssets(api, assetsSearch)
+  }
+}
+
+export function* changeOrder(api) {
+  let assets = yield select(selectAssets)
+  let assetsChange = [...assets]
+  yield put(MyAssetsActions.myAssetsSuccess(assetsChange.reverse()))
+  yield loadAssetsAgain(api)
 }
