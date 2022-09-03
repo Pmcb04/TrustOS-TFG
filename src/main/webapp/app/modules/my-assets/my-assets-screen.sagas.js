@@ -9,9 +9,6 @@ export const selectChangeOffset = (state) => state.myAssets.changeOffset
 export const selectOrder = (state) => state.myAssets.order
 export const selectAssetsLoaded = (state) => state.myAssets.assetsLoaded
 
-// TODO mover a el reducer para que pueda coger el estado de algun filtro
-const isAuthorised = false
-
 export function* getAssets(api) {
   console.log('begin')
   // FIXME eliminar cuando tengamos el login resuelto
@@ -21,21 +18,42 @@ export function* getAssets(api) {
   }
   const token = yield call(api.loginTrustOS, account)
   yield call(api.setTrustOSToken, token.data.message)
-  const response = yield call(api.getAssets, isAuthorised)
-  console.log(response)
+  let assetsOwner = yield call(api.getAssets, false)
+  let assetsAuthorised = yield call(api.getAssets, true)
   // success?
-  if (response.ok) {
+  if (assetsOwner.ok && assetsAuthorised.ok) {
+    // check if assetId is null
+    assetsOwner.data.forEach((assetId, index) => {
+      if (assetId === null || assetId === '') assetsOwner.data.splice(index, 1)
+    })
+    assetsAuthorised.data.forEach((assetId, index) => {
+      if (assetId === null || assetId === '') assetsAuthorised.data.splice(index, 1)
+    })
+
+    // second put isAuthorised flag
+    assetsOwner.data.forEach((assetId, index) => {
+      assetsOwner.data[index] = { assetId: assetId, isAuthorised: false }
+    })
+    assetsAuthorised.data.forEach((assetId, index) => {
+      assetsAuthorised.data[index] = { assetId: assetId, isAuthorised: true }
+    })
+
+    // finally, concat the two list and sort
+    // FIXME ver como podemos ordernar la lista concatenada alfabeticamente (ahora no se ordena)
+    const assets = assetsOwner.data.concat(assetsAuthorised.data).sort((a, b) => a.assetId > b.assetId)
+
     // obtain all data for all assets
-    yield put(MyAssetsActions.myAssetsSuccess(response.data))
+    yield put(MyAssetsActions.myAssetsSuccess(assets))
     console.log('RESPONSE GET ASSETS OK')
   } else {
-    yield put(MyAssetsActions.myAssetsFailure(response.data))
+    yield put(MyAssetsActions.myAssetsFailure(assetsOwner.data))
     console.log('RESPONSE GET ASSETS NOT OK')
   }
 
   console.log('end')
 }
 
+// BUG cuando se cambia a la segunda pantalla estando en order 5 y se cambia a 10 se muestran 11 elementos.
 export function* loadAssetsAgain(api) {
   let assets = yield select(selectAssets)
   const index = yield select(selectIndex)
@@ -57,12 +75,11 @@ export function* loadAssetsAgain(api) {
 function* loadAssets(api, assets) {
   let assetsLoaded = []
   // set assets loaded
-  const response = yield all(
-    assets.map((assetId) => (assetId !== null && assetId !== '' ? call(api.getAsset, isAuthorised, assetId) : null)),
-  )
+  const response = yield all(assets.map((asset) => call(api.getAsset, asset.isAuthorised, asset.assetId)))
   // for each reponse  check if it is diferent of null
-  response.forEach((asset) => {
-    if (asset !== null) assetsLoaded.push(asset.data)
+  response.forEach((asset, index) => {
+    asset.data.isAuthorised = assets[index].isAuthorised
+    assetsLoaded.push(asset.data)
   })
 
   // set list of asset in state

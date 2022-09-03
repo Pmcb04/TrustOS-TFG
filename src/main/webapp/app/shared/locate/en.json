@@ -32,7 +32,9 @@
     "SHOW": "Show",
     "AUTHORIZATHED": "Authorizathed",
     "YES": "Yes",
-    "NO": "No"
+    "NO": "No",
+    "TYPE": "Type",
+    "OWNER": "Owner"
 
 
 }

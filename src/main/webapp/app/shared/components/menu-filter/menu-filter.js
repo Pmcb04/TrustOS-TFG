@@ -77,22 +77,24 @@ function MenuFilter(props) {
 
         <View style={[styles.authorizathed, styles.dataFilter]}>
           <View style={styles.title}>
-            <Text5>{t('AUTHORIZATHED')}</Text5>
+            <Text5>{t('TYPE')}</Text5>
           </View>
           <Inline space={'evenly'} alignItems="center">
             <Checkbox
+              defaultChecked={true}
               name="authorizathed-yes"
               render={({ labelId, checked }) => (
                 <Chip active={checked} id={labelId}>
-                  {t('YES')}
+                  {t('AUTHORIZATHED')}
                 </Chip>
               )}
             />
             <Checkbox
+              defaultChecked={true}
               name="authorizathed-no"
               render={({ labelId, checked }) => (
                 <Chip active={checked} id={labelId}>
-                  {t('NO')}
+                  {t('OWNER')}
                 </Chip>
               )}
             />

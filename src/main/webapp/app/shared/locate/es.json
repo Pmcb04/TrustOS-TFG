@@ -32,5 +32,7 @@
     "SHOW": "Mostrar",
     "AUTHORIZATHED": "Autorizado",
     "YES": "Si",
-    "NO": "No"
+    "NO": "No",
+    "TYPE": "Tipo",
+    "OWNER": "Propietario"
 }

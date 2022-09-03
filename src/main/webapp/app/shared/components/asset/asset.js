@@ -4,7 +4,7 @@ import {
   Tag,
   IconFolderRegular,
   IconFingerprintRegular,
-  IconAutenticationSuccessRegular,
+  IconShieldRegular,
   IconBoxRegular,
   Text4,
   Text1,
@@ -41,22 +41,31 @@ function Asset(props) {
   return (
     <DataCard
       headline={<Tag type="active">{type ? type : 'Asset'}</Tag>}
-      title={<Text4 color={colors.textPrimary}>{name.substring(0, 30)}</Text4>}
+      title={
+        <Text4 truncate color={colors.textPrimary}>
+          {name}
+        </Text4>
+      }
       subtitle={
         <Stack>
-          {authorizathed ? (
-            <Inline space={8}>
-              <IconAutenticationSuccessRegular color={colors.success} size={SIZE_ICONS_DESCRIPTION} />
-              <Text1 color={colors.success} medium>
+          <Inline space={8}>
+            <IconShieldRegular color={authorizathed ? colors.success : colors.textPrimary} size={SIZE_ICONS_DESCRIPTION} />
+            {authorizathed ? (
+              <Text1 wordBreak color={colors.success} medium>
                 {t('AUTHORIZATHED')}
               </Text1>
-            </Inline>
-          ) : null}
+            ) : (
+              <Text1 color={colors.textPrimary} medium>
+                {t('OWNER')}
+              </Text1>
+            )}
+          </Inline>
 
           <Inline space={8}>
             <IconFingerprintRegular size={SIZE_ICONS_DESCRIPTION} />
-            <Text1 color={colors.textSecondary} light>
-              {hash.substring(0, 30)}
+
+            <Text1 color={colors.textSecondary} regular truncate>
+              {hash}
             </Text1>
           </Inline>
         </Stack>
