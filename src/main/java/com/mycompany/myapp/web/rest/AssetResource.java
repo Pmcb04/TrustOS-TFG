@@ -29,7 +29,7 @@ import com.mycompany.myapp.service.dto.trustos.AssetDTO;
 @RequestMapping("/trustos")
 public class AssetResource {
 
-    private final Logger log = LoggerFactory.getLogger(AccountResource.class);
+    private final Logger log = LoggerFactory.getLogger(AssetResource.class);
 
     private final AssetService assetService;
 

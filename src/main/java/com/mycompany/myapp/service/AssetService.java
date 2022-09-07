@@ -2,6 +2,7 @@ package com.mycompany.myapp.service;
 
 import java.util.Map;
 
+import org.springframework.cache.annotation.Cacheable;
 import org.springframework.stereotype.Service;
 
 import com.google.gson.Gson;
@@ -56,11 +57,8 @@ public class AssetService {
      * @param isAuthorised obtain authorised assets
      * @param token     jwt token to access the TrustOS platform
      */
+    @Cacheable(cacheNames = "assets", key = "#assetId")
     public Asset getAsset(String assetId, boolean isAuthorised, String token) {
-        System.out.println("GET ASSET");
-        System.out.println(assetId);
-        System.out.println(isAuthorised);
-        System.out.println(token);
         return new Gson()
             .fromJson(
                 trustos.call(CallType.GET, TRACK_URL + "/asset/" + assetId + "?isAuthorised=" + isAuthorised, null, token).get("output"),

@@ -9,7 +9,7 @@ import MyAssetsActions from '../../../modules/my-assets/my-assets-screen.reducer
 
 function MenuFilter(props) {
   const { t } = useTranslation()
-  const { changeOffset, offset, setOrder, order } = props
+  const { changeOffset, offset, setOrder, order, showOwner, showAuthorizathed, setShowOwner, setShowAuthorizathed } = props
   return (
     <ScrollView>
       <Boxed>
@@ -35,14 +35,6 @@ function MenuFilter(props) {
           </View>
           <RadioGroup onChange={(value) => changeOffset(value)} name="chip-offset" defaultValue={offset}>
             <Inline space={'evenly'} alignItems="center">
-              <RadioButton
-                value={5}
-                render={({ checked, labelId }) => (
-                  <Chip active={checked} id={labelId}>
-                    5
-                  </Chip>
-                )}
-              />
               <RadioButton
                 value={10}
                 render={({ checked, labelId }) => (
@@ -77,11 +69,12 @@ function MenuFilter(props) {
 
         <View style={[styles.authorizathed, styles.dataFilter]}>
           <View style={styles.title}>
-            <Text5>{t('TYPE')}</Text5>
+            <Text5>{t('OWNERSHIP')}</Text5>
           </View>
           <Inline space={'evenly'} alignItems="center">
             <Checkbox
-              defaultChecked={true}
+              onChange={(value) => setShowAuthorizathed(value)}
+              defaultChecked={showAuthorizathed}
               name="authorizathed-yes"
               render={({ labelId, checked }) => (
                 <Chip active={checked} id={labelId}>
@@ -90,7 +83,8 @@ function MenuFilter(props) {
               )}
             />
             <Checkbox
-              defaultChecked={true}
+              onChange={(value) => setShowOwner(value)}
+              defaultChecked={showOwner}
               name="authorizathed-no"
               render={({ labelId, checked }) => (
                 <Chip active={checked} id={labelId}>
@@ -108,12 +102,16 @@ const mapStateToProps = (state) => {
   return {
     offset: state.myAssets.offset,
     order: state.myAssets.order,
+    showOwner: state.myAssets.showOwner,
+    showAuthorizathed: state.myAssets.showAuthorizathed,
   }
 }
 const mapDispatchToProps = (dispatch) => {
   return {
     changeOffset: (changeOffset) => dispatch(MyAssetsActions.myAssetsChangeOffset(changeOffset)),
     setOrder: (order) => dispatch(MyAssetsActions.myAssetsSetOrder(order)),
+    setShowOwner: (showOwner) => dispatch(MyAssetsActions.myAssetsSetShowOwner(showOwner)),
+    setShowAuthorizathed: (showAuthorizathed) => dispatch(MyAssetsActions.myAssetsSetShowAuthorizathed(showAuthorizathed)),
   }
 }
 export default connect(mapStateToProps, mapDispatchToProps)(MenuFilter)

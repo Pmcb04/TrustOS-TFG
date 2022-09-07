@@ -13,6 +13,8 @@ const { Types, Creators } = createActions({
   myAssetsChangeOffset: ['changeOffset'],
   myAssetsSetIndex: ['index'],
   myAssetsSetOrder: ['order'],
+  myAssetsSetShowOwner: ['showOwner'],
+  myAssetsSetShowAuthorizathed: ['showAuthorizathed'],
   myAssetsSetAssetsLoaded: ['assetsLoaded'],
   myAssetsSearch: ['search'],
 })
@@ -33,6 +35,8 @@ export const INITIAL_STATE = Immutable({
   changeOffset: 10,
   search: '',
   order: 'natural',
+  showOwner: true,
+  showAuthorizathed: true,
 })
 
 /* ------------- Reducers ------------- */
@@ -91,6 +95,12 @@ export const setSearch = (state, { search }) => state.merge({ search })
 // set order to state
 export const setOrder = (state, { order }) => state.merge({ order })
 
+// set showOwner to state
+export const setShowOwner = (state, { showOwner }) => state.merge({ showOwner })
+
+// set showAuthorizathed to state
+export const setShowAuthorizathed = (state, { showAuthorizathed }) => state.merge({ showAuthorizathed })
+
 // reset the asset reducer
 export const reset = () => INITIAL_STATE
 
@@ -109,4 +119,6 @@ export const reducer = createReducer(INITIAL_STATE, {
   [Types.MY_ASSETS_SET_ASSETS_LOADED]: setAssetsLoaded,
   [Types.MY_ASSETS_RESET]: reset,
   [Types.MY_ASSETS_SEARCH]: setSearch,
+  [Types.MY_ASSETS_SET_SHOW_OWNER]: setShowOwner,
+  [Types.MY_ASSETS_SET_SHOW_AUTHORIZATHED]: setShowAuthorizathed,
 })

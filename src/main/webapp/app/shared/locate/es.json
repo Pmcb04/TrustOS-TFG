@@ -34,5 +34,6 @@
     "YES": "Si",
     "NO": "No",
     "TYPE": "Tipo",
-    "OWNER": "Propietario"
+    "OWNER": "Propietario",
+    "OWNERSHIP": "Titularidad"
 }

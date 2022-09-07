@@ -34,7 +34,8 @@
     "YES": "Yes",
     "NO": "No",
     "TYPE": "Type",
-    "OWNER": "Owner"
+    "OWNER": "Owner",
+    "OWNERSHIP": "Owership"
 
 
 }

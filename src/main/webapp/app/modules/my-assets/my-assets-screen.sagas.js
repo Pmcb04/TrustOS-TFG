@@ -8,9 +8,10 @@ export const selectSearch = (state) => state.myAssets.search
 export const selectChangeOffset = (state) => state.myAssets.changeOffset
 export const selectOrder = (state) => state.myAssets.order
 export const selectAssetsLoaded = (state) => state.myAssets.assetsLoaded
+export const selectShowOwner = (state) => state.myAssets.showOwner
+export const selectShowAuthorizathed = (state) => state.myAssets.showAuthorizathed
 
-export function* getAssets(api) {
-  console.log('begin')
+function* login(api) {
   // FIXME eliminar cuando tengamos el login resuelto
   const account = {
     id: 'did:vtn:trustid:0106a4d4a997ac85895ed20cbdaafe6a58c5bd8d7311b446d11502bfe9942311',
@@ -18,42 +19,59 @@ export function* getAssets(api) {
   }
   const token = yield call(api.loginTrustOS, account)
   yield call(api.setTrustOSToken, token.data.message)
-  let assetsOwner = yield call(api.getAssets, false)
-  let assetsAuthorised = yield call(api.getAssets, true)
+}
+
+export function* getAssets(api) {
+  yield login(api) // TODO eliminar cuando tengamos el login
+
+  const showOwner = yield select(selectShowOwner)
+  const showAuthorizathed = yield select(selectShowAuthorizathed)
+  const order = yield select(selectOrder)
+
+  let assetsOwner = []
+  let assetsAuthorised = []
+
+  if (showOwner) {
+    assetsOwner = yield call(api.getAssets, false)
+    assetsOwner = yield putIsAuthorisedFlag(assetsOwner.data, false)
+  }
+
+  if (showAuthorizathed) {
+    assetsAuthorised = yield call(api.getAssets, true)
+    assetsAuthorised = yield putIsAuthorisedFlag(assetsAuthorised.data, true)
+  }
+
   // success?
-  if (assetsOwner.ok && assetsAuthorised.ok) {
-    // check if assetId is null
-    assetsOwner.data.forEach((assetId, index) => {
-      if (assetId === null || assetId === '') assetsOwner.data.splice(index, 1)
-    })
-    assetsAuthorised.data.forEach((assetId, index) => {
-      if (assetId === null || assetId === '') assetsAuthorised.data.splice(index, 1)
-    })
-
-    // second put isAuthorised flag
-    assetsOwner.data.forEach((assetId, index) => {
-      assetsOwner.data[index] = { assetId: assetId, isAuthorised: false }
-    })
-    assetsAuthorised.data.forEach((assetId, index) => {
-      assetsAuthorised.data[index] = { assetId: assetId, isAuthorised: true }
-    })
-
+  if (assetsOwner && assetsAuthorised) {
     // finally, concat the two list and sort
-    // FIXME ver como podemos ordernar la lista concatenada alfabeticamente (ahora no se ordena)
-    const assets = assetsOwner.data.concat(assetsAuthorised.data).sort((a, b) => a.assetId > b.assetId)
+    let assets = assetsOwner.concat(assetsAuthorised).sort((a, b) => (a.assetId < b.assetId ? -1 : a.assetId > b.assetId ? 1 : 0))
+
+    if (order === 'inverse') {
+      assets = assets.reverse()
+    }
 
     // obtain all data for all assets
     yield put(MyAssetsActions.myAssetsSuccess(assets))
-    console.log('RESPONSE GET ASSETS OK')
-  } else {
-    yield put(MyAssetsActions.myAssetsFailure(assetsOwner.data))
-    console.log('RESPONSE GET ASSETS NOT OK')
+  } else if (!assetsOwner) {
+    yield put(MyAssetsActions.myAssetsFailure(assetsOwner))
+  } else if (!assetsAuthorised) {
+    yield put(MyAssetsActions.myAssetsFailure(assetsAuthorised))
   }
-
-  console.log('end')
 }
 
-// BUG cuando se cambia a la segunda pantalla estando en order 5 y se cambia a 10 se muestran 11 elementos.
+function* putIsAuthorisedFlag(assets, isAuthorised) {
+  // check if assetId is null
+  assets.forEach((assetId, index) => {
+    if (assetId === null || assetId === '') assets.splice(index, 1)
+  })
+  // second put isAuthorised flag
+  assets.forEach((assetId, index) => {
+    assets[index] = { assetId: assetId, isAuthorised: isAuthorised }
+  })
+
+  return assets
+}
+
 export function* loadAssetsAgain(api) {
   let assets = yield select(selectAssets)
   const index = yield select(selectIndex)
@@ -61,7 +79,8 @@ export function* loadAssetsAgain(api) {
   const newOffset = yield select(selectChangeOffset)
 
   // calculate new index
-  const start = (index - 1) * offset // 5
+  // ONLY TESTED WITH VALUES 10, 20, 30 IN FILTER
+  const start = (index - 1) * offset
   const newEnd = start + newOffset
   const newIndex = yield Math.floor(newEnd / newOffset)
   let newStart = (newIndex - 1) * newOffset
@@ -81,6 +100,8 @@ function* loadAssets(api, assets) {
     asset.data.isAuthorised = assets[index].isAuthorised
     assetsLoaded.push(asset.data)
   })
+
+  console.log(assetsLoaded)
 
   // set list of asset in state
   yield put(MyAssetsActions.myAssetsSetAssetsLoaded(assetsLoaded))
@@ -117,11 +138,11 @@ export function* search(api) {
   let assetsSearch = []
   // filter by search
   if (found === null || found === '') {
-    yield loadAssetsAgain(api)
+    yield loadAssets(api, assets)
   } else {
-    yield assets.forEach((assetId) => {
-      if (assetId.toLowerCase().includes(found.toLowerCase())) {
-        assetsSearch.push(assetId)
+    yield assets.forEach((asset) => {
+      if (asset.assetId.toLowerCase().includes(found.toLowerCase())) {
+        assetsSearch.push(asset)
       }
     })
     yield loadAssets(api, assetsSearch)

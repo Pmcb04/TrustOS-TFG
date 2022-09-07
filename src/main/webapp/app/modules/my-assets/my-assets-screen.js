@@ -19,12 +19,11 @@ import {
 
 const NUM_COLUMNS = 3
 
-// FIXME cuando se recarga la pagina el state assets se encuentra vacio
 function MyAssetsScreen(props) {
   const { t } = useTranslation() //i18n instance
   const { colors } = React.useContext(ThemeContext)
   const { navigation } = props
-  const { next, previous, index, numAssets, offset, assetsLoaded, getAssets, search, order } = props
+  const { next, previous, index, numAssets, offset, assetsLoaded, getAssets, search } = props
 
   useEffect(() => {
     if (numAssets === 0) getAssets()
@@ -45,16 +44,10 @@ function MyAssetsScreen(props) {
           <AssetList navigation={navigation} data={assetsLoaded} numColums={NUM_COLUMNS} />
           <FixedFooterLayout>
             <ButtonLayout align="center">
-              <ButtonLink
-                small
-                disabled={order === 'inverse' ? index * offset >= numAssets : index === 1}
-                onPress={order === 'inverse' ? next : previous}>
+              <ButtonLink small disabled={index === 1} onPress={previous}>
                 {t('PREVIOUS')}
               </ButtonLink>
-              <ButtonLink
-                small
-                disabled={order === 'inverse' ? index === 1 : index * offset >= numAssets}
-                onPress={order === 'inverse' ? previous : next}>
+              <ButtonLink small disabled={index * offset >= numAssets} onPress={next}>
                 {t('NEXT')}
               </ButtonLink>
             </ButtonLayout>
@@ -73,7 +66,6 @@ const mapStateToProps = (state) => ({
   numAssets: state.myAssets.numAssets,
   offset: state.myAssets.offset,
   assetsLoaded: state.myAssets.assetsLoaded,
-  order: state.myAssets.order,
 })
 const mapDispatchToProps = (dispatch) => ({
   getAssets: () => dispatch(MyAssetsActions.myAssetsRequest()),
