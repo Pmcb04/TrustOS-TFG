@@ -11,6 +11,7 @@ import { LoginTypes } from '../../modules/login/login.reducer'
 import { AccountTypes } from '../../shared/reducers/account.reducer'
 import { UserTypes } from '../../shared/reducers/user.reducer'
 // jhipster-react-native-saga-redux-import-needle
+import { AssetListTypes } from '../../modules/my-assets/my-assets-screen.reducer'
 
 /* ------------- Sagas ------------- */
 
@@ -20,6 +21,14 @@ import { login, logout, loginLoad } from '../../modules/login/login.sagas'
 import { getAccount, updateAccount } from '../../shared/sagas/account.sagas'
 import UserSagas from '../../shared/sagas/user.sagas'
 // jhipster-react-native-saga-method-import-needle
+import {
+  getAssets,
+  loadAssetsAgain,
+  loadNextAssets,
+  loadPreviousAssets,
+  search,
+  changeOrder,
+} from '../../modules/my-assets/my-assets-screen.sagas'
 
 /* ------------- API ------------- */
 
@@ -45,5 +54,16 @@ export default function* root() {
 
     takeLatest(AccountTypes.ACCOUNT_REQUEST, getAccount, api),
     takeLatest(AccountTypes.ACCOUNT_UPDATE_REQUEST, updateAccount, api),
+
+    // Asset list
+    takeLatest(AssetListTypes.MY_ASSETS_REQUEST, getAssets, api),
+    takeLatest(AssetListTypes.MY_ASSETS_SET_SHOW_OWNER, getAssets, api),
+    takeLatest(AssetListTypes.MY_ASSETS_SET_SHOW_AUTHORIZATHED, getAssets, api),
+    takeLatest(AssetListTypes.MY_ASSETS_CHANGE_OFFSET, loadAssetsAgain, api),
+    takeLatest(AssetListTypes.MY_ASSETS_SUCCESS, loadNextAssets, api),
+    takeLatest(AssetListTypes.MY_ASSETS_LOAD_NEXT_CONTENT, loadNextAssets, api),
+    takeLatest(AssetListTypes.MY_ASSETS_LOAD_PREVIOUS_CONTENT, loadPreviousAssets, api),
+    takeLatest(AssetListTypes.MY_ASSETS_SEARCH, search, api),
+    takeLatest(AssetListTypes.MY_ASSETS_SET_ORDER, changeOrder, api),
   ])
 }

@@ -2,9 +2,11 @@ package com.mycompany.myapp.config;
 
 import java.net.URI;
 import java.util.concurrent.TimeUnit;
+
 import javax.cache.configuration.MutableConfiguration;
 import javax.cache.expiry.CreatedExpiryPolicy;
 import javax.cache.expiry.Duration;
+
 import org.redisson.Redisson;
 import org.redisson.config.ClusterServersConfig;
 import org.redisson.config.Config;
@@ -16,9 +18,9 @@ import org.springframework.boot.info.BuildProperties;
 import org.springframework.boot.info.GitProperties;
 import org.springframework.cache.annotation.EnableCaching;
 import org.springframework.cache.interceptor.KeyGenerator;
-import org.springframework.context.annotation.*;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+
 import tech.jhipster.config.JHipsterProperties;
 import tech.jhipster.config.cache.PrefixedKeyGenerator;
 
@@ -72,6 +74,7 @@ public class CacheConfiguration {
             createCache(cm, com.mycompany.myapp.repository.UserRepository.USERS_BY_LOGIN_CACHE, jcacheConfiguration);
             createCache(cm, com.mycompany.myapp.repository.UserRepository.USERS_BY_EMAIL_CACHE, jcacheConfiguration);
             // jhipster-needle-redis-add-entry
+            createCache(cm, "assets", jcacheConfiguration);
         };
     }
 

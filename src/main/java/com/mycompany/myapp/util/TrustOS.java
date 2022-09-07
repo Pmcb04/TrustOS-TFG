@@ -46,7 +46,7 @@ public class TrustOS {
 
             // token jwt
             if (other.length >= 2) {
-                conn.setRequestProperty("Authorization", "Bearer " + other[1]);
+                conn.setRequestProperty("Authorization", other[1].toString());
             }
 
             // input json

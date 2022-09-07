@@ -29,7 +29,7 @@ import com.mycompany.myapp.service.dto.trustos.AssetDTO;
 @RequestMapping("/trustos")
 public class AssetResource {
 
-    private final Logger log = LoggerFactory.getLogger(AccountResource.class);
+    private final Logger log = LoggerFactory.getLogger(AssetResource.class);
 
     private final AssetService assetService;
 
@@ -47,6 +47,7 @@ public class AssetResource {
      */
     @PostMapping("/login")
     public ResponseEntity<Message> login(@RequestBody LoginTrustos auth) {
+        System.out.println("LOGIN TRUSTOS");
         return ResponseEntity.ok(assetService.login(auth));
     }
 
@@ -54,12 +55,31 @@ public class AssetResource {
      * {@code POST  /assets} : create an asset
      *
      * @param assetDTO assetDTO to create
+     * @param token token authorization to track module
      */
     @PostMapping("/assets")
     public ResponseEntity<Asset> createAsset(@RequestBody AssetDTO assetDTO, @RequestHeader(HttpHeaders.AUTHORIZATION) String token) {
         return ResponseEntity.ok(assetService.createAsset(assetDTO, token));
     }
 
+    /**
+     * {@code GET  /assets} : obtains all assets for a user
+     *
+     * @param isAuthorised flag to obtain authorised assets or not
+     * @param token token authorization to track module
+     */
+    @GetMapping("/assets")
+    public ResponseEntity<String[]> getAssets(@RequestParam boolean isAuthorised, @RequestHeader(HttpHeaders.AUTHORIZATION) String token) {
+        return ResponseEntity.ok(assetService.getAssets(isAuthorised, token));
+    }
+
+    /**
+     * {@code GET  /assets/{assetId}} : obtains the asset with assetId
+     *
+     * @param assetId identifier of asset to obtain
+     * @param isAuthorised flag to obtain authorised assets or not
+     * @param token token authorization to track module
+     */
     @GetMapping("/assets/{assetId}")
     public ResponseEntity<Asset> getAsset(
         @PathVariable String assetId,
@@ -69,6 +89,14 @@ public class AssetResource {
         return ResponseEntity.ok(assetService.getAsset(assetId, isAuthorised, token));
     }
 
+    /**
+     * {@code POST  /assets/update/{assetId}} : update the asset with assetId
+     *
+     * @param assetId identifier of asset to obtain
+     * @param isAuthorised flag to obtain authorised assets or not
+     * @param metadata data to update the asset
+     * @param token token authorization to track module
+     */
     @PostMapping("/assets/update/{assetId}")
     public ResponseEntity<Asset> updateAsset(
         @PathVariable String assetId,
@@ -79,6 +107,13 @@ public class AssetResource {
         return ResponseEntity.ok(assetService.updateAsset(assetId, metadata, isAuthorised, token));
     }
 
+    /**
+     * {@code GET  /assets/transactions/{assetId}} : obtains the transactions of a one asset
+     *
+     * @param assetId identifier of asset to obtain the transactions
+     * @param isAuthorised flag to obtain authorised assets or not
+     * @param token token authorization to track module
+     */
     @GetMapping("/assets/transactions/{assetId}")
     public ResponseEntity<Transaction> getTransactionAsset(
         @PathVariable String assetId,

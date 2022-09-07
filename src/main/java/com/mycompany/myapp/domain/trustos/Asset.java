@@ -1,11 +1,12 @@
 package com.mycompany.myapp.domain.trustos;
 
+import java.io.Serializable;
 import java.util.Map;
 
 /**
  * A Asset.
  */
-public class Asset {
+public class Asset implements Serializable {
 
     private String assetId;
 
