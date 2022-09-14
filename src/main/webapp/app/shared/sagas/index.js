@@ -12,6 +12,7 @@ import { AccountTypes } from '../../shared/reducers/account.reducer'
 import { UserTypes } from '../../shared/reducers/user.reducer'
 // jhipster-react-native-saga-redux-import-needle
 import { AssetListTypes } from '../../modules/my-assets/my-assets-screen.reducer'
+import { AssetDetailsTypes } from '../../modules/asset-details/asset-details-screen.reducer'
 
 /* ------------- Sagas ------------- */
 
@@ -29,6 +30,7 @@ import {
   search,
   changeOrder,
 } from '../../modules/my-assets/my-assets-screen.sagas'
+import { getAsset } from '../../modules/asset-details/asset-details-screen.sagas'
 
 /* ------------- API ------------- */
 
@@ -65,5 +67,8 @@ export default function* root() {
     takeLatest(AssetListTypes.MY_ASSETS_LOAD_PREVIOUS_CONTENT, loadPreviousAssets, api),
     takeLatest(AssetListTypes.MY_ASSETS_SEARCH, search, api),
     takeLatest(AssetListTypes.MY_ASSETS_SET_ORDER, changeOrder, api),
+
+    // Asset Details
+    takeLatest(AssetDetailsTypes.ASSET_DETAILS_REQUEST, getAsset, api),
   ])
 }

@@ -35,5 +35,8 @@
     "NO": "No",
     "TYPE": "Tipo",
     "OWNER": "Propietario",
-    "OWNERSHIP": "Titularidad"
+    "OWNERSHIP": "Titularidad",
+    "UPDATE": "Actualizar",
+    "CANCEL": "Cancelar",
+    "VALUES_UPDATE": "Valores actualizados"
 }
