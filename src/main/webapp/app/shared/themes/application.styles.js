@@ -9,7 +9,6 @@ const ApplicationStyles = {
   screen: {
     container: {
       flex: 1,
-      padding: 20,
       backgroundColor: Colors.transparent,
       fontFamily: Fonts.type.base,
     },

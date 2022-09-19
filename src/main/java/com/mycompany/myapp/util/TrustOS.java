@@ -1,12 +1,18 @@
 package com.mycompany.myapp.util;
 
-import java.io.IOException;
-import java.io.InputStream;
-import java.io.OutputStream;
-import java.net.HttpURLConnection;
 import java.net.InetSocketAddress;
 import java.net.Proxy;
-import java.net.URL;
+import java.net.Proxy.Type;
+import java.util.Collections;
+
+import org.springframework.http.HttpEntity;
+import org.springframework.http.HttpHeaders;
+import org.springframework.http.HttpMethod;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.MediaType;
+import org.springframework.http.ResponseEntity;
+import org.springframework.http.client.SimpleClientHttpRequestFactory;
+import org.springframework.web.client.RestTemplate;
 
 import com.google.gson.JsonObject;
 import com.google.gson.JsonParser;
@@ -17,60 +23,72 @@ public class TrustOS {
     private static final int PROXY_PORT = 5657;
     private static final String BASE_URL = "https://pro.virtualtrust.io";
 
-    public enum CallType {
-        POST,
-        GET,
+    public JsonObject get(String url, String token) {
+        Proxy proxy = new Proxy(Type.HTTP, new InetSocketAddress(PROXY_HOST_URI, PROXY_PORT));
+        SimpleClientHttpRequestFactory requestFactory = new SimpleClientHttpRequestFactory();
+        requestFactory.setProxy(proxy);
+
+        RestTemplate restTemplate = new RestTemplate(requestFactory);
+
+        // create headers
+        HttpHeaders headers = new HttpHeaders();
+        // set `content-type` header
+        headers.setContentType(MediaType.APPLICATION_JSON);
+        // set `accept` header
+        headers.setAccept(Collections.singletonList(MediaType.APPLICATION_JSON));
+        headers.setBearerAuth(token.split(" ")[1]);
+
+        // build the request
+        HttpEntity<Void> request = new HttpEntity<>(headers);
+
+        // send GET request
+        ResponseEntity<String> response = restTemplate.exchange(BASE_URL + url, HttpMethod.GET, request, String.class);
+
+        // check response
+        if (response.getStatusCode() == HttpStatus.OK) {
+            System.out.println("Request Successful");
+            System.out.println(response.getBody());
+            return JsonParser.parseString(response.getBody()).getAsJsonObject();
+        } else {
+            System.out.println("Request Failed");
+            System.out.println(response.getStatusCode());
+            return null;
+        }
     }
 
-    private static JsonObject readResponse(InputStream in) throws IOException {
-        StringBuffer out = new StringBuffer();
-        byte[] b = new byte[4096];
-        for (int n; (n = in.read(b)) != -1;) {
-            out.append(new String(b, 0, n));
+    public JsonObject post(String url, JsonObject body, String token) {
+        Proxy proxy = new Proxy(Type.HTTP, new InetSocketAddress(PROXY_HOST_URI, PROXY_PORT));
+        SimpleClientHttpRequestFactory requestFactory = new SimpleClientHttpRequestFactory();
+        requestFactory.setProxy(proxy);
+
+        RestTemplate restTemplate = new RestTemplate(requestFactory);
+
+        // create headers
+        HttpHeaders headers = new HttpHeaders();
+        // set `content-type` header
+        headers.setContentType(MediaType.APPLICATION_JSON);
+        // set `accept` header
+        headers.setAccept(Collections.singletonList(MediaType.APPLICATION_JSON));
+        if (token != null) headers.setBearerAuth(token.split(" ")[1]);
+
+        HttpEntity<String> request = new HttpEntity<String>(body.toString(), headers);
+
+        // send POST request
+        ResponseEntity<String> response = restTemplate.postForEntity(BASE_URL + url, request, String.class);
+
+        // check response
+        if (response.getStatusCode() == HttpStatus.OK) {
+            System.out.println("Request Successful");
+            System.out.println(response.getBody());
+            return JsonParser.parseString(response.getBody()).getAsJsonObject();
+        } else {
+            System.out.println("Request Failed");
+            System.out.println(response.getStatusCode());
+            return null;
         }
-        in.close();
-        return JsonParser.parseString(out.toString()).getAsJsonObject();
     }
 
-    public JsonObject call(CallType callType, String url, Object... other) {
-        try {
-            Proxy proxy = new Proxy(Proxy.Type.HTTP, new InetSocketAddress(PROXY_HOST_URI, PROXY_PORT));
-
-            URL httpUrl = new URL(BASE_URL + url);
-
-            HttpURLConnection conn = (HttpURLConnection) httpUrl.openConnection(proxy);
-
-            conn.setDoOutput(true);
-            conn.setRequestMethod(callType.name());
-            conn.setRequestProperty("Content-Type", "application/json");
-
-            // token jwt
-            if (other.length >= 2) {
-                conn.setRequestProperty("Authorization", other[1].toString());
-            }
-
-            // input json
-            if (other[0] != null && other.length >= 1) {
-                conn.setRequestProperty("Accept", "application/json");
-                try (OutputStream os = conn.getOutputStream()) {
-                    byte[] input = other[0].toString().getBytes("utf-8");
-                    os.write(input, 0, input.length);
-                }
-            }
-
-            conn.connect();
-
-            if (conn.getResponseCode() == 200) {
-                JsonObject jsonOutput = readResponse((InputStream) conn.getContent());
-                System.out.println("PETICION RESPUESTA");
-                System.out.println(jsonOutput);
-                conn.disconnect();
-                return jsonOutput;
-            }
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-
-        return null;
+    public JsonObject post(String url, JsonObject body) {
+        return post(url, body, null);
     }
 }

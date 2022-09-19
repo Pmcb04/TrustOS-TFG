@@ -35,5 +35,13 @@
     "NO": "No",
     "TYPE": "Tipo",
     "OWNER": "Propietario",
-    "OWNERSHIP": "Titularidad"
+    "OWNERSHIP": "Titularidad",
+    "UPDATE": "Actualizar",
+    "CANCEL": "Cancelar",
+    "VALUES_UPDATE": "Valores actualizados",
+    "VALUE": "Value",
+    "CHANGE": "Change",
+    "ASSET_UPDATE": "Asset actualizado",
+    "ASSET_WITH_ID_UPDATE" : "Asset con identificador {{assetId}} se ha actualizado correctamente",
+    "ACCEPT": "Aceptar"
 }

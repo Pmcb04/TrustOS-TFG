@@ -1,109 +1,180 @@
-import React from 'react'
+import React, { useEffect } from 'react'
 import { View } from 'react-native'
 import { useTranslation } from 'react-i18next'
 
-import Product from '../../shared/themes/icons/product'
 import styles from './asset-details-screen.styles'
 import Asset from '../../shared/components/asset/asset'
 import { connect } from 'react-redux'
-import AssetDetailsScreenActions from './asset-details-screen.reducer'
+import AssetDetailsActions from './asset-details-screen.reducer'
+import { process, copyAssetMetadata } from './asset-details.utils'
+import TableUpdate from '../../shared/components/table-update/table-update'
 import {
   ButtonPrimary,
   ButtonSecondary,
+  ButtonDanger,
   IconIdCardRegular,
   IconEditPencilRegular,
-  IconBookmarkRegular,
+  IconCloseRegular,
   Form,
-  TextField,
   Stack,
-  DateField,
   ThemeContext,
-  IntegerField,
   IconRouteRegular,
-  DecimalField,
+  Text10,
+  Text6,
+  Text3,
+  Box,
+  Spinner,
+  confirm,
+  Callout,
+  IconSuccess,
+  FadeIn,
 } from '@telefonica/mistica'
 
-// TODO cambiar por futura llamada a la api
-const DATA = {
-  image: <Product width={40} height={40} />,
-  name: 'bd7acbea-c1b1-46c2-aed5-3ad53abb28ba',
-  type: 'Fourth Item',
-  hash: 'b1d9f25b1bf78e25e443a6815b9763b7f7eda25d1dd06486ccfc2130b229dc93',
-}
-
 function AssetDetailsScreen(props) {
-  const { assetId } = props.route.params
-  const { editAsset, disabled_fields } = props
+  const { navigation } = props
+  let { assetId, isAuthorised } = props.route.params
+  const { editAsset, edit_fields, getAsset, asset, fetching, error, updateAsset, setSuccessUpdate, successUpdate } = props
   const { colors } = React.useContext(ThemeContext)
   const { t } = useTranslation() //i18n instance
 
+  // BUG cuando se recarga la página nos lanza un 401, esto es por que perdemos el token de la api al actualizar.
+
+  useEffect(() => {
+    getAsset(isAuthorised, assetId)
+  }, [getAsset, isAuthorised, assetId])
+
+  function update(newMetadata) {
+    // copy new metadata
+    const metadataUpdate = copyAssetMetadata(asset.metadata, newMetadata)
+
+    // put metadata and prepare new asset
+    let newAsset = { ...asset }
+    newAsset.metadata = metadataUpdate
+
+    // update the asset
+    updateAsset(newAsset)
+
+    // change to view mode
+    editAsset()
+
+    // to view message in screen
+    setSuccessUpdate()
+  }
+
   return (
-    <View style={[styles.container, styles.mainContainer]}>
-      <View style={[styles.properties, { borderColor: colors.border }]}>
-        <Form onSubmit={(formData) => console.log(formData)}>
-          <Stack fullWidth space={16}>
-            <TextField disabled fullWidth name="owner" label="Owner" />
-            <TextField disabled={disabled_fields} fullWidth name="name" label="Name" />
-            <TextField disabled={disabled_fields} fullWidth optional name="name" label="Name" />
-            <TextField disabled={disabled_fields} fullWidth multiline name="name" label="Name" />
-            <TextField disabled={disabled_fields} fullWidth optional multiline name="name" label="Name" />
-            <DateField disabled={disabled_fields} fullWidth name="date" label="Date" />
-            <DateField disabled={disabled_fields} fullWidth optional name="date" label="Date" />
-            <IntegerField disabled={disabled_fields} fullWidth name="integer" label="Integer" />
-            <IntegerField disabled={disabled_fields} fullWidth optional name="integer" label="Integer" />
-            <DecimalField disabled={disabled_fields} fullWidth name="decimal" label="Decimal" />
-            <DecimalField disabled={disabled_fields} fullWidth optional name="decimal" label="Decimal" />
-          </Stack>
-        </Form>
-      </View>
-      <View style={styles.assetView}>
-        <View style={styles.asset}>
-          <Asset name={assetId} image={DATA.image} type={DATA.type} hash={DATA.hash} />
-        </View>
-
-        <Stack space={16}>
-          <View style={styles.buttons}>
-            {disabled_fields ? (
-              <ButtonPrimary onPress={editAsset}>
-                <IconEditPencilRegular color="currentColor" />
-                {t('EDIT')}
-              </ButtonPrimary>
-            ) : (
-              <ButtonPrimary onPress={editAsset}>
-                <IconBookmarkRegular color="currentColor" />
-                {t('SAVE')}
-              </ButtonPrimary>
-            )}
-
-            <ButtonSecondary disabled={!disabled_fields} onPress={() => {}}>
-              <IconIdCardRegular color="currentColor" />
-              {t('TRANFER')}
-            </ButtonSecondary>
-            <ButtonSecondary disabled={!disabled_fields} onPress={() => {}}>
-              <IconRouteRegular color="currentColor" />
-              {t('TRACEABILITY')}
-            </ButtonSecondary>
-            <ButtonSecondary disabled={!disabled_fields} onPress={() => {}}>
-              Action 2
-            </ButtonSecondary>
-            <ButtonSecondary disabled={!disabled_fields} onPress={() => {}}>
-              Action 1
-            </ButtonSecondary>
+    <>
+      {error && (
+        <View style={[styles.loading, { backgroundColor: colors.background }]}>
+          <View style={styles.loadingText}>
+            <Text10>Asset with id {assetId} not found...</Text10>
           </View>
-        </Stack>
-      </View>
-    </View>
+        </View>
+      )}
+      {fetching && (
+        <View style={[styles.loading, { backgroundColor: colors.background }]}>
+          <View style={styles.loadingText}>
+            <Text10>Loading...</Text10>
+            <Spinner size={64} />
+          </View>
+        </View>
+      )}
+      {!error && !fetching && (
+        <View style={[styles.container, { backgroundColor: colors.background }]}>
+          {successUpdate && (
+            <Callout
+              icon={<IconSuccess />}
+              onClose={setSuccessUpdate}
+              title={t('ASSET_UPDATE')}
+              description={t('ASSET_WITH_ID_UPDATE', { assetId: assetId })}
+              button={
+                <ButtonPrimary small onPress={setSuccessUpdate}>
+                  {t('ACCEPT')}
+                </ButtonPrimary>
+              }
+            />
+          )}
+          <Form
+            onSubmit={(formData) =>
+              confirm({
+                title: <Text6>{t('VALUES_UPDATE')}</Text6>,
+                message: <TableUpdate data={formData} />,
+                acceptText: <Text3 color="currentColor">{t('UPDATE')}</Text3>,
+                cancelText: <Text3 color="currentColor">{t('CANCEL')}</Text3>,
+                onAccept: () => update(formData),
+              })
+            }>
+            <View style={[styles.mainContainer]}>
+              <View style={[styles.container, styles.metadata, styles.properties, { borderColor: colors.border }]}>
+                <Box padding={16}>
+                  <FadeIn delay="0.25s">
+                    <Stack fullWidth space={16}>
+                      {process(asset.metadata, edit_fields)}
+                    </Stack>
+                  </FadeIn>
+                  {edit_fields ? <ButtonPrimary submit>{t('UPDATE')}</ButtonPrimary> : null}
+                </Box>
+              </View>
+
+              <View style={styles.assetView}>
+                <View style={styles.asset}>
+                  <Asset name={assetId} image={asset.data.image} type={asset.data.type} hash={asset.hash} authorizathed={isAuthorised} />
+                </View>
+                <Stack space={16}>
+                  <View style={styles.buttons}>
+                    {edit_fields ? (
+                      <ButtonDanger onPress={editAsset}>
+                        <IconCloseRegular color="currentColor" />
+                        {t('CANCEL')}
+                      </ButtonDanger>
+                    ) : (
+                      <ButtonPrimary onPress={editAsset}>
+                        <IconEditPencilRegular color="currentColor" />
+                        {t('EDIT')}
+                      </ButtonPrimary>
+                    )}
+
+                    <ButtonSecondary disabled={edit_fields} onPress={() => {}}>
+                      <IconIdCardRegular color="currentColor" />
+                      {t('TRANFER')}
+                    </ButtonSecondary>
+                    <ButtonSecondary
+                      disabled={edit_fields}
+                      onPress={() => navigation.navigate('AssetTraceability', { assetId: assetId, isAuthorised: isAuthorised })}>
+                      <IconRouteRegular color="currentColor" />
+                      {t('TRACEABILITY')}
+                    </ButtonSecondary>
+                    <ButtonSecondary disabled={edit_fields} onPress={() => {}}>
+                      Action 1
+                    </ButtonSecondary>
+                    <ButtonSecondary disabled={edit_fields} onPress={() => {}}>
+                      Action 2
+                    </ButtonSecondary>
+                  </View>
+                </Stack>
+              </View>
+            </View>
+          </Form>
+        </View>
+      )}
+    </>
   )
 }
 
 const mapStateToProps = (state) => {
   return {
-    disabled_fields: state.assetDetails.disabled_fields,
+    edit_fields: state.assetDetails.edit_fields,
+    asset: state.assetDetails.asset,
+    fetching: state.assetDetails.fetching,
+    error: state.assetDetails.error,
+    successUpdate: state.assetDetails.successUpdate,
   }
 }
 const mapDispatchToProps = (dispatch) => {
   return {
-    editAsset: () => dispatch(AssetDetailsScreenActions.assetDetailsEdit()),
+    editAsset: () => dispatch(AssetDetailsActions.assetDetailsEdit()),
+    setSuccessUpdate: () => dispatch(AssetDetailsActions.assetDetailsSuccessUpdate()),
+    getAsset: (isAuthorised, assetId) => dispatch(AssetDetailsActions.assetDetailsRequest(isAuthorised, assetId)),
+    updateAsset: (newAsset) => dispatch(AssetDetailsActions.assetDetailsUpdate(newAsset)),
   }
 }
 export default connect(mapStateToProps, mapDispatchToProps)(AssetDetailsScreen)

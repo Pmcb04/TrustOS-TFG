@@ -21,7 +21,8 @@ function AssetList(props) {
 
   const renderCategoryItem = (itemData) => {
     return (
-      <TouchableWithoutFeedback onPress={() => navigation.navigate('AssetDetails', { assetId: itemData.item.assetId })}>
+      <TouchableWithoutFeedback
+        onPress={() => navigation.navigate('AssetDetails', { assetId: itemData.item.assetId, isAuthorised: itemData.item.isAuthorised })}>
         <View style={[styles.item, { flex: 1 / numColums }]}>
           <Asset
             name={itemData.item.assetId}

@@ -22,6 +22,7 @@ import { ModalScreen } from './modal-screen'
 import { DrawerButton } from './drawer/drawer-button'
 
 import AssetDetailsScreen from '../modules/asset-details/asset-details-screen'
+import AssetTraceabilityScreen from '../modules/asset-traceability/asset-traceability-screen'
 
 export const getDrawerRoutes = () => {
   const routes = {}
@@ -52,6 +53,7 @@ const linking = {
         },
       },
       AssetDetails: 'asset',
+      AssetTraceability: 'asset/traceability',
       ModalScreen: 'alert',
       OAuthRedirect: 'start',
       NotFound: '*',
@@ -155,6 +157,7 @@ function NavContainer(props) {
         <Stack.Screen name="OAuthRedirect" component={OAuthRedirectScreen} options={{ title: 'Redirecting...' }} />
         <Stack.Screen name="NotFound" component={NotFound} options={{ title: 'Oops!' }} />
         <Stack.Screen name="AssetDetails" component={AssetDetailsScreen} />
+        <Stack.Screen name="AssetTraceability" component={AssetTraceabilityScreen} />
       </Stack.Navigator>
     </NavigationContainer>
   )
