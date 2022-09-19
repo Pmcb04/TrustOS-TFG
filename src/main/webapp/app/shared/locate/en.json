@@ -38,7 +38,10 @@
     "OWNERSHIP": "Owership",
     "UPDATE": "Update",
     "CANCEL": "Cancel",
-    "VALUES_UPDATE": "Values update"
-
-
+    "VALUES_UPDATE": "Values update",
+    "VALUE": "Value",
+    "CHANGE": "Change",
+    "ASSET_UPDATE": "Asset update",
+    "ASSET_WITH_ID_UPDATE" : "Asset with identifier {{assetId}} has been updated successfully",
+    "ACCEPT": "ACCEPT"
 }

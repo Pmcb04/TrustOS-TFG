@@ -47,7 +47,6 @@ public class AssetResource {
      */
     @PostMapping("/login")
     public ResponseEntity<Message> login(@RequestBody LoginTrustos auth) {
-        System.out.println("LOGIN TRUSTOS");
         return ResponseEntity.ok(assetService.login(auth));
     }
 
@@ -90,14 +89,14 @@ public class AssetResource {
     }
 
     /**
-     * {@code POST  /assets/update/{assetId}} : update the asset with assetId
+     * {@code POST  /assets/{assetId}/update} : update the asset with assetId
      *
      * @param assetId identifier of asset to obtain
      * @param isAuthorised flag to obtain authorised assets or not
      * @param metadata data to update the asset
      * @param token token authorization to track module
      */
-    @PostMapping("/assets/update/{assetId}")
+    @PostMapping("/assets/{assetId}/update")
     public ResponseEntity<Asset> updateAsset(
         @PathVariable String assetId,
         @RequestParam Boolean isAuthorised,
@@ -108,13 +107,13 @@ public class AssetResource {
     }
 
     /**
-     * {@code GET  /assets/transactions/{assetId}} : obtains the transactions of a one asset
+     * {@code GET  /assets/{assetId}/transactions} : obtains the transactions of a one asset
      *
      * @param assetId identifier of asset to obtain the transactions
      * @param isAuthorised flag to obtain authorised assets or not
      * @param token token authorization to track module
      */
-    @GetMapping("/assets/transactions/{assetId}")
+    @GetMapping("/assets/{assetId}/transactions")
     public ResponseEntity<Transaction> getTransactionAsset(
         @PathVariable String assetId,
         @RequestParam Boolean isAuthorised,

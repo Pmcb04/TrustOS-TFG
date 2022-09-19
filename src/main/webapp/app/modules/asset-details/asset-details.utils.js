@@ -54,3 +54,27 @@ export function process(data, edit_fields) {
     }
   })
 }
+
+export function copyAssetMetadata(metadata, newMetadata) {
+  let metadataCopy = {}
+  Object.keys(metadata).map((key) => {
+    if (typeof metadata[key] === 'object' && !Array.isArray(metadata[key])) {
+      metadataCopy[key] = copyAssetMetadata(metadata[key], newMetadata)
+    } else {
+      metadataCopy[key] = parseType(newMetadata[key])
+    }
+  })
+
+  return metadataCopy
+}
+
+function parseType(str) {
+  if (!isNaN(parseFloat(str))) {
+    return parseFloat(str)
+  }
+  if (!isNaN(parseInt(str, 10))) {
+    return parseInt(str, 10)
+  }
+
+  return str
+}

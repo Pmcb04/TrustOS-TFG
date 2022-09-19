@@ -30,7 +30,7 @@ import {
   search,
   changeOrder,
 } from '../../modules/my-assets/my-assets-screen.sagas'
-import { getAsset } from '../../modules/asset-details/asset-details-screen.sagas'
+import { getAsset, updateAsset } from '../../modules/asset-details/asset-details-screen.sagas'
 
 /* ------------- API ------------- */
 
@@ -70,5 +70,6 @@ export default function* root() {
 
     // Asset Details
     takeLatest(AssetDetailsTypes.ASSET_DETAILS_REQUEST, getAsset, api),
+    takeLatest(AssetDetailsTypes.ASSET_DETAILS_UPDATE, updateAsset, api),
   ])
 }

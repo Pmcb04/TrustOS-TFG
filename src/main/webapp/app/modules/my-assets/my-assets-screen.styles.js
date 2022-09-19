@@ -4,7 +4,9 @@ import { ApplicationStyles } from '../../shared/themes'
 
 export default StyleSheet.create({
   ...ApplicationStyles.screen,
-  mainContainer: {},
+  mainContainer: {
+    padding: 20,
+  },
   header: {
     flexDirection: 'row',
   },

@@ -6,7 +6,7 @@ import styles from './asset-details-screen.styles'
 import Asset from '../../shared/components/asset/asset'
 import { connect } from 'react-redux'
 import AssetDetailsActions from './asset-details-screen.reducer'
-import { process } from './asset-details.utils'
+import { process, copyAssetMetadata } from './asset-details.utils'
 import TableUpdate from '../../shared/components/table-update/table-update'
 import {
   ButtonPrimary,
@@ -25,22 +25,41 @@ import {
   Box,
   Spinner,
   confirm,
+  Callout,
+  IconSuccess,
   FadeIn,
 } from '@telefonica/mistica'
 
 function AssetDetailsScreen(props) {
   const { navigation } = props
   let { assetId, isAuthorised } = props.route.params
-  const { editAsset, edit_fields, getAsset, asset, fetching, error } = props
+  const { editAsset, edit_fields, getAsset, asset, fetching, error, updateAsset, setSuccessUpdate, successUpdate } = props
   const { colors } = React.useContext(ThemeContext)
   const { t } = useTranslation() //i18n instance
 
-  // change isAuthorised to boolean type
-  isAuthorised = isAuthorised === 'true'
+  // BUG cuando se recarga la página nos lanza un 401, esto es por que perdemos el token de la api al actualizar.
 
   useEffect(() => {
     getAsset(isAuthorised, assetId)
   }, [getAsset, isAuthorised, assetId])
+
+  function update(newMetadata) {
+    // copy new metadata
+    const metadataUpdate = copyAssetMetadata(asset.metadata, newMetadata)
+
+    // put metadata and prepare new asset
+    let newAsset = { ...asset }
+    newAsset.metadata = metadataUpdate
+
+    // update the asset
+    updateAsset(newAsset)
+
+    // change to view mode
+    editAsset()
+
+    // to view message in screen
+    setSuccessUpdate()
+  }
 
   return (
     <>
@@ -61,6 +80,19 @@ function AssetDetailsScreen(props) {
       )}
       {!error && !fetching && (
         <View style={[styles.container, { backgroundColor: colors.background }]}>
+          {successUpdate && (
+            <Callout
+              icon={<IconSuccess />}
+              onClose={setSuccessUpdate}
+              title={t('ASSET_UPDATE')}
+              description={t('ASSET_WITH_ID_UPDATE', { assetId: assetId })}
+              button={
+                <ButtonPrimary small onPress={setSuccessUpdate}>
+                  {t('ACCEPT')}
+                </ButtonPrimary>
+              }
+            />
+          )}
           <Form
             onSubmit={(formData) =>
               confirm({
@@ -68,6 +100,7 @@ function AssetDetailsScreen(props) {
                 message: <TableUpdate data={formData} />,
                 acceptText: <Text3 color="currentColor">{t('UPDATE')}</Text3>,
                 cancelText: <Text3 color="currentColor">{t('CANCEL')}</Text3>,
+                onAccept: () => update(formData),
               })
             }>
             <View style={[styles.mainContainer]}>
@@ -133,12 +166,15 @@ const mapStateToProps = (state) => {
     asset: state.assetDetails.asset,
     fetching: state.assetDetails.fetching,
     error: state.assetDetails.error,
+    successUpdate: state.assetDetails.successUpdate,
   }
 }
 const mapDispatchToProps = (dispatch) => {
   return {
     editAsset: () => dispatch(AssetDetailsActions.assetDetailsEdit()),
+    setSuccessUpdate: () => dispatch(AssetDetailsActions.assetDetailsSuccessUpdate()),
     getAsset: (isAuthorised, assetId) => dispatch(AssetDetailsActions.assetDetailsRequest(isAuthorised, assetId)),
+    updateAsset: (newAsset) => dispatch(AssetDetailsActions.assetDetailsUpdate(newAsset)),
   }
 }
 export default connect(mapStateToProps, mapDispatchToProps)(AssetDetailsScreen)

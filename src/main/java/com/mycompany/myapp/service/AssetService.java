@@ -2,18 +2,18 @@ package com.mycompany.myapp.service;
 
 import java.util.Map;
 
-import org.springframework.cache.annotation.Cacheable;
 import org.springframework.stereotype.Service;
 
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
+import com.google.gson.JsonObject;
+import com.google.gson.JsonParser;
 import com.mycompany.myapp.domain.trustos.Asset;
 import com.mycompany.myapp.domain.trustos.LoginTrustos;
 import com.mycompany.myapp.domain.trustos.Message;
 import com.mycompany.myapp.domain.trustos.Transaction;
 import com.mycompany.myapp.service.dto.trustos.AssetDTO;
 import com.mycompany.myapp.util.TrustOS;
-import com.mycompany.myapp.util.TrustOS.CallType;
 
 /**
  * Service class for managing assets.
@@ -33,7 +33,8 @@ public class AssetService {
      * @param auth contain the id ans password of user
      */
     public Message login(LoginTrustos auth) {
-        return new Gson().fromJson(trustos.call(CallType.POST, TRACK_URL + "/login", gson.toJson(auth, LoginTrustos.class)), Message.class);
+        JsonObject body = JsonParser.parseString(gson.toJson(auth, LoginTrustos.class)).getAsJsonObject();
+        return new Gson().fromJson(trustos.post(TRACK_URL + "/login", body), Message.class);
     }
 
     /**
@@ -43,11 +44,8 @@ public class AssetService {
      * @param token     jwt token to access the TrustOS platform
      */
     public Asset createAsset(AssetDTO assetDTO, String token) {
-        return new Gson()
-            .fromJson(
-                trustos.call(CallType.POST, TRACK_URL + "/asset/create", gson.toJson(assetDTO, AssetDTO.class), token).get("output"),
-                Asset.class
-            );
+        JsonObject body = JsonParser.parseString(gson.toJson(assetDTO, AssetDTO.class)).getAsJsonObject();
+        return new Gson().fromJson(trustos.post(TRACK_URL + "/asset/create", body, token).get("output"), Asset.class);
     }
 
     /**
@@ -57,13 +55,10 @@ public class AssetService {
      * @param isAuthorised obtain authorised assets
      * @param token     jwt token to access the TrustOS platform
      */
-    @Cacheable(cacheNames = "assets", key = "#assetId")
+    // @Cacheable(cacheNames = "assets", key = "#assetId")
     public Asset getAsset(String assetId, boolean isAuthorised, String token) {
         return new Gson()
-            .fromJson(
-                trustos.call(CallType.GET, TRACK_URL + "/asset/" + assetId + "?isAuthorised=" + isAuthorised, null, token).get("output"),
-                Asset.class
-            );
+            .fromJson(trustos.get(TRACK_URL + "/asset/" + assetId + "?isAuthorised=" + isAuthorised, token).get("output"), Asset.class);
     }
 
     /**
@@ -76,7 +71,7 @@ public class AssetService {
         return new Gson()
             .fromJson(
                 trustos
-                    .call(CallType.GET, TRACK_URL + "/assets/" + "?isAuthorised=" + isAuthorised, null, token)
+                    .get(TRACK_URL + "/assets/" + "?isAuthorised=" + isAuthorised, token)
                     .getAsJsonObject("output")
                     .getAsJsonArray("assetId"),
                 String[].class
@@ -92,16 +87,13 @@ public class AssetService {
      * @param token     jwt token to access the TrustOS platform
      */
     public Asset updateAsset(String assetId, Map<String, Object> metadata, boolean isAuthorised, String token) {
+        // build the request
+        JsonObject json = new JsonObject();
+        json.add("metadata", JsonParser.parseString(metadata.toString()));
+
         return new Gson()
             .fromJson(
-                trustos
-                    .call(
-                        CallType.POST,
-                        TRACK_URL + "/asset/" + assetId + "/update?isAuthorised=" + isAuthorised,
-                        gson.toJson(metadata),
-                        token
-                    )
-                    .get("output"),
+                trustos.post(TRACK_URL + "/asset/" + assetId + "/update?isAuthorised=" + isAuthorised, json, token).get("output"),
                 Asset.class
             );
     }
@@ -116,7 +108,7 @@ public class AssetService {
     public Transaction getAssetTransaction(String assetId, boolean isAuthorised, String token) {
         return new Gson()
             .fromJson(
-                trustos.call(CallType.GET, TRACK_URL + "/asset/" + assetId + "/transactions?isAuthorised=" + isAuthorised, null, token),
+                trustos.get(TRACK_URL + "/asset/" + assetId + "/transactions?isAuthorised=" + isAuthorised, token),
                 Transaction.class
             );
     }

@@ -101,8 +101,6 @@ function* loadAssets(api, assets) {
     assetsLoaded.push(asset.data)
   })
 
-  console.log(assetsLoaded)
-
   // set list of asset in state
   yield put(MyAssetsActions.myAssetsSetAssetsLoaded(assetsLoaded))
 }
