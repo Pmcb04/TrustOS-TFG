@@ -1,22 +1,55 @@
 package com.mycompany.myapp.domain.trustos;
 
 import java.util.List;
+import java.util.Map;
 
 public class Transaction {
 
-    private List<Asset> output;
+    private String assetId;
+
+    private Map<String, Object> data;
+
+    private List<Asset> transactions;
 
     /**
-     * @return the output
+     * @return the assetId
      */
-    public List<Asset> getOutput() {
-        return output;
+    public String getAssetId() {
+        return assetId;
     }
 
     /**
-     * @param output the output to set
+     * @param assetId the assetId to set
      */
-    public void setOutput(List<Asset> output) {
-        this.output = output;
+    public void setAssetId(String assetId) {
+        this.assetId = assetId;
+    }
+
+    /**
+     * @return the data
+     */
+    public Map<String, Object> getData() {
+        return data;
+    }
+
+    /**
+     * @param data the data to set
+     */
+    public void setData(Map<String, Object> data) {
+        this.data = data;
+    }
+
+    /**
+     * @return the transactions
+     */
+    public List<Asset> getTransactions() {
+        return transactions;
+    }
+
+    /**
+     * @param transactions the transactions to set
+     */
+    public void setTransactions(List<Asset> transactions) {
+        this.transactions = transactions;
     }
 }

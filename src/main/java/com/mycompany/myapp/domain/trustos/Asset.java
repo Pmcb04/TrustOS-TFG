@@ -14,7 +14,8 @@ public class Asset implements Serializable {
 
     private Map<String, Object> metadata;
 
-    private String datetime;
+    private int datetime;
+    private int timestamp;
 
     private String hfTxId;
 
@@ -72,15 +73,29 @@ public class Asset implements Serializable {
     /**
      * @return the datetime
      */
-    public String getDatetime() {
+    public int getDatetime() {
         return datetime;
     }
 
     /**
      * @param datetime the datetime to set
      */
-    public void setDatetime(String datetime) {
+    public void setDatetime(int datetime) {
         this.datetime = datetime;
+    }
+
+    /**
+     * @return the timestamp
+     */
+    public int getTimestamp() {
+        return timestamp;
+    }
+
+    /**
+     * @param timestamp the timestamp to set
+     */
+    public void setTimestamp(int timestamp) {
+        this.timestamp = timestamp;
     }
 
     /**
@@ -135,9 +150,11 @@ public class Asset implements Serializable {
         int result = 1;
         result = prime * result + ((assetId == null) ? 0 : assetId.hashCode());
         result = prime * result + ((data == null) ? 0 : data.hashCode());
+        result = prime * result + datetime;
         result = prime * result + ((hash == null) ? 0 : hash.hashCode());
+        result = prime * result + ((hfTxId == null) ? 0 : hfTxId.hashCode());
         result = prime * result + ((metadata == null) ? 0 : metadata.hashCode());
-        result = prime * result + ((datetime == null) ? 0 : datetime.hashCode());
+        result = prime * result + timestamp;
         result = prime * result + ((userOwner == null) ? 0 : userOwner.hashCode());
         return result;
     }
@@ -158,15 +175,17 @@ public class Asset implements Serializable {
         if (data == null) {
             if (other.data != null) return false;
         } else if (!data.equals(other.data)) return false;
+        if (datetime != other.datetime) return false;
         if (hash == null) {
             if (other.hash != null) return false;
         } else if (!hash.equals(other.hash)) return false;
+        if (hfTxId == null) {
+            if (other.hfTxId != null) return false;
+        } else if (!hfTxId.equals(other.hfTxId)) return false;
         if (metadata == null) {
             if (other.metadata != null) return false;
         } else if (!metadata.equals(other.metadata)) return false;
-        if (datetime == null) {
-            if (other.datetime != null) return false;
-        } else if (!datetime.equals(other.datetime)) return false;
+        if (timestamp != other.timestamp) return false;
         if (userOwner == null) {
             if (other.userOwner != null) return false;
         } else if (!userOwner.equals(other.userOwner)) return false;
@@ -184,12 +203,16 @@ public class Asset implements Serializable {
             assetId +
             ", data=" +
             data +
-            ", hash=" +
-            hash +
-            ", metadata=" +
-            metadata +
             ", datetime=" +
             datetime +
+            ", hash=" +
+            hash +
+            ", hfTxId=" +
+            hfTxId +
+            ", metadata=" +
+            metadata +
+            ", timestamp=" +
+            timestamp +
             ", userOwner=" +
             userOwner +
             "]"

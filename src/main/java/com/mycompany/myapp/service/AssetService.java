@@ -108,7 +108,7 @@ public class AssetService {
     public Transaction getAssetTransaction(String assetId, boolean isAuthorised, String token) {
         return new Gson()
             .fromJson(
-                trustos.get(TRACK_URL + "/asset/" + assetId + "/transactions?isAuthorised=" + isAuthorised, token),
+                trustos.get(TRACK_URL + "/asset/" + assetId + "/transactions?isAuthorised=" + isAuthorised, token).get("output"),
                 Transaction.class
             );
     }
