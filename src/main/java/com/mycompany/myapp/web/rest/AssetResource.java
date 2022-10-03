@@ -121,4 +121,21 @@ public class AssetResource {
     ) {
         return ResponseEntity.ok(assetService.getAssetTransaction(assetId, isAuthorised, token));
     }
+
+    /**
+     * {@code GET  /assets/{assetId}/transactions/range} : obtains the transactions of a one asset
+     *
+     * @param assetId identifier of asset to obtain the transactions
+     * @param isAuthorised flag to obtain authorised assets or not
+     * @param token token authorization to track module
+     */
+    @PostMapping("/assets/{assetId}/transactions/range")
+    public ResponseEntity<Transaction> getRangeTransactionAsset(
+        @PathVariable String assetId,
+        @RequestParam Boolean isAuthorised,
+        @RequestBody Map<String, Object> body,
+        @RequestHeader(HttpHeaders.AUTHORIZATION) String token
+    ) {
+        return ResponseEntity.ok(assetService.getAssetRangeTransaction(assetId, isAuthorised, body, token));
+    }
 }

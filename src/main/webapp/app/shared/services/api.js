@@ -73,6 +73,9 @@ const create = (baseURL = AppConfig.apiUrl) => {
     api.post('/trustos/assets/' + assetId + '/update', newMetadata, { params: { isAuthorised: isAuthorised } })
   const getAssetTraceability = (isAuthorised, assetId) =>
     api.get('/trustos/assets/' + assetId + '/transactions', {}, { params: { isAuthorised: isAuthorised } })
+  const getAssetRangeTraceability = (isAuthorised, assetId, body) =>
+    api.post('/trustos/assets/' + assetId + '/transactions/range', body, { params: { isAuthorised: isAuthorised } })
+
   // ------
   // STEP 3
   // ------
@@ -110,6 +113,7 @@ const create = (baseURL = AppConfig.apiUrl) => {
     getAsset,
     updateAsset,
     getAssetTraceability,
+    getAssetRangeTraceability,
   }
 }
 

@@ -8,15 +8,36 @@ export default StyleSheet.create({
     flex: 3,
     flexDirection: 'row',
   },
-  list: {
+  listView: {
     flex: 1,
     padding: 5,
   },
-  metadata: {
+  list: {
+    padding: 5,
+  },
+  date: {
+    margin: 10,
+  },
+  assetView: {
     flex: 2,
     padding: 5,
   },
+  asset: {
+    padding: 10,
+  },
+  metadata: {
+    padding: 10,
+  },
   contentContainer: {
     padding: 10,
+  },
+  transaction: {
+    padding: 5,
+  },
+  dateFilter: {
+    padding: 5,
+  },
+  buttonFilter: {
+    padding: 5,
   },
 })

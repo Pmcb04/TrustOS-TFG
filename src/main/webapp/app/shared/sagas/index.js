@@ -32,7 +32,7 @@ import {
   changeOrder,
 } from '../../modules/my-assets/my-assets-screen.sagas'
 import { getAsset, updateAsset } from '../../modules/asset-details/asset-details-screen.sagas'
-import { getAssetTraceability } from '../../modules/asset-traceability/asset-traceability-screen.sagas'
+import { getAssetTraceability, getAssetRangeTraceability } from '../../modules/asset-traceability/asset-traceability-screen.sagas'
 
 /* ------------- API ------------- */
 
@@ -76,5 +76,6 @@ export default function* root() {
 
     // Asset Traceability
     takeLatest(AssetTraceabilityTypes.ASSET_TRACEABILITY_REQUEST, getAssetTraceability, api),
+    takeLatest(AssetTraceabilityTypes.ASSET_TRACEABILITY_RANGE_REQUEST, getAssetRangeTraceability, api),
   ])
 }
