@@ -118,7 +118,10 @@ function NavContainer(props) {
       onReady={() => {
         isReadyRef.current = true
       }}>
-      <Stack.Navigator>
+      <Stack.Navigator
+        screenOptions={{
+          headerShown: !moreDimension,
+        }}>
         <Stack.Screen name="Home" options={{ headerShown: false }}>
           {() => (
             <Drawer.Navigator

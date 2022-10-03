@@ -13,6 +13,7 @@ import { UserTypes } from '../../shared/reducers/user.reducer'
 // jhipster-react-native-saga-redux-import-needle
 import { AssetListTypes } from '../../modules/my-assets/my-assets-screen.reducer'
 import { AssetDetailsTypes } from '../../modules/asset-details/asset-details-screen.reducer'
+import { AssetTraceabilityTypes } from '../../modules/asset-traceability/asset-traceability-screen.reducer'
 
 /* ------------- Sagas ------------- */
 
@@ -31,6 +32,7 @@ import {
   changeOrder,
 } from '../../modules/my-assets/my-assets-screen.sagas'
 import { getAsset, updateAsset } from '../../modules/asset-details/asset-details-screen.sagas'
+import { getAssetTraceability, getAssetRangeTraceability } from '../../modules/asset-traceability/asset-traceability-screen.sagas'
 
 /* ------------- API ------------- */
 
@@ -71,5 +73,9 @@ export default function* root() {
     // Asset Details
     takeLatest(AssetDetailsTypes.ASSET_DETAILS_REQUEST, getAsset, api),
     takeLatest(AssetDetailsTypes.ASSET_DETAILS_UPDATE, updateAsset, api),
+
+    // Asset Traceability
+    takeLatest(AssetTraceabilityTypes.ASSET_TRACEABILITY_REQUEST, getAssetTraceability, api),
+    takeLatest(AssetTraceabilityTypes.ASSET_TRACEABILITY_RANGE_REQUEST, getAssetRangeTraceability, api),
   ])
 }

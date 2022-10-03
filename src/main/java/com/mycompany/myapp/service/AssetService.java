@@ -88,12 +88,12 @@ public class AssetService {
      */
     public Asset updateAsset(String assetId, Map<String, Object> metadata, boolean isAuthorised, String token) {
         // build the request
-        JsonObject json = new JsonObject();
-        json.add("metadata", JsonParser.parseString(metadata.toString()));
+        JsonObject body = new JsonObject();
+        body.add("metadata", JsonParser.parseString(metadata.toString()));
 
         return new Gson()
             .fromJson(
-                trustos.post(TRACK_URL + "/asset/" + assetId + "/update?isAuthorised=" + isAuthorised, json, token).get("output"),
+                trustos.post(TRACK_URL + "/asset/" + assetId + "/update?isAuthorised=" + isAuthorised, body, token).get("output"),
                 Asset.class
             );
     }
@@ -108,7 +108,29 @@ public class AssetService {
     public Transaction getAssetTransaction(String assetId, boolean isAuthorised, String token) {
         return new Gson()
             .fromJson(
-                trustos.get(TRACK_URL + "/asset/" + assetId + "/transactions?isAuthorised=" + isAuthorised, token),
+                trustos.get(TRACK_URL + "/asset/" + assetId + "/transactions?isAuthorised=" + isAuthorised, token).get("output"),
+                Transaction.class
+            );
+    }
+
+    /**
+     * Obtain a transaction of one asset in a defined range
+     *
+     * @param assetId   identifier of asset
+     * @param isAuthorised obtain authorised assets
+     * @param token     jwt token to access the TrustOS platform
+     */
+    public Transaction getAssetRangeTransaction(String assetId, boolean isAuthorised, Map<String, Object> request, String token) {
+        // build the request
+        JsonObject body = new JsonObject();
+        body.addProperty("init", request.get("init").toString());
+        body.addProperty("end", request.get("end").toString());
+
+        return new Gson()
+            .fromJson(
+                trustos
+                    .post(TRACK_URL + "/asset/" + assetId + "/transactions/range?isAuthorised=" + isAuthorised, body, token)
+                    .get("output"),
                 Transaction.class
             );
     }

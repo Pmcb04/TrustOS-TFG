@@ -6,8 +6,9 @@ import styles from './asset-details-screen.styles'
 import Asset from '../../shared/components/asset/asset'
 import { connect } from 'react-redux'
 import AssetDetailsActions from './asset-details-screen.reducer'
-import { process, copyAssetMetadata } from './asset-details.utils'
+import { copyAssetMetadata } from './asset-details.utils'
 import TableUpdate from '../../shared/components/table-update/table-update'
+import Metadata from '../../shared/components/metadata/metadata'
 import {
   ButtonPrimary,
   ButtonSecondary,
@@ -22,12 +23,10 @@ import {
   Text10,
   Text6,
   Text3,
-  Box,
   Spinner,
   confirm,
   Callout,
   IconSuccess,
-  FadeIn,
 } from '@telefonica/mistica'
 
 function AssetDetailsScreen(props) {
@@ -103,18 +102,10 @@ function AssetDetailsScreen(props) {
                 onAccept: () => update(formData),
               })
             }>
-            <View style={[styles.mainContainer]}>
-              <View style={[styles.container, styles.metadata, styles.properties, { borderColor: colors.border }]}>
-                <Box padding={16}>
-                  <FadeIn delay="0.25s">
-                    <Stack fullWidth space={16}>
-                      {process(asset.metadata, edit_fields)}
-                    </Stack>
-                  </FadeIn>
-                  {edit_fields ? <ButtonPrimary submit>{t('UPDATE')}</ButtonPrimary> : null}
-                </Box>
+            <View style={[styles.container, styles.mainContainer]}>
+              <View style={styles.metadata}>
+                <Metadata data={asset.metadata} edit_fields={edit_fields} />
               </View>
-
               <View style={styles.assetView}>
                 <View style={styles.asset}>
                   <Asset name={assetId} image={asset.data.image} type={asset.data.type} hash={asset.hash} authorizathed={isAuthorised} />

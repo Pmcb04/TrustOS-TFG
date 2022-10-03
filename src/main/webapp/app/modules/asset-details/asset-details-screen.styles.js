@@ -24,15 +24,9 @@ export default StyleSheet.create({
   propertyBox: {
     padding: 15,
   },
-  properties: {
-    borderWidth: 0.5,
-    borderStyle: 'solid',
-    borderRadius: 10,
-    margin: 15,
-    padding: 30,
-  },
   metadata: {
     flex: 3,
+    margin: 15,
   },
   assetView: {
     flex: 1,
