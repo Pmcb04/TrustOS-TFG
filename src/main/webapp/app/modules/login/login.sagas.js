@@ -17,7 +17,12 @@ export function* login(api) {
       yield put(AuthInfoActions.authInfoRequest())
     }
     const { issuer, clientId } = authInfo
+    console.log('issuer_>', issuer)
+    console.log('clientID>', clientId)
     const { accessToken, idToken } = yield call(doOauthPkceFlow, AppConfig.nativeClientId || clientId, issuer)
+    console.table('accessToken_> ', accessToken)
+    console.log('idToken_> ', idToken)
+
     if (accessToken) {
       yield call(api.setAuthToken, accessToken)
       yield put(LoginActions.loginSuccess(accessToken, idToken))

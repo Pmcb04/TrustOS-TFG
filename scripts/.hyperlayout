@@ -1,0 +1,6 @@
+[
+  [[
+    [ "./trustos.sh", "./frontend.sh"],
+    "./backend.sh"
+  ]]
+]

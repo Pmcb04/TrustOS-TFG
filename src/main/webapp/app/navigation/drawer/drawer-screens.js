@@ -18,6 +18,7 @@ export const drawerScreens = [
     settings: [
       { title: i18n.t('HOME'), icon: <IconHomeRegular />, component: HomeScreen, auth: null },
       { title: i18n.t('MY_ASSETS'), icon: <IconBoxRegular />, route: 'assets', component: MyAssetsScreen, auth: false },
+      { title: i18n.t('LOGIN'), icon: <IconBoxRegular />, route: 'login', component: LoginScreen, auth: false },
     ],
   },
   {

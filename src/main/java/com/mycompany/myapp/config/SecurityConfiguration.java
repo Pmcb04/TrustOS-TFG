@@ -8,6 +8,7 @@ import org.springframework.boot.web.client.RestTemplateBuilder;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Import;
 import org.springframework.core.convert.converter.Converter;
+import org.springframework.http.HttpMethod;
 import org.springframework.security.authentication.AbstractAuthenticationToken;
 import org.springframework.security.config.annotation.method.configuration.EnableGlobalMethodSecurity;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
@@ -25,9 +26,13 @@ import org.springframework.security.oauth2.jwt.JwtValidators;
 import org.springframework.security.oauth2.jwt.NimbusJwtDecoder;
 import org.springframework.security.oauth2.server.resource.authentication.JwtAuthenticationConverter;
 import org.springframework.security.web.SecurityFilterChain;
+import org.springframework.security.web.csrf.CookieCsrfTokenRepository;
+import org.springframework.security.web.csrf.CsrfFilter;
+import org.springframework.security.web.header.writers.ReferrerPolicyHeaderWriter;
 import org.springframework.web.filter.CorsFilter;
 import org.zalando.problem.spring.web.advice.security.SecurityProblemSupport;
 
+import com.mycompany.myapp.security.AuthoritiesConstants;
 import com.mycompany.myapp.security.SecurityUtils;
 import com.mycompany.myapp.security.oauth2.AudienceValidator;
 import com.mycompany.myapp.security.oauth2.CustomClaimConverter;
@@ -58,50 +63,49 @@ public class SecurityConfiguration {
     @Bean
     public SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
         // @formatter:off
-        // http
-        //     .csrf()
-        //     .csrfTokenRepository(CookieCsrfTokenRepository.withHttpOnlyFalse())
-        // .and()
-        //     .addFilterBefore(corsFilter, CsrfFilter.class)
-        //     .exceptionHandling()
-        //         .authenticationEntryPoint(problemSupport)
-        //         .accessDeniedHandler(problemSupport)
-        // .and()
-        //     .headers()
-        //     .contentSecurityPolicy(jHipsterProperties.getSecurity().getContentSecurityPolicy())
-        // .and()
-        //     .referrerPolicy(ReferrerPolicyHeaderWriter.ReferrerPolicy.STRICT_ORIGIN_WHEN_CROSS_ORIGIN)
-        // .and()
-        //     .permissionsPolicy().policy("camera=(), fullscreen=(self), geolocation=(), gyroscope=(), magnetometer=(), microphone=(), midi=(), payment=(), sync-xhr=()")
-        // .and()
-        //     .frameOptions()
-        //     .sameOrigin()
-        // .and()
-        //     .authorizeRequests()
-        //     .antMatchers(HttpMethod.OPTIONS, "/**").permitAll()
-        //     .antMatchers("/swagger-ui/**").permitAll()
-        //     .antMatchers("/test/**").permitAll()
-        //     .antMatchers("/trustos/**").permitAll()
-        //     .antMatchers("/api/authenticate").permitAll()
-        //     .antMatchers("/api/auth-info").permitAll()
-        //     .antMatchers("/api/admin/**").hasAuthority(AuthoritiesConstants.ADMIN)
-        //     .antMatchers("/api/**").authenticated()
-        //     .antMatchers("/management/health").permitAll()
-        //     .antMatchers("/management/health/**").permitAll()
-        //     .antMatchers("/management/info").permitAll()
-        //     .antMatchers("/management/prometheus").permitAll()
-        //     .antMatchers("/management/**").hasAuthority(AuthoritiesConstants.ADMIN)
-        // .and()
-        //     .oauth2Login()
-        // .and()
-        //     .oauth2ResourceServer()
-        //         .jwt()
-        //         .jwtAuthenticationConverter(authenticationConverter())
-        //         .and()
-        //     .and()
-        //         .oauth2Client();
-        // return http.build();
-        return http.csrf().disable().build();
+        http
+            .csrf()
+            .csrfTokenRepository(CookieCsrfTokenRepository.withHttpOnlyFalse())
+        .and()
+            .addFilterBefore(corsFilter, CsrfFilter.class)
+            .exceptionHandling()
+                .authenticationEntryPoint(problemSupport)
+                .accessDeniedHandler(problemSupport)
+        .and()
+            .headers()
+            .contentSecurityPolicy(jHipsterProperties.getSecurity().getContentSecurityPolicy())
+        .and()
+            .referrerPolicy(ReferrerPolicyHeaderWriter.ReferrerPolicy.STRICT_ORIGIN_WHEN_CROSS_ORIGIN)
+        .and()
+            .permissionsPolicy().policy("camera=(), fullscreen=(self), geolocation=(), gyroscope=(), magnetometer=(), microphone=(), midi=(), payment=(), sync-xhr=()")
+        .and()
+            .frameOptions()
+            .sameOrigin()
+        .and()
+            .authorizeRequests()
+            .antMatchers(HttpMethod.OPTIONS, "/**").permitAll()
+            .antMatchers("/swagger-ui/**").permitAll()
+            .antMatchers("/test/**").permitAll()
+            .antMatchers("/trustos").permitAll()
+            .antMatchers("/api/authenticate").permitAll()
+            .antMatchers("/api/auth-info").permitAll()
+            .antMatchers("/api/admin/**").hasAuthority(AuthoritiesConstants.ADMIN)
+            .antMatchers("/api/**").authenticated()
+            .antMatchers("/management/health").permitAll()
+            .antMatchers("/management/health/**").permitAll()
+            .antMatchers("/management/info").permitAll()
+            .antMatchers("/management/prometheus").permitAll()
+            .antMatchers("/management/**").hasAuthority(AuthoritiesConstants.ADMIN)
+        .and()
+            .oauth2Login()
+        .and()
+            .oauth2ResourceServer()
+                .jwt()
+                .jwtAuthenticationConverter(authenticationConverter())
+                .and()
+            .and()
+                .oauth2Client();
+        return http.build();
         // @formatter:on
     }
 

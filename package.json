@@ -68,5 +68,8 @@
   },
   "cacheDirectories": [
     "node_modules"
-  ]
+  ],
+  "dependencies": {
+    "react-native": "^0.70.5"
+  }
 }

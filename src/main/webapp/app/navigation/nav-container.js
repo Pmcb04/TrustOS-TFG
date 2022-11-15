@@ -96,13 +96,15 @@ function NavContainer(props) {
   }, [loaded])
 
   React.useEffect(() => {
-    const handleChange = (nextAppState) => {
+    const subscription = AppState.addEventListener('change', (nextAppState) => {
       if (lastAppState.match(/inactive|background/) && nextAppState === 'active') {
         getAccount()
       }
+    })
+
+    return () => {
+      subscription.remove()
     }
-    AppState.addEventListener('change', handleChange)
-    return () => AppState.removeEventListener('change', handleChange)
   }, [getAccount])
 
   useReduxDevToolsExtension(navigationRef)

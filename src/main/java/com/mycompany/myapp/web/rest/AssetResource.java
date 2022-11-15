@@ -1,7 +1,12 @@
 package com.mycompany.myapp.web.rest;
 
+import com.mycompany.myapp.domain.trustos.Asset;
+import com.mycompany.myapp.domain.trustos.LoginTrustos;
+import com.mycompany.myapp.domain.trustos.Message;
+import com.mycompany.myapp.domain.trustos.Transaction;
+import com.mycompany.myapp.service.AssetService;
+import com.mycompany.myapp.service.dto.trustos.AssetDTO;
 import java.util.Map;
-
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.http.HttpHeaders;
@@ -15,15 +20,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.mycompany.myapp.domain.trustos.Asset;
-import com.mycompany.myapp.domain.trustos.LoginTrustos;
-import com.mycompany.myapp.domain.trustos.Message;
-import com.mycompany.myapp.domain.trustos.Transaction;
-import com.mycompany.myapp.service.AssetService;
-import com.mycompany.myapp.service.dto.trustos.AssetDTO;
-
 /**
- * REST controller for managing the current user's account.
+ * REST controller for managing assets.
  */
 @RestController
 @RequestMapping("/trustos")

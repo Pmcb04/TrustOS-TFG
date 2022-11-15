@@ -127,7 +127,7 @@ liquibase {
         main {
             driver "org.mariadb.jdbc.Driver"
             url "jdbc:mariadb://localhost:3306/test"
-            username ""
+            username "root"
             password ""
             changeLogFile "src/main/resources/config/liquibase/master.xml"
             defaultSchemaName ""
@@ -137,7 +137,7 @@ liquibase {
         diffLog {
             driver "org.mariadb.jdbc.Driver"
             url "jdbc:mariadb://localhost:3306/test"
-            username ""
+            username "root"
             password ""
             changeLogFile project.ext.diffChangelogFile
             referenceUrl "hibernate:spring:com.mycompany.myapp.domain?dialect=org.hibernate.dialect.MariaDB103Dialect&hibernate.physical_naming_strategy=org.springframework.boot.orm.jpa.hibernate.SpringPhysicalNamingStrategy&hibernate.implicit_naming_strategy=org.springframework.boot.orm.jpa.hibernate.SpringImplicitNamingStrategy"

@@ -9,7 +9,11 @@ import com.mycompany.myapp.security.SecurityUtils;
 import com.mycompany.myapp.service.dto.AdminUserDTO;
 import com.mycompany.myapp.service.dto.UserDTO;
 import java.time.Instant;
-import java.util.*;
+import java.util.Collection;
+import java.util.List;
+import java.util.Map;
+import java.util.Objects;
+import java.util.Optional;
 import java.util.stream.Collectors;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -144,6 +148,8 @@ public class UserService {
      */
     @Transactional
     public AdminUserDTO getUserFromAuthentication(AbstractAuthenticationToken authToken) {
+        System.out.println("METHOD _ > getUserFromAuthentication");
+
         Map<String, Object> attributes;
         if (authToken instanceof OAuth2AuthenticationToken) {
             attributes = ((OAuth2AuthenticationToken) authToken).getPrincipal().getAttributes();
@@ -165,6 +171,8 @@ public class UserService {
                 })
                 .collect(Collectors.toSet())
         );
+
+        System.out.println("USER _ > " + user.toString());
 
         return new AdminUserDTO(syncUserWithIdP(attributes, user));
     }
