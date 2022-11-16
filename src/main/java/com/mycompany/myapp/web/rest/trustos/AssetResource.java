@@ -24,7 +24,7 @@ import org.springframework.web.bind.annotation.RestController;
  * REST controller for managing assets.
  */
 @RestController
-@RequestMapping("/api/trustos")
+@RequestMapping("/trustos")
 public class AssetResource {
 
     private final Logger log = LoggerFactory.getLogger(AssetResource.class);

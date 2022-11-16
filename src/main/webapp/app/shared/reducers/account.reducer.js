@@ -21,7 +21,7 @@ export const INITIAL_STATE = Immutable({
   account: null,
   error: null,
   fetching: false,
-  updating: false
+  updating: false,
 })
 
 /* ------------- Reducers ------------- */
@@ -64,6 +64,6 @@ export const reducer = createReducer(INITIAL_STATE, {
 
 /* ------------- Selectors ------------- */
 // Is the current user logged in?
-export const isLoggedIn = accountState => accountState.account !== null
+export const isLoggedIn = (accountState) => accountState.account !== null
 
-export const getLogin = accountState => accountState.account !== null ? accountState.account.login : 'anonymoususer'
+export const getLogin = (accountState) => (accountState.account !== null ? accountState.account.login : 'anonymoususer')

@@ -14,7 +14,11 @@ export const reducers = combineReducers({
   login: require('../../modules/login/login.reducer').reducer,
   register: require('../../modules/account/register/register.reducer').reducer,
   changePassword: require('../../modules/account/password/change-password.reducer').reducer,
-  forgotPassword: require('../../modules/account/password-reset/forgot-password.reducer').reducer
+  forgotPassword: require('../../modules/account/password-reset/forgot-password.reducer').reducer,
+
+  assetDetails: require('../../modules/asset-details/asset-details-screen.reducer').reducer,
+  myAssets: require('../../modules/my-assets/my-assets-screen.reducer').reducer,
+  assetTraceability: require('../../modules/asset-traceability/asset-traceability-screen.reducer').reducer,
 })
 
 export default () => {

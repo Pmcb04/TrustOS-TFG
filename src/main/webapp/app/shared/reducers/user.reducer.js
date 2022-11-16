@@ -17,7 +17,7 @@ const { Types, Creators } = createActions({
   userAllFailure: ['error'],
   userFailure: ['error'],
   userUpdateFailure: ['error'],
-  userDeleteFailure: ['error']
+  userDeleteFailure: ['error'],
 })
 
 export const UserTypes = Types
@@ -35,7 +35,7 @@ export const INITIAL_STATE = Immutable({
   errorAll: null,
   errorOne: null,
   errorUpdating: null,
-  errorDeleting: null
+  errorDeleting: null,
 })
 
 /* ------------- Reducers ------------- */
@@ -44,25 +44,25 @@ export const INITIAL_STATE = Immutable({
 export const allRequest = (state) =>
   state.merge({
     fetchingAll: true,
-    userList: []
+    userList: [],
   })
 
 // request the data from an api
 export const request = (state) =>
   state.merge({
     fetchingOne: true,
-    user: null
+    user: null,
   })
 
 // request to update from an api
 export const updateRequest = (state) =>
   state.merge({
-    updating: true
+    updating: true,
   })
 // request to delete from an api
 export const deleteRequest = (state) =>
   state.merge({
-    deleting: true
+    deleting: true,
   })
 
 // successful api lookup for all entities
@@ -71,7 +71,7 @@ export const allSuccess = (state, action) => {
   return state.merge({
     fetchingAll: false,
     errorAll: null,
-    userList
+    userList,
   })
 }
 
@@ -81,7 +81,7 @@ export const success = (state, action) => {
   return state.merge({
     fetchingOne: false,
     errorOne: null,
-    user
+    user,
   })
 }
 
@@ -91,7 +91,7 @@ export const updateSuccess = (state, action) => {
   return state.merge({
     updating: false,
     errorUpdating: null,
-    user
+    user,
   })
 }
 // successful api delete
@@ -99,7 +99,7 @@ export const deleteSuccess = (state) => {
   return state.merge({
     deleting: false,
     errorDeleting: null,
-    user: null
+    user: null,
   })
 }
 
@@ -109,7 +109,7 @@ export const allFailure = (state, action) => {
   return state.merge({
     fetchingAll: false,
     errorAll: error,
-    userList: []
+    userList: [],
   })
 }
 
@@ -119,7 +119,7 @@ export const failure = (state, action) => {
   return state.merge({
     fetchingOne: false,
     errorOne: error,
-    user: null
+    user: null,
   })
 }
 
@@ -156,5 +156,5 @@ export const reducer = createReducer(INITIAL_STATE, {
   [Types.USER_ALL_FAILURE]: allFailure,
   [Types.USER_FAILURE]: failure,
   [Types.USER_UPDATE_FAILURE]: updateFailure,
-  [Types.USER_DELETE_FAILURE]: deleteFailure
+  [Types.USER_DELETE_FAILURE]: deleteFailure,
 })
