@@ -1,35 +1,44 @@
 import FixtureAPI from '../../../../app/shared/services/fixture-api'
 import { call, put, select } from 'redux-saga/effects'
 
-import { login, logout, loginLoad, selectAuthToken, selectAuthInfo, selectIdToken} from '../../../../app/modules/login/login.sagas'
+import { login, logout, loginLoad, selectAuthToken} from '../../../../app/modules/login/login.sagas'
 import LoginActions from '../../../../app/modules/login/login.reducer'
 import AccountActions from '../../../../app/shared/reducers/account.reducer'
 
 const stepper = (fn) => (mock) => fn.next(mock).value
 
 test('login success path', () => {
-  const oauthInfo = FixtureAPI.getOauthInfo()
-  const step = stepper(login(FixtureAPI, oauthInfo))
-  const sampleOauthResponse = {
-    accessToken: 'test-access-token',
-    idToken: 'test-id-token',
-    refreshToken: 'test-refresh-token'
+  const authObj = {
+    username: 'user',
+    password: 'user',
+    rememberMe: true
   }
-  expect(step(oauthInfo)).toEqual(select(selectAuthInfo));
-  // await the response from the oauth2 issuer
-  step(oauthInfo)
-  expect(step(sampleOauthResponse)).toEqual(call(FixtureAPI.setAuthToken, 'test-access-token'))
-  expect(step()).toEqual(put(LoginActions.loginSuccess('test-access-token', 'test-id-token')));
+  const response = FixtureAPI.login(authObj)
+  const step = stepper(login(FixtureAPI, authObj))
+
+  expect(step(response)).toEqual(call(FixtureAPI.login, { username: 'user', password: 'user', rememberMe: true }))
+  // Set the auth token on the API
+  expect(step(response)).toEqual(call(FixtureAPI.setAuthToken, response.data.id_token))
+  // Store the auth token in redux
+  expect(step(response)).toEqual(put(LoginActions.loginSuccess(response.data.id_token)))
   // Request the account details
   expect(step()).toEqual(put(AccountActions.accountRequest()))
   // Close the relogin popup if needed
   expect(step()).toEqual(put({ type: 'RELOGIN_OK' }))
 })
 test('login failure path', () => {
-  const step = stepper(login(FixtureAPI))
+  const authObj = {
+    username: 'user',
+    password: 'user2',
+    rememberMe: true
+  }
+  const response = FixtureAPI.login(authObj)
+  const step = stepper(login(FixtureAPI, { username: 'user', password: 'user2' }))
 
-  expect(step()).toEqual(select(selectAuthInfo));
-  expect(step()).toEqual(put(LoginActions.loginFailure('Login failed, please try again')));
+  // Attempt to login and fail
+  expect(step(response)).toEqual(call(FixtureAPI.login, authObj))
+  // Send the error
+  expect(step(response)).toEqual(put(LoginActions.loginFailure('Bad credentials')))
 })
 test('login load path with no token', () => {
   const step = stepper(loginLoad(FixtureAPI))
@@ -55,9 +64,6 @@ test('logout success path', () => {
   // Reset the account and logout
   expect(step()).toEqual(put(AccountActions.accountReset()))
   expect(step()).toEqual(put(AccountActions.accountRequest()))
-  const oauthInfo = FixtureAPI.getOauthInfo();
-  expect(step(oauthInfo)).toEqual(select(selectAuthInfo));
-  expect(step('test-id-token')).toEqual(select(selectIdToken));
   expect(step()).toEqual(put(LoginActions.logoutSuccess()))
   expect(step()).toEqual(put({ type: 'RELOGIN_ABORT' }))
 })

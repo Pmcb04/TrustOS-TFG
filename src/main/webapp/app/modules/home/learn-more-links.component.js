@@ -7,18 +7,12 @@
  */
 // slightly modified version of https://github.com/facebook/react-native/blob/e028ac7af2d5b48860f01055f3bbacf91f6b6956/Libraries/NewAppScreen/components/LearnMoreLinks.js
 
-import { View, Text, StyleSheet, TouchableOpacity } from 'react-native'
-import * as Linking from 'expo-linking'
+import { View, Text, StyleSheet, TouchableOpacity } from 'react-native';
+import * as Linking from 'expo-linking';
 import React from 'react'
 import { Colors } from '../../shared/themes'
 
 const links = [
-  {
-    id: 0,
-    title: 'OAuth2 Login Config',
-    link: 'https://github.com/jhipster/generator-jhipster-react-native/blob/main/docs/oauth2-oidc.md',
-    description: 'Configuring Keycloak or Okta for login.',
-  },
   {
     id: 1,
     title: 'Project Structure',
@@ -69,7 +63,10 @@ const LinkList = () => (
       return (
         <React.Fragment key={id}>
           <View style={styles.separator} />
-          <TouchableOpacity accessibilityRole={'button'} onPress={() => Linking.openURL(link)} style={styles.linkContainer}>
+          <TouchableOpacity
+            accessibilityRole={'button'}
+            onPress={() => Linking.openURL(link)}
+            style={styles.linkContainer}>
             <Text style={styles.link}>{title}</Text>
             <Text style={styles.description}>{description}</Text>
           </TouchableOpacity>

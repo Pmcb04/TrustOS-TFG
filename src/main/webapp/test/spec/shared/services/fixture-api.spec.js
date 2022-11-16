@@ -1,6 +1,6 @@
 import R from 'ramda'
 
-import API from '../../../../app/shared/services/apiUser'
+import API from '../../../../app/shared/services/api'
 import FixtureAPI from '../../../../app/shared/services/fixture-api'
 
 test('All fixtures map to actual API', () => {

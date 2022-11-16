@@ -23,3 +23,56 @@ test('getAll failure path', () => {
   expect(step(response)).toEqual(put(UserActions.userAllFailure()))
 })
 
+test('get success path', () => {
+  const response = FixtureAPI.getUser(1)
+  const step = stepper(UserSagas.getUser(FixtureAPI, { userId: { id: 1 } }))
+  // Step 1: Hit the api
+  step()
+  // Step 2: Successful return and data!
+  expect(step(response)).toEqual(put(UserActions.userSuccess({ id: 1 })))
+})
+
+test('get failure path', () => {
+  const response = { ok: false }
+  const step = stepper(UserSagas.getUser(FixtureAPI, { userId: { id: 1 } }))
+  // Step 1: Hit the api
+  step()
+  // Step 2: Failed response.
+  expect(step(response)).toEqual(put(UserActions.userFailure()))
+})
+
+test('update success path', () => {
+  const response = FixtureAPI.updateUser({ id: 1 })
+  const step = stepper(UserSagas.updateUser(FixtureAPI, { user: { id: 1 } }))
+  // Step 1: Hit the api
+  step()
+  // Step 2: Successful return and data!
+  expect(step(response)).toEqual(put(UserActions.userUpdateSuccess({ id: 1 })))
+})
+
+test('update failure path', () => {
+  const response = { ok: false }
+  const step = stepper(UserSagas.updateUser(FixtureAPI, { user: { id: 1 } }))
+  // Step 1: Hit the api
+  step()
+  // Step 2: Failed response.
+  expect(step(response)).toEqual(put(UserActions.userUpdateFailure()))
+})
+
+test('delete success path', () => {
+  const response = FixtureAPI.deleteUser({ id: 1 })
+  const step = stepper(UserSagas.deleteUser(FixtureAPI, { userId: { id: 1 } }))
+  // Step 1: Hit the api
+  step()
+  // Step 2: Successful return and data!
+  expect(step(response)).toEqual(put(UserActions.userDeleteSuccess({ id: 1 })))
+})
+
+test('delete failure path', () => {
+  const response = { ok: false }
+  const step = stepper(UserSagas.deleteUser(FixtureAPI, { userId: { id: 1 } }))
+  // Step 1: Hit the api
+  step()
+  // Step 2: Failed response.
+  expect(step(response)).toEqual(put(UserActions.userDeleteFailure()))
+})

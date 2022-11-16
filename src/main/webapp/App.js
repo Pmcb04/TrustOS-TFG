@@ -1,39 +1,26 @@
-import * as React from 'react'
-import { Provider } from 'react-redux'
-import createStore from './app/shared/reducers'
-import * as SplashScreen from 'expo-splash-screen'
-import { ThemeContextProvider, getTelefonicaSkin } from '@telefonica/mistica'
+import * as React from 'react';
+import { Provider } from 'react-redux';
+import createStore from './app/shared/reducers';
+import * as SplashScreen from 'expo-splash-screen';
 
-import NavContainer from './app/navigation/nav-container'
-import './app/config/i18-config'
+import NavContainer from './app/navigation/nav-container';
 
-const store = createStore()
+const store = createStore();
 
-const misticaTheme = {
-  skin: getTelefonicaSkin(),
-  colorScheme: store.getState().appState.theme,
-  i18n: { locale: 'es-ES', phoneNumberFormattingRegionCode: 'ES' },
-}
-
-function App(props) {
+export default function App() {
   // prevent the splashscreen from disappearing until the redux store is completely ready (hidden in nav-container.js)
-  const [displayApp, setDisplayApp] = React.useState(false)
-
+  const [displayApp, setDisplayApp] = React.useState(false);
   React.useEffect(() => {
     if (!displayApp) {
       SplashScreen.preventAutoHideAsync()
         .then(() => setDisplayApp(true))
-        .catch(() => setDisplayApp(true))
+        .catch(() => setDisplayApp(true));
     }
-  }, [displayApp, setDisplayApp])
+  }, [displayApp, setDisplayApp]);
 
   return displayApp ? (
     <Provider store={store}>
-      <ThemeContextProvider theme={misticaTheme}>
-        <NavContainer />
-      </ThemeContextProvider>
+      <NavContainer />
     </Provider>
-  ) : null
+  ) : null;
 }
-
-export default App

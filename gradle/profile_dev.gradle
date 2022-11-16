@@ -1,8 +1,8 @@
 dependencies {
     developmentOnly "org.springframework.boot:spring-boot-devtools:${springBootVersion}"
-    implementation "org.mariadb.jdbc:mariadb-java-client"
-    liquibaseRuntime "org.mariadb.jdbc:mariadb-java-client"
-    testImplementation "org.testcontainers:mariadb"
+    implementation "org.postgresql:postgresql"
+    liquibaseRuntime "org.postgresql:postgresql"
+    testImplementation "org.testcontainers:postgresql"
 }
 
 def profiles = "dev"

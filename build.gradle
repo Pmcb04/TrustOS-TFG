@@ -82,7 +82,7 @@ eclipse {
 defaultTasks "bootRun"
 
 springBoot {
-    mainClass = "com.mycompany.myapp.BackApp"
+    mainClass = "com.mycompany.myapp.TrustOstfgApp"
 }
 
 test {
@@ -125,9 +125,9 @@ project.ext.diffChangelogFile = "src/main/resources/config/liquibase/changelog/"
 liquibase {
     activities {
         main {
-            driver "org.mariadb.jdbc.Driver"
-            url "jdbc:mariadb://localhost:3306/test"
-            username "root"
+            driver "org.postgresql.Driver"
+            url "jdbc:postgresql://localhost:5432/TrustOSTFG"
+            username "TrustOSTFG"
             password ""
             changeLogFile "src/main/resources/config/liquibase/master.xml"
             defaultSchemaName ""
@@ -135,16 +135,15 @@ liquibase {
             classpath "src/main/resources/"
         }
         diffLog {
-            driver "org.mariadb.jdbc.Driver"
-            url "jdbc:mariadb://localhost:3306/test"
-            username "root"
+            driver "org.postgresql.Driver"
+            url "jdbc:postgresql://localhost:5432/TrustOSTFG"
+            username "TrustOSTFG"
             password ""
             changeLogFile project.ext.diffChangelogFile
-            referenceUrl "hibernate:spring:com.mycompany.myapp.domain?dialect=org.hibernate.dialect.MariaDB103Dialect&hibernate.physical_naming_strategy=org.springframework.boot.orm.jpa.hibernate.SpringPhysicalNamingStrategy&hibernate.implicit_naming_strategy=org.springframework.boot.orm.jpa.hibernate.SpringImplicitNamingStrategy"
+            referenceUrl "hibernate:spring:com.mycompany.myapp.domain?dialect=tech.jhipster.domain.util.FixedPostgreSQL10Dialect&hibernate.physical_naming_strategy=org.springframework.boot.orm.jpa.hibernate.SpringPhysicalNamingStrategy&hibernate.implicit_naming_strategy=org.springframework.boot.orm.jpa.hibernate.SpringImplicitNamingStrategy"
             defaultSchemaName ""
             logLevel "debug"
             classpath "$buildDir/classes/java/main"
-            excludeObjects "oauth_access_token, oauth_approvals, oauth_client_details, oauth_client_token, oauth_code, oauth_refresh_token"
         }
     }
 
@@ -199,12 +198,14 @@ dependencies {
     implementation "com.fasterxml.jackson.datatype:jackson-datatype-hibernate5"
     implementation "com.fasterxml.jackson.datatype:jackson-datatype-hppc"
     implementation "com.fasterxml.jackson.datatype:jackson-datatype-jsr310"
-    implementation "org.redisson:redisson"
     testImplementation "org.testcontainers:junit-jupiter"
     testImplementation "org.testcontainers:testcontainers"
     implementation "org.springdoc:springdoc-openapi-webmvc-core"
     implementation "com.zaxxer:HikariCP"
     implementation "org.apache.commons:commons-lang3"
+    implementation "javax.cache:cache-api"
+    implementation "org.ehcache:ehcache"
+    implementation "org.hibernate:hibernate-jcache"
     annotationProcessor "org.hibernate:hibernate-jpamodelgen:${hibernateVersion}"
     implementation "org.hibernate:hibernate-core"
     implementation "org.hibernate.validator:hibernate-validator"
@@ -219,6 +220,7 @@ dependencies {
     testImplementation "org.testcontainers:jdbc"
     implementation "org.springframework.boot:spring-boot-starter-logging"
     implementation "org.springframework.boot:spring-boot-starter-mail"
+    implementation "org.springframework.boot:spring-boot-starter-security"
     implementation "org.springframework.boot:spring-boot-starter-thymeleaf"
     implementation "org.springframework.boot:spring-boot-starter-web"
     testImplementation "org.springframework.boot:spring-boot-starter-test"
@@ -228,8 +230,14 @@ dependencies {
     testRuntimeOnly "com.tngtech.archunit:archunit-junit5-engine:${archunitJunit5Version}"
     implementation "org.zalando:problem-spring-web"
     implementation "org.springframework.boot:spring-boot-starter-undertow"
-    implementation "org.springframework.boot:spring-boot-starter-oauth2-client"
-    implementation "org.springframework.boot:spring-boot-starter-oauth2-resource-server"
+    implementation "io.jsonwebtoken:jjwt-api"
+    if (!project.hasProperty("gae")) {
+    runtimeOnly "io.jsonwebtoken:jjwt-impl"
+    runtimeOnly "io.jsonwebtoken:jjwt-jackson"
+    } else {
+    implementation "io.jsonwebtoken:jjwt-impl"
+    implementation "io.jsonwebtoken:jjwt-jackson"
+    }
     implementation "org.springframework.cloud:spring-cloud-starter-bootstrap"
     implementation "org.springframework.security:spring-security-data"
     implementation "io.micrometer:micrometer-registry-prometheus"
@@ -237,11 +245,6 @@ dependencies {
     liquibaseRuntime sourceSets.main.compileClasspath
     liquibaseRuntime "org.liquibase.ext:liquibase-hibernate5:${liquibaseHibernate5Version}"
     //jhipster-needle-gradle-dependency - JHipster will add additional dependencies here
-
-    // my implementation
-    implementation 'org.json:json:20211205'
-    implementation group: 'com.google.code.gson', name: 'gson', version: '2.7'
-
 }
 
 if (project.hasProperty("gae")) {

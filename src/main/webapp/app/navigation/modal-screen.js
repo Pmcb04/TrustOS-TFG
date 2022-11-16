@@ -1,16 +1,16 @@
-import * as React from 'react'
-import { Button, StyleSheet, Text, useWindowDimensions, View } from 'react-native'
-import { Ionicons } from '@expo/vector-icons'
+import * as React from 'react';
+import { Button, StyleSheet, Text, useWindowDimensions, View } from 'react-native';
+import { Ionicons } from '@expo/vector-icons';
 /* eslint-disable react-native/no-inline-styles */
 
 export function ModalScreen({ route, navigation, isError = false }) {
   React.useEffect(() => {
     if (!navigation.canGoBack()) {
-      navigation.navigate('Drawer')
+      navigation.navigate('Drawer');
     }
-  }, [navigation])
+  }, [navigation]);
 
-  const dimensions = useWindowDimensions()
+  const dimensions = useWindowDimensions();
   return (
     <View style={styles.outerContainer}>
       <View style={[styles.backgroundContainer, { height: dimensions.height / 3, minWidth: dimensions.width / 2 }]}>
@@ -32,7 +32,7 @@ export function ModalScreen({ route, navigation, isError = false }) {
         </View>
       </View>
     </View>
-  )
+  );
 }
 
 const styles = StyleSheet.create({
@@ -65,4 +65,4 @@ const styles = StyleSheet.create({
   successIcon: {
     color: 'green',
   },
-})
+});

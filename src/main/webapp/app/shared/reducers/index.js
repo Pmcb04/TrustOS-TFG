@@ -10,13 +10,11 @@ export const reducers = combineReducers({
   appState: require('./app-state.reducer').reducer,
   users: require('./user.reducer').reducer,
   // jhipster-react-native-redux-store-import-needle
-  authInfo: require('./auth-info.reducer').reducer,
   account: require('./account.reducer').reducer,
   login: require('../../modules/login/login.reducer').reducer,
-
-  assetDetails: require('../../modules/asset-details/asset-details-screen.reducer').reducer,
-  myAssets: require('../../modules/my-assets/my-assets-screen.reducer').reducer,
-  assetTraceability: require('../../modules/asset-traceability/asset-traceability-screen.reducer').reducer,
+  register: require('../../modules/account/register/register.reducer').reducer,
+  changePassword: require('../../modules/account/password/change-password.reducer').reducer,
+  forgotPassword: require('../../modules/account/password-reset/forgot-password.reducer').reducer
 })
 
 export default () => {

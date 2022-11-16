@@ -2,11 +2,10 @@ module.exports = {
   root: true,
   extends: ['@react-native-community', 'prettier'],
   rules: {
-    semi: [2, 'never'],
+    semi: [2, 'always'],
     quotes: [2, 'single', { avoidEscape: true }],
   },
   globals: {
-    JSX: 'readonly',
     describe: 'readonly',
     test: 'readonly',
     jest: 'readonly',

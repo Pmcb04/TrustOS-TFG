@@ -6,33 +6,24 @@ import AppConfig from '../../config/app-config'
 /* ------------- Types ------------- */
 
 import { StartupTypes } from '../reducers/startup.reducer'
-import { AuthInfoTypes } from '../reducers/auth-info.reducer'
 import { LoginTypes } from '../../modules/login/login.reducer'
 import { AccountTypes } from '../../shared/reducers/account.reducer'
+import { RegisterTypes } from '../../modules/account/register/register.reducer'
+import { ForgotPasswordTypes } from '../../modules/account/password-reset/forgot-password.reducer'
+import { ChangePasswordTypes } from '../../modules/account/password/change-password.reducer'
 import { UserTypes } from '../../shared/reducers/user.reducer'
 // jhipster-react-native-saga-redux-import-needle
-import { AssetListTypes } from '../../modules/my-assets/my-assets-screen.reducer'
-import { AssetDetailsTypes } from '../../modules/asset-details/asset-details-screen.reducer'
-import { AssetTraceabilityTypes } from '../../modules/asset-traceability/asset-traceability-screen.reducer'
 
 /* ------------- Sagas ------------- */
 
 import { startup } from './startup.saga'
-import { getAuthInfo } from './auth-info.saga'
 import { login, logout, loginLoad } from '../../modules/login/login.sagas'
+import { register } from '../../modules/account/register/register.sagas'
+import { forgotPassword } from '../../modules/account/password-reset/forgot-password.sagas'
+import { changePassword } from '../../modules/account/password/change-password.sagas'
 import { getAccount, updateAccount } from '../../shared/sagas/account.sagas'
 import UserSagas from '../../shared/sagas/user.sagas'
 // jhipster-react-native-saga-method-import-needle
-import {
-  getAssets,
-  loadAssetsAgain,
-  loadNextAssets,
-  loadPreviousAssets,
-  search,
-  changeOrder,
-} from '../../modules/my-assets/my-assets-screen.sagas'
-import { getAsset, updateAsset } from '../../modules/asset-details/asset-details-screen.sagas'
-import { getAssetTraceability, getAssetRangeTraceability } from '../../modules/asset-traceability/asset-traceability-screen.sagas'
 
 /* ------------- API ------------- */
 
@@ -42,11 +33,10 @@ const api = AppConfig.useFixtures ? FixtureAPI : API.create()
 
 /* ------------- Connect Types To Sagas ------------- */
 
-export default function* root() {
+export default function * root () {
   yield all([
     // some sagas only receive an action
     takeLatest(StartupTypes.STARTUP, startup),
-    takeLatest(AuthInfoTypes.AUTH_INFO_REQUEST, getAuthInfo, api),
 
     // JHipster accounts
     takeLatest(LoginTypes.LOGIN_LOAD, loginLoad, api),
@@ -54,28 +44,15 @@ export default function* root() {
     takeLatest(LoginTypes.LOGOUT_REQUEST, logout, api),
     // jhipster-react-native-saga-redux-connect-needle
 
+    takeLatest(RegisterTypes.REGISTER_REQUEST, register, api),
+    takeLatest(ForgotPasswordTypes.FORGOT_PASSWORD_REQUEST, forgotPassword, api),
+    takeLatest(ChangePasswordTypes.CHANGE_PASSWORD_REQUEST, changePassword, api),
+    takeLatest(UserTypes.USER_REQUEST, UserSagas.getUser, api),
+    takeLatest(UserTypes.USER_UPDATE_REQUEST, UserSagas.updateUser, api),
+    takeLatest(UserTypes.USER_DELETE_REQUEST, UserSagas.deleteUser, api),
     takeLatest(UserTypes.USER_ALL_REQUEST, UserSagas.getAllUsers, api),
 
     takeLatest(AccountTypes.ACCOUNT_REQUEST, getAccount, api),
-    takeLatest(AccountTypes.ACCOUNT_UPDATE_REQUEST, updateAccount, api),
-
-    // Asset list
-    takeLatest(AssetListTypes.MY_ASSETS_REQUEST, getAssets, api),
-    takeLatest(AssetListTypes.MY_ASSETS_SET_SHOW_OWNER, getAssets, api),
-    takeLatest(AssetListTypes.MY_ASSETS_SET_SHOW_AUTHORIZATHED, getAssets, api),
-    takeLatest(AssetListTypes.MY_ASSETS_CHANGE_OFFSET, loadAssetsAgain, api),
-    takeLatest(AssetListTypes.MY_ASSETS_SUCCESS, loadNextAssets, api),
-    takeLatest(AssetListTypes.MY_ASSETS_LOAD_NEXT_CONTENT, loadNextAssets, api),
-    takeLatest(AssetListTypes.MY_ASSETS_LOAD_PREVIOUS_CONTENT, loadPreviousAssets, api),
-    takeLatest(AssetListTypes.MY_ASSETS_SEARCH, search, api),
-    takeLatest(AssetListTypes.MY_ASSETS_SET_ORDER, changeOrder, api),
-
-    // Asset Details
-    takeLatest(AssetDetailsTypes.ASSET_DETAILS_REQUEST, getAsset, api),
-    takeLatest(AssetDetailsTypes.ASSET_DETAILS_UPDATE, updateAsset, api),
-
-    // Asset Traceability
-    takeLatest(AssetTraceabilityTypes.ASSET_TRACEABILITY_REQUEST, getAssetTraceability, api),
-    takeLatest(AssetTraceabilityTypes.ASSET_TRACEABILITY_RANGE_REQUEST, getAssetRangeTraceability, api),
+    takeLatest(AccountTypes.ACCOUNT_UPDATE_REQUEST, updateAccount, api)
   ])
 }

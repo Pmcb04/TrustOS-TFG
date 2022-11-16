@@ -1,11 +1,11 @@
-import { createStore, applyMiddleware, compose as composeWithoutDevTools } from 'redux'
+import { createStore, applyMiddleware, compose as composeWithoutDevTools } from 'redux';
 import createSagaMiddleware from 'redux-saga'
-import { composeWithDevTools } from 'redux-devtools-extension'
+import { composeWithDevTools } from 'redux-devtools-extension';
 
-import AppConfig from '../../config/app-config'
+import AppConfig from '../../config/app-config';
 import RehydrationServices from '../services/rehydration.service'
 import ReduxPersist from '../../config/redux-persist'
-const compose = AppConfig.debugMode ? composeWithDevTools : composeWithoutDevTools
+const compose = AppConfig.debugMode ? composeWithDevTools : composeWithoutDevTools;
 // creates the store
 export default (rootReducer, rootSaga) => {
   /* ------------- Redux Configuration ------------- */
@@ -15,7 +15,7 @@ export default (rootReducer, rootSaga) => {
 
   /* ------------- Saga Middleware ------------- */
 
-  const sagaMonitor = null
+  const sagaMonitor = null;
   const sagaMiddleware = createSagaMiddleware({ sagaMonitor })
   middleware.push(sagaMiddleware)
 
@@ -23,7 +23,7 @@ export default (rootReducer, rootSaga) => {
 
   enhancers.push(applyMiddleware(...middleware))
 
-  const store = createStore(rootReducer, compose(...enhancers))
+  const store = createStore(rootReducer, compose(...enhancers));
 
   // configure persistStore and check reducer version number
   if (ReduxPersist.active) {
@@ -36,6 +36,6 @@ export default (rootReducer, rootSaga) => {
   return {
     store,
     sagasManager,
-    sagaMiddleware,
+    sagaMiddleware
   }
 }

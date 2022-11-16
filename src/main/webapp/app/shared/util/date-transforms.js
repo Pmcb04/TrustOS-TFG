@@ -1,31 +1,25 @@
 export const convertLocalDateToString = (date) => {
-  var d = new Date(date),
-    month = '' + (d.getMonth() + 1),
-    day = '' + d.getDate(),
-    year = d.getFullYear(),
-    hours = '' + d.getHours(),
-    minutes = '' + d.getMinutes(),
-    seconds = '' + d.getSeconds()
+  return !date || !date.getYear
+    ? ''
+    : ('0' + (date.getMonth() + 1).toString()).substr(-2) +
+        '/' +
+        ('0' + date.getDate().toString()).substr(-2) +
+        '/' +
+        date.getFullYear().toString().substr(2);
+};
 
-  if (month.length < 2) month = '0' + month
-  if (day.length < 2) day = '0' + day
-  if (hours.length < 2) hours = '0' + hours
-  if (minutes.length < 2) minutes = '0' + minutes
-  if (seconds.length < 2) seconds = '0' + seconds
+export const convertDateTimeFromServer = (date) => {
+  if (date) {
+    return new Date(date);
+  } else {
+    return null;
+  }
+};
 
-  return [day, month, year].join('/') + ' ' + hours + ':' + minutes + ':' + seconds
-}
-
-// Date format YYYY-MM-DDTHH:MM
-export const convertLocalDateToTimestamp = (date) => {
-  const dateString = date.toString()
-  const dateArray = dateString.split('T')
-  const dateArray1 = dateArray[0].split('-') // YYYY-MM-DD
-  const dateArray2 = dateArray[1].split(':') // HH:MM
-  const d = new Date(dateArray1[0], dateArray1[1] - 1, dateArray1[2], dateArray2[0], dateArray2[1])
-  return d.getTime() / 1000 // pass to timestamp
-}
-
-export const convertTimestampToLocalDate = (timestamp) => {
-  return convertLocalDateToString(new Date(timestamp * 1000))
-}
+export const convertLocalDateFromServer = (date) => {
+  if (date) {
+    var dateString = date.split('-');
+    return new Date(dateString[0], dateString[1] - 1, dateString[2]);
+  }
+  return null;
+};
