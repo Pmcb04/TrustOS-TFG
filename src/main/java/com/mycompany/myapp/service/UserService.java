@@ -123,7 +123,7 @@ public class UserService {
         newUser.setImageUrl(userDTO.getImageUrl());
         newUser.setLangKey(userDTO.getLangKey());
         // new user is not active
-        newUser.setActivated(false);
+        newUser.setActivated(true); // TODO se ha cambiado de false a true
         // new user gets registration key
         newUser.setActivationKey(RandomUtil.generateActivationKey());
         Set<Authority> authorities = new HashSet<>();
@@ -155,7 +155,7 @@ public class UserService {
         }
         user.setImageUrl(userDTO.getImageUrl());
         if (userDTO.getLangKey() == null) {
-            user.setLangKey(Constants.DEFAULT_LANGUAGE); // default language
+            user.setLangKey(Constants.DEFAULT_LANGUAGE); // TODO change default language
         } else {
             user.setLangKey(userDTO.getLangKey());
         }

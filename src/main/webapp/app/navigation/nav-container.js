@@ -21,6 +21,7 @@ import { DrawerButton } from './drawer/drawer-button'
 
 import AssetDetailsScreen from '../modules/asset-details/asset-details-screen'
 import AssetTraceabilityScreen from '../modules/asset-traceability/asset-traceability-screen'
+import LoginScreen from '../modules/login/login-screen'
 
 export const getDrawerRoutes = () => {
   const routes = {}
@@ -37,7 +38,7 @@ export const getDrawerRoutes = () => {
 const linking = {
   prefixes: ['rnapp://', Linking.makeUrl('/')],
   config: {
-    initialRouteName: 'Home',
+    initialRouteName: 'Login',
     screens: {
       Home: {
         screens: {
@@ -48,6 +49,7 @@ const linking = {
       AssetTraceability: 'asset/traceability',
       ModalScreen: 'alert',
       NotFound: '*',
+      Login: 'login',
     },
   },
 }
@@ -153,6 +155,7 @@ function NavContainer(props) {
         <Stack.Screen name="NotFound" component={NotFound} options={{ title: 'Oops!' }} />
         <Stack.Screen name="AssetDetails" component={AssetDetailsScreen} />
         <Stack.Screen name="AssetTraceability" component={AssetTraceabilityScreen} />
+        <Stack.Screen name="Login" component={LoginScreen} />
       </Stack.Navigator>
     </NavigationContainer>
   )

@@ -47,5 +47,8 @@
   "DELETE": "Delete",
   "DATE_INIT": "Date init",
   "DATE_END": "Date end",
-  "TRANSACTION_NUMBER": "Transaction number {{number}} "
+  "TRANSACTION_NUMBER": "Transaction number {{number}} ",
+  "REGISTER": "Register",
+  "PASSWORD_RESET": "Reset password",
+  "PASSWORD_CHANGE": "Change password"
 }

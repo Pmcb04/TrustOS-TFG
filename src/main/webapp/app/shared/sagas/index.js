@@ -33,7 +33,7 @@ const api = AppConfig.useFixtures ? FixtureAPI : API.create()
 
 /* ------------- Connect Types To Sagas ------------- */
 
-export default function * root () {
+export default function* root() {
   yield all([
     // some sagas only receive an action
     takeLatest(StartupTypes.STARTUP, startup),
@@ -53,6 +53,6 @@ export default function * root () {
     takeLatest(UserTypes.USER_ALL_REQUEST, UserSagas.getAllUsers, api),
 
     takeLatest(AccountTypes.ACCOUNT_REQUEST, getAccount, api),
-    takeLatest(AccountTypes.ACCOUNT_UPDATE_REQUEST, updateAccount, api)
+    takeLatest(AccountTypes.ACCOUNT_UPDATE_REQUEST, updateAccount, api),
   ])
 }

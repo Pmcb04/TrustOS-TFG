@@ -1,15 +1,14 @@
-import React, { createRef } from 'react'
-import { Text } from 'react-native'
+import React from 'react'
+import { View } from 'react-native'
 import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view'
 import { connect } from 'react-redux'
-import * as Yup from 'yup'
+import { useTranslation } from 'react-i18next'
 
 import LoginActions from './login.reducer'
 import { useDidUpdateEffect } from '../../shared/util/use-did-update-effect'
-import FormButton from '../../shared/components/form/jhi-form-button'
-import FormField from '../../shared/components/form/jhi-form-field'
-import Form from '../../shared/components/form/jhi-form'
 import styles from './login-screen.styles'
+
+import { Text5, TextField, PasswordField, Box, Stack, ButtonLayout, ButtonPrimary, Form, ThemeContext } from '@telefonica/mistica'
 
 function LoginScreen(props) {
   const { account, navigation, fetching, loginError, attemptLogin } = props
@@ -35,49 +34,38 @@ function LoginScreen(props) {
     setError('')
     attemptLogin(data.login, data.password)
   }
-
-  // create refs for handling onSubmit functionality
-  const passwordRef = createRef()
-  const formRef = createRef()
-
-  // set up validation schema for the form
-  const validationSchema = Yup.object().shape({
-    login: Yup.string().required('Please enter your login').label('Login'),
-    password: Yup.string().required().label('Password'),
-  })
+  // TODO internacionalizar
+  const { t } = useTranslation() //i18n instance
+  const { colors } = React.useContext(ThemeContext)
 
   return (
-    <KeyboardAwareScrollView
-      contentContainerStyle={styles.container}
-      testID="loginScreen"
-      keyboardShouldPersistTaps="handled"
-      keyboardDismissMode="on-drag">
-      {!!error && <Text style={styles.errorText}>{error}</Text>}
-      <Form initialValues={{ login: '', password: '' }} validationSchema={validationSchema} onSubmit={onSubmit} ref={formRef}>
-        <FormField
-          name="login"
-          testID="loginScreenUsername"
-          label="Login"
-          placeholder="Enter login"
-          onSubmitEditing={() => passwordRef?.current?.focus()}
-          autoCapitalize="none"
-          textContentType="username"
-        />
-        <FormField
-          ref={passwordRef}
-          name="password"
-          testID="loginScreenPassword"
-          label="Password"
-          placeholder="Enter password"
-          autoCapitalize="none"
-          autoCorrect={false}
-          secureTextEntry={true}
-          onSubmitEditing={() => formRef?.current?.submitForm()}
-          textContentType="password"
-        />
-        <FormButton testID="loginScreenLoginButton" title={'Login'} />
-      </Form>
-    </KeyboardAwareScrollView>
+    <View style={[styles.container, styles.mainContainer, { backgroundColor: colors.background }]}>
+      <KeyboardAwareScrollView
+        contentContainerStyle={styles.container}
+        testID="loginScreen"
+        keyboardShouldPersistTaps="handled"
+        keyboardDismissMode="on-drag">
+        {!!error && <Text5 style={styles.errorText}>{error}</Text5>}
+        <View style={styles.login}>
+          <Form
+            onSubmit={(formData) => {
+              onSubmit(formData)
+            }}>
+            <Box padding={16}>
+              <Stack space={16}>
+                <TextField name="login" label="Username/Email" fullWidth />
+                <PasswordField name="password" label="Password" fullWidth />
+                <ButtonLayout>
+                  <ButtonPrimary fullWidth submit>
+                    Send
+                  </ButtonPrimary>
+                </ButtonLayout>
+              </Stack>
+            </Box>
+          </Form>
+        </View>
+      </KeyboardAwareScrollView>
+    </View>
   )
 }
 

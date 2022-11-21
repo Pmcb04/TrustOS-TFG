@@ -5,11 +5,11 @@ import AccountActions from '../../shared/reducers/account.reducer'
 
 export const selectAuthToken = (state) => state.login.authToken
 // attempts to login
-export function * login (api, { username, password }) {
+export function* login(api, { username, password }) {
   const authObj = {
     username: username,
     password: password,
-    rememberMe: true
+    rememberMe: true,
   }
 
   const response = yield call(api.login, authObj)
@@ -25,12 +25,12 @@ export function * login (api, { username, password }) {
       ? 'Failed to reach backend API'
       : response.data && response.data.detail
       ? response.data.detail
-      : 'Bad credentials';
-    yield put(LoginActions.loginFailure(errorMessage));
+      : 'Bad credentials'
+    yield put(LoginActions.loginFailure(errorMessage))
   }
 }
 // attempts to logout
-export function * logout (api) {
+export function* logout(api) {
   yield call(api.removeAuthToken)
   yield put(AccountActions.accountReset())
   yield put(AccountActions.accountRequest())
@@ -39,7 +39,7 @@ export function * logout (api) {
 }
 
 // loads the login
-export function * loginLoad (api) {
+export function* loginLoad(api) {
   const authToken = yield select(selectAuthToken)
   // only set the token if we have it
   if (authToken) {

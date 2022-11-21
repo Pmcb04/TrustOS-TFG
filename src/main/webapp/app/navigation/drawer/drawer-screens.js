@@ -2,12 +2,12 @@ import React from 'react'
 import i18n from '../../config/i18-config'
 
 import HomeScreen from '../../modules/home/home-screen'
-import LoginScreen from '../../modules/login/login-screen'
 import StorybookScreen from '../../../storybook'
 
 import ConfigurationScreen from '../../modules/configuration/configuration-screen'
 import AccountScreen from '../../modules/account/account-screen'
 import MyAssetsScreen from '../../modules/my-assets/my-assets-screen'
+import RegisterScreen from '../../modules/account/register/register-screen'
 
 import { IconUserAccountRegular, IconHomeRegular, IconBoxRegular, IconSettingsRegular, IconAlertRegular } from '@telefonica/mistica'
 
@@ -15,14 +15,13 @@ export const drawerScreens = [
   {
     categoryName: i18n.t('APPLICATION'),
     settings: [
-      { title: i18n.t('HOME'), icon: <IconHomeRegular />, component: HomeScreen, auth: null },
-      { title: i18n.t('MY_ASSETS'), icon: <IconBoxRegular />, route: 'assets', component: MyAssetsScreen, auth: false },
-      { title: i18n.t('LOGIN'), icon: <IconBoxRegular />, route: 'login', component: LoginScreen, auth: false },
+      { title: i18n.t('HOME'), icon: <IconHomeRegular />, component: HomeScreen, auth: true },
+      { title: i18n.t('MY_ASSETS'), icon: <IconBoxRegular />, route: 'assets', component: MyAssetsScreen, auth: true },
     ],
   },
   {
     categoryName: i18n.t('PERSONAL_INFORMATION'),
-    settings: [{ title: i18n.t('ACCOUNT'), icon: <IconUserAccountRegular />, route: 'account', component: AccountScreen, auth: false }],
+    settings: [{ title: i18n.t('ACCOUNT'), icon: <IconUserAccountRegular />, route: 'account', component: AccountScreen, auth: true }],
   },
   {
     categoryName: i18n.t('CONFIGURATION'),
@@ -32,7 +31,19 @@ export const drawerScreens = [
         icon: <IconSettingsRegular />,
         route: 'configuration',
         component: ConfigurationScreen,
-        auth: false,
+        auth: true,
+      },
+    ],
+  },
+  {
+    categoryName: i18n.t('ADMINITRATION'),
+    settings: [
+      {
+        title: i18n.t('REGISTER'),
+        icon: <IconSettingsRegular />,
+        route: 'register',
+        component: RegisterScreen,
+        auth: true,
       },
     ],
   },
