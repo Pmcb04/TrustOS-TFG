@@ -116,7 +116,7 @@ public class UserService {
         // new user gets initially a generated password
         newUser.setPassword(encryptedPassword);
         newUser.setFirstName(userDTO.getFirstName());
-        newUser.setLastName(userDTO.getLastName());
+        newUser.setLastName(userDTO.getLastName().toUpperCase());
         if (userDTO.getEmail() != null) {
             newUser.setEmail(userDTO.getEmail().toLowerCase());
         }
@@ -155,7 +155,7 @@ public class UserService {
         }
         user.setImageUrl(userDTO.getImageUrl());
         if (userDTO.getLangKey() == null) {
-            user.setLangKey(Constants.DEFAULT_LANGUAGE); // TODO change default language
+            user.setLangKey(Constants.DEFAULT_LANGUAGE); 
         } else {
             user.setLangKey(userDTO.getLangKey());
         }

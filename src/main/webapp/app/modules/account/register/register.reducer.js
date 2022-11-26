@@ -5,7 +5,7 @@ import Immutable from 'seamless-immutable'
 const { Types, Creators } = createActions({
   registerRequest: ['user'],
   registerSuccess: [],
-  registerFailure: ['error']
+  registerFailure: ['error'],
 })
 
 export const RegisterTypes = Types
@@ -15,7 +15,7 @@ export default Creators
 
 export const INITIAL_STATE = Immutable({
   error: null,
-  fetching: false
+  fetching: false,
 })
 
 /* ------------- Reducers ------------- */
@@ -34,7 +34,7 @@ export const failure = (state, { error }) => state.merge({ fetching: false, erro
 export const reducer = createReducer(INITIAL_STATE, {
   [Types.REGISTER_REQUEST]: request,
   [Types.REGISTER_SUCCESS]: success,
-  [Types.REGISTER_FAILURE]: failure
+  [Types.REGISTER_FAILURE]: failure,
 })
 
 /* ------------- Selectors ------------- */

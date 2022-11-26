@@ -14,6 +14,10 @@ import { ChangePasswordTypes } from '../../modules/account/password/change-passw
 import { UserTypes } from '../../shared/reducers/user.reducer'
 // jhipster-react-native-saga-redux-import-needle
 
+import { AssetListTypes } from '../../modules/my-assets/my-assets-screen.reducer'
+import { AssetDetailsTypes } from '../../modules/asset-details/asset-details-screen.reducer'
+import { AssetTraceabilityTypes } from '../../modules/asset-traceability/asset-traceability-screen.reducer'
+
 /* ------------- Sagas ------------- */
 
 import { startup } from './startup.saga'
@@ -25,6 +29,16 @@ import { getAccount, updateAccount } from '../../shared/sagas/account.sagas'
 import UserSagas from '../../shared/sagas/user.sagas'
 // jhipster-react-native-saga-method-import-needle
 
+import {
+  getAssets,
+  loadAssetsAgain,
+  loadNextAssets,
+  loadPreviousAssets,
+  search,
+  changeOrder,
+} from '../../modules/my-assets/my-assets-screen.sagas'
+import { getAsset, updateAsset } from '../../modules/asset-details/asset-details-screen.sagas'
+import { getAssetTraceability, getAssetRangeTraceability } from '../../modules/asset-traceability/asset-traceability-screen.sagas'
 /* ------------- API ------------- */
 
 // The API we use is only used from Sagas, so we create it here and pass along
@@ -54,5 +68,24 @@ export default function* root() {
 
     takeLatest(AccountTypes.ACCOUNT_REQUEST, getAccount, api),
     takeLatest(AccountTypes.ACCOUNT_UPDATE_REQUEST, updateAccount, api),
+
+    // Asset list
+    takeLatest(AssetListTypes.MY_ASSETS_REQUEST, getAssets, api),
+    takeLatest(AssetListTypes.MY_ASSETS_SET_SHOW_OWNER, getAssets, api),
+    takeLatest(AssetListTypes.MY_ASSETS_SET_SHOW_AUTHORIZATHED, getAssets, api),
+    takeLatest(AssetListTypes.MY_ASSETS_CHANGE_OFFSET, loadAssetsAgain, api),
+    takeLatest(AssetListTypes.MY_ASSETS_SUCCESS, loadNextAssets, api),
+    takeLatest(AssetListTypes.MY_ASSETS_LOAD_NEXT_CONTENT, loadNextAssets, api),
+    takeLatest(AssetListTypes.MY_ASSETS_LOAD_PREVIOUS_CONTENT, loadPreviousAssets, api),
+    takeLatest(AssetListTypes.MY_ASSETS_SEARCH, search, api),
+    takeLatest(AssetListTypes.MY_ASSETS_SET_ORDER, changeOrder, api),
+
+    // Asset Details
+    takeLatest(AssetDetailsTypes.ASSET_DETAILS_REQUEST, getAsset, api),
+    takeLatest(AssetDetailsTypes.ASSET_DETAILS_UPDATE, updateAsset, api),
+
+    // Asset Traceability
+    takeLatest(AssetTraceabilityTypes.ASSET_TRACEABILITY_REQUEST, getAssetTraceability, api),
+    takeLatest(AssetTraceabilityTypes.ASSET_TRACEABILITY_RANGE_REQUEST, getAssetRangeTraceability, api),
   ])
 }

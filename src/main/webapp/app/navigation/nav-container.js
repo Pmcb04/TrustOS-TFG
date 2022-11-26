@@ -21,7 +21,6 @@ import { DrawerButton } from './drawer/drawer-button'
 
 import AssetDetailsScreen from '../modules/asset-details/asset-details-screen'
 import AssetTraceabilityScreen from '../modules/asset-traceability/asset-traceability-screen'
-import LoginScreen from '../modules/login/login-screen'
 
 export const getDrawerRoutes = () => {
   const routes = {}
@@ -38,7 +37,7 @@ export const getDrawerRoutes = () => {
 const linking = {
   prefixes: ['rnapp://', Linking.makeUrl('/')],
   config: {
-    initialRouteName: 'Login',
+    initialRouteName: 'Home',
     screens: {
       Home: {
         screens: {
@@ -49,7 +48,6 @@ const linking = {
       AssetTraceability: 'asset/traceability',
       ModalScreen: 'alert',
       NotFound: '*',
-      Login: 'login',
     },
   },
 }
@@ -57,14 +55,13 @@ const linking = {
 const Stack = createStackNavigator()
 const Drawer = createDrawerNavigator()
 
-const getScreens = (props) => {
-  const isAuthed = props.account !== null
+const getScreens = (isAuthed) => {
   return drawerScreens.map((category, index) => {
     return category.settings.map((setting) => {
       if (setting.auth === null || setting.auth === undefined) {
-        return <Drawer.Screen name={setting.title} component={setting.component} options={setting.options} key={setting.title} />
+        return <Drawer.Screen name={setting.title} component={setting.component} options={setting.options} key={index} />
       } else if (setting.auth === isAuthed) {
-        return <Drawer.Screen name={setting.title} component={setting.component} options={setting.options} key={setting.title} />
+        return <Drawer.Screen name={setting.title} component={setting.component} options={setting.options} key={index} />
       }
     })
   })
@@ -75,6 +72,7 @@ function NavContainer(props) {
   const dimensions = useWindowDimensions()
   const moreDimension = dimensions.width >= 768
   const lastAppState = 'active'
+  const isAuthed = props.account !== null
 
   React.useEffect(() => {
     return () => {
@@ -124,7 +122,7 @@ function NavContainer(props) {
               initialRouteName={drawerScreens[0].title}
               drawerType={moreDimension ? 'permanent' : 'slide'}
               screenOptions={{ headerShown: !moreDimension, headerLeft: DrawerButton }}>
-              {getScreens(props)}
+              {getScreens(isAuthed)}
             </Drawer.Navigator>
           )}
         </Stack.Screen>
@@ -155,7 +153,6 @@ function NavContainer(props) {
         <Stack.Screen name="NotFound" component={NotFound} options={{ title: 'Oops!' }} />
         <Stack.Screen name="AssetDetails" component={AssetDetailsScreen} />
         <Stack.Screen name="AssetTraceability" component={AssetTraceabilityScreen} />
-        <Stack.Screen name="Login" component={LoginScreen} />
       </Stack.Navigator>
     </NavigationContainer>
   )

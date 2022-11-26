@@ -46,24 +46,22 @@ function LoginScreen(props) {
         keyboardShouldPersistTaps="handled"
         keyboardDismissMode="on-drag">
         {!!error && <Text5 style={styles.errorText}>{error}</Text5>}
-        <View style={styles.login}>
-          <Form
-            onSubmit={(formData) => {
-              onSubmit(formData)
-            }}>
-            <Box padding={16}>
-              <Stack space={16}>
-                <TextField name="login" label="Username/Email" fullWidth />
-                <PasswordField name="password" label="Password" fullWidth />
-                <ButtonLayout>
-                  <ButtonPrimary fullWidth submit>
-                    Send
-                  </ButtonPrimary>
-                </ButtonLayout>
-              </Stack>
-            </Box>
-          </Form>
-        </View>
+        <Form
+          onSubmit={(formData) => {
+            onSubmit(formData)
+          }}>
+          <Box padding={16}>
+            <Stack space={16}>
+              <TextField name="login" label="Username/Email" fullWidth />
+              <PasswordField name="password" label="Password" fullWidth />
+              <ButtonLayout>
+                <ButtonPrimary fullWidth submit>
+                  Send
+                </ButtonPrimary>
+              </ButtonLayout>
+            </Stack>
+          </Box>
+        </Form>
       </KeyboardAwareScrollView>
     </View>
   )

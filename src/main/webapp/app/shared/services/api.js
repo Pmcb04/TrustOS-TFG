@@ -16,10 +16,10 @@ const create = (baseURL = AppConfig.apiUrl) => {
     baseURL,
     // here are some default headers
     headers: {
-      'Cache-Control': 'no-cache'
+      'Cache-Control': 'no-cache',
     },
     // 10 second timeout...
-    timeout: 10000
+    timeout: 10000,
   })
 
   // ------
@@ -40,11 +40,19 @@ const create = (baseURL = AppConfig.apiUrl) => {
   const removeAuthToken = () => api.deleteHeader('Authorization')
   const login = (userAuth) => api.post('api/authenticate', userAuth)
   const register = (user) => api.post('api/register', user)
-  const forgotPassword = (data) => api.post('api/account/reset-password/init', data, { headers: { 'Content-Type': 'text/plain', 'Accept': 'application/json, text/plain, */*' } })
+  const forgotPassword = (data) =>
+    api.post('api/account/reset-password/init', data, {
+      headers: { 'Content-Type': 'text/plain', Accept: 'application/json, text/plain, */*' },
+    })
 
   const getAccount = () => api.get('api/account')
   const updateAccount = (account) => api.post('api/account', account)
-  const changePassword = (currentPassword, newPassword) => api.post('api/account/change-password', { currentPassword, newPassword }, { headers: { 'Content-Type': 'application/json', 'Accept': 'application/json, text/plain, */*' } })
+  const changePassword = (currentPassword, newPassword) =>
+    api.post(
+      'api/account/change-password',
+      { currentPassword, newPassword },
+      { headers: { 'Content-Type': 'application/json', Accept: 'application/json, text/plain, */*' } },
+    )
 
   const getUser = (userId) => api.get('api/users/' + userId)
   const getAllUsers = (options) => api.get('api/users', options)
@@ -52,6 +60,19 @@ const create = (baseURL = AppConfig.apiUrl) => {
   const updateUser = (user) => api.put('api/users', user)
   const deleteUser = (userId) => api.delete('api/users/' + userId)
   // jhipster-react-native-api-method-needle
+
+  // trustOS api methods
+  const loginTrustOS = (account) => api.post('/trustos/login', account)
+  const setTrustOSToken = (trustOSAuth) => api.setHeader('Authorization', 'Bearer ' + trustOSAuth)
+  const removeTrustOSToken = () => api.deleteHeader('Authorization')
+  const getAssets = (isAuthorised) => api.get('/trustos/assets', {}, { params: { isAuthorised: isAuthorised } })
+  const getAsset = (isAuthorised, assetId) => api.get('/trustos/assets/' + assetId, {}, { params: { isAuthorised: isAuthorised } })
+  const updateAsset = (isAuthorised, assetId, newMetadata) =>
+    api.post('/trustos/assets/' + assetId + '/update', newMetadata, { params: { isAuthorised: isAuthorised } })
+  const getAssetTraceability = (isAuthorised, assetId) =>
+    api.get('/trustos/assets/' + assetId + '/transactions', {}, { params: { isAuthorised: isAuthorised } })
+  const getAssetRangeTraceability = (isAuthorised, assetId, body) =>
+    api.post('/trustos/assets/' + assetId + '/transactions/range', body, { params: { isAuthorised: isAuthorised } })
 
   // ------
   // STEP 3
@@ -80,11 +101,20 @@ const create = (baseURL = AppConfig.apiUrl) => {
     forgotPassword,
     getAccount,
     updateAccount,
-    changePassword
+    changePassword,
+    // trustOS api methods
+    loginTrustOS,
+    setTrustOSToken,
+    removeTrustOSToken,
+    getAssets,
+    getAsset,
+    updateAsset,
+    getAssetTraceability,
+    getAssetRangeTraceability,
   }
 }
 
 // let's return back our create method as the default.
 export default {
-  create
+  create,
 }

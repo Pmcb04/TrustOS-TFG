@@ -31,7 +31,7 @@ const LanguagePicker = (props) => {
   )
 }
 
-const mapStateToProps = (state) => ({ language: state.appState.language })
+const mapStateToProps = (state) => ({ language: state.account.account.langKey })
 const mapDispatchToProps = (dispatch) => {
   return {
     setLanguage: (language) => dispatch(AppActions.setLanguage(language)),

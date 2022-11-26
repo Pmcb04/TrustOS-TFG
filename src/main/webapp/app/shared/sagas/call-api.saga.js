@@ -1,11 +1,11 @@
 import { put, take } from 'redux-saga/effects'
 
-import { navigate } from '../../navigation/nav-ref';
+import { navigate } from '../../navigation/nav-ref'
 
 // this saga is used for showing the LoginScreen when a 401 error is received
 // if login is successful, it will reattempt the request
 // if login fails, it will return the error
-export function * callApi (apiCall) {
+export function* callApi(apiCall) {
   const response = yield apiCall
   if (!isUnauthorized(response)) {
     return response
@@ -24,6 +24,6 @@ export function * callApi (apiCall) {
   return yield apiCall
 }
 
-function isUnauthorized (resp) {
+function isUnauthorized(resp) {
   return resp.status === 401
 }

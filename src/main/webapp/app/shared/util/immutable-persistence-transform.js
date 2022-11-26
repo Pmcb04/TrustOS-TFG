@@ -1,4 +1,4 @@
-import { has, when } from 'ramda';
+import { has, when } from 'ramda'
 import Immutable from 'seamless-immutable'
 
 // is this object already Immutable?
@@ -22,5 +22,5 @@ export default {
   in: (raw) => {
     // console.log({ storing: raw })
     return fromImmutable(raw)
-  }
+  },
 }

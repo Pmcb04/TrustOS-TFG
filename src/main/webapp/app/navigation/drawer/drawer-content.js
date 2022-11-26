@@ -1,5 +1,5 @@
 import React from 'react'
-import { DrawerItem, DrawerContentScrollView } from '@react-navigation/drawer'
+import { DrawerItem, DrawerContentScrollView, DrawerItemList } from '@react-navigation/drawer'
 import { connect } from 'react-redux'
 import LoginActions from '../../modules/login/login.reducer'
 import InfoAccount from '../../shared/components/info-account/info-account'
@@ -16,7 +16,11 @@ function DrawerContent(props) {
   return !loaded ? null : (
     <DrawerContentScrollView {...props} testID="drawerContentScrollView">
       <InfoAccount />
-      <ListOptions navigation={navigation} />
+      <DrawerItemList {...props} />{' '}
+      {
+        // TODO ver como se puede personalizar DrawerItem o en caso contrario ver como se puede pasar a ListOptions la informacion necesaria como el titulo de la sección y el icono de este
+      }
+      {/* <ListOptions navigation={navigation} /> */}
       {account && <DrawerItem label="Logout" onPress={logoutAndCloseDrawer} />}
     </DrawerContentScrollView>
   )

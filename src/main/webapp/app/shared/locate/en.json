@@ -50,5 +50,19 @@
   "TRANSACTION_NUMBER": "Transaction number {{number}} ",
   "REGISTER": "Register",
   "PASSWORD_RESET": "Reset password",
-  "PASSWORD_CHANGE": "Change password"
+  "PASSWORD_CHANGE": "Change password",
+  "USERNAME": "Username",
+  "ENTER_USERNAME": "Enter username",
+  "FIRST_NAME": "First Name",
+  "ENTER_FIRST_NAME": "Enter first Name",
+  "LAST_NAME": "Last Name",
+  "ENTER_LAST_NAME": "Enter last Name",
+  "EMAIL": "Email",
+  "ENTER_EMAIL": "Enter email",
+  "PASSWORD": "Password",
+  "ENTER_PASSWORD": "Enter password",
+  "CONFIRM_PASSWORD": "Confirm password",
+  "ENTER_CONFIRM_PASSWORD": "Enter password again",
+  "IMAGE_PROFILE": "Image profile",
+  "ENTER_IMAGE_PROFILE": "http://www.imageurl.com"
 }

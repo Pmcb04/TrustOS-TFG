@@ -62,10 +62,13 @@ function RegisterScreen(props) {
             }}>
             <Box padding={16}>
               <Stack space={16}>
-                <TextField name="login" label="Username" placeholder="Enter username" fullWidth />
-                <EmailField name="email" label="Email" placeholder="Enter email" fullWidth />
-                <PasswordField name="password" label="Password" placeholder="Enter password" fullWidth />
-                <PasswordField name="confirmPassword" label="Confirm Password" placeholder="Enter password" fullWidth />
+                <TextField name="login" label={t('USERNAME')} placeholder={t('ENTER_USERNAME')} fullWidth />
+                <TextField name="firstName" label={t('FIRST_NAME')} placeholder={t('ENTER_FIRST_NAME')} fullWidth />
+                <TextField name="lastName" label={t('LAST_NAME')} placeholder={t('ENTER_LAST_NAME')} fullWidth />
+                <EmailField name="email" label={t('EMAIL')} placeholder={t('ENTER_EMAIL')} fullWidth />
+                <PasswordField name="password" label={t('PASSWORD')} placeholder={t('ENTER_PASSWORD')} fullWidth />
+                <PasswordField name="confirmPassword" label={t('CONFIRM_PASSWORD')} placeholder={t('ENTER_CONFIRM_PASSWORD')} fullWidth />
+                <TextField name="imageUrl" label={t('IMAGE_PROFILE')} placeholder={t('ENTER_IMAGE_PROFILE')} fullWidth optional />
                 <ButtonLayout>
                   <ButtonPrimary fullWidth submit>
                     Send
