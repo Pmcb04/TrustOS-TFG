@@ -6,11 +6,14 @@ import AppConfig from '../../config/app-config'
 /* ------------- Types ------------- */
 
 import { StartupTypes } from '../reducers/startup.reducer'
-import { AuthInfoTypes } from '../reducers/auth-info.reducer'
 import { LoginTypes } from '../../modules/login/login.reducer'
 import { AccountTypes } from '../../shared/reducers/account.reducer'
+import { RegisterTypes } from '../../modules/account/register/register.reducer'
+import { ForgotPasswordTypes } from '../../modules/account/password-reset/forgot-password.reducer'
+import { ChangePasswordTypes } from '../../modules/account/password/change-password.reducer'
 import { UserTypes } from '../../shared/reducers/user.reducer'
 // jhipster-react-native-saga-redux-import-needle
+
 import { AssetListTypes } from '../../modules/my-assets/my-assets-screen.reducer'
 import { AssetDetailsTypes } from '../../modules/asset-details/asset-details-screen.reducer'
 import { AssetTraceabilityTypes } from '../../modules/asset-traceability/asset-traceability-screen.reducer'
@@ -18,11 +21,14 @@ import { AssetTraceabilityTypes } from '../../modules/asset-traceability/asset-t
 /* ------------- Sagas ------------- */
 
 import { startup } from './startup.saga'
-import { getAuthInfo } from './auth-info.saga'
 import { login, logout, loginLoad } from '../../modules/login/login.sagas'
+import { register } from '../../modules/account/register/register.sagas'
+import { forgotPassword } from '../../modules/account/password-reset/forgot-password.sagas'
+import { changePassword } from '../../modules/account/password/change-password.sagas'
 import { getAccount, updateAccount } from '../../shared/sagas/account.sagas'
 import UserSagas from '../../shared/sagas/user.sagas'
 // jhipster-react-native-saga-method-import-needle
+
 import {
   getAssets,
   loadAssetsAgain,
@@ -33,7 +39,6 @@ import {
 } from '../../modules/my-assets/my-assets-screen.sagas'
 import { getAsset, updateAsset } from '../../modules/asset-details/asset-details-screen.sagas'
 import { getAssetTraceability, getAssetRangeTraceability } from '../../modules/asset-traceability/asset-traceability-screen.sagas'
-
 /* ------------- API ------------- */
 
 // The API we use is only used from Sagas, so we create it here and pass along
@@ -46,7 +51,6 @@ export default function* root() {
   yield all([
     // some sagas only receive an action
     takeLatest(StartupTypes.STARTUP, startup),
-    takeLatest(AuthInfoTypes.AUTH_INFO_REQUEST, getAuthInfo, api),
 
     // JHipster accounts
     takeLatest(LoginTypes.LOGIN_LOAD, loginLoad, api),
@@ -54,6 +58,12 @@ export default function* root() {
     takeLatest(LoginTypes.LOGOUT_REQUEST, logout, api),
     // jhipster-react-native-saga-redux-connect-needle
 
+    takeLatest(RegisterTypes.REGISTER_REQUEST, register, api),
+    takeLatest(ForgotPasswordTypes.FORGOT_PASSWORD_REQUEST, forgotPassword, api),
+    takeLatest(ChangePasswordTypes.CHANGE_PASSWORD_REQUEST, changePassword, api),
+    takeLatest(UserTypes.USER_REQUEST, UserSagas.getUser, api),
+    takeLatest(UserTypes.USER_UPDATE_REQUEST, UserSagas.updateUser, api),
+    takeLatest(UserTypes.USER_DELETE_REQUEST, UserSagas.deleteUser, api),
     takeLatest(UserTypes.USER_ALL_REQUEST, UserSagas.getAllUsers, api),
 
     takeLatest(AccountTypes.ACCOUNT_REQUEST, getAccount, api),

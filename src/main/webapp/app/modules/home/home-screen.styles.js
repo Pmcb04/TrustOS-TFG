@@ -1,6 +1,6 @@
-import { StyleSheet } from 'react-native'
+import { StyleSheet } from 'react-native';
 
-import { Metrics, ApplicationStyles, Colors } from '../../shared/themes'
+import { Metrics, ApplicationStyles, Colors } from '../../shared/themes';
 
 export default StyleSheet.create({
   ...ApplicationStyles.screen,
@@ -82,4 +82,4 @@ export default StyleSheet.create({
     color: Colors.white,
     fontWeight: '600',
   },
-})
+});

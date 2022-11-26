@@ -9,7 +9,7 @@ jib {
         }
     }
     to {
-        image = "back:latest"
+        image = "trustostfg:latest"
     }
     container {
         entrypoint = ["bash", "-c", "/entrypoint.sh"]

@@ -2,15 +2,12 @@ import * as React from 'react'
 import { Provider } from 'react-redux'
 import createStore from './app/shared/reducers'
 import * as SplashScreen from 'expo-splash-screen'
-
 import { ThemeContextProvider, getTelefonicaSkin } from '@telefonica/mistica'
 
 import NavContainer from './app/navigation/nav-container'
 import './app/config/i18-config'
 
 const store = createStore()
-
-console.log(store.getState().appState.theme)
 
 const misticaTheme = {
   skin: getTelefonicaSkin(),

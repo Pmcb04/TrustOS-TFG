@@ -47,5 +47,22 @@
   "DELETE": "Borrar",
   "DATE_INIT": "Fecha inicial",
   "DATE_END": "Fecha final",
-  "TRANSACTION_NUMBER": "Transición número {{number}} "
+  "TRANSACTION_NUMBER": "Transición número {{number}} ",
+  "REGISTER": "Registrar",
+  "PASSWORD_RESET": "Resetear contraseña",
+  "PASSWORD_CHANGE": "CCambiar contraseña",
+  "USERNAME": "Username",
+  "ENTER_USERNAME": "Introduce username",
+  "FIRST_NAME": "Primer nombre",
+  "ENTER_FIRST_NAME": "Introduce primer nombre",
+  "LAST_NAME": "Apellidos",
+  "ENTER_LAST_NAME": "Introduce apellidos",
+  "EMAIL": "Email",
+  "ENTER_EMAIL": "Introduce email",
+  "PASSWORD": "Contraseña",
+  "ENTER_PASSWORD": "Introduce contraseña",
+  "CONFIRM_PASSWORD": "Confirmar contraseña",
+  "ENTER_CONFIRM_PASSWORD": "Introduce contraseña otra vez",
+  "IMAGE_PROFILE": "Imagen del perfil",
+  "ENTER_IMAGE_PROFILE": "http://www.imagenurl.com"
 }

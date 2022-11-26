@@ -13,11 +13,9 @@ import { drawerScreens } from './drawer/drawer-screens'
 // import screens
 
 import AccountActions from '../shared/reducers/account.reducer'
-import { getEntityRoutes } from './entity-stack'
 import DrawerContent from './drawer/drawer-content'
 import { isReadyRef, navigationRef } from './nav-ref'
 import NotFound from './not-found-screen'
-import OAuthRedirectScreen from './oauth-redirect-screen'
 import { ModalScreen } from './modal-screen'
 import { DrawerButton } from './drawer/drawer-button'
 
@@ -44,18 +42,11 @@ const linking = {
       Home: {
         screens: {
           ...getDrawerRoutes(),
-          EntityStack: {
-            path: 'entities',
-            screens: {
-              ...getEntityRoutes(),
-            },
-          },
         },
       },
       AssetDetails: 'asset',
       AssetTraceability: 'asset/traceability',
       ModalScreen: 'alert',
-      OAuthRedirect: 'start',
       NotFound: '*',
     },
   },
@@ -64,14 +55,13 @@ const linking = {
 const Stack = createStackNavigator()
 const Drawer = createDrawerNavigator()
 
-const getScreens = (props) => {
-  const isAuthed = props.account !== null
+const getScreens = (isAuthed) => {
   return drawerScreens.map((category, index) => {
     return category.settings.map((setting) => {
       if (setting.auth === null || setting.auth === undefined) {
-        return <Drawer.Screen name={setting.title} component={setting.component} options={setting.options} key={setting.title} />
+        return <Drawer.Screen name={setting.title} component={setting.component} options={setting.options} key={index} />
       } else if (setting.auth === isAuthed) {
-        return <Drawer.Screen name={setting.title} component={setting.component} options={setting.options} key={setting.title} />
+        return <Drawer.Screen name={setting.title} component={setting.component} options={setting.options} key={index} />
       }
     })
   })
@@ -82,6 +72,7 @@ function NavContainer(props) {
   const dimensions = useWindowDimensions()
   const moreDimension = dimensions.width >= 768
   const lastAppState = 'active'
+  const isAuthed = props.account !== null
 
   React.useEffect(() => {
     return () => {
@@ -96,13 +87,15 @@ function NavContainer(props) {
   }, [loaded])
 
   React.useEffect(() => {
-    const handleChange = (nextAppState) => {
+    const subscription = AppState.addEventListener('change', (nextAppState) => {
       if (lastAppState.match(/inactive|background/) && nextAppState === 'active') {
         getAccount()
       }
+    })
+
+    return () => {
+      subscription.remove()
     }
-    AppState.addEventListener('change', handleChange)
-    return () => AppState.removeEventListener('change', handleChange)
   }, [getAccount])
 
   useReduxDevToolsExtension(navigationRef)
@@ -129,7 +122,7 @@ function NavContainer(props) {
               initialRouteName={drawerScreens[0].title}
               drawerType={moreDimension ? 'permanent' : 'slide'}
               screenOptions={{ headerShown: !moreDimension, headerLeft: DrawerButton }}>
-              {getScreens(props)}
+              {getScreens(isAuthed)}
             </Drawer.Navigator>
           )}
         </Stack.Screen>
@@ -157,7 +150,6 @@ function NavContainer(props) {
             }),
           }}
         />
-        <Stack.Screen name="OAuthRedirect" component={OAuthRedirectScreen} options={{ title: 'Redirecting...' }} />
         <Stack.Screen name="NotFound" component={NotFound} options={{ title: 'Oops!' }} />
         <Stack.Screen name="AssetDetails" component={AssetDetailsScreen} />
         <Stack.Screen name="AssetTraceability" component={AssetTraceabilityScreen} />

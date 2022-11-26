@@ -25,13 +25,10 @@ export function* getAssetRangeTraceability(api) {
   const timestampInit = yield select(selectTimestampInit)
   const timestampEnd = yield select(selectTimestampEnd)
 
-  // FIXME ver como podemos pasar el body, ahora esta pasando {}
   const body = {
     init: timestampInit,
     end: timestampEnd,
   }
-
-  console.log('BODY_> ', body)
 
   const response = yield call(api.getAssetRangeTraceability, isAuthorised, assetId, body)
   // success?

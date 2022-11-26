@@ -1,20 +1,20 @@
-import React from 'react'
-import { ScrollView, Text, Image, View, Platform } from 'react-native'
-import { Ionicons } from '@expo/vector-icons'
-import { connect } from 'react-redux'
+import React from 'react';
+import { ScrollView, Text, Image, View, Platform } from 'react-native';
+import { Ionicons } from '@expo/vector-icons';
+import { connect } from 'react-redux';
 
-import LearnMoreLinks from './learn-more-links.component.js'
-import { Images } from '../../shared/themes'
-import styles from './home-screen.styles'
+import LearnMoreLinks from './learn-more-links.component.js';
+import { Images } from '../../shared/themes';
+import styles from './home-screen.styles';
 
 function HomeScreen(props) {
-  const { account } = props
+  const { account } = props;
   return (
     <View style={[styles.container, styles.mainContainer]} testID="homeScreen">
       <ScrollView contentInsetAdjustmentBehavior="automatic" style={styles.scrollView}>
         <View style={styles.centered}>
           <Image source={Images.logoJhipster} style={styles.logo} />
-          <Text style={styles.welcomeText}>RnApp</Text>
+          <Text style={styles.welcomeText}>TrustOSTFGReactNative</Text>
           <Text style={styles.welcomeText}>Welcome to your JHipster React Native app.</Text>
         </View>
         {account && account.login ? (
@@ -61,9 +61,9 @@ function HomeScreen(props) {
         </View>
       </ScrollView>
     </View>
-  )
+  );
 }
 
-const mapStateToProps = (state) => ({ account: state.account.account })
-const mapDispatchToProps = (dispatch) => ({})
-export default connect(mapStateToProps, mapDispatchToProps)(HomeScreen)
+const mapStateToProps = (state) => ({ account: state.account.account });
+const mapDispatchToProps = (dispatch) => ({});
+export default connect(mapStateToProps, mapDispatchToProps)(HomeScreen);

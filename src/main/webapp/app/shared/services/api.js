@@ -38,9 +38,7 @@ const create = (baseURL = AppConfig.apiUrl) => {
   //
   const setAuthToken = (userAuth) => api.setHeader('Authorization', 'Bearer ' + userAuth)
   const removeAuthToken = () => api.deleteHeader('Authorization')
-  // use an empty Authorization header in the auth-info request to prevent an invalid token from returning 401
-  const getOauthInfo = () => api.get('api/auth-info', {}, { headers: { Authorization: undefined } })
-  const getOauthIssuerInfo = (issuerUrl) => api.get(`${issuerUrl}/.well-known/openid-configuration`)
+  const login = (userAuth) => api.post('api/authenticate', userAuth)
   const register = (user) => api.post('api/register', user)
   const forgotPassword = (data) =>
     api.post('api/account/reset-password/init', data, {
@@ -98,8 +96,7 @@ const create = (baseURL = AppConfig.apiUrl) => {
     // jhipster-react-native-api-export-needle
     setAuthToken,
     removeAuthToken,
-    getOauthInfo,
-    getOauthIssuerInfo,
+    login,
     register,
     forgotPassword,
     getAccount,

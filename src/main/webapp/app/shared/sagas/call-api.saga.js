@@ -1,6 +1,6 @@
 import { put, take } from 'redux-saga/effects'
 
-import LoginActions from '../../modules/login/login.reducer'
+import { navigate } from '../../navigation/nav-ref'
 
 // this saga is used for showing the LoginScreen when a 401 error is received
 // if login is successful, it will reattempt the request
@@ -13,7 +13,7 @@ export function* callApi(apiCall) {
   // this triggers your UI to show a login form
   yield put({ type: 'RELOGIN' })
 
-  LoginActions.loginRequest()
+  navigate('LoginScreen')
   const action = yield take(['RELOGIN_OK', 'RELOGIN_ABORT'])
 
   if (action.type === 'RELOGIN_ABORT') {

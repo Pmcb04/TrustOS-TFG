@@ -7,7 +7,7 @@ import com.mycompany.myapp.domain.User;
  */
 public class UserDTO {
 
-    private String id;
+    private Long id;
 
     private String login;
 
@@ -21,30 +21,18 @@ public class UserDTO {
         this.login = user.getLogin();
     }
 
-    /**
-     * @return the id
-     */
-    public String getId() {
+    public Long getId() {
         return id;
     }
 
-    /**
-     * @param id the id to set
-     */
-    public void setId(String id) {
+    public void setId(Long id) {
         this.id = id;
     }
 
-    /**
-     * @return the login
-     */
     public String getLogin() {
         return login;
     }
 
-    /**
-     * @param login the login to set
-     */
     public void setLogin(String login) {
         this.login = login;
     }

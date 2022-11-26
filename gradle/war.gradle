@@ -1,7 +1,7 @@
 apply plugin: "war"
 
 bootWar {
-    mainClass = "com.mycompany.myapp.BackApp"
+    mainClass = "com.mycompany.myapp.TrustOstfgApp"
     includes = ["WEB-INF/**", "META-INF/**"]
 }
 
