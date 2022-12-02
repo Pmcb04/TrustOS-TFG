@@ -4,8 +4,8 @@ import { connect } from 'react-redux'
 import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view'
 import { useTranslation } from 'react-i18next'
 
-import RegisterActions from '../register/register.reducer'
-import { useDidUpdateEffect } from '../../../shared/util/use-did-update-effect'
+import RegisterActions from './register.reducer'
+import { useDidUpdateEffect } from '../../shared/util/use-did-update-effect'
 import styles from './register-screen.styles'
 
 import {

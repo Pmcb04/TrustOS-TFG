@@ -4,10 +4,10 @@ import i18n from '../../config/i18-config'
 import HomeScreen from '../../modules/home/home-screen'
 import StorybookScreen from '../../../storybook'
 
-import ConfigurationScreen from '../../modules/configuration/configuration-screen'
+import ConfigurationScreen from '../../modules/account/configuration/configuration-screen'
 import AccountScreen from '../../modules/account/account-screen'
 import MyAssetsScreen from '../../modules/my-assets/my-assets-screen'
-import RegisterScreen from '../../modules/account/register/register-screen'
+import RegisterScreen from '../../modules/register/register-screen'
 import LoginScreen from '../../modules/login/login-screen'
 
 import { IconUserAccountRegular, IconHomeRegular, IconBoxRegular, IconSettingsRegular, IconAlertRegular } from '@telefonica/mistica'

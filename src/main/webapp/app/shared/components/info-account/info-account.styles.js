@@ -8,7 +8,14 @@ export default StyleSheet.create({
     textAlign: 'center',
     fontFamily: Fonts.type.base,
   },
+  containerHorizontal: {
+    flexDirection: 'row',
+    textAlign: 'start',
+  },
   userData: {
     padding: 10,
+  },
+  userDataHorizontal: {
+    padding: 30,
   },
 })
