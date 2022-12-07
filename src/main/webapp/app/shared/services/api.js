@@ -62,17 +62,17 @@ const create = (baseURL = AppConfig.apiUrl) => {
   // jhipster-react-native-api-method-needle
 
   // trustOS api methods
-  const loginTrustOS = (account) => api.post('/trustos/login', account)
-  const setTrustOSToken = (trustOSAuth) => api.setHeader('Authorization', 'Bearer ' + trustOSAuth)
-  const removeTrustOSToken = () => api.deleteHeader('Authorization')
-  const getAssets = (isAuthorised) => api.get('/trustos/assets', {}, { params: { isAuthorised: isAuthorised } })
-  const getAsset = (isAuthorised, assetId) => api.get('/trustos/assets/' + assetId, {}, { params: { isAuthorised: isAuthorised } })
+  const loginTrustOS = (account) => api.post('api/trustos/login', account)
+  const setTrustOSToken = (trustOSAuth) => api.setHeader('Api-Authorization', 'Bearer ' + trustOSAuth)
+  const removeTrustOSToken = () => api.deleteHeader('Api-Authorization')
+  const getAssets = (isAuthorised) => api.get('api/trustos/assets', {}, { params: { isAuthorised: isAuthorised } })
+  const getAsset = (isAuthorised, assetId) => api.get('api/trustos/assets/' + assetId, {}, { params: { isAuthorised: isAuthorised } })
   const updateAsset = (isAuthorised, assetId, newMetadata) =>
-    api.post('/trustos/assets/' + assetId + '/update', newMetadata, { params: { isAuthorised: isAuthorised } })
+    api.post('api/trustos/assets/' + assetId + '/update', newMetadata, { params: { isAuthorised: isAuthorised } })
   const getAssetTraceability = (isAuthorised, assetId) =>
-    api.get('/trustos/assets/' + assetId + '/transactions', {}, { params: { isAuthorised: isAuthorised } })
+    api.get('api/trustos/assets/' + assetId + '/transactions', {}, { params: { isAuthorised: isAuthorised } })
   const getAssetRangeTraceability = (isAuthorised, assetId, body) =>
-    api.post('/trustos/assets/' + assetId + '/transactions/range', body, { params: { isAuthorised: isAuthorised } })
+    api.post('api/trustos/assets/' + assetId + '/transactions/range', body, { params: { isAuthorised: isAuthorised } })
 
   // ------
   // STEP 3

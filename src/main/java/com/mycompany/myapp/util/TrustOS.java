@@ -1,10 +1,11 @@
 package com.mycompany.myapp.util;
 
+import com.google.gson.JsonObject;
+import com.google.gson.JsonParser;
 import java.net.InetSocketAddress;
 import java.net.Proxy;
 import java.net.Proxy.Type;
 import java.util.Collections;
-
 import org.springframework.http.HttpEntity;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpMethod;
@@ -14,14 +15,11 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.http.client.SimpleClientHttpRequestFactory;
 import org.springframework.web.client.RestTemplate;
 
-import com.google.gson.JsonObject;
-import com.google.gson.JsonParser;
-
 public class TrustOS {
 
     private static final String PROXY_HOST_URI = "localhost";
     private static final int PROXY_PORT = 5657;
-    private static final String BASE_URL = "https://pro.virtualtrust.io";
+    private static final String BASE_URL = "https://lab.trustos.telefonicatech.com";
 
     public JsonObject get(String url, String token) {
         Proxy proxy = new Proxy(Type.HTTP, new InetSocketAddress(PROXY_HOST_URI, PROXY_PORT));

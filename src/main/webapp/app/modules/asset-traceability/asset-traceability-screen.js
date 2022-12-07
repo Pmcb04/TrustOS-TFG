@@ -63,7 +63,7 @@ function AssetTraceabilityScreen(props) {
           </View>
         </View>
       )}
-      {!error && !fetching && (
+      {!error && !fetching && traceability && (
         <View style={[styles.container, styles.mainContainer, { backgroundColor: colors.background }]}>
           <View style={styles.listView}>
             <View style={styles.date}>

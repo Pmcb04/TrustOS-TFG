@@ -65,6 +65,9 @@ public class User extends AbstractAuditingEntity implements Serializable {
     @Column(name = "lang_key", length = 10)
     private String langKey;
 
+    @Column(nullable = false)
+    private String theme = "light";
+
     @Size(max = 256)
     @Column(name = "image_url", length = 256)
     private String imageUrl;
@@ -190,6 +193,14 @@ public class User extends AbstractAuditingEntity implements Serializable {
         this.langKey = langKey;
     }
 
+    public void setTheme(String theme) {
+        this.theme = theme;
+    }
+
+    public String getTheme() {
+        return theme;
+    }
+
     public Set<Authority> getAuthorities() {
         return authorities;
     }
@@ -227,6 +238,7 @@ public class User extends AbstractAuditingEntity implements Serializable {
             ", activated='" + activated + '\'' +
             ", langKey='" + langKey + '\'' +
             ", activationKey='" + activationKey + '\'' +
+            ", theme='" + theme + '\'' +
             "}";
     }
 }

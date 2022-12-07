@@ -11,7 +11,7 @@ const store = createStore()
 
 const misticaTheme = {
   skin: getTelefonicaSkin(),
-  colorScheme: store.getState().appState.theme,
+  colorScheme: 'auto',
   i18n: { locale: 'es-ES', phoneNumberFormattingRegionCode: 'ES' },
 }
 

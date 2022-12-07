@@ -24,12 +24,14 @@ import org.springframework.web.bind.annotation.RestController;
  * REST controller for managing assets.
  */
 @RestController
-@RequestMapping("/trustos")
+@RequestMapping("api/trustos")
 public class AssetResource {
 
     private final Logger log = LoggerFactory.getLogger(AssetResource.class);
 
     private final AssetService assetService;
+
+    private final String TOKEN_API_HEADER = "Api-Authorization";
 
     /**
      * @param assetService
@@ -55,7 +57,7 @@ public class AssetResource {
      * @param token token authorization to track module
      */
     @PostMapping("/assets")
-    public ResponseEntity<Asset> createAsset(@RequestBody AssetDTO assetDTO, @RequestHeader(HttpHeaders.AUTHORIZATION) String token) {
+    public ResponseEntity<Asset> createAsset(@RequestBody AssetDTO assetDTO, @RequestHeader(value = TOKEN_API_HEADER) String token) {
         return ResponseEntity.ok(assetService.createAsset(assetDTO, token));
     }
 
@@ -66,7 +68,7 @@ public class AssetResource {
      * @param token token authorization to track module
      */
     @GetMapping("/assets")
-    public ResponseEntity<String[]> getAssets(@RequestParam boolean isAuthorised, @RequestHeader(HttpHeaders.AUTHORIZATION) String token) {
+    public ResponseEntity<String[]> getAssets(@RequestParam boolean isAuthorised, @RequestHeader(value = TOKEN_API_HEADER) String token) {
         return ResponseEntity.ok(assetService.getAssets(isAuthorised, token));
     }
 
@@ -81,7 +83,7 @@ public class AssetResource {
     public ResponseEntity<Asset> getAsset(
         @PathVariable String assetId,
         @RequestParam Boolean isAuthorised,
-        @RequestHeader(HttpHeaders.AUTHORIZATION) String token
+        @RequestHeader(value = TOKEN_API_HEADER) String token
     ) {
         return ResponseEntity.ok(assetService.getAsset(assetId, isAuthorised, token));
     }
@@ -99,7 +101,7 @@ public class AssetResource {
         @PathVariable String assetId,
         @RequestParam Boolean isAuthorised,
         @RequestBody Map<String, Object> metadata,
-        @RequestHeader(HttpHeaders.AUTHORIZATION) String token
+        @RequestHeader(value = TOKEN_API_HEADER) String token
     ) {
         return ResponseEntity.ok(assetService.updateAsset(assetId, metadata, isAuthorised, token));
     }
@@ -115,7 +117,7 @@ public class AssetResource {
     public ResponseEntity<Transaction> getTransactionAsset(
         @PathVariable String assetId,
         @RequestParam Boolean isAuthorised,
-        @RequestHeader(HttpHeaders.AUTHORIZATION) String token
+        @RequestHeader(value = TOKEN_API_HEADER) String token
     ) {
         return ResponseEntity.ok(assetService.getAssetTransaction(assetId, isAuthorised, token));
     }
@@ -132,7 +134,7 @@ public class AssetResource {
         @PathVariable String assetId,
         @RequestParam Boolean isAuthorised,
         @RequestBody Map<String, Object> body,
-        @RequestHeader(HttpHeaders.AUTHORIZATION) String token
+        @RequestHeader(value = TOKEN_API_HEADER) String token
     ) {
         return ResponseEntity.ok(assetService.getAssetRangeTransaction(assetId, isAuthorised, body, token));
     }

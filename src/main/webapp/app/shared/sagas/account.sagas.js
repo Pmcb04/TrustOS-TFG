@@ -19,9 +19,7 @@ export function* getAccount(api) {
 
 // attempts to update account settings
 export function* updateAccount(api, action) {
-  console.log('action', action)
   const { account } = action
-  console.log('updateAccount', account)
   const apiCall = call(api.updateAccount, account)
   const response = yield call(callApi, apiCall)
 

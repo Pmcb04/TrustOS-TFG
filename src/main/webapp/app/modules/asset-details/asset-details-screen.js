@@ -36,8 +36,6 @@ function AssetDetailsScreen(props) {
   const { colors } = React.useContext(ThemeContext)
   const { t } = useTranslation() //i18n instance
 
-  // BUG cuando se recarga la página nos lanza un 401, esto es por que perdemos el token de la api al actualizar.
-
   useEffect(() => {
     getAsset(isAuthorised, assetId)
   }, [getAsset, isAuthorised, assetId])
@@ -77,7 +75,7 @@ function AssetDetailsScreen(props) {
           </View>
         </View>
       )}
-      {!error && !fetching && (
+      {!error && !fetching && asset && (
         <View style={[styles.container, { backgroundColor: colors.background }]}>
           {successUpdate && (
             <Callout

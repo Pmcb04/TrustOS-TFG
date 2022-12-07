@@ -8,7 +8,7 @@ import { createStackNavigator } from '@react-navigation/stack'
 import { useReduxDevToolsExtension } from '@react-navigation/devtools'
 import { connect } from 'react-redux'
 
-import { drawerScreens } from './drawer/drawer-screens'
+// import { drawerScreens } from './drawer/drawer-screens'
 
 // import screens
 
@@ -21,6 +21,8 @@ import { DrawerButton } from './drawer/drawer-button'
 
 import AssetDetailsScreen from '../modules/asset-details/asset-details-screen'
 import AssetTraceabilityScreen from '../modules/asset-traceability/asset-traceability-screen'
+
+import { drawerScreens } from './drawer/drawer-screens'
 
 export const getDrawerRoutes = () => {
   const routes = {}
