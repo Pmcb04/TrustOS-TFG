@@ -15,13 +15,13 @@ function DrawerContent(props) {
 
   return !loaded ? null : (
     <DrawerContentScrollView {...props} testID="drawerContentScrollView">
-      <InfoAccount />
-      <DrawerItemList {...props} />{' '}
+      <InfoAccount small />
+      <DrawerItemList {...props} />
       {
         // TODO ver como se puede personalizar DrawerItem o en caso contrario ver como se puede pasar a ListOptions la informacion necesaria como el titulo de la sección y el icono de este
       }
       {/* <ListOptions navigation={navigation} /> */}
-      {account && <DrawerItem label="Logout" onPress={logoutAndCloseDrawer} />}
+      {/* {account && <DrawerItem label="Logout" onPress={logoutAndCloseDrawer} />} */}
     </DrawerContentScrollView>
   )
 }

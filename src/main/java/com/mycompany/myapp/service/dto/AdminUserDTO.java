@@ -38,6 +38,8 @@ public class AdminUserDTO {
     @Size(min = 2, max = 10)
     private String langKey;
 
+    private String theme; 
+
     private String createdBy;
 
     private Instant createdDate;
@@ -61,6 +63,7 @@ public class AdminUserDTO {
         this.activated = user.isActivated();
         this.imageUrl = user.getImageUrl();
         this.langKey = user.getLangKey();
+        this.theme = user.getTheme();
         this.createdBy = user.getCreatedBy();
         this.createdDate = user.getCreatedDate();
         this.lastModifiedBy = user.getLastModifiedBy();
@@ -132,6 +135,14 @@ public class AdminUserDTO {
         this.langKey = langKey;
     }
 
+    public String getTheme(){
+        return theme;
+    }
+
+    public void setTheme(String theme){
+        this.theme = theme;
+    }
+
     public String getCreatedBy() {
         return createdBy;
     }
@@ -183,6 +194,7 @@ public class AdminUserDTO {
             ", imageUrl='" + imageUrl + '\'' +
             ", activated=" + activated +
             ", langKey='" + langKey + '\'' +
+            ", theme='" + theme + '\'' +
             ", createdBy=" + createdBy +
             ", createdDate=" + createdDate +
             ", lastModifiedBy='" + lastModifiedBy + '\'' +

@@ -1,4 +1,4 @@
-import Actions, { reducer, INITIAL_STATE } from '../../../../../app/modules/account/register/register.reducer'
+import Actions, { reducer, INITIAL_STATE } from '../../../../../app/modules/register/register.reducer'
 
 test('request', () => {
   const state = reducer(INITIAL_STATE, Actions.registerRequest())

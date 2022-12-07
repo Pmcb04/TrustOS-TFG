@@ -12,7 +12,7 @@ export const reducers = combineReducers({
   // jhipster-react-native-redux-store-import-needle
   account: require('./account.reducer').reducer,
   login: require('../../modules/login/login.reducer').reducer,
-  register: require('../../modules/account/register/register.reducer').reducer,
+  register: require('../../modules/register/register.reducer').reducer,
   changePassword: require('../../modules/account/password/change-password.reducer').reducer,
   forgotPassword: require('../../modules/account/password-reset/forgot-password.reducer').reducer,
 

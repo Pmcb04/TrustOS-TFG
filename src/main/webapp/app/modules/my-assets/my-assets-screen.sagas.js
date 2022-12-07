@@ -11,19 +11,7 @@ export const selectAssetsLoaded = (state) => state.myAssets.assetsLoaded
 export const selectShowOwner = (state) => state.myAssets.showOwner
 export const selectShowAuthorizathed = (state) => state.myAssets.showAuthorizathed
 
-function* login(api) {
-  // FIXME eliminar cuando tengamos el login resuelto
-  const account = {
-    id: 'did:vtn:trustid:0106a4d4a997ac85895ed20cbdaafe6a58c5bd8d7311b446d11502bfe9942311',
-    password: 'KMv52hzgfQYW',
-  }
-  const token = yield call(api.loginTrustOS, account)
-  yield call(api.setTrustOSToken, token.data.message)
-}
-
 export function* getAssets(api) {
-  yield login(api) // TODO eliminar cuando tengamos el login
-
   const showOwner = yield select(selectShowOwner)
   const showAuthorizathed = yield select(selectShowAuthorizathed)
   const order = yield select(selectOrder)
