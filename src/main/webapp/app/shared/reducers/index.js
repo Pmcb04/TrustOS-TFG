@@ -19,6 +19,7 @@ export const reducers = combineReducers({
   assetDetails: require('../../modules/asset-details/asset-details-screen.reducer').reducer,
   myAssets: require('../../modules/my-assets/my-assets-screen.reducer').reducer,
   assetTraceability: require('../../modules/asset-traceability/asset-traceability-screen.reducer').reducer,
+  assetCreate: require('../../modules/asset-create/asset-create-screen.reducer').reducer,
 })
 
 export default () => {

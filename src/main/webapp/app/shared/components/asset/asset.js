@@ -1,38 +1,9 @@
 import React from 'react'
-import {
-  DataCard,
-  Tag,
-  IconFolderRegular,
-  IconFingerprintRegular,
-  IconShieldRegular,
-  IconBoxRegular,
-  Text4,
-  Text1,
-  Stack,
-  ThemeContext,
-  Inline,
-} from '@telefonica/mistica'
+import { DataCard, Tag, IconFingerprintRegular, IconShieldRegular, Text4, Text1, Stack, ThemeContext, Inline } from '@telefonica/mistica'
 import { useTranslation } from 'react-i18next'
+import { setImage } from '../../util/images-asset'
 
-const IMAGES = {
-  TRANSACTION: 'transaction',
-  PRODUCT: 'product',
-}
-const SIZE_ICONS = 50
 const SIZE_ICONS_DESCRIPTION = 20
-
-function setImage(image) {
-  switch (image) {
-    case IMAGES.TRANSACTION:
-      return <IconFolderRegular size={SIZE_ICONS} />
-
-    case IMAGES.PRODUCT:
-      return <IconBoxRegular size={SIZE_ICONS} />
-
-    default:
-      return <IconBoxRegular size={SIZE_ICONS} />
-  }
-}
 
 function Asset(props) {
   const { t } = useTranslation()
@@ -60,14 +31,15 @@ function Asset(props) {
               </Text1>
             )}
           </Inline>
+          {hash && (
+            <Inline space={8}>
+              <IconFingerprintRegular size={SIZE_ICONS_DESCRIPTION} />
 
-          <Inline space={8}>
-            <IconFingerprintRegular size={SIZE_ICONS_DESCRIPTION} />
-
-            <Text1 color={colors.textSecondary} regular truncate>
-              {hash}
-            </Text1>
-          </Inline>
+              <Text1 color={colors.textSecondary} regular truncate>
+                {hash}
+              </Text1>
+            </Inline>
+          )}
         </Stack>
       }
       icon={setImage(image)}

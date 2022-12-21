@@ -20,7 +20,7 @@ function Metadata(props) {
               {process(data, edit_fields)}
             </Stack>
           </FadeIn>
-          {edit_fields ? <ButtonPrimary submit>{t('UPDATE')}</ButtonPrimary> : null}
+          {edit_fields && <ButtonPrimary submit>{t('UPDATE')}</ButtonPrimary>}
         </Box>
       </ScrollView>
     </View>

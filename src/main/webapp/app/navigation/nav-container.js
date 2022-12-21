@@ -8,9 +8,7 @@ import { createStackNavigator } from '@react-navigation/stack'
 import { useReduxDevToolsExtension } from '@react-navigation/devtools'
 import { connect } from 'react-redux'
 
-// import { drawerScreens } from './drawer/drawer-screens'
-
-// import screens
+import { drawerScreens } from './drawer/drawer-screens'
 
 import AccountActions from '../shared/reducers/account.reducer'
 import DrawerContent from './drawer/drawer-content'
@@ -21,8 +19,7 @@ import { DrawerButton } from './drawer/drawer-button'
 
 import AssetDetailsScreen from '../modules/asset-details/asset-details-screen'
 import AssetTraceabilityScreen from '../modules/asset-traceability/asset-traceability-screen'
-
-import { drawerScreens } from './drawer/drawer-screens'
+import AssetCreateScreen from '../modules/asset-create/asset-create-screen'
 
 export const getDrawerRoutes = () => {
   const routes = {}
@@ -47,6 +44,7 @@ const linking = {
         },
       },
       AssetDetails: 'asset',
+      AssetCreate: 'asset/create',
       AssetTraceability: 'asset/traceability',
       ModalScreen: 'alert',
       NotFound: '*',
@@ -155,6 +153,7 @@ function NavContainer(props) {
         <Stack.Screen name="NotFound" component={NotFound} options={{ title: 'Oops!' }} />
         <Stack.Screen name="AssetDetails" component={AssetDetailsScreen} />
         <Stack.Screen name="AssetTraceability" component={AssetTraceabilityScreen} />
+        <Stack.Screen name="AssetCreate" component={AssetCreateScreen} />
       </Stack.Navigator>
     </NavigationContainer>
   )

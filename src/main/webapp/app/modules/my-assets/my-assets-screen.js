@@ -7,16 +7,32 @@ import AssetList from '../../shared/components/asset-list/asset-list'
 import MyAssetsActions from './my-assets-screen.reducer'
 import styles from './my-assets-screen.styles'
 import MenuFilter from '../../shared/components/menu-filter/menu-filter'
+
+import { ScrollView } from 'react-native-gesture-handler'
+import { IMAGES, setImage } from '../../shared/util/images-asset'
+
+// TODO sustituir por llamada a la api
+const ASSET_TYPES = [
+  { name: 'Ternero', image: IMAGES.PRODUCT },
+  { name: 'Pantalón', image: IMAGES.PRODUCT },
+  { name: 'Botella', image: IMAGES.PRODUCT },
+  { name: 'Motor', image: IMAGES.PRODUCT },
+  { name: 'Coche', image: IMAGES.PRODUCT },
+]
+
 import {
   SearchField,
-  ButtonPrimary,
   ButtonLink,
-  IconAddMoreRegular,
   ThemeContext,
   ButtonLayout,
   FixedFooterLayout,
+  ButtonPrimary,
+  confirm,
+  IconAddMoreRegular,
+  RadioGroup,
+  RowList,
+  Row,
 } from '@telefonica/mistica'
-
 const NUM_COLUMNS = 3
 
 function MyAssetsScreen(props) {
@@ -24,6 +40,8 @@ function MyAssetsScreen(props) {
   const { colors } = React.useContext(ThemeContext)
   const { navigation } = props
   const { next, previous, index, numAssets, offset, assetsLoaded, getAssets, search } = props
+
+  let typeCreateAssetSelected = ASSET_TYPES[0].name
 
   useEffect(() => {
     if (numAssets === 0) getAssets()
@@ -34,7 +52,27 @@ function MyAssetsScreen(props) {
       <View style={styles.header}>
         <SearchField onChangeValue={search} fullWidth name="search" label={t('SEARCH')} />
 
-        <ButtonPrimary onPress={() => {}}>
+        <ButtonPrimary
+          onPress={() =>
+            confirm({
+              message: (
+                <View style={styles.container}>
+                  <ScrollView>
+                    <RadioGroup onChange={(value) => (typeCreateAssetSelected = value)} defaultValue={typeCreateAssetSelected}>
+                      <RowList>
+                        {ASSET_TYPES.map((type, i) => (
+                          <Row key={i} asset={setImage(type.image)} title={type.name} radioValue={type.name} value={type.name} />
+                        ))}
+                      </RowList>
+                    </RadioGroup>
+                  </ScrollView>
+                </View>
+              ),
+              acceptText: t('CREATE'),
+              cancelText: t('CANCEL'),
+              onAccept: () => navigation.navigate('AssetCreate', { type: typeCreateAssetSelected }),
+            })
+          }>
           <IconAddMoreRegular color="currentColor" />
           {t('CREATE')}
         </ButtonPrimary>

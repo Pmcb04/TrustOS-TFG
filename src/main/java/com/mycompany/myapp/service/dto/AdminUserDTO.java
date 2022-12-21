@@ -15,6 +15,8 @@ public class AdminUserDTO {
 
     private Long id;
 
+    private String idTrustos;
+
     @NotBlank
     @Pattern(regexp = Constants.LOGIN_REGEX)
     @Size(min = 1, max = 50)
@@ -38,7 +40,7 @@ public class AdminUserDTO {
     @Size(min = 2, max = 10)
     private String langKey;
 
-    private String theme; 
+    private String theme;
 
     private String createdBy;
 
@@ -56,6 +58,7 @@ public class AdminUserDTO {
 
     public AdminUserDTO(User user) {
         this.id = user.getId();
+        this.idTrustos = user.getIdTrustos();
         this.login = user.getLogin();
         this.firstName = user.getFirstName();
         this.lastName = user.getLastName();
@@ -77,6 +80,14 @@ public class AdminUserDTO {
 
     public void setId(Long id) {
         this.id = id;
+    }
+
+    public String getIdTrustos() {
+        return idTrustos;
+    }
+
+    public void setIdTrustos(String idTrustos) {
+        this.idTrustos = idTrustos;
     }
 
     public String getLogin() {
@@ -135,11 +146,11 @@ public class AdminUserDTO {
         this.langKey = langKey;
     }
 
-    public String getTheme(){
+    public String getTheme() {
         return theme;
     }
 
-    public void setTheme(String theme){
+    public void setTheme(String theme) {
         this.theme = theme;
     }
 

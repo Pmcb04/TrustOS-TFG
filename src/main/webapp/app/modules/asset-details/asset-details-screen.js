@@ -16,6 +16,7 @@ import {
   IconIdCardRegular,
   IconEditPencilRegular,
   IconCloseRegular,
+  IconTeamRegular,
   Form,
   Stack,
   ThemeContext,
@@ -121,10 +122,13 @@ function AssetDetailsScreen(props) {
                         {t('EDIT')}
                       </ButtonPrimary>
                     )}
-
                     <ButtonSecondary disabled={edit_fields} onPress={() => {}}>
                       <IconIdCardRegular color="currentColor" />
                       {t('TRANFER')}
+                    </ButtonSecondary>
+                    <ButtonSecondary disabled={edit_fields} onPress={() => {}}>
+                      <IconTeamRegular color="currentColor" />
+                      {t('AUTHORISE')}
                     </ButtonSecondary>
                     <ButtonSecondary
                       disabled={edit_fields}
