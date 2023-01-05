@@ -10,6 +10,7 @@ export const selectOrder = (state) => state.myAssets.order
 export const selectAssetsLoaded = (state) => state.myAssets.assetsLoaded
 export const selectShowOwner = (state) => state.myAssets.showOwner
 export const selectShowAuthorizathed = (state) => state.myAssets.showAuthorizathed
+export const selectAuthorities = (state) => state.account.account.authorities
 
 export function* getAssets(api) {
   const showOwner = yield select(selectShowOwner)
@@ -44,6 +45,16 @@ export function* getAssets(api) {
     yield put(MyAssetsActions.myAssetsFailure(assetsOwner))
   } else if (!assetsAuthorised) {
     yield put(MyAssetsActions.myAssetsFailure(assetsAuthorised))
+  }
+}
+
+export function* getAssetCreate(api) {
+  const authorities = yield select(selectAuthorities)
+  const products = yield call(api.getAssetsCreate, authorities[0])
+  if (products.ok) {
+    yield put(MyAssetsActions.myAssetsCreateSuccess(products.data))
+  } else {
+    yield put(MyAssetsActions.myAssetsFailure(products.data))
   }
 }
 

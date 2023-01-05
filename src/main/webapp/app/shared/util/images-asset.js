@@ -6,6 +6,7 @@ export const IMAGES = {
 }
 const SIZE_ICONS = 50
 
+// TODO revisar si se necesita autogenerar tambien
 export function setImage(image) {
   switch (image) {
     case IMAGES.TRANSACTION:

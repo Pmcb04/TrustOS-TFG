@@ -18,10 +18,15 @@ function Row(props) {
       </View>
       <View key={field + 'change'} style={[styles.rowData, { borderColor: colors.border }]}>
         <Inline key={field} space={8}>
-          <Text3 key={before} color={colors.error} decoration="line-through">
-            {before}
-          </Text3>
-          <IconArrowLineRightLight key={'arrow'} size={16} />
+          {before && (
+            <>
+              <Text3 key={before} color={colors.error} decoration="line-through">
+                {before}
+              </Text3>
+              <IconArrowLineRightLight key={'arrow'} size={16} />
+            </>
+          )}
+
           <Text3 key={after} color={colors.successHigh}>
             {after}
           </Text3>
@@ -32,10 +37,23 @@ function Row(props) {
 }
 
 function process(dataBefore, dataAfter) {
+  if (!Object.keys(dataBefore).length) {
+    // dataBefore empty
+    return Object.keys(dataAfter).map((key) => {
+      if (typeof dataAfter[key] === 'object' && !Array.isArray(dataAfter[key])) {
+        return process(dataAfter[key], dataAfter)
+      } else {
+        return <Row key={key} field={key} after={dataAfter[key].toString()} />
+      }
+    })
+  }
+
+  // dataBefore not empty
   return Object.keys(dataBefore).map((key) => {
-    if (typeof dataBefore[key] === 'object' && !Array.isArray(dataBefore[key])) {
+    if (dataBefore[key] != null && typeof dataBefore[key] === 'object' && !Array.isArray(dataBefore[key])) {
       return process(dataBefore[key], dataAfter)
     } else {
+      console.log('KEY _> ', key, 'condition _> ', dataBefore[key].toString() !== dataAfter[key].toString())
       return (
         dataBefore[key].toString() !== dataAfter[key].toString() && (
           <Row key={key} field={key} before={dataBefore[key].toString()} after={dataAfter[key].toString()} />
@@ -47,21 +65,20 @@ function process(dataBefore, dataAfter) {
 
 function TableUpdate(props) {
   const { colors } = React.useContext(ThemeContext)
-  const { asset } = props
-  const { data } = props
+  const { dataBefore, dataAfter } = props
   const { t } = useTranslation() //i18n instance
 
   return (
     <View style={[styles.container, styles.mainContainer]}>
       <View style={styles.row}>
         <View style={[styles.rowData, { borderColor: colors.border }]}>
-          <Text3>{t('VALUE')}</Text3>
+          <Text3>{t('ATTRIBUTE')}</Text3>
         </View>
         <View style={[styles.rowData, { borderColor: colors.border }]}>
-          <Text3>{t('CHANGE')}</Text3>
+          <Text3>{t('VALUE')}</Text3>
         </View>
       </View>
-      {process(asset.metadata, data)}
+      {process(dataBefore, dataAfter)}
     </View>
   )
 }

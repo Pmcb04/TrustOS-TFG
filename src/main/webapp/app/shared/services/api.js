@@ -61,11 +61,12 @@ const create = (baseURL = AppConfig.apiUrl) => {
   const deleteUser = (userId) => api.delete('api/users/' + userId)
   // jhipster-react-native-api-method-needle
 
-  // trustOS api methods
+  // trustOS api
   const loginTrustOS = (account) => api.post('api/trustos/login', account)
   const setTrustOSToken = (trustOSAuth) => api.setHeader('Api-Authorization', 'Bearer ' + trustOSAuth)
   const removeTrustOSToken = () => api.deleteHeader('Api-Authorization')
   const getAssets = (isAuthorised) => api.get('api/trustos/assets', {}, { params: { isAuthorised: isAuthorised } })
+  const getAssetsCreate = (rol) => api.get('api/products/create/' + rol, {}, {})
   const getAsset = (isAuthorised, assetId) => api.get('api/trustos/assets/' + assetId, {}, { params: { isAuthorised: isAuthorised } })
   const updateAsset = (isAuthorised, assetId, newMetadata) =>
     api.post('api/trustos/assets/' + assetId + '/update', newMetadata, { params: { isAuthorised: isAuthorised } })
@@ -107,6 +108,7 @@ const create = (baseURL = AppConfig.apiUrl) => {
     setTrustOSToken,
     removeTrustOSToken,
     getAssets,
+    getAssetsCreate,
     getAsset,
     updateAsset,
     getAssetTraceability,

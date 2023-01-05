@@ -1,12 +1,19 @@
 package com.mycompany.myapp.service.dto;
 
-import com.mycompany.myapp.config.Constants;
-import com.mycompany.myapp.domain.Authority;
-import com.mycompany.myapp.domain.User;
 import java.time.Instant;
+import java.util.List;
 import java.util.Set;
 import java.util.stream.Collectors;
-import javax.validation.constraints.*;
+
+import javax.validation.constraints.Email;
+import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.Pattern;
+import javax.validation.constraints.Size;
+
+import com.mycompany.myapp.config.Constants;
+import com.mycompany.myapp.domain.Authority;
+import com.mycompany.myapp.domain.Product;
+import com.mycompany.myapp.domain.User;
 
 /**
  * A DTO representing a user, with his authorities.
@@ -52,6 +59,8 @@ public class AdminUserDTO {
 
     private Set<String> authorities;
 
+    private List<Product> products;
+
     public AdminUserDTO() {
         // Empty constructor needed for Jackson.
     }
@@ -72,6 +81,13 @@ public class AdminUserDTO {
         this.lastModifiedBy = user.getLastModifiedBy();
         this.lastModifiedDate = user.getLastModifiedDate();
         this.authorities = user.getAuthorities().stream().map(Authority::getName).collect(Collectors.toSet());
+        // this.products =
+        //     user
+        //         .getAuthorities()
+        //         .stream()
+        //         .map(auth -> auth.getProducts().stream().collect(Collectors.toList()))
+        //         .flatMap(Collection::stream)
+        //         .collect(Collectors.toList());
     }
 
     public Long getId() {
@@ -194,6 +210,14 @@ public class AdminUserDTO {
         this.authorities = authorities;
     }
 
+    public List<Product> getProducts() {
+        return products;
+    }
+
+    public void setProducts(List<Product> products) {
+        this.products = products;
+    }
+
     // prettier-ignore
     @Override
     public String toString() {
@@ -211,6 +235,7 @@ public class AdminUserDTO {
             ", lastModifiedBy='" + lastModifiedBy + '\'' +
             ", lastModifiedDate=" + lastModifiedDate +
             ", authorities=" + authorities +
+            ", products=" + products +
             "}";
     }
 }

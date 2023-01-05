@@ -1,25 +1,32 @@
-import React, { useEffect } from 'react'
+import React from 'react'
 import { View } from 'react-native'
 import { useTranslation } from 'react-i18next'
 
 import styles from './asset-create-screen.styles'
 import { connect } from 'react-redux'
 import Asset from '../../shared/components/asset/asset'
-import AssetCreateActions from './asset-create-screen.reducer'
 
-import { Form, ThemeContext, Text10, Spinner, TextField } from '@telefonica/mistica'
+import { Form, ThemeContext, Text3, Text6, Text10, Spinner, confirm } from '@telefonica/mistica'
+import Metadata from '../../shared/components/metadata/metadata'
+import TableUpdate from '../../shared/components/table-update/table-update'
 
 function AssetCreateScreen(props) {
-  const { navigation } = props
   let { type } = props.route.params
-  const { fetching, error, name, setName } = props
+  const { fetching, error, name } = props
   const { colors } = React.useContext(ThemeContext)
   const { t } = useTranslation() //i18n instance
 
-  // // BUG cuando se recarga la página nos lanza un 401, esto es por que perdemos el token de la api al actualizar.
-  // useEffect(() => {
-  //   getAsset(isAuthorised, assetId)
-  // }, [getAsset, isAuthorised, assetId])
+  function addName(data) {
+    data.name = name + '#' + (Math.random() + 1).toString(36).substring(2)
+    return data
+  }
+
+  function create(data) {
+    console.log('ASSET_ID -> ', data.name)
+    delete data.name
+    console.log('METADATA _> ', data)
+    console.log('DATA _> ', { type: type })
+  }
 
   return (
     <>
@@ -40,10 +47,24 @@ function AssetCreateScreen(props) {
       )}
       {!error && !fetching && (
         <View style={[styles.container, { backgroundColor: colors.background }]}>
-          <Form onSubmit={(formData) => console.table(formData)}>
+          {
+            // TODO hacer en el submit el create asset
+          }
+          <Form
+            onSubmit={(formData) => {
+              let newAsset = addName(formData)
+              console.log(newAsset)
+              confirm({
+                title: <Text6>{t('VALUES_UPDATE')}</Text6>,
+                message: <TableUpdate dataBefore={{}} dataAfter={newAsset} />,
+                acceptText: <Text3 color="currentColor">{t('CREATE')}</Text3>,
+                cancelText: <Text3 color="currentColor">{t('CANCEL')}</Text3>,
+                onAccept: () => create(newAsset),
+              })
+            }}>
             <View style={[styles.container, styles.mainContainer]}>
               <View style={styles.metadata}>
-                <TextField name="name" label="name" onChangeValue={(value) => setName(value)} />
+                <Metadata type={type} data={{ height: 663445, capacity: 234234 }} create={true} />
               </View>
               <View style={styles.assetView}>
                 <View style={styles.asset}>
@@ -66,8 +87,6 @@ const mapStateToProps = (state) => {
   }
 }
 const mapDispatchToProps = (dispatch) => {
-  return {
-    setName: (name) => dispatch(AssetCreateActions.assetCreateSetName(name)),
-  }
+  return {}
 }
 export default connect(mapStateToProps, mapDispatchToProps)(AssetCreateScreen)

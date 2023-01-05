@@ -5,7 +5,7 @@ export default StyleSheet.create({
     borderWidth: 0.5,
     borderStyle: 'solid',
     borderRadius: 10,
-
+    height: 800,
     padding: 30,
   },
   contentContainer: {

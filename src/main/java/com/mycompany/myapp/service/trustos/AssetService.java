@@ -1,4 +1,4 @@
-package com.mycompany.myapp.service;
+package com.mycompany.myapp.service.trustos;
 
 import java.util.Map;
 

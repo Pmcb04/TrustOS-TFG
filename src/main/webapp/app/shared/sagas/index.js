@@ -35,6 +35,7 @@ import {
   loadNextAssets,
   loadPreviousAssets,
   search,
+  getAssetCreate,
   changeOrder,
 } from '../../modules/my-assets/my-assets-screen.sagas'
 import { getAsset, updateAsset } from '../../modules/asset-details/asset-details-screen.sagas'
@@ -78,6 +79,7 @@ export default function* root() {
     takeLatest(AssetListTypes.MY_ASSETS_LOAD_NEXT_CONTENT, loadNextAssets, api),
     takeLatest(AssetListTypes.MY_ASSETS_LOAD_PREVIOUS_CONTENT, loadPreviousAssets, api),
     takeLatest(AssetListTypes.MY_ASSETS_SEARCH, search, api),
+    takeLatest(AssetListTypes.MY_ASSETS_CREATE, getAssetCreate, api),
     takeLatest(AssetListTypes.MY_ASSETS_SET_ORDER, changeOrder, api),
 
     // Asset Details

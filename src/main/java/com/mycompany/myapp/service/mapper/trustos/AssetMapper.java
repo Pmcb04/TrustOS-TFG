@@ -1,12 +1,13 @@
-package com.mycompany.myapp.service.mapper;
+package com.mycompany.myapp.service.mapper.trustos;
 
-import com.mycompany.myapp.domain.trustos.Asset;
-import com.mycompany.myapp.service.dto.trustos.AssetDTO;
 import java.util.List;
 import java.util.Objects;
 import java.util.stream.Collectors;
-import org.springframework.beans.factory.annotation.Autowired;
+
 import org.springframework.stereotype.Service;
+
+import com.mycompany.myapp.domain.trustos.Asset;
+import com.mycompany.myapp.service.dto.trustos.AssetDTO;
 
 /**
  * Mapper for the entity {@link Asset} and its DTO called {@link AssetDTO}.

@@ -27,6 +27,7 @@ export const request = (state) =>
   state.merge({
     fetching: true,
     error: null,
+    name: '',
   })
 
 // state sucess request completed
@@ -34,6 +35,7 @@ export const success = (state) =>
   state.merge({
     fetching: false,
     error: null,
+    name: '',
   })
 
 // state failure request error
@@ -41,6 +43,7 @@ export const failure = (state, { error }) =>
   state.merge({
     fetching: false,
     error,
+    name: '',
   })
 
 // set name of the asset to create

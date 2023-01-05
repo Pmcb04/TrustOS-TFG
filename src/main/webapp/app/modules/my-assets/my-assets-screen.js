@@ -11,15 +11,6 @@ import MenuFilter from '../../shared/components/menu-filter/menu-filter'
 import { ScrollView } from 'react-native-gesture-handler'
 import { IMAGES, setImage } from '../../shared/util/images-asset'
 
-// TODO sustituir por llamada a la api
-const ASSET_TYPES = [
-  { name: 'Ternero', image: IMAGES.PRODUCT },
-  { name: 'Pantalón', image: IMAGES.PRODUCT },
-  { name: 'Botella', image: IMAGES.PRODUCT },
-  { name: 'Motor', image: IMAGES.PRODUCT },
-  { name: 'Coche', image: IMAGES.PRODUCT },
-]
-
 import {
   SearchField,
   ButtonLink,
@@ -39,13 +30,14 @@ function MyAssetsScreen(props) {
   const { t } = useTranslation() //i18n instance
   const { colors } = React.useContext(ThemeContext)
   const { navigation } = props
-  const { next, previous, index, numAssets, offset, assetsLoaded, getAssets, search } = props
+  const { next, previous, index, numAssets, offset, assetsLoaded, getAssets, search, getAssetsCreate, products } = props
 
-  let typeCreateAssetSelected = ASSET_TYPES[0].name
+  let typeCreateAssetSelected = products[0].name
 
   useEffect(() => {
-    if (numAssets === 0) getAssets()
-  }, [getAssets, numAssets])
+    // if (numAssets === 0) getAssets()
+    getAssetsCreate()
+  }, [getAssets, numAssets, getAssetsCreate])
 
   return (
     <View style={[styles.container, styles.mainContainer, { backgroundColor: colors.background }]}>
@@ -60,9 +52,10 @@ function MyAssetsScreen(props) {
                   <ScrollView>
                     <RadioGroup onChange={(value) => (typeCreateAssetSelected = value)} defaultValue={typeCreateAssetSelected}>
                       <RowList>
-                        {ASSET_TYPES.map((type, i) => (
-                          <Row key={i} asset={setImage(type.image)} title={type.name} radioValue={type.name} value={type.name} />
-                        ))}
+                        {products &&
+                          products.map((type, i) => (
+                            <Row key={i} asset={setImage(IMAGES.PRODUCT)} title={type.name} radioValue={type.name} value={type.name} />
+                          ))}
                       </RowList>
                     </RadioGroup>
                   </ScrollView>
@@ -104,11 +97,13 @@ const mapStateToProps = (state) => ({
   numAssets: state.myAssets.numAssets,
   offset: state.myAssets.offset,
   assetsLoaded: state.myAssets.assetsLoaded,
+  products: state.myAssets.products,
 })
 const mapDispatchToProps = (dispatch) => ({
   getAssets: () => dispatch(MyAssetsActions.myAssetsRequest()),
   next: () => dispatch(MyAssetsActions.myAssetsLoadNextContent()),
   previous: () => dispatch(MyAssetsActions.myAssetsLoadPreviousContent()),
   search: (search) => dispatch(MyAssetsActions.myAssetsSearch(search)),
+  getAssetsCreate: () => dispatch(MyAssetsActions.myAssetsCreate()),
 })
 export default connect(mapStateToProps, mapDispatchToProps)(MyAssetsScreen)

@@ -8,7 +8,7 @@
 
 
     <changeSet id="00000000000003" author="admin">
-        <createTable tableName="transaction">
+        <createTable tableName="jhi_transaction">
             <column name="id" type="bigint">
                 <constraints primaryKey="true" nullable="false"/>
             </column>
@@ -17,7 +17,7 @@
             </column>
         </createTable>
 
-        <createTable tableName="product_transaction">
+        <createTable tableName="jhi_product_transaction">
             <column name="product_id" type="bigint">
                 <constraints nullable="false"/>
             </column>
@@ -29,23 +29,23 @@
             </column>
         </createTable>
 
-        <addPrimaryKey columnNames="product_id, transaction_id, authority_name" tableName="product_transaction"/>
+        <addPrimaryKey columnNames="product_id, transaction_id, authority_name" tableName="jhi_product_transaction"/>
 
 
         <addForeignKeyConstraint baseColumnNames="product_id"
-                                 baseTableName="product_transaction"
+                                 baseTableName="jhi_product_transaction"
                                  constraintName="fk_product_id"
                                  referencedColumnNames="id"
-                                 referencedTableName="product"/>
+                                 referencedTableName="jhi_product"/>
 
         <addForeignKeyConstraint baseColumnNames="transaction_id"
-                                 baseTableName="product_transaction"
+                                 baseTableName="jhi_product_transaction"
                                  constraintName="fk_transaction_id"
                                  referencedColumnNames="id"
-                                 referencedTableName="transaction"/>
+                                 referencedTableName="jhi_transaction"/>
 
         <addForeignKeyConstraint baseColumnNames="authority_name"
-                                 baseTableName="product_transaction"
+                                 baseTableName="jhi_product_transaction"
                                  constraintName="fk_authority_name"
                                  referencedColumnNames="name"
                                  referencedTableName="jhi_authority"/>
@@ -53,7 +53,7 @@
         <loadData
             file="config/liquibase/data/transaction.csv"
             separator=";"
-            tableName="transaction"
+            tableName="jhi_transaction"
             usePreparedStatements="true">
             <column name="id" type="numeric"/>
         </loadData>
@@ -61,7 +61,7 @@
         <loadData
             file="config/liquibase/data/product_transaction.csv"
             separator=";"
-            tableName="product_transaction"
+            tableName="jhi_product_transaction"
             usePreparedStatements="true">
             <column name="product_id" type="numeric"/>
             <column name="transaction_id" type="numeric"/>
