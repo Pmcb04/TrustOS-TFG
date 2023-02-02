@@ -1,10 +1,11 @@
+// TODO fichero autogenerado
 export function permissionsPantalon(rol) {
   let canView = []
   let canEdit = []
   switch (rol) {
     case 'ROLE_ADMIN':
-      canView = ['height', 'width']
-      canEdit = []
+      canView = ['color', 'width']
+      canEdit = ['color', 'width']
       break
   }
 

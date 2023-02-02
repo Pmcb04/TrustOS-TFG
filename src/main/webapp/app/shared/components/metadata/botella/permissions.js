@@ -1,14 +1,15 @@
+// TODO fichero autogenerado
 export function permissionsBotella(rol) {
   let canView = []
   let canEdit = []
   switch (rol) {
     case 'ROLE_ADMIN':
-      canView = ['height', 'capacity']
+      canView = ['heigth', 'capacity']
       canEdit = ['capacity']
       break
     case 'ROLE_USER':
-      canView = ['height', 'capacity']
-      canEdit = ['height']
+      canView = ['heigth', 'capacity']
+      canEdit = ['heigth']
       break
   }
 

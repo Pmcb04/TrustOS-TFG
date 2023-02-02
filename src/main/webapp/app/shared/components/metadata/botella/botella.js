@@ -2,24 +2,24 @@ import React from 'react'
 import Property from '../../property/property'
 import { Select, TextField, Title1, IntegerField, DecimalField, DoubleField, Switch, Box, RowList } from '@telefonica/mistica'
 
+import { permissionsBotella } from './permissions'
+
 // TODO fichero autogenado
 
 function Botella(props) {
-  const { data } = props
-  const { create, edit, canEdit, canView } = props
-  // TODO probar si data no contiene una propiedad que esta puesta aqui abajo si se muestra o no.
-  // si no se muestra en metadata.utils filtraremos la data dependiendo del rol
+  const { data, rol, create, edit } = props
+  const { canView, canEdit } = permissionsBotella(rol)
 
   return (
     <Box>
-      {(create || canView.includes('height')) && (
+      {(create || canView.includes('heigth')) && (
         <Property
           title="heigth"
           primaryKey="heigth"
-          key={'property-height'}
-          value={!create && data.height ? data.height.toString() : null}
+          key={'property-heigth'}
+          value={!create && data.heigth ? data.heigth.toString() : null}
           edit={create ? true : canEdit.includes('heigth') ? edit : false}>
-          <DecimalField key={'heigth'} name="heigth" label="heigth" defaultValue={!create && data.height ? data.height.toString() : null} />
+          <DecimalField key={'heigth'} name="heigth" label="heigth" defaultValue={!create && data.heigth ? data.heigth.toString() : null} />
         </Property>
       )}
 

@@ -53,7 +53,6 @@ function process(dataBefore, dataAfter) {
     if (dataBefore[key] != null && typeof dataBefore[key] === 'object' && !Array.isArray(dataBefore[key])) {
       return process(dataBefore[key], dataAfter)
     } else {
-      console.log('KEY _> ', key, 'condition _> ', dataBefore[key].toString() !== dataAfter[key].toString())
       return (
         dataBefore[key].toString() !== dataAfter[key].toString() && (
           <Row key={key} field={key} before={dataBefore[key].toString()} after={dataAfter[key].toString()} />

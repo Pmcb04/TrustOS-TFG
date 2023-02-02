@@ -4,33 +4,33 @@ import styles from './property-box.styles'
 import { Title2, Divider, Box, Inline, IconButton, IconChevronDownRegular, IconChevronTopRegular } from '@telefonica/mistica'
 
 function PropertyBox(props) {
-  const { title, field, primaryKey } = props
-  const [showMore, setShowMore] = useState(true) // TODO cambiar a redux?
+  const { title } = props
+  const [showMore, setShowMore] = useState(true)
   return (
-    <Box key={primaryKey}>
-      <Box key={primaryKey} padding={10}>
-        <Inline key={primaryKey} space={8}>
-          <Title2 key={primaryKey + 'title'}>{title}</Title2>
+    <Box key={title}>
+      <Box key={title} padding={10}>
+        <Inline key={title} space={8}>
+          <Title2 key={title + 'title'}>{title}</Title2>
           {showMore ? (
-            <IconButton key={primaryKey} onPress={() => setShowMore(false)}>
-              <IconChevronTopRegular key={primaryKey} />
+            <IconButton key={title} onPress={() => setShowMore(false)}>
+              <IconChevronTopRegular key={title} />
             </IconButton>
           ) : (
-            <IconButton key={primaryKey} onPress={() => setShowMore(true)}>
-              <IconChevronDownRegular key={primaryKey} />
+            <IconButton key={title} onPress={() => setShowMore(true)}>
+              <IconChevronDownRegular key={title} />
             </IconButton>
           )}
         </Inline>
       </Box>
-      <Divider key={primaryKey + 'divider1'} />
+      <Divider key={title + 'divider1'} />
       {showMore && (
-        <Box key={primaryKey + 'field'} padding={20}>
-          {field}
+        <Box key={title + 'field'} padding={20}>
+          {props.children}
         </Box>
       )}
       {!showMore && (
-        <View style={styles.hiddenField} key={primaryKey + 'field'} padding={20}>
-          {field}
+        <View style={styles.hiddenField} key={title + 'field'} padding={20}>
+          {props.children}
         </View>
       )}
     </Box>

@@ -2,9 +2,9 @@ import React from 'react'
 import { Box, Title1, Text6, Stack } from '@telefonica/mistica'
 
 function Property(props) {
-  const { primaryKey, edit, title, value } = props
+  const { edit, title, value } = props
   return (
-    <Box key={primaryKey} paddingBottom={16}>
+    <Box key={title} paddingBottom={16}>
       <Stack padding={16}>
         <Title1>{title}</Title1>
         {!edit ? ( // in mode view

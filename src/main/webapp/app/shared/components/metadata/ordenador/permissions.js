@@ -1,3 +1,5 @@
+// TODO fichero autogenerado
+
 export function permissionsOrdenador(rol) {
   let canView = []
   let canEdit = []

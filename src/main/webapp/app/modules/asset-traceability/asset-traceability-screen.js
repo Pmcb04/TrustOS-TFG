@@ -120,14 +120,16 @@ function AssetTraceabilityScreen(props) {
             <View style={styles.asset}>
               <Asset
                 name={assetId}
-                image={traceability.data.id}
-                type={traceability.data.version}
+                type={traceability.data.type}
                 hash={traceability.transactions[transactionSelect].hash}
                 authorizathed={isAuthorised}
               />
             </View>
             <View style={styles.metadata}>
-              <Metadata data={traceability.transactions[transactionSelect].metadata} />
+              <Metadata
+                data={traceability.transactions[transactionSelect].metadata}
+                type={traceability.data.type}
+              />
             </View>
           </View>
         </View>

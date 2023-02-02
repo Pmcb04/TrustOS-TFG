@@ -1,3 +1,5 @@
+// TODO fichero autogenerado
+
 export function permissionsCoche(rol) {
   let canView = []
   let canEdit = []

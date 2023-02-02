@@ -1,5 +1,5 @@
 import { select, call, put, all } from 'redux-saga/effects'
-import MyAssetsActions from './my-assets-screen.reducer'
+import MyAssetsActions, { AssetListTypes } from './my-assets-screen.reducer'
 
 export const selectIndex = (state) => state.myAssets.index
 export const selectOffset = (state) => state.myAssets.offset
@@ -17,11 +17,15 @@ export function* getAssets(api) {
   const showAuthorizathed = yield select(selectShowAuthorizathed)
   const order = yield select(selectOrder)
 
+  yield getAssetCreate(api)
+
   let assetsOwner = []
   let assetsAuthorised = []
 
   if (showOwner) {
     assetsOwner = yield call(api.getAssets, false)
+    // TODO eliminar para otra cuenta la ultima condicion de Ternero
+    assetsOwner.data = assetsOwner.data.filter((e) => e !== 'Ternero#xcryscrq34')
     assetsOwner = yield putIsAuthorisedFlag(assetsOwner.data, false)
   }
 
@@ -93,7 +97,9 @@ export function* loadAssetsAgain(api) {
 function* loadAssets(api, assets) {
   let assetsLoaded = []
   // set assets loaded
+
   const response = yield all(assets.map((asset) => call(api.getAsset, asset.isAuthorised, asset.assetId)))
+
   // for each reponse  check if it is diferent of null
   response.forEach((asset, index) => {
     asset.data.isAuthorised = assets[index].isAuthorised
@@ -133,6 +139,7 @@ export function* search(api) {
   let assets = yield select(selectAssets)
   const found = yield select(selectSearch)
   let assetsSearch = []
+
   // filter by search
   if (found === null || found === '') {
     yield loadAssets(api, assets)

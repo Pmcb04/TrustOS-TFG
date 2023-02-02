@@ -1,3 +1,5 @@
+// TODO fichero autogenerado
+
 export function permissionsTernero(rol) {
   let canView = []
   let canEdit = []

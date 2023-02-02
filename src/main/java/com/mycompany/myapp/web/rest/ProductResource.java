@@ -25,6 +25,7 @@ public class ProductResource {
     /**
      * {@code GET /api/products/create} : get all products can be create a rol
      *
+     * @param rol rol of user to identify what product can be create
      * @return the {@link ResponseEntity} with status {@code 200 (OK)} and with body all product can be create a rol.
      */
     @GetMapping("/products/create/{rol}")

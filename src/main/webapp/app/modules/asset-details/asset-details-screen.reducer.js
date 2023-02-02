@@ -34,7 +34,6 @@ export const request = (state, { isAuthorised, assetId }) =>
   state.merge({
     fetching: true,
     error: null,
-    asset: null,
     edit_fields: false,
     successUpdate: false,
     isAuthorised,

@@ -10,7 +10,7 @@ export const selectAccount = (state) => state.account.account
 function* loginTrustos(api, idTrustos, password) {
   const account = {
     id: idTrustos,
-    password: 'KMv52hzgfQYW',
+    password: 'KMv52hzgfQYW', // FIXME poner contraseña de el usuario (poner o nombre de login o una personalizada, esta ultima guardar en la base de datos)
   }
   const token = yield call(api.loginTrustOS, account)
   return token.data.message

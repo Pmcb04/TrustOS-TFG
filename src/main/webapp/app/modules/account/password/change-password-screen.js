@@ -55,50 +55,6 @@ function ChangePasswordScreen(props) {
           </ButtonLayout>
         </Stack>
       </Form>
-
-      {/* <Form
-        initialValues={{ currentPassword: '', confirmPassword: '', newPassword: '' }}
-        validationSchema={validationSchema}
-        onSubmit={onSubmit}
-        ref={formRef}>
-        <FormField
-          ref={currentPasswordRef}
-          testID="currentPasswordInput"
-          name="currentPassword"
-          label="Current Password"
-          placeholder="Enter current password"
-          autoCapitalize="none"
-          autoCorrect={false}
-          secureTextEntry={true}
-          onSubmitEditing={() => newPasswordRef?.current?.focus()}
-          textContentType="password"
-        />
-        <FormField
-          ref={newPasswordRef}
-          testID="newPasswordInput"
-          name="newPassword"
-          label="New Password"
-          placeholder="Enter new password"
-          autoCapitalize="none"
-          autoCorrect={false}
-          secureTextEntry={true}
-          onSubmitEditing={() => confirmPasswordRef?.current?.focus()}
-          textContentType="password"
-        />
-        <FormField
-          ref={confirmPasswordRef}
-          testID="confirmPasswordInput"
-          name="confirmPassword"
-          label="Confirm Password"
-          placeholder="Enter new password"
-          autoCapitalize="none"
-          autoCorrect={false}
-          secureTextEntry={true}
-          onSubmitEditing={() => formRef?.current?.submitForm()}
-          textContentType="password"
-        />
-        <FormButton testID="changePasswordSubmitButton" title={'Change Password'} />
-      </Form> */}
     </KeyboardAwareScrollView>
   )
 }

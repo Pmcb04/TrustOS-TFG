@@ -1,12 +1,15 @@
 import React from 'react'
+import { View } from 'react-native'
 import Property from '../../property/property'
 import { Select, TextField, Title1, IntegerField, DecimalField, DoubleField, Switch, Box } from '@telefonica/mistica'
+
+import { permissionsTernero } from './permissions'
 
 // TODO fichero autogenado
 
 function Ternero(props) {
-  const { data } = props
-  const { create, edit, canEdit, canView } = props
+  const { data, rol, create, edit } = props
+  const { canView, canEdit } = permissionsTernero(rol)
 
   return (
     <Box>
@@ -15,9 +18,9 @@ function Ternero(props) {
           title="heigth"
           primaryKey="heigth"
           key={'property-height'}
-          value={!create && data.height ? data.height.toString() : null}
+          value={!create && data.heigth ? data.heigth.toString() : null}
           edit={create ? true : canEdit.includes('heigth') ? edit : false}>
-          <DecimalField key={'heigth'} name="heigth" label="heigth" defaultValue={!create && data.height ? data.height.toString() : null} />
+          <DecimalField key={'heigth'} name="heigth" label="heigth" defaultValue={!create && data.heigth ? data.heigth.toString() : null} />
         </Property>
       )}
       {(create || canView.includes('width')) && (

@@ -1,14 +1,14 @@
 import React from 'react'
 import { DataCard, Tag, IconFingerprintRegular, IconShieldRegular, Text4, Text1, Stack, ThemeContext, Inline } from '@telefonica/mistica'
 import { useTranslation } from 'react-i18next'
-import { setImage } from '../../util/images-asset'
+import { getImage } from '../../util/asset-image-name'
 
 const SIZE_ICONS_DESCRIPTION = 20
 
 function Asset(props) {
   const { t } = useTranslation()
   const { colors } = React.useContext(ThemeContext)
-  const { image, name, type, hash, authorizathed } = props
+  const { name, type, hash, authorizathed } = props
   return (
     <DataCard
       headline={<Tag type="active">{type ? type : 'Asset'}</Tag>}
@@ -42,7 +42,7 @@ function Asset(props) {
           )}
         </Stack>
       }
-      icon={setImage(image)}
+      icon={getImage(type)}
     />
   )
 }

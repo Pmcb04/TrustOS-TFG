@@ -22,7 +22,11 @@ export function process(data, edit_fields) {
         </Property>
       )
     } else if (typeof data[key] === 'object') {
-      return <PropertyBox title={key} key={key} primaryKey={key} field={process(data[key], edit_fields)} />
+      return (
+        <PropertyBox title={key} key={key}>
+          {process(data[key], edit_fields)}
+        </PropertyBox>
+      )
     } else if (typeof data[key] === 'number') {
       if (data[key] % 1 === 0)
         return (

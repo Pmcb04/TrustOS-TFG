@@ -2,10 +2,12 @@ import React from 'react'
 import Property from '../../property/property'
 import { Select, TextField, Title1, IntegerField, DecimalField, DoubleField, Switch, Box } from '@telefonica/mistica'
 
+import { permissionsCoche } from './permissions'
+
 // TODO fichero autogenado
 function Coche(props) {
-  const { data } = props
-  const { create, edit, canEdit, canView } = props
+  const { data, rol, create, edit } = props
+  const { canView, canEdit } = permissionsCoche(rol)
 
   return (
     <Box>
