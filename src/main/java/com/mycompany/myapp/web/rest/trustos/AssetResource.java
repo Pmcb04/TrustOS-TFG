@@ -1,15 +1,14 @@
-package com.mycompany.myapp.web.rest;
+package com.mycompany.myapp.web.rest.trustos;
 
 import com.mycompany.myapp.domain.trustos.Asset;
 import com.mycompany.myapp.domain.trustos.LoginTrustos;
 import com.mycompany.myapp.domain.trustos.Message;
 import com.mycompany.myapp.domain.trustos.Transaction;
-import com.mycompany.myapp.service.AssetService;
 import com.mycompany.myapp.service.dto.trustos.AssetDTO;
+import com.mycompany.myapp.service.trustos.AssetService;
 import java.util.Map;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import org.springframework.http.HttpHeaders;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -56,7 +55,7 @@ public class AssetResource {
      * @param assetDTO assetDTO to create
      * @param token token authorization to track module
      */
-    @PostMapping("/assets")
+    @PostMapping("/asset")
     public ResponseEntity<Asset> createAsset(@RequestBody AssetDTO assetDTO, @RequestHeader(value = TOKEN_API_HEADER) String token) {
         return ResponseEntity.ok(assetService.createAsset(assetDTO, token));
     }

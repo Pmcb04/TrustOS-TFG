@@ -33,4 +33,8 @@ export default StyleSheet.create({
     flex: 1,
     margin: 30,
   },
+  callout: {
+    marginHorizontal: 10,
+    marginBottom: 10,
+  },
 })

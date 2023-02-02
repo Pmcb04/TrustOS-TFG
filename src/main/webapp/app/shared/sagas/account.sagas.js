@@ -6,6 +6,7 @@ import { callApi } from './call-api.saga'
 // attempts to account
 export function* getAccount(api) {
   const response = yield call(api.getAccount)
+  // TODO llamar a get asset de account.login para obtener el asset del usuario.
 
   // success?
   if (response.ok && response.headers['content-type']?.indexOf('json') !== -1) {

@@ -17,6 +17,9 @@ const { Types, Creators } = createActions({
   myAssetsSetShowAuthorizathed: ['showAuthorizathed'],
   myAssetsSetAssetsLoaded: ['assetsLoaded'],
   myAssetsSearch: ['search'],
+  myAssetsCreate: [],
+  myAssetsCreateSuccess: ['products'],
+  myAssetsSetSuccessCreated: [],
 })
 
 export const AssetListTypes = Types
@@ -37,6 +40,8 @@ export const INITIAL_STATE = Immutable({
   order: 'natural',
   showOwner: true,
   showAuthorizathed: true,
+  products: [],
+  successCreate: false,
 })
 
 /* ------------- Reducers ------------- */
@@ -51,6 +56,8 @@ export const request = (state) =>
     assetsLoaded: null,
     index: 0,
     search: null,
+    products: [],
+    successCreate: false,
   })
 
 // state sucess request completed
@@ -61,6 +68,7 @@ export const success = (state, { assets }) =>
     assets,
     index: 0, // TODO quitar cuando arreglemos el login
     numAssets: assets.length,
+    successCreate: false,
   })
 
 // state failure request error
@@ -69,6 +77,8 @@ export const failure = (state, { error }) =>
     fetching: false,
     error,
     assets: null,
+    products: [],
+    successCreate: false,
   })
 
 // load next offset asset list
@@ -92,6 +102,12 @@ export const setChangeOffset = (state, { changeOffset }) => state.merge({ change
 // search in assets
 export const setSearch = (state, { search }) => state.merge({ search })
 
+// get assets to create
+export const setCreate = (state) => state
+
+// search in assets
+export const setCreateSuccess = (state, { products }) => state.merge({ products })
+
 // set order to state
 export const setOrder = (state, { order }) => state.merge({ order })
 
@@ -100,6 +116,9 @@ export const setShowOwner = (state, { showOwner }) => state.merge({ showOwner })
 
 // set showAuthorizathed to state
 export const setShowAuthorizathed = (state, { showAuthorizathed }) => state.merge({ showAuthorizathed })
+
+// set assetCreated to state
+export const setSuccessCreate = (state) => state.merge({ successCreate: !state.successCreate })
 
 // reset the asset reducer
 export const reset = () => INITIAL_STATE
@@ -119,6 +138,9 @@ export const reducer = createReducer(INITIAL_STATE, {
   [Types.MY_ASSETS_SET_ASSETS_LOADED]: setAssetsLoaded,
   [Types.MY_ASSETS_RESET]: reset,
   [Types.MY_ASSETS_SEARCH]: setSearch,
+  [Types.MY_ASSETS_CREATE]: setCreate,
+  [Types.MY_ASSETS_CREATE_SUCCESS]: setCreateSuccess,
   [Types.MY_ASSETS_SET_SHOW_OWNER]: setShowOwner,
   [Types.MY_ASSETS_SET_SHOW_AUTHORIZATHED]: setShowAuthorizathed,
+  [Types.MY_ASSETS_SET_SUCCESS_CREATED]: setSuccessCreate,
 })

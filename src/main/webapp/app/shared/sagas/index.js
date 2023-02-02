@@ -17,6 +17,7 @@ import { UserTypes } from '../../shared/reducers/user.reducer'
 import { AssetListTypes } from '../../modules/my-assets/my-assets-screen.reducer'
 import { AssetDetailsTypes } from '../../modules/asset-details/asset-details-screen.reducer'
 import { AssetTraceabilityTypes } from '../../modules/asset-traceability/asset-traceability-screen.reducer'
+import { AssetCreateTypes } from '../../modules/asset-create/asset-create-screen.reducer'
 
 /* ------------- Sagas ------------- */
 
@@ -35,10 +36,12 @@ import {
   loadNextAssets,
   loadPreviousAssets,
   search,
+  getAssetCreate,
   changeOrder,
 } from '../../modules/my-assets/my-assets-screen.sagas'
 import { getAsset, updateAsset } from '../../modules/asset-details/asset-details-screen.sagas'
 import { getAssetTraceability, getAssetRangeTraceability } from '../../modules/asset-traceability/asset-traceability-screen.sagas'
+import { createAsset } from '../../modules/asset-create/asset-create-screen.sagas'
 /* ------------- API ------------- */
 
 // The API we use is only used from Sagas, so we create it here and pass along
@@ -78,6 +81,7 @@ export default function* root() {
     takeLatest(AssetListTypes.MY_ASSETS_LOAD_NEXT_CONTENT, loadNextAssets, api),
     takeLatest(AssetListTypes.MY_ASSETS_LOAD_PREVIOUS_CONTENT, loadPreviousAssets, api),
     takeLatest(AssetListTypes.MY_ASSETS_SEARCH, search, api),
+    takeLatest(AssetListTypes.MY_ASSETS_CREATE, getAssetCreate, api),
     takeLatest(AssetListTypes.MY_ASSETS_SET_ORDER, changeOrder, api),
 
     // Asset Details
@@ -87,5 +91,8 @@ export default function* root() {
     // Asset Traceability
     takeLatest(AssetTraceabilityTypes.ASSET_TRACEABILITY_REQUEST, getAssetTraceability, api),
     takeLatest(AssetTraceabilityTypes.ASSET_TRACEABILITY_RANGE_REQUEST, getAssetRangeTraceability, api),
+
+    // Asset create
+    takeLatest(AssetCreateTypes.ASSET_CREATE_REQUEST, createAsset, api),
   ])
 }

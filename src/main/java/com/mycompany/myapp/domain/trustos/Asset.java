@@ -15,6 +15,7 @@ public class Asset implements Serializable {
     private Map<String, Object> metadata;
 
     private int datetime;
+
     private int timestamp;
 
     private String hfTxId;

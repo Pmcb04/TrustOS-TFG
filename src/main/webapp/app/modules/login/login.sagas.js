@@ -1,16 +1,16 @@
-import { call, put, select } from 'redux-saga/effects'
+import { call, put, select, take } from 'redux-saga/effects'
 
 import LoginActions from './login.reducer'
 import AccountActions from '../../shared/reducers/account.reducer'
 
 export const selectAuthToken = (state) => state.login.authToken
 export const selectTrustosToken = (state) => state.login.trustosToken
+export const selectAccount = (state) => state.account.account
 
-function* loginTrustos(api) {
-  // FIXME traer del backend el usuario trustos?
+function* loginTrustos(api, idTrustos, password) {
   const account = {
-    id: 'did:vtn:trustid:0106a4d4a997ac85895ed20cbdaafe6a58c5bd8d7311b446d11502bfe9942311',
-    password: 'KMv52hzgfQYW',
+    id: idTrustos,
+    password: 'KMv52hzgfQYW', // FIXME poner contraseña de el usuario (poner o nombre de login o una personalizada, esta ultima guardar en la base de datos)
   }
   const token = yield call(api.loginTrustOS, account)
   return token.data.message
@@ -29,11 +29,15 @@ export function* login(api, { username, password }) {
   // success?
   if (response.ok) {
     yield call(api.setAuthToken, response.data.id_token)
-    console.log('success', response.data.id_token)
-    const trustosToken = yield loginTrustos(api)
+    yield put(AccountActions.accountRequest())
+    let account = yield select(selectAccount)
+    while (account === null) {
+      yield take()
+      account = yield select(selectAccount)
+    }
+    const trustosToken = yield loginTrustos(api, account.idTrustos, password)
     yield call(api.setTrustOSToken, trustosToken)
     yield put(LoginActions.loginSuccess(response.data.id_token, trustosToken))
-    yield put(AccountActions.accountRequest())
     yield put({ type: 'RELOGIN_OK' })
   } else {
     const errorMessage = !response.data

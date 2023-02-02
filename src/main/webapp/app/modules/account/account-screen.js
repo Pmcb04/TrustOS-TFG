@@ -16,12 +16,6 @@ function AccountScreen(props) {
   const { t } = useTranslation() //i18n instance
   const { logout, account } = props
 
-  // TODO sustituir por parametro de account
-  const fakeAccount = {
-    idTrustos: 'did:vtn:trustid:0106a4d4a997ac85895ed20cbdaafe6a58c5bd8d7311b446d11502bfe9942311',
-    hash: '04f8996da763b7a969b1028ee3007569eaf3a635486ddab211d512c85b9df8fb',
-  }
-
   return (
     <ScrollView>
       <View style={[styles.container, { backgroundColor: colors.background }]}>
@@ -33,14 +27,6 @@ function AccountScreen(props) {
               <View style={styles.dataUserRow}>
                 <Title1>{t('EMAIL')}</Title1>
                 <Text4>{account.email}</Text4>
-              </View>
-              <View style={styles.dataUserRow}>
-                <Title1>{t('USER_TRUSTOS')}</Title1>
-                <Text4>{fakeAccount.idTrustos}</Text4>
-              </View>
-              <View style={styles.dataUserRow}>
-                <Title1>{t('USER_HASH')}</Title1>
-                <Text4>{fakeAccount.hash}</Text4>
               </View>
             </View>
 

@@ -16,6 +16,7 @@ import {
   IconIdCardRegular,
   IconEditPencilRegular,
   IconCloseRegular,
+  IconTeamRegular,
   Form,
   Stack,
   ThemeContext,
@@ -28,13 +29,16 @@ import {
   Callout,
   IconSuccess,
 } from '@telefonica/mistica'
+import { getPermissions } from '../../shared/components/metadata/metadata.utils'
 
 function AssetDetailsScreen(props) {
   const { navigation } = props
   let { assetId, isAuthorised } = props.route.params
-  const { editAsset, edit_fields, getAsset, asset, fetching, error, updateAsset, setSuccessUpdate, successUpdate } = props
+  const { editAsset, edit_fields, getAsset, asset, fetching, error, updateAsset, setSuccessUpdate, successUpdate, account } = props
   const { colors } = React.useContext(ThemeContext)
   const { t } = useTranslation() //i18n instance
+
+  const { _, canEdit } = getPermissions(asset.data.type, account.authorities[0])
 
   useEffect(() => {
     getAsset(isAuthorised, assetId)
@@ -102,29 +106,42 @@ function AssetDetailsScreen(props) {
             }>
             <View style={[styles.container, styles.mainContainer]}>
               <View style={styles.metadata}>
-                <Metadata data={asset.metadata} edit_fields={edit_fields} />
+                <Metadata data={asset.metadata} edit_fields={edit_fields} type={asset.data.type} canEdit={canEdit} />
               </View>
               <View style={styles.assetView}>
                 <View style={styles.asset}>
-                  <Asset name={assetId} image={asset.data.image} type={asset.data.type} hash={asset.hash} authorizathed={isAuthorised} />
+                  <Asset name={assetId} type={asset.data.type} hash={asset.hash} authorizathed={isAuthorised} />
                 </View>
                 <Stack space={16}>
                   <View style={styles.buttons}>
-                    {edit_fields ? (
-                      <ButtonDanger onPress={editAsset}>
-                        <IconCloseRegular color="currentColor" />
-                        {t('CANCEL')}
-                      </ButtonDanger>
-                    ) : (
-                      <ButtonPrimary onPress={editAsset}>
-                        <IconEditPencilRegular color="currentColor" />
-                        {t('EDIT')}
-                      </ButtonPrimary>
-                    )}
-
+                    {
+                      // FIXME cambiar para que solo el propietario del asset lo pueda hacer (asset.owner === account.trustosID)
+                    }
+                    {canEdit.length > 0 &&
+                      (edit_fields ? (
+                        <ButtonDanger onPress={editAsset}>
+                          <IconCloseRegular color="currentColor" />
+                          {t('CANCEL')}
+                        </ButtonDanger>
+                      ) : (
+                        <ButtonPrimary onPress={editAsset}>
+                          <IconEditPencilRegular color="currentColor" />
+                          {t('EDIT')}
+                        </ButtonPrimary>
+                      ))}
+                    {
+                      // FIXME cambiar para que solo el propietario del asset lo pueda hacer (asset.owner === account.trustosID)
+                    }
                     <ButtonSecondary disabled={edit_fields} onPress={() => {}}>
                       <IconIdCardRegular color="currentColor" />
                       {t('TRANFER')}
+                    </ButtonSecondary>
+                    {
+                      // FIXME cambiar para que solo el propietario del asset lo pueda hacer (asset.owner === account.trustosID)
+                    }
+                    <ButtonSecondary disabled={edit_fields} onPress={() => {}}>
+                      <IconTeamRegular color="currentColor" />
+                      {t('AUTHORISE')}
                     </ButtonSecondary>
                     <ButtonSecondary
                       disabled={edit_fields}
@@ -132,12 +149,14 @@ function AssetDetailsScreen(props) {
                       <IconRouteRegular color="currentColor" />
                       {t('TRACEABILITY')}
                     </ButtonSecondary>
-                    <ButtonSecondary disabled={edit_fields} onPress={() => {}}>
-                      Action 1
-                    </ButtonSecondary>
-                    <ButtonSecondary disabled={edit_fields} onPress={() => {}}>
-                      Action 2
-                    </ButtonSecondary>
+                    {
+                      // TODO poner dinamicamente por respuesta a llamada a la api de las transacciones del producto
+                    }
+                    {['Action 1', 'Action 2'].map((action) => (
+                      <ButtonSecondary key={action} disabled={edit_fields} onPress={() => console.log(action)}>
+                        {action}
+                      </ButtonSecondary>
+                    ))}
                   </View>
                 </Stack>
               </View>
@@ -156,6 +175,7 @@ const mapStateToProps = (state) => {
     fetching: state.assetDetails.fetching,
     error: state.assetDetails.error,
     successUpdate: state.assetDetails.successUpdate,
+    account: state.account.account,
   }
 }
 const mapDispatchToProps = (dispatch) => {

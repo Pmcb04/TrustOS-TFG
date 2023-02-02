@@ -27,7 +27,6 @@ function AssetList(props) {
           <Asset
             name={itemData.item.assetId}
             type={itemData.item.data.type}
-            image={itemData.item.data.image}
             hash={itemData.item.hash}
             authorizathed={itemData.item.isAuthorised}
           />

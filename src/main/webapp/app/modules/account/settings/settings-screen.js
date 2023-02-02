@@ -23,7 +23,7 @@ import {
 } from '@telefonica/mistica'
 
 function SettingsScreen(props) {
-  const { account, getAccount, updating, error, updateAccount } = props
+  const { account, getAccount, updating, error, updateAccount, getAsset } = props
   const { t, i18n } = useTranslation() //i18n instance
 
   // array with all types of modes themes
@@ -42,11 +42,12 @@ function SettingsScreen(props) {
   const [successMessage, setSuccessMessage] = React.useState('')
   const [language, setLanguage] = React.useState(props.account.langKey)
   const [theme, setTheme] = React.useState(props.account.theme)
+  const [me, setMe] = React.useState() // TODO meter el asset correspondiente a este usuario
 
   React.useEffect(() => {
     setLanguage(props.account.langKey)
     setTheme(props.account.theme)
-  }, [props.account.langKey, props.account.theme])
+  }, [props.account.langKey, props.account.theme, account.login, getAsset])
 
   const onSubmit = (data) => {
     setSuccessMessage('')
@@ -54,7 +55,6 @@ function SettingsScreen(props) {
     let dataUpdate = Object.assign({ ...account }, data)
     dataUpdate = Object.assign({ ...dataUpdate }, { langKey: language })
     dataUpdate = Object.assign({ ...dataUpdate }, { theme: theme })
-    console.log(dataUpdate)
     updateAccount(dataUpdate)
     i18n.changeLanguage(language) //changes the app language
     // window.location.reload(true) // refress app
@@ -86,7 +86,7 @@ function SettingsScreen(props) {
           <EmailField name="email" label={t('EMAIL')} placeholder={t('ENTER_EMAIL')} fullWidth />
           <TextField name="imageUrl" label={t('IMAGE_PROFILE')} placeholder={t('ENTER_IMAGE_PROFILE')} fullWidth optional />
           {
-            // funcion para añadir las propiedades propias de cada rol
+            // TODO funcion para añadir las propiedades propias de cada rol
           }
           <ListOptionsChips title={t('SELECT_LANGUAGE')} options={languages} defaultOption={language} callback={setLanguage} />
           <ListOptionsChips title={t('SELECT_THEME')} options={themes} defaultOption={theme} callback={setTheme} />

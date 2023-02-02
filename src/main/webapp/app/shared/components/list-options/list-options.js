@@ -23,7 +23,6 @@ function ListOptions(props) {
       })
       categories.push(category)
     })
-    console.log(categories)
     return categories
   }
 
