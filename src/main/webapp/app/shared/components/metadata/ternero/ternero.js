@@ -15,12 +15,12 @@ function Ternero(props) {
     <Box>
       {(create || canView.includes('height')) && (
         <Property
-          title="heigth"
-          primaryKey="heigth"
+          title="height"
+          primaryKey="height"
           key={'property-height'}
-          value={!create && data.heigth ? data.heigth.toString() : null}
-          edit={create ? true : canEdit.includes('heigth') ? edit : false}>
-          <DecimalField key={'heigth'} name="heigth" label="heigth" defaultValue={!create && data.heigth ? data.heigth.toString() : null} />
+          value={data.height ? data.height.toString() : null}
+          edit={create ? true : canEdit.includes('height') ? edit : false}>
+          <DecimalField fullWidth key={'height'} name="height" defaultValue={data.height ? data.height.toString() : null} />
         </Property>
       )}
       {(create || canView.includes('width')) && (
@@ -28,9 +28,9 @@ function Ternero(props) {
           title="width"
           primaryKey="width"
           key={'property-width'}
-          value={!create && data.width ? data.width.toString() : null}
+          value={data.width ? data.width.toString() : null}
           edit={create ? true : canEdit.includes('width') ? edit : false}>
-          <DecimalField key={'width'} name="width" label="width" defaultValue={!create && data.width ? data.width.toString() : null} />
+          <DecimalField fullWidth key={'width'} name="width" defaultValue={data.width ? data.width.toString() : null} />
         </Property>
       )}
     </Box>

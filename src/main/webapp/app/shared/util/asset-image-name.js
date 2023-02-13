@@ -14,6 +14,8 @@ export function getImage(type) {
       return <IconBoxRegular size={SIZE_ICONS} />
     case TYPES.PANTALON:
       return <IconBoxRegular size={SIZE_ICONS} />
+    case TYPES.ROMPER:
+      return <IconFolderRegular size={SIZE_ICONS} />
     default:
       return <IconBoxRegular size={SIZE_ICONS} />
   }
@@ -33,17 +35,4 @@ function alphaNumberRandom(length) {
     counter += 1
   }
   return result
-}
-
-export function getName(type) {
-  switch (type) {
-    case TYPES.TERNERO:
-      return addRandomString(NAMES.TERNERO)
-    case TYPES.BOTELLA:
-      return addRandomString(NAMES.BOTELLA)
-    case TYPES.PANTALON:
-      return addRandomString(NAMES.PANTALON)
-    default:
-      return addRandomString('no_name')
-  }
 }

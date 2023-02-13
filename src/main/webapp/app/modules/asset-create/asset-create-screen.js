@@ -72,7 +72,7 @@ function AssetCreateScreen(props) {
             }}>
             <View style={[styles.container, styles.mainContainer]}>
               <View style={styles.metadata}>
-                <Metadata type={type} create={true} />
+                <Metadata type={type} createWithButton={true} />
               </View>
               <View style={styles.assetView}>
                 <View style={styles.asset}>

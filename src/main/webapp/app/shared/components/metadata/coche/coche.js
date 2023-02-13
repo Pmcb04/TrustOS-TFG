@@ -16,9 +16,9 @@ function Coche(props) {
           title="heigth"
           primaryKey="heigth"
           key={'property-height'}
-          value={!create && data.height ? data.height.toString() : null}
+          value={data.height ? data.height.toString() : null}
           edit={create ? true : canEdit.includes('heigth') ? edit : false}>
-          <DecimalField key={'heigth'} name="heigth" label="heigth" defaultValue={!create && data.height ? data.height.toString() : null} />
+          <DecimalField fullWidth key={'heigth'} name="heigth" defaultValue={data.height ? data.height.toString() : null} />
         </Property>
       )}
       {(create || canView.includes('width')) && (
@@ -26,9 +26,9 @@ function Coche(props) {
           title="width"
           primaryKey="width"
           key={'property-width'}
-          value={!create && data.width ? data.width.toString() : null}
+          value={data.width ? data.width.toString() : null}
           edit={create ? true : canEdit.includes('width') ? edit : false}>
-          <DecimalField key={'width'} name="width" label="width" defaultValue={!create && data.width ? data.width.toString() : null} />
+          <DecimalField fullWidth key={'width'} name="width" defaultValue={data.width ? data.width.toString() : null} />
         </Property>
       )}
       {(create || canView.includes('color')) && (
@@ -36,9 +36,9 @@ function Coche(props) {
           title="color"
           primaryKey="color"
           key={'property-color'}
-          value={!create && data.color ? data.color.toString() : null}
+          value={data.color ? data.color.toString() : null}
           edit={create ? true : canEdit.includes('color') ? edit : false}>
-          <TextField key={'color'} name="color" label="color" defaultValue={!create && data.color ? data.color.toString() : null} />
+          <TextField fullWidth key={'color'} name="color" defaultValue={data.color ? data.color.toString() : null} />
         </Property>
       )}
       {(create || canView.includes('horsepower')) && (
@@ -46,13 +46,13 @@ function Coche(props) {
           title="horsepower"
           primaryKey="horsepower"
           key={'property-horsepower'}
-          value={!create && data.horsepower ? data.horsepower.toString() : null}
+          value={data.horsepower ? data.horsepower.toString() : null}
           edit={create ? true : canEdit.includes('horsepower') ? edit : false}>
           <IntegerField
+            fullWidth
             key={'horsepower'}
             name="horsepower"
-            label="horsepower"
-            defaultValue={!create && data.horsepower ? data.horsepower.toString() : null}
+            defaultValue={data.horsepower ? data.horsepower.toString() : null}
           />
         </Property>
       )}

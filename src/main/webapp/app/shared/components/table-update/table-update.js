@@ -40,17 +40,19 @@ function process(dataBefore, dataAfter) {
   if (!Object.keys(dataBefore).length) {
     // dataBefore empty
     return Object.keys(dataAfter).map((key) => {
-      if (typeof dataAfter[key] === 'object' && !Array.isArray(dataAfter[key])) {
-        return process(dataAfter[key], dataAfter)
-      } else {
-        return <Row key={key} field={key} after={dataAfter[key].toString()} />
+      if (dataAfter[key] !== null){
+        if(typeof dataAfter[key] === 'object' && !Array.isArray(dataAfter[key])) {
+          return process(dataAfter[key], dataAfter)
+        } else {
+          return <Row key={key} field={key} after={dataAfter[key].toString()} />
+        }
       }
     })
   }
 
   // dataBefore not empty
   return Object.keys(dataBefore).map((key) => {
-    if (dataBefore[key] != null && typeof dataBefore[key] === 'object' && !Array.isArray(dataBefore[key])) {
+    if (dataBefore[key] !== null && typeof dataBefore[key] === 'object' && !Array.isArray(dataBefore[key])) {
       return process(dataBefore[key], dataAfter)
     } else {
       return (
@@ -66,6 +68,9 @@ function TableUpdate(props) {
   const { colors } = React.useContext(ThemeContext)
   const { dataBefore, dataAfter } = props
   const { t } = useTranslation() //i18n instance
+
+  console.log("b",dataBefore)
+  console.log("a",dataAfter)
 
   return (
     <View style={[styles.container, styles.mainContainer]}>

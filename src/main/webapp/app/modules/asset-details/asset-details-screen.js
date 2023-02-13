@@ -38,6 +38,7 @@ function AssetDetailsScreen(props) {
   const { colors } = React.useContext(ThemeContext)
   const { t } = useTranslation() //i18n instance
 
+  // FIXME ver como podemos ver que no salte el fallo de que no encuentra el asset.data
   const { _, canEdit } = getPermissions(asset.data.type, account.authorities[0])
 
   useEffect(() => {
@@ -110,7 +111,7 @@ function AssetDetailsScreen(props) {
               </View>
               <View style={styles.assetView}>
                 <View style={styles.asset}>
-                  <Asset name={assetId} type={asset.data.type} hash={asset.hash} authorizathed={isAuthorised} />
+                  <Asset name={assetId} type={asset.data.type} hash={asset.hash} />
                 </View>
                 <Stack space={16}>
                   <View style={styles.buttons}>
@@ -129,7 +130,7 @@ function AssetDetailsScreen(props) {
                           {t('EDIT')}
                         </ButtonPrimary>
                       ))}
-                    {
+                    {/* {
                       // FIXME cambiar para que solo el propietario del asset lo pueda hacer (asset.owner === account.trustosID)
                     }
                     <ButtonSecondary disabled={edit_fields} onPress={() => {}}>
@@ -142,7 +143,7 @@ function AssetDetailsScreen(props) {
                     <ButtonSecondary disabled={edit_fields} onPress={() => {}}>
                       <IconTeamRegular color="currentColor" />
                       {t('AUTHORISE')}
-                    </ButtonSecondary>
+                    </ButtonSecondary> */}
                     <ButtonSecondary
                       disabled={edit_fields}
                       onPress={() => navigation.navigate('AssetTraceability', { assetId: assetId, isAuthorised: isAuthorised })}>
@@ -151,9 +152,10 @@ function AssetDetailsScreen(props) {
                     </ButtonSecondary>
                     {
                       // TODO poner dinamicamente por respuesta a llamada a la api de las transacciones del producto
+                      // FIXME Arreglar numero de veces que se puede realizar una accion. Aqui es donde el usuario elige la opcion a realizar, aqui es donde podemos limitar el numero de veces que usuario realiza la accion con el asset que estemos tratando.
                     }
-                    {['Action 1', 'Action 2'].map((action) => (
-                      <ButtonSecondary key={action} disabled={edit_fields} onPress={() => console.log(action)}>
+                    {['Regalar', 'Romper', 'Usar'].map((action) => (
+                      <ButtonSecondary key={action} disabled={edit_fields} onPress={() => navigation.navigate('AssetAction', { action: action })}>
                         {action}
                       </ButtonSecondary>
                     ))}

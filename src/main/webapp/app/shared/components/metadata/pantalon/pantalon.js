@@ -16,13 +16,13 @@ function Pantalon(props) {
         <Property
           title="Color"
           key={'property-color'}
-          value={!create && data.color ? data.color.toString() : null}
+          value={data.color ? data.color.toString() : null}
           edit={create ? true : canEdit.includes('color') ? edit : false}>
           <Select
+            fullWidth
             name={'color'}
             key={'property-color'}
-            label={'Color'}
-            value={!create && data.color ? data.color.toString() : null}
+            value={data.color != null ? data.color.toString() : null}
             options={[
               { value: 'azul', text: 'azul' },
               { value: 'blanco', text: 'blanco' },
@@ -36,13 +36,13 @@ function Pantalon(props) {
           title="width"
           primaryKey="width"
           key={'property-width'}
-          value={!create && data.width ? data.width.toString() : null}
+          value={data.width != null ? data.width.toString() : null}
           edit={create ? true : canEdit.includes('width') ? edit : false}>
           <Select
+            fullWidth
             name={'width'}
             key={'property-width'}
-            label={'Width'}
-            value={!create && data.width ? data.width.toString() : null}
+            value={data.width ? data.width.toString() : null}
             options={[
               { value: 'XXS', text: 'XXS' },
               { value: 'XS', text: 'XS' },
