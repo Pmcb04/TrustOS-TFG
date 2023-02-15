@@ -2,7 +2,7 @@ import React, { useRef, useState, useEffect } from 'react'
 import { View } from 'react-native'
 import { connect } from 'react-redux'
 import { ThemeContext, ButtonPrimary, IconOfferFilled, 
-    Stack, Stepper , ButtonLayout, Box, Text5, Text4, Text3,
+    Stack, Stepper , ButtonLayout, Box, Text5, Text4,
     Inline,IconArrowLineRightRegular,IconArrowLineLeftRegular } from '@telefonica/mistica'
 import { useTranslation } from 'react-i18next'
 
@@ -24,16 +24,28 @@ function AssetActionScreen(props) {
     const { colors } = React.useContext(ThemeContext)
     const { t } = useTranslation() //i18n instance
 
-    useEffect(() => {
-        reset()
-      }, [])  
-
-    const texts = [t('INPUT'),t('ACTION'),t('OUTPUT'),t('FINAL')]
+    const steps = [t('INPUT'),t('ACTION'),t('OUTPUT'),t('FINAL')]
 
     const [step, setStep] = useState(0)
+    const [errorNextStep, setErrorNextStep] = useState(false)
+
+    function currentIsEmpty(current){
+        return Object.keys(current).length == 0
+    }
 
     const stepDecrement = () => {setStep((prevStep) => prevStep - 1)}
-    const stepIncrement = () => {setStep((prevStep) => prevStep + 1)}
+    const stepIncrement = () => {
+        if(![step_input, step_action, step_output][step].some((element => currentIsEmpty(element.ref.current)))){
+            setErrorNextStep(false)
+            setStep((prevStep) => prevStep + 1)
+        }else{
+            setErrorNextStep(true)
+        }
+    }
+
+    useEffect(() => {
+        reset()
+    }, [])  
 
     const step_input = [
         {
@@ -51,7 +63,7 @@ function AssetActionScreen(props) {
         }
     ]
 
-    const step_action = [
+    const step_action =[
         {
             title: NAMES.ROMPER,
             type: action,
@@ -81,27 +93,6 @@ function AssetActionScreen(props) {
         },
     ]
 
-    function saveStateStep(step){
-        switch (step) {
-            case 0:
-                {step_input.map((element, index) => (   
-                    console.log(element.ref)
-                ))}
-                break;
-            case 1:
-                {step_action.map((element, index) => (   
-                    console.log(element.ref)
-                ))}
-                break;
-            case 2:
-                {step_output.map((element, index) => (   
-                    console.log(element.ref)
-                ))}
-                break;
-            default:
-                break;
-        }        
-    }
 
     function tablesSteps(){
         return (
@@ -109,7 +100,7 @@ function AssetActionScreen(props) {
                 {[step_input, step_action, step_output].map((step, index) => {
                     return (
                     <View key={"step-" + index} style={styles.tablesSteps}>
-                        <View style={styles.titleTable}><Text5 key={"title-" + index} decoration='underline'>{texts[index]}</Text5></View>
+                        <View style={styles.titleTable}><Text5 key={"title-" + index} decoration='underline'>{steps[index]}</Text5></View>
                         {step.map((element, index) => (  
                             <TableResume 
                                 key={element.title + index}
@@ -178,24 +169,21 @@ function AssetActionScreen(props) {
     }
 
   return (
-    // <Form onSubmit={(formData) => console.log(formData)}>
+ 
       <View style={[styles.container, { backgroundColor: colors.background }]}>
-       {/* <ButtonPrimary submit>{t('SAVE')}</ButtonPrimary> */}
        <Stack space={32}>
-            <Stepper currentIndex={step} steps={texts} aria-label="Progress" />
+            <Stepper currentIndex={step} steps={steps} aria-label="Progress" />
             <ButtonLayout align="center">
                 <ButtonPrimary onPress={stepDecrement} disabled={step === 0}>
                     <IconArrowLineLeftRegular color="currentColor"/>
                     {t('PREVIOUS')}
                 </ButtonPrimary>
-                <ButtonPrimary onPress={stepIncrement} disabled={step === texts.length - 1}>
+                <ButtonPrimary onPress={stepIncrement} disabled={step === steps.length - 1}>
                     {t('NEXT')}
                     <IconArrowLineRightRegular color="currentColor"/>
                 </ButtonPrimary>
-                {/* <ButtonPrimary onPress={() => saveStateStep(step)}>
-                    STATES
-                </ButtonPrimary> */}
             </ButtonLayout>
+            {errorNextStep && <View style={{textAlign: 'center'}}><Text4 color={colors.error}>{t('ERROR_NEXT_STEP')}</Text4></View>}
             <View style={ styles.table}>
                 {step == 0 && (<Step assets={assets} list={step_input}></Step>)}
                 {step == 1 && (<Step list={step_action}></Step>)}
@@ -210,7 +198,6 @@ function AssetActionScreen(props) {
         </Stack>
       
       </View>
-    // </Form>
   )
 }
 

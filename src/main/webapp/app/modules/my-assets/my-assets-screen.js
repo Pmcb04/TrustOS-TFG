@@ -51,8 +51,8 @@ function MyAssetsScreen(props) {
 
   useEffect(() => {
     getAssetsCreate()
-    if (numAssets === 0) getAssets()
-  }, [getAssets, numAssets, getAssetsCreate])
+    getAssets()
+  }, [])
 
   return (
     <View style={[styles.container, styles.mainContainer, { backgroundColor: colors.background }]}>

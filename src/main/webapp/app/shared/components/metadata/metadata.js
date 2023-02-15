@@ -19,7 +19,7 @@ function Metadata(props) {
     <View style={[styles.properties, { borderColor: colors.border }]}>
       <ScrollView contentContainerStyle={styles.contentContainer}>
         <Box padding={16}>
-          {/* <FadeIn delay="0.25s"> */}
+          <FadeIn delay="0.25s">
             {asset}
             {canEdit != [] && edit_fields && (
               <ButtonPrimary fullWidth submit>
@@ -31,7 +31,7 @@ function Metadata(props) {
                 {t('CREATE')}
               </ButtonPrimary>
             )}
-          {/* </FadeIn> */}
+          </FadeIn>
         </Box>
       </ScrollView>
     </View>

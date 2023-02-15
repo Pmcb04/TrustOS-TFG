@@ -14,8 +14,8 @@ import AssetActionActions from '../../../modules/asset-action/asset-action-scree
 
 const AssetWithProperties = React.forwardRef((props, ref) => {
   const { title, type, create, listOption, assetRef, indexAsset, assets, getAsset, assetList } = props
-  const [name, setName] = useState(listOption)
-  const [metadata, setMetadata] = useState(assetRef.current)
+  const [name, setName] = useState(assetRef.assetId || listOption)
+  const [metadata, setMetadata] = useState(create ? assetRef.current : {})
   
   assetRef.current = metadata
   assetRef.title = title
@@ -32,31 +32,33 @@ const AssetWithProperties = React.forwardRef((props, ref) => {
   }, [name])    
 
   useEffect(() => {
-    if(!create && assetList[indexAsset] != null){
+    if(!create && name != null && assetList[indexAsset] != null){
       setMetadata(assetList[indexAsset].metadata)
     }
   }, [assetList[indexAsset]])  
 
   return (
-      <View style={styles.row}>
-        <View style={styles.titleTable}><Title2>{title}</Title2></View>
-        {!create && ( // if the asset not will create, choose to the list of assets
-          <Select
-            fullWidth
-            name={'name'}
-            label={t('CHOOSE') + ' ' + type}
-            key={'property-name'}
-            value={name}
-            onChangeValue={(value) => setName(value)}
-            options={options}
-          />
-        )}
-        <Asset name={name} type={type} hash={assetList[indexAsset] ? assetList[indexAsset].hash :  null}/>
-        <Form onSubmit={(formData) => setMetadata(formData)}>
-          <Metadata data={metadata} type={type} create={create} />
-          <ButtonPrimary submit>SAVE</ButtonPrimary>
-        </Form>
-      </View>
+      <Form onSubmit={(formData) => setMetadata(formData)}>
+        <View style={styles.row}>
+          <View style={styles.titleTable}><Title2>{title}</Title2></View>
+            {!create && ( // if the asset not will create, choose to the list of assets
+              <Select
+                fullWidth
+                name={'name'}
+                label={t('CHOOSE') + ' ' + type}
+                key={'property-name'}
+                value={name}
+                onChangeValue={(value) => setName(value)}
+                options={options}
+              />
+            )}
+            <Asset name={name} type={type} hash={!create && assetList[indexAsset] ? assetList[indexAsset].hash : null}/>
+            {(create || name != null) && (
+              <Metadata data={metadata} type={type} create={create} />
+            )}
+            {create && <ButtonPrimary submit>{t('SAVE')}</ButtonPrimary>}
+        </View>
+      </Form> 
   )
 })
 

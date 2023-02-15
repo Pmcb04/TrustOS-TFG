@@ -85,5 +85,6 @@
   "ACTION" : "Action",
   "OUTPUT" : "Output",
   "FINAL" : "Final",
-  "NEW" : "New"
+  "NEW" : "New",
+  "ERROR_NEXT_STEP": "One element is not selected or is empty"
 }

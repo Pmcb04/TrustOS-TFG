@@ -85,5 +85,7 @@
   "ACTION" : "Acción",
   "OUTPUT" : "Salida",
   "FINAL" : "Final",
-  "NEW" : "Nuevo"
+  "NEW" : "Nuevo",
+  "ERROR_NEXT_STEP": "Un elemento no está selecionado o está vacio"
+
 }

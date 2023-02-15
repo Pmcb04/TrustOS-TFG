@@ -69,9 +69,6 @@ function TableUpdate(props) {
   const { dataBefore, dataAfter } = props
   const { t } = useTranslation() //i18n instance
 
-  console.log("b",dataBefore)
-  console.log("a",dataAfter)
-
   return (
     <View style={[styles.container, styles.mainContainer]}>
       <View style={styles.row}>
