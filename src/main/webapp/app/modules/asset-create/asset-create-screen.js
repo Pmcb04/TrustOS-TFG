@@ -22,13 +22,11 @@ function AssetCreateScreen(props) {
   function create(metadata) {
     const assetId = addRandomString(type)
     delete metadata.name
-    metadata.assetAfter = null
     const newAsset = {
       assetId: assetId,
       metadata: metadata,
       data: { type: type, assetBefore: null },
     }
-    console.log(newAsset)
     createAsset(newAsset)
     setSuccessCreated() // activamos para que se muestre el mensaje de asset creado satisfactoriamente
     props.navigation.navigate(t('MY_ASSETS'), { assetId: assetId }) // vamos a la pantalla de la lista de assets

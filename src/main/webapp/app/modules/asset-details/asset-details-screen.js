@@ -13,10 +13,8 @@ import {
   ButtonPrimary,
   ButtonSecondary,
   ButtonDanger,
-  IconIdCardRegular,
   IconEditPencilRegular,
   IconCloseRegular,
-  IconTeamRegular,
   Form,
   Stack,
   ThemeContext,
@@ -38,7 +36,7 @@ function AssetDetailsScreen(props) {
   const { colors } = React.useContext(ThemeContext)
   const { t } = useTranslation() //i18n instance
 
-  // FIXME ver como podemos ver que no salte el fallo de que no encuentra el asset.data
+  // FIXME ver como podemos ver que no salte el fallo de que no encuentra el asset.data, ¿cambiar a un useEffect?
   const { _, canEdit } = getPermissions(asset.data.type, account.authorities[0])
 
   useEffect(() => {
@@ -46,12 +44,12 @@ function AssetDetailsScreen(props) {
   }, [getAsset, isAuthorised, assetId])
 
   function update(newMetadata) {
-    // copy new metadata
-    const metadataUpdate = copyAssetMetadata(asset.metadata, newMetadata)
-
+    
     // put metadata and prepare new asset
     let newAsset = { ...asset }
-    newAsset.metadata = metadataUpdate
+    newAsset.metadata = newMetadata
+
+    console.log(newAsset)
 
     // update the asset
     updateAsset(newAsset)
@@ -96,14 +94,19 @@ function AssetDetailsScreen(props) {
             />
           )}
           <Form
-            onSubmit={(formData) =>
+            onSubmit={(formData) =>{
+              const newMetadata = copyAssetMetadata(asset.metadata, formData)
+              console.log("new", newMetadata)
               confirm({
                 title: <Text6>{t('VALUES_UPDATE')}</Text6>,
-                message: <TableUpdate data={formData} />,
+                message: <TableUpdate dataBefore={asset.metadata} dataAfter={newMetadata} />,
                 acceptText: <Text3 color="currentColor">{t('UPDATE')}</Text3>,
                 cancelText: <Text3 color="currentColor">{t('CANCEL')}</Text3>,
-                onAccept: () => update(formData),
+                onAccept: () => update(newMetadata),
               })
+              console.log(formData)
+              console.log("asset", asset.metadata)
+            }
             }>
             <View style={[styles.container, styles.mainContainer]}>
               <View style={styles.metadata}>
@@ -130,20 +133,6 @@ function AssetDetailsScreen(props) {
                           {t('EDIT')}
                         </ButtonPrimary>
                       ))}
-                    {/* {
-                      // FIXME cambiar para que solo el propietario del asset lo pueda hacer (asset.owner === account.trustosID)
-                    }
-                    <ButtonSecondary disabled={edit_fields} onPress={() => {}}>
-                      <IconIdCardRegular color="currentColor" />
-                      {t('TRANFER')}
-                    </ButtonSecondary>
-                    {
-                      // FIXME cambiar para que solo el propietario del asset lo pueda hacer (asset.owner === account.trustosID)
-                    }
-                    <ButtonSecondary disabled={edit_fields} onPress={() => {}}>
-                      <IconTeamRegular color="currentColor" />
-                      {t('AUTHORISE')}
-                    </ButtonSecondary> */}
                     <ButtonSecondary
                       disabled={edit_fields}
                       onPress={() => navigation.navigate('AssetTraceability', { assetId: assetId, isAuthorised: isAuthorised })}>

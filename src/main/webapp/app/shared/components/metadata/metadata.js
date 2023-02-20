@@ -13,7 +13,7 @@ function Metadata(props) {
   const { colors } = React.useContext(ThemeContext)
   const { t } = useTranslation() //i18n instance
 
-  const asset = process(data, edit_fields, create || createWithButton, type, account.authorities[0])
+  const asset = process(data || {}, edit_fields, create || createWithButton, type, account.authorities[0])
 
   return (
     <View style={[styles.properties, { borderColor: colors.border }]}>

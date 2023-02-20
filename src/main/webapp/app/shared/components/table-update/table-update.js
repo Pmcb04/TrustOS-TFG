@@ -52,14 +52,16 @@ function process(dataBefore, dataAfter) {
 
   // dataBefore not empty
   return Object.keys(dataBefore).map((key) => {
-    if (dataBefore[key] !== null && typeof dataBefore[key] === 'object' && !Array.isArray(dataBefore[key])) {
-      return process(dataBefore[key], dataAfter)
-    } else {
-      return (
-        dataBefore[key].toString() !== dataAfter[key].toString() && (
-          <Row key={key} field={key} before={dataBefore[key].toString()} after={dataAfter[key].toString()} />
-        )
-      )
+    if (dataBefore[key] !== null)  {
+      if(typeof dataBefore[key] === 'object' && !Array.isArray(dataBefore[key])) {
+        return process(dataBefore[key], dataAfter)
+      } else {
+        return (
+          dataBefore[key].toString() !== dataAfter[key].toString() && (
+            <Row key={key} field={key} before={dataBefore[key].toString()} after={dataAfter[key].toString()} />
+            )
+          )
+      }  
     }
   })
 }

@@ -1,4 +1,4 @@
-import React from 'react'
+import React, {useState} from 'react'
 import Property from '../../property/property'
 import { Select, TextField, Title1, IntegerField, DecimalField, DoubleField, Switch, Box } from '@telefonica/mistica'
 
@@ -9,6 +9,10 @@ import { permissionsPantalon } from './permissions'
 function Pantalon(props) {
   const { data, rol, create, edit } = props
   const { canView, canEdit } = permissionsPantalon(rol)
+  // TODO ver como se puede actualizar este estado en la pantalla de trazabilidad 
+  // que ahora mismo muestra la ultima actualizacion
+  const [color, setColor] = React.useState(data.color)
+  console.log("color", color)
 
   return (
     <Box>
@@ -22,6 +26,7 @@ function Pantalon(props) {
             fullWidth
             name={'color'}
             key={'property-color'}
+            onChangeValue={(value) => setColor(value)}
             value={data.color != null ? data.color.toString() : null}
             options={[
               { value: 'azul', text: 'azul' },

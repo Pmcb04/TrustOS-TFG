@@ -7,6 +7,9 @@ const { Types, Creators } = createActions({
   assetActionRequest: ['isAuthorised', 'assetId', 'index'],
   assetActionSuccess: ['assetList'],
   assetActionFailure: ['error'],
+  assetActionCreate: ['newAsset'],
+  assetActionCreateSuccess: [],
+  assetActionCreateFailure: ['error'],
 })
 
 export const AssetActionTypes = Types
@@ -49,6 +52,8 @@ export const failure = (state, { error }) =>
 // reset the asset reducer
 export const reset = () => INITIAL_STATE
 
+export const create = (state) => state
+
 /* ------------- Hookup Reducers To Types ------------- */
 
 export const reducer = createReducer(INITIAL_STATE, {
@@ -56,4 +61,7 @@ export const reducer = createReducer(INITIAL_STATE, {
   [Types.ASSET_ACTION_SUCCESS]: success,
   [Types.ASSET_ACTION_FAILURE]: failure,
   [Types.ASSET_ACTION_RESET]: reset,
+  [Types.ASSET_ACTION_CREATE]: create,
+  [Types.ASSET_ACTION_CREATE_SUCCESS]: create,
+  [Types.ASSET_ACTION_CREATE_FAILURE]: failure,
 })

@@ -14,7 +14,7 @@ import AssetActionActions from '../../../modules/asset-action/asset-action-scree
 
 const AssetWithProperties = React.forwardRef((props, ref) => {
   const { title, type, create, listOption, assetRef, indexAsset, assets, getAsset, assetList } = props
-  const [name, setName] = useState(assetRef.assetId || listOption)
+  const [name, setName] = useState(listOption || assetRef.assetId )
   const [metadata, setMetadata] = useState(create ? assetRef.current : {})
   
   assetRef.current = metadata
@@ -26,7 +26,7 @@ const AssetWithProperties = React.forwardRef((props, ref) => {
   const options = assets.filter((asset) => asset.assetId.includes(type)).map((asset) => ({ value: asset.assetId, text: asset.assetId }))
   
   useEffect(() => {
-    if(name != null){
+    if(!create && name != null){
       getAsset(false,name,indexAsset)
     }
   }, [name])    
@@ -36,6 +36,8 @@ const AssetWithProperties = React.forwardRef((props, ref) => {
       setMetadata(assetList[indexAsset].metadata)
     }
   }, [assetList[indexAsset]])  
+
+  console.log("list option", listOption, "assetId", assetRef.assetId)
 
   return (
       <Form onSubmit={(formData) => setMetadata(formData)}>

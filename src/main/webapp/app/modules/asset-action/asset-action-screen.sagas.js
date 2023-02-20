@@ -16,3 +16,14 @@ export function* getAssetAction(api, action) {
     yield put(AssetActionActions.assetActionFailure(response.data))
   }
 }
+
+export function* createAssetAction(api, action) {
+  const { newAsset } = action
+  const response = yield call(api.createAsset, newAsset)
+  // success?
+  if (response.ok) {
+    yield put(AssetActionActions.assetActionCreateSuccess())
+  } else {
+    yield put(AssetActionActions.assetActionCreateFailure(response.data))
+  }
+}

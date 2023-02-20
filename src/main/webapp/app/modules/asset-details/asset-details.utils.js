@@ -62,10 +62,10 @@ export function process(data, edit_fields) {
 export function copyAssetMetadata(metadata, newMetadata) {
   let metadataCopy = {}
   Object.keys(metadata).map((key) => {
-    if (typeof metadata[key] === 'object' && !Array.isArray(metadata[key])) {
+    if (metadata[key] != null && typeof metadata[key] === 'object' && !Array.isArray(metadata[key])) {
       metadataCopy[key] = copyAssetMetadata(metadata[key], newMetadata)
     } else {
-      metadataCopy[key] = parseType(newMetadata[key])
+      metadataCopy[key] = parseType(newMetadata[key] || metadata[key])
     }
   })
 

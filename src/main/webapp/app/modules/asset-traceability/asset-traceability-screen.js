@@ -126,9 +126,10 @@ function AssetTraceabilityScreen(props) {
             </View>
             <View style={styles.metadata}>
               <Metadata
-                data={traceability.transactions[transactionSelect].metadata}
                 type={traceability.data.type}
+                data={traceability.transactions[transactionSelect].metadata}
               />
+              {console.log(traceability.transactions[transactionSelect].metadata)}
             </View>
           </View>
         </View>
