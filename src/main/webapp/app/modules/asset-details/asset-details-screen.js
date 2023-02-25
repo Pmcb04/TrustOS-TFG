@@ -32,24 +32,28 @@ import { getPermissions } from '../../shared/components/metadata/metadata.utils'
 function AssetDetailsScreen(props) {
   const { navigation } = props
   let { assetId, isAuthorised } = props.route.params
-  const { editAsset, edit_fields, getAsset, asset, fetching, error, updateAsset, setSuccessUpdate, successUpdate, account } = props
+  const { editAsset, edit_fields, getAsset, asset, fetching, error, updateAsset, setSuccessUpdate, successUpdate, account, getActions, actions } = props
   const { colors } = React.useContext(ThemeContext)
   const { t } = useTranslation() //i18n instance
 
-  // FIXME ver como podemos ver que no salte el fallo de que no encuentra el asset.data, ¿cambiar a un useEffect?
-  const { _, canEdit } = getPermissions(asset.data.type, account.authorities[0])
+  // BUG arreglar por que cuando da fallo no puede leer asset.data.type
+  const { canView, canEdit } = getPermissions(asset.data.type, account.authorities[0])
 
   useEffect(() => {
     getAsset(isAuthorised, assetId)
   }, [getAsset, isAuthorised, assetId])
 
+  useEffect(() => {
+    if(asset != null){
+      getActions(asset.data.type)
+    }
+  }, [asset])
+
   function update(newMetadata) {
     
     // put metadata and prepare new asset
     let newAsset = { ...asset }
-    newAsset.metadata = newMetadata
-
-    console.log(newAsset)
+    newAsset.metadata = newMetadata 
 
     // update the asset
     updateAsset(newAsset)
@@ -96,7 +100,6 @@ function AssetDetailsScreen(props) {
           <Form
             onSubmit={(formData) =>{
               const newMetadata = copyAssetMetadata(asset.metadata, formData)
-              console.log("new", newMetadata)
               confirm({
                 title: <Text6>{t('VALUES_UPDATE')}</Text6>,
                 message: <TableUpdate dataBefore={asset.metadata} dataAfter={newMetadata} />,
@@ -104,8 +107,6 @@ function AssetDetailsScreen(props) {
                 cancelText: <Text3 color="currentColor">{t('CANCEL')}</Text3>,
                 onAccept: () => update(newMetadata),
               })
-              console.log(formData)
-              console.log("asset", asset.metadata)
             }
             }>
             <View style={[styles.container, styles.mainContainer]}>
@@ -119,9 +120,7 @@ function AssetDetailsScreen(props) {
                 <Stack space={16}>
                   <View style={styles.buttons}>
                     {
-                      // FIXME cambiar para que solo el propietario del asset lo pueda hacer (asset.owner === account.trustosID)
-                    }
-                    {canEdit.length > 0 &&
+                    canEdit && canEdit.length > 0 &&
                       (edit_fields ? (
                         <ButtonDanger onPress={editAsset}>
                           <IconCloseRegular color="currentColor" />
@@ -139,15 +138,19 @@ function AssetDetailsScreen(props) {
                       <IconRouteRegular color="currentColor" />
                       {t('TRACEABILITY')}
                     </ButtonSecondary>
-                    {
-                      // TODO poner dinamicamente por respuesta a llamada a la api de las transacciones del producto
-                      // FIXME Arreglar numero de veces que se puede realizar una accion. Aqui es donde el usuario elige la opcion a realizar, aqui es donde podemos limitar el numero de veces que usuario realiza la accion con el asset que estemos tratando.
-                    }
-                    {['Regalar', 'Romper', 'Usar'].map((action) => (
-                      <ButtonSecondary key={action} disabled={edit_fields} onPress={() => navigation.navigate('AssetAction', { action: action })}>
-                        {action}
-                      </ButtonSecondary>
-                    ))}
+                    {actions.map((action) => ( 
+                      ((action.repeat === -1 || 
+                        (asset.metadata.actions ?  
+                          asset.metadata.actions[action.name.trim().replace(" ", "_")] < action.repeat 
+                          : false))
+                          &&
+                        (<ButtonSecondary 
+                          key={action.name} 
+                          disabled={edit_fields} 
+                          onPress={() => navigation.navigate('AssetAction', { action: action.name })}>
+                          {action.name}
+                        </ButtonSecondary>)
+                    )))}
                   </View>
                 </Stack>
               </View>
@@ -166,6 +169,7 @@ const mapStateToProps = (state) => {
     fetching: state.assetDetails.fetching,
     error: state.assetDetails.error,
     successUpdate: state.assetDetails.successUpdate,
+    actions: state.assetDetails.actions,
     account: state.account.account,
   }
 }
@@ -175,6 +179,7 @@ const mapDispatchToProps = (dispatch) => {
     setSuccessUpdate: () => dispatch(AssetDetailsActions.assetDetailsSuccessUpdate()),
     getAsset: (isAuthorised, assetId) => dispatch(AssetDetailsActions.assetDetailsRequest(isAuthorised, assetId)),
     updateAsset: (newAsset) => dispatch(AssetDetailsActions.assetDetailsUpdate(newAsset)),
+    getActions: (assetType) => dispatch(AssetDetailsActions.assetDetailsActionRequest(assetType)),
   }
 }
 export default connect(mapStateToProps, mapDispatchToProps)(AssetDetailsScreen)

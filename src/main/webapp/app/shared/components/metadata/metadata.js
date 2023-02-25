@@ -17,7 +17,6 @@ function Metadata(props) {
 
   return (
     <View style={[styles.properties, { borderColor: colors.border }]}>
-      <ScrollView contentContainerStyle={styles.contentContainer}>
         <Box padding={16}>
           <FadeIn delay="0.25s">
             {asset}
@@ -33,7 +32,6 @@ function Metadata(props) {
             )}
           </FadeIn>
         </Box>
-      </ScrollView>
     </View>
   )
 }

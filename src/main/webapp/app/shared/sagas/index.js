@@ -40,10 +40,10 @@ import {
   getAssetCreate,
   changeOrder,
 } from '../../modules/my-assets/my-assets-screen.sagas'
-import { getAsset, updateAsset } from '../../modules/asset-details/asset-details-screen.sagas'
+import { getAsset, updateAsset, getActions } from '../../modules/asset-details/asset-details-screen.sagas'
 import { getAssetTraceability, getAssetRangeTraceability } from '../../modules/asset-traceability/asset-traceability-screen.sagas'
-import { createAsset } from '../../modules/asset-create/asset-create-screen.sagas'
-import { getAssetAction, createAssetAction } from '../../modules/asset-action/asset-action-screen.sagas'
+import { createAsset, getActionsCreate } from '../../modules/asset-create/asset-create-screen.sagas'
+import { getAssetAction, createAssetAction, updateAssetAction, getActionsAction } from '../../modules/asset-action/asset-action-screen.sagas'
 /* ------------- API ------------- */
 
 // The API we use is only used from Sagas, so we create it here and pass along
@@ -89,6 +89,7 @@ export default function* root() {
     // Asset Details
     takeLatest(AssetDetailsTypes.ASSET_DETAILS_REQUEST, getAsset, api),
     takeLatest(AssetDetailsTypes.ASSET_DETAILS_UPDATE, updateAsset, api),
+    takeLatest(AssetDetailsTypes.ASSET_DETAILS_ACTION_REQUEST, getActions, api),
 
     // Asset Traceability
     takeLatest(AssetTraceabilityTypes.ASSET_TRACEABILITY_REQUEST, getAssetTraceability, api),
@@ -96,10 +97,15 @@ export default function* root() {
 
     // Asset create
     takeLatest(AssetCreateTypes.ASSET_CREATE_REQUEST, createAsset, api),
+    takeLatest(AssetCreateTypes.ASSET_CREATE_ACTION_REQUEST, getActionsCreate, api),
+
 
     // Asset Action
     takeLatest(AssetActionTypes.ASSET_ACTION_REQUEST, getAssetAction, api),
     takeLatest(AssetActionTypes.ASSET_ACTION_CREATE, createAssetAction, api),
+    takeLatest(AssetActionTypes.ASSET_ACTION_UPDATE, updateAssetAction, api),
+    takeLatest(AssetActionTypes.ASSET_ACTION_ACTION_REQUEST, getActionsAction, api),
+
 
   ])
 }

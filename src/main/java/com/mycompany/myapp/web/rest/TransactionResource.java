@@ -21,14 +21,14 @@ public class TransactionResource {
     }
 
     /**
-     * {@code GET api/products/transaction/{productId}/{rol}} : get all products can be create a rol
+     * {@code GET api/products/transaction/{productName}/{rol}} : get all products can be create a rol
      *
-     * @param productId id of product to get the transactions
+     * @param productName name of product to get the transactions
      * @param rol rol of user to identify what transactions can be do
      * @return the {@link ResponseEntity} with status {@code 200 (OK)} and with body all product can be create a rol.
      */
-    @GetMapping("/products/transaction/{productId}/{rol}")
-    public ResponseEntity<List<TransactionDTO>> getAllProductsByRol(@PathVariable String productId, @PathVariable String rol) {
-        return new ResponseEntity<>(transactionService.findAllByProductRol(productId, rol), HttpStatus.OK);
+    @GetMapping("/products/transaction/{productName}/{rol}")
+    public ResponseEntity<List<TransactionDTO>> getAllProductsByRol(@PathVariable String productName, @PathVariable String rol) {
+        return new ResponseEntity<>(transactionService.findAllByProductRol(productName, rol), HttpStatus.OK);
     }
 }

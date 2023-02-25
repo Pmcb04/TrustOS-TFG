@@ -1,4 +1,4 @@
-import React, {useState} from 'react'
+import React, { useState, useEffect } from 'react'
 import Property from '../../property/property'
 import { Select, TextField, Title1, IntegerField, DecimalField, DoubleField, Switch, Box } from '@telefonica/mistica'
 
@@ -9,10 +9,16 @@ import { permissionsPantalon } from './permissions'
 function Pantalon(props) {
   const { data, rol, create, edit } = props
   const { canView, canEdit } = permissionsPantalon(rol)
-  // TODO ver como se puede actualizar este estado en la pantalla de trazabilidad 
-  // que ahora mismo muestra la ultima actualizacion
-  const [color, setColor] = React.useState(data.color)
-  console.log("color", color)
+
+  const [color, setColor] = useState(data.color)
+  const [width, setWidth] = useState(data.width)
+
+
+  useEffect(() => {
+    setColor(data.color)
+    setWidth(data.width)
+  }, [data])  
+  
 
   return (
     <Box>
@@ -20,14 +26,14 @@ function Pantalon(props) {
         <Property
           title="Color"
           key={'property-color'}
-          value={data.color ? data.color.toString() : null}
+          value={color ? color.toString() : null}
           edit={create ? true : canEdit.includes('color') ? edit : false}>
           <Select
             fullWidth
             name={'color'}
             key={'property-color'}
             onChangeValue={(value) => setColor(value)}
-            value={data.color != null ? data.color.toString() : null}
+            value={color != null ? color.toString() : null}
             options={[
               { value: 'azul', text: 'azul' },
               { value: 'blanco', text: 'blanco' },
@@ -41,13 +47,15 @@ function Pantalon(props) {
           title="width"
           primaryKey="width"
           key={'property-width'}
-          value={data.width != null ? data.width.toString() : null}
+          onChangeValue={(value) => setWidth(value)}
+          value={width != null ? width.toString() : null}
           edit={create ? true : canEdit.includes('width') ? edit : false}>
           <Select
             fullWidth
             name={'width'}
             key={'property-width'}
-            value={data.width ? data.width.toString() : null}
+            onChangeValue={(value) => setWidth(value)}
+            value={width ? width.toString() : null}
             options={[
               { value: 'XXS', text: 'XXS' },
               { value: 'XS', text: 'XS' },

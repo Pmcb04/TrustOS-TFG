@@ -9,31 +9,17 @@ export default {
             type: TYPES.PANTALON,
             create: false,
         },
-        {
-            title: NAMES.PANTALON,
-            type: TYPES.PANTALON,
-            create: false,
-        }
     ],
 
     action : [
         {
-            title: NAMES.ROMPER,
+            title: NAMES.USAR,
+            type: TYPES.USAR,
             create: true,
         }
     ],
 
     output : [
-        {
-            title: NAMES.TERNERO,
-            type: TYPES.TERNERO,
-            create: true,
-        },
-        {
-            title: NAMES.TERNERO,
-            type: TYPES.TERNERO,
-            create: true,
-        },
         {
             title: NAMES.TERNERO,
             type: TYPES.TERNERO,

@@ -75,6 +75,7 @@ const create = (baseURL = AppConfig.apiUrl) => {
   const getAssetRangeTraceability = (isAuthorised, assetId, body) =>
     api.post('api/trustos/assets/' + assetId + '/transactions/range', body, { params: { isAuthorised: isAuthorised } })
   const createAsset = (newAsset) => api.post('api/trustos/asset', newAsset, { params: {} })
+  const getActionsByAsset = (assetType, rol) => api.get('api/products/transaction/' + assetType + '/' + rol, {}, {})
   // ------
   // STEP 3
   // ------
@@ -114,6 +115,7 @@ const create = (baseURL = AppConfig.apiUrl) => {
     getAssetTraceability,
     getAssetRangeTraceability,
     createAsset,
+    getActionsByAsset,
   }
 }
 

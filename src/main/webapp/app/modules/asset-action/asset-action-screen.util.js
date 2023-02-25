@@ -1,16 +1,22 @@
 import { TYPES } from '../../shared/util/nodes-types'
 
-import romper from './actions/romper'
+import romperPantalon from './actions/romperPantalon'
+import usar from './actions/usar'
 
 export function getAction(action) {
     let stepInput = []
     let stepAction = []
     let stepOutput = []
     switch (action) {
-      case TYPES.ROMPER:
-        stepInput = romper.input
-        stepAction = romper.action
-        stepOutput = romper.output
+      case TYPES.ROMPER_PANTALON:
+        stepInput = romperPantalon.input
+        stepAction = romperPantalon.action
+        stepOutput = romperPantalon.output
+        break
+      case TYPES.USAR:
+        stepInput = usar.input
+        stepAction = usar.action
+        stepOutput = usar.output
         break
     }
   

@@ -5,25 +5,24 @@ import { connect } from 'react-redux'
 import Metadata from '../../components/metadata/metadata'
 import Asset from '../../components/asset/asset'
 import styles from './assetWithProperties.styles'
-import TableUpdate from '../table-update/table-update'
 
-import { Title2, Select, Form, ButtonPrimary, confirm, Text3, Text6} from '@telefonica/mistica'
+import { Title2, Select, Form, ButtonPrimary} from '@telefonica/mistica'
 
 import AssetActionActions from '../../../modules/asset-action/asset-action-screen.reducer'
 
 
 const AssetWithProperties = React.forwardRef((props, ref) => {
-  const { title, type, create, listOption, assetRef, indexAsset, assets, getAsset, assetList } = props
+  const { title, type, create, listOption, assetRef, indexAsset, getAsset, assetList, options } = props
   const [name, setName] = useState(listOption || assetRef.assetId )
-  const [metadata, setMetadata] = useState(create ? assetRef.current : {})
-  
-  assetRef.current = metadata
+  const [metadata, setMetadata] = useState(create ? assetRef.metadata ? assetRef.metadata : {} : {})
+
+  assetRef.metadata = metadata
   assetRef.title = title
   assetRef.type = type
   assetRef.assetId = name
 
   const { t } = useTranslation() //i18n instance
-  const options = assets.filter((asset) => asset.assetId.includes(type)).map((asset) => ({ value: asset.assetId, text: asset.assetId }))
+
   
   useEffect(() => {
     if(!create && name != null){
@@ -34,13 +33,14 @@ const AssetWithProperties = React.forwardRef((props, ref) => {
   useEffect(() => {
     if(!create && name != null && assetList[indexAsset] != null){
       setMetadata(assetList[indexAsset].metadata)
+      assetRef.data = assetList[indexAsset].data
     }
-  }, [assetList[indexAsset]])  
-
-  console.log("list option", listOption, "assetId", assetRef.assetId)
+  }, [assetList[indexAsset]])    
 
   return (
-      <Form onSubmit={(formData) => setMetadata(formData)}>
+      <Form onSubmit={(formData) =>{
+          setMetadata(formData) 
+        }}>
         <View style={styles.row}>
           <View style={styles.titleTable}><Title2>{title}</Title2></View>
             {!create && ( // if the asset not will create, choose to the list of assets
@@ -65,7 +65,6 @@ const AssetWithProperties = React.forwardRef((props, ref) => {
 })
 
 const mapStateToProps = (state) => ({ 
-  assets: state.myAssets.assets,
   assetList: state.assetAction.assetList,
 })
 const mapDispatchToProps = (dispatch) => ({    

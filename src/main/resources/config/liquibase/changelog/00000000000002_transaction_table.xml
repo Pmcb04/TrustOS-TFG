@@ -15,6 +15,9 @@
             <column name="name" type="varchar(255)">
                 <constraints nullable="false"/>
             </column>
+            <column name="repeat" type="bigint">
+                <constraints nullable="false"/>
+            </column>
         </createTable>
 
         <createTable tableName="jhi_product_transaction">
