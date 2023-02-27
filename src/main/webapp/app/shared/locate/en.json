@@ -40,10 +40,13 @@
   "ALPHABETIC": "Alphabetic (A-Z)",
   "ALPHABETIC_REVERSE": "Alphabetic reverse (Z-A)",
   "SHOW": "Show",
+  "SHOW_MORE": "Show more",
+  "SHOW_LESS": "Show less",
   "AUTHORIZATHED": "Authorizathed",
   "YES": "Yes",
   "NO": "No",
   "TYPE": "Type",
+  "TITLE": "Title",
   "OWNER": "Owner",
   "OWNERSHIP": "Owership",
   "UPDATE": "Update",
@@ -76,5 +79,12 @@
   "CONFIRM_PASSWORD": "Confirm password",
   "ENTER_CONFIRM_PASSWORD": "Enter password again",
   "IMAGE_PROFILE": "Image profile",
-  "ENTER_IMAGE_PROFILE": "http://www.imageurl.com"
+  "ENTER_IMAGE_PROFILE": "http://www.imageurl.com",
+  "CHOOSE": "Elegir",
+  "INPUT": "Input",
+  "ACTION" : "Action",
+  "OUTPUT" : "Output",
+  "FINAL" : "Final",
+  "NEW" : "New",
+  "ERROR_NEXT_STEP": "One element is not selected or is empty"
 }

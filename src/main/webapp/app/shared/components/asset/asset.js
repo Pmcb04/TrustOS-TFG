@@ -19,7 +19,7 @@ function Asset(props) {
       }
       subtitle={
         <Stack>
-          <Inline space={8}>
+          {/* <Inline space={8}>
             <IconShieldRegular color={authorizathed ? colors.success : colors.textPrimary} size={SIZE_ICONS_DESCRIPTION} />
             {authorizathed ? (
               <Text1 wordBreak color={colors.success} medium>
@@ -30,14 +30,12 @@ function Asset(props) {
                 {t('OWNER')}
               </Text1>
             )}
-          </Inline>
-          {hash && (
+          </Inline> */}
+          {hash && (  
             <Inline space={8}>
-              <IconFingerprintRegular size={SIZE_ICONS_DESCRIPTION} />
-
-              <Text1 color={colors.textSecondary} regular truncate>
-                {hash}
-              </Text1>
+              {/* <IconFingerprintRegular size={SIZE_ICONS_DESCRIPTION} /> */}
+              <Text1 color={colors.textPrimary} regular truncate>HASH</Text1>
+              <Text1 color={colors.textSecondary} regular truncate>{hash}</Text1>
             </Inline>
           )}
         </Stack>

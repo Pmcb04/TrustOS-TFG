@@ -29,6 +29,7 @@ public class TransactionMapper {
             Transaction transaction = new Transaction();
             transaction.setId(null);
             transaction.setName(transactionDTO.getName());
+            transaction.setRepeat(transactionDTO.getRepeat());
             return transaction;
         }
     }

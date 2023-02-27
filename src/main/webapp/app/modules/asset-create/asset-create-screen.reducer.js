@@ -6,6 +6,9 @@ const { Types, Creators } = createActions({
   assetCreateRequest: ['newAsset'],
   assetCreateSuccess: ['assetId'],
   assetCreateFailure: ['error'],
+  assetCreateActionRequest: ['assetType'],
+  assetCreateActionSuccess: ['actions'],
+  assetCreateActionFailure: [],
 })
 
 export const AssetCreateTypes = Types
@@ -16,6 +19,7 @@ export default Creators
 export const INITIAL_STATE = Immutable({
   fetching: false,
   error: null,
+  actions : []
 })
 
 /* ------------- Reducers ------------- */
@@ -43,10 +47,29 @@ export const failure = (state, { error }) =>
     assetid: null,
   })
 
+export const actionRequest = (state) => state
+
+export const actionSuccess = (state, { actions }) =>
+  state.merge({
+    fetching: false,
+    error: null,
+    actions,
+  })
+
+export const actionFailure = (state, { error }) =>
+  state.merge({
+    fetching: false,
+    error,
+    actions : []
+  })
+
 /* ------------- Hookup Reducers To Types ------------- */
 
 export const reducer = createReducer(INITIAL_STATE, {
   [Types.ASSET_CREATE_REQUEST]: request,
   [Types.ASSET_CREATE_SUCCESS]: success,
   [Types.ASSET_CREATE_FAILURE]: failure,
+  [Types.ASSET_CREATE_ACTION_REQUEST]: actionRequest,
+  [Types.ASSET_CREATE_ACTION_SUCCESS]: actionSuccess,
+  [Types.ASSET_CREATE_ACTION_FAILURE]: actionFailure,
 })

@@ -12,9 +12,12 @@ public class TransactionDTO {
 
     public TransactionDTO(Transaction transaction) {
         this.name = transaction.getName();
+        this.repeat = transaction.getRepeat();
     }
 
     private String name;
+
+    private Long repeat; 
 
     public String getName() {
         return name;
@@ -24,11 +27,20 @@ public class TransactionDTO {
         this.name = name;
     }
 
+    public Long getRepeat() {
+        return repeat;
+    }
+
+    public void setRepeat(Long repeat) {
+        this.repeat = repeat;
+    }
+
     // prettier-ignore
     @Override
     public String toString() {
         return "TransactionDTO{" +
             "name='" + name + '\'' +
+            "repeat='" + repeat + '\'' +
             "}";
     }
 }

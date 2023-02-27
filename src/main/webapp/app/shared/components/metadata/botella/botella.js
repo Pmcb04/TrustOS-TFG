@@ -17,9 +17,9 @@ function Botella(props) {
           title="heigth"
           primaryKey="heigth"
           key={'property-heigth'}
-          value={!create && data.heigth ? data.heigth.toString() : null}
+          value={data.heigth ? data.heigth.toString() : null}
           edit={create ? true : canEdit.includes('heigth') ? edit : false}>
-          <DecimalField key={'heigth'} name="heigth" label="heigth" defaultValue={!create && data.heigth ? data.heigth.toString() : null} />
+          <DecimalField fullWidth key={'heigth'} name="heigth" defaultValue={data.heigth ? data.heigth.toString() : null} />
         </Property>
       )}
 
@@ -28,13 +28,13 @@ function Botella(props) {
           title="capacity"
           primaryKey="capacity"
           key={'property-capacity'}
-          value={!create && data.capacity ? data.capacity.toString() : null}
+          value={data.capacity ? data.capacity.toString() : null}
           edit={create ? true : canEdit.includes('capacity') ? edit : false}>
           <DecimalField
+            fullWidth
             key={'capacity'}
             name="capacity"
-            label="capacity"
-            defaultValue={!create && data.capacity ? data.capacity.toString() : null}
+            defaultValue={data.capacity ? data.capacity.toString() : null}
           />
         </Property>
       )}

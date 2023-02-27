@@ -4,4 +4,6 @@ export const NAMES = {
   TERNERO: 'Ternero',
   BOTELLA: 'Botella',
   PANTALON: 'Pantalon',
+  ROMPER_PANTALON: 'Romper pantalon',
+  USAR: "Usar"
 }

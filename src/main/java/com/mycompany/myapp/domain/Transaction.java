@@ -31,6 +31,9 @@ public class Transaction implements Serializable {
     @Column(length = 50)
     private String name;
 
+    @NotNull
+    private Long repeat;
+
     public Long getId() {
         return id;
     }
@@ -45,6 +48,14 @@ public class Transaction implements Serializable {
 
     public void setName(String name) {
         this.name = name;
+    }
+
+    public Long getRepeat() {
+        return repeat;
+    }
+
+    public void setRepeat(Long repeat) {
+        this.repeat = repeat;
     }
 
     @Override
@@ -68,6 +79,7 @@ public class Transaction implements Serializable {
     public String toString() {
         return "Transaction{" +
             "name='" + name + '\'' +
+            "repeat='" + repeat + '\'' +
             "}";
     }
 }

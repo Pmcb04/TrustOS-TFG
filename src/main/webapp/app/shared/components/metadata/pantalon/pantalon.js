@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useState, useEffect } from 'react'
 import Property from '../../property/property'
 import { Select, TextField, Title1, IntegerField, DecimalField, DoubleField, Switch, Box } from '@telefonica/mistica'
 
@@ -10,19 +10,30 @@ function Pantalon(props) {
   const { data, rol, create, edit } = props
   const { canView, canEdit } = permissionsPantalon(rol)
 
+  const [color, setColor] = useState(data.color)
+  const [width, setWidth] = useState(data.width)
+
+
+  useEffect(() => {
+    setColor(data.color)
+    setWidth(data.width)
+  }, [data])  
+  
+
   return (
     <Box>
       {(create || canView.includes('color')) && (
         <Property
           title="Color"
           key={'property-color'}
-          value={!create && data.color ? data.color.toString() : null}
+          value={color ? color.toString() : null}
           edit={create ? true : canEdit.includes('color') ? edit : false}>
           <Select
+            fullWidth
             name={'color'}
             key={'property-color'}
-            label={'Color'}
-            value={!create && data.color ? data.color.toString() : null}
+            onChangeValue={(value) => setColor(value)}
+            value={color != null ? color.toString() : null}
             options={[
               { value: 'azul', text: 'azul' },
               { value: 'blanco', text: 'blanco' },
@@ -36,13 +47,15 @@ function Pantalon(props) {
           title="width"
           primaryKey="width"
           key={'property-width'}
-          value={!create && data.width ? data.width.toString() : null}
+          onChangeValue={(value) => setWidth(value)}
+          value={width != null ? width.toString() : null}
           edit={create ? true : canEdit.includes('width') ? edit : false}>
           <Select
+            fullWidth
             name={'width'}
             key={'property-width'}
-            label={'Width'}
-            value={!create && data.width ? data.width.toString() : null}
+            onChangeValue={(value) => setWidth(value)}
+            value={width ? width.toString() : null}
             options={[
               { value: 'XXS', text: 'XXS' },
               { value: 'XS', text: 'XS' },

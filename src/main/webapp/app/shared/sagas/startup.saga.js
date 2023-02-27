@@ -9,5 +9,5 @@ export function* startup(action) {
   yield put(LoginActions.loginLoad())
   yield put(AccountActions.accountRequest())
   yield put(AppStateActions.setRehydrationComplete())
-  yield put(MyAssetsActions.myAssetsSuccess([])) // TODO eliminar cuando tengamos el login
+  // yield put(MyAssetsActions.myAssetsSuccess([])) // TODO eliminar cuando tengamos el login
 }

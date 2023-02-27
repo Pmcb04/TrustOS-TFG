@@ -38,10 +38,13 @@
   "ALPHABETIC": "Alfabetico (A-Z)",
   "ALPHABETIC_REVERSE": "Alfabetico inverso (Z-A)",
   "SHOW": "Mostrar",
+  "SHOW_MORE": "Mostrar mas",
+  "SHOW_LESS": "Mostrar menos",
   "AUTHORIZATHED": "Autorizado",
   "YES": "Si",
   "NO": "No",
   "TYPE": "Tipo",
+  "TITLE": "Título",
   "OWNER": "Propietario",
   "OWNERSHIP": "Titularidad",
   "UPDATE": "Actualizar",
@@ -62,7 +65,7 @@
   "TRANSACTION_NUMBER": "Transición número {{number}} ",
   "REGISTER": "Registrar",
   "PASSWORD_RESET": "Resetear contraseña",
-  "PASSWORD_CHANGE": "CCambiar contraseña",
+  "PASSWORD_CHANGE": "Cambiar contraseña",
   "USERNAME": "Username",
   "ENTER_USERNAME": "Introduce username",
   "FIRST_NAME": "Nombre",
@@ -76,5 +79,13 @@
   "CONFIRM_PASSWORD": "Confirmar contraseña",
   "ENTER_CONFIRM_PASSWORD": "Introduce contraseña otra vez",
   "IMAGE_PROFILE": "Imagen del perfil",
-  "ENTER_IMAGE_PROFILE": "http://www.imagenurl.com"
+  "ENTER_IMAGE_PROFILE": "http://www.imagenurl.com",
+  "CHOOSE": "Elegir",
+  "INPUT": "Entrada",
+  "ACTION" : "Acción",
+  "OUTPUT" : "Salida",
+  "FINAL" : "Final",
+  "NEW" : "Nuevo",
+  "ERROR_NEXT_STEP": "Un elemento no está selecionado o está vacio"
+
 }

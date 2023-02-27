@@ -1,12 +1,12 @@
 // TODO fichero autogenerado
 
-export function permissionsTernero(rol) {
+export function permissionsRomper(rol) {
   let canView = []
   let canEdit = []
   switch (rol) {
     case 'ROLE_ADMIN':
-      canView = ['height', 'width']
-      canEdit = ['height', 'width']
+      canView = ['damage']
+      canEdit = []
       break
   }
 

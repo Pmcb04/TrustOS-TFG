@@ -16,13 +16,13 @@ function Ordenador(props) {
           primaryKey="company"
           title="company"
           key={'property-company'}
-          value={!create && data.company ? data.company.toString() : null}
+          value={data.company ? data.company.toString() : null}
           edit={create ? true : canEdit.includes('company') ? edit : false}>
           <TextField
+            fullWidth
             key={'company'}
             name="company"
-            label="company"
-            defaultValue={!create && data.company ? data.company.toString() : null}
+            defaultValue={data.company ? data.company.toString() : null}
           />
         </Property>
       )}
@@ -31,9 +31,9 @@ function Ordenador(props) {
           title="ram"
           primaryKey="ram"
           key={'property-ram'}
-          value={!create && data.ram ? data.ram.toString() : null}
+          value={data.ram ? data.ram.toString() : null}
           edit={create ? true : canEdit.includes('ram') ? edit : false}>
-          <IntegerField key={'ram'} name="ram" label="ram" defaultValue={!create && data.ram ? data.ram.toString() : null} />
+          <IntegerField fullWidth key={'ram'} name="ram" defaultValue={data.ram ? data.ram.toString() : null} />
         </Property>
       )}
       {(create || canView.includes('rom')) && (
@@ -41,9 +41,9 @@ function Ordenador(props) {
           title="rom"
           primaryKey="rom"
           key={'property-rom'}
-          value={!create && data.rom ? data.rom.toString() : null}
+          value={data.rom ? data.rom.toString() : null}
           edit={create ? true : canEdit.includes('rom') ? edit : false}>
-          <IntegerField key={'rom'} name="rom" label="rom" defaultValue={!create && data.rom ? data.rom.toString() : null} />
+          <IntegerField fullWidth key={'rom'} name="rom" defaultValue={data.rom ? data.rom.toString() : null} />
         </Property>
       )}
       {(create || canView.includes('processor')) && (
@@ -51,13 +51,13 @@ function Ordenador(props) {
           title="processor"
           primaryKey="processor"
           key={'property-processor'}
-          value={!create && data.processor ? data.processor.toString() : null}
+          value={data.processor ? data.processor.toString() : null}
           edit={create ? true : canEdit.includes('processor') ? edit : false}>
           <TextField
+            fullWidth
             key={'processor'}
             name="processor"
-            label="processor"
-            defaultValue={!create && data.processor ? data.processor.toString() : null}
+            defaultValue={data.processor ? data.processor.toString() : null}
           />
         </Property>
       )}

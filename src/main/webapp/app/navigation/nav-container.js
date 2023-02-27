@@ -20,6 +20,7 @@ import { DrawerButton } from './drawer/drawer-button'
 import AssetDetailsScreen from '../modules/asset-details/asset-details-screen'
 import AssetTraceabilityScreen from '../modules/asset-traceability/asset-traceability-screen'
 import AssetCreateScreen from '../modules/asset-create/asset-create-screen'
+import AssetActionScreen from '../modules/asset-action/asset-action-screen'
 
 export const getDrawerRoutes = () => {
   const routes = {}
@@ -45,6 +46,7 @@ const linking = {
       },
       AssetDetails: 'asset',
       AssetCreate: 'asset/create',
+      AssetAction: 'asset/action',
       AssetTraceability: 'asset/traceability',
       ModalScreen: 'alert',
       NotFound: '*',
@@ -154,6 +156,7 @@ function NavContainer(props) {
         <Stack.Screen name="AssetDetails" component={AssetDetailsScreen} />
         <Stack.Screen name="AssetTraceability" component={AssetTraceabilityScreen} />
         <Stack.Screen name="AssetCreate" component={AssetCreateScreen} />
+        <Stack.Screen name="AssetAction" component={AssetActionScreen} />
       </Stack.Navigator>
     </NavigationContainer>
   )

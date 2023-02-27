@@ -28,7 +28,6 @@ function AssetList(props) {
             name={itemData.item.assetId}
             type={itemData.item.data.type}
             hash={itemData.item.hash}
-            authorizathed={itemData.item.isAuthorised}
           />
         </View>
       </TouchableWithoutFeedback>

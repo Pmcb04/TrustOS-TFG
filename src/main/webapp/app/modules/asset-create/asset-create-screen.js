@@ -1,4 +1,4 @@
-import React from 'react'
+import React, {useEffect} from 'react'
 import { View } from 'react-native'
 import { useTranslation } from 'react-i18next'
 
@@ -15,24 +15,33 @@ import { addRandomString } from '../../shared/util/asset-image-name'
 
 function AssetCreateScreen(props) {
   let { type } = props.route.params
-  const { fetching, name, error, products, createAsset, setSuccessCreated } = props
+  const { fetching, name, error, products, createAsset, setSuccessCreated, getActions, actions } = props
   const { colors } = React.useContext(ThemeContext)
   const { t } = useTranslation() //i18n instance
 
+  function metadataActions(){
+    metadataActions = {}
+    actions.map((action) => metadataActions[action.name.trim().replace(" ", "_")] = 0)
+    return metadataActions
+  }
+
   function create(metadata) {
     const assetId = addRandomString(type)
-    delete metadata.name
-    metadata.assetAfter = null
+    // delete metadata.name
+    metadata.actions = metadataActions()
     const newAsset = {
       assetId: assetId,
       metadata: metadata,
       data: { type: type, assetBefore: null },
     }
-    console.log(newAsset)
     createAsset(newAsset)
     setSuccessCreated() // activamos para que se muestre el mensaje de asset creado satisfactoriamente
     props.navigation.navigate(t('MY_ASSETS'), { assetId: assetId }) // vamos a la pantalla de la lista de assets
   }
+
+  useEffect(() => {
+      getActions(type)
+  }, [type])
 
   return (
     <>
@@ -72,7 +81,7 @@ function AssetCreateScreen(props) {
             }}>
             <View style={[styles.container, styles.mainContainer]}>
               <View style={styles.metadata}>
-                <Metadata type={type} create={true} />
+                <Metadata type={type} createWithButton={true} />
               </View>
               <View style={styles.assetView}>
                 <View style={styles.asset}>
@@ -93,12 +102,14 @@ const mapStateToProps = (state) => {
     error: state.assetCreate.error,
     name: state.assetCreate.name,
     products: state.myAssets.products,
+    actions: state.assetCreate.actions
   }
 }
 const mapDispatchToProps = (dispatch) => {
   return {
     createAsset: (newAsset) => dispatch(AssetCreateActions.assetCreateRequest(newAsset)),
     setSuccessCreated: () => dispatch(MyAssetsActions.myAssetsSetSuccessCreated()),
+    getActions: (assetType) => dispatch(AssetCreateActions.assetCreateActionRequest(assetType)),
   }
 }
 export default connect(mapStateToProps, mapDispatchToProps)(AssetCreateScreen)

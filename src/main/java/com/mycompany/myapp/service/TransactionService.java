@@ -25,7 +25,7 @@ public class TransactionService {
         this.transactionMapper = transactionMapper;
     }
 
-    public List<TransactionDTO> findAllByProductRol(String productId, String rol) {
-        return transactionMapper.transactionsToTransactionsDTOs(transactionRepository.findAllByAssetRol(productId, rol));
+    public List<TransactionDTO> findAllByProductRol(String productName, String rol) {
+        return transactionMapper.transactionsToTransactionsDTOs(transactionRepository.findAllByAssetRol(productName, rol));
     }
 }

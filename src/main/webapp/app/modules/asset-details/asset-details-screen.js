@@ -13,10 +13,8 @@ import {
   ButtonPrimary,
   ButtonSecondary,
   ButtonDanger,
-  IconIdCardRegular,
   IconEditPencilRegular,
   IconCloseRegular,
-  IconTeamRegular,
   Form,
   Stack,
   ThemeContext,
@@ -34,23 +32,28 @@ import { getPermissions } from '../../shared/components/metadata/metadata.utils'
 function AssetDetailsScreen(props) {
   const { navigation } = props
   let { assetId, isAuthorised } = props.route.params
-  const { editAsset, edit_fields, getAsset, asset, fetching, error, updateAsset, setSuccessUpdate, successUpdate, account } = props
+  const { editAsset, edit_fields, getAsset, asset, fetching, error, updateAsset, setSuccessUpdate, successUpdate, account, getActions, actions } = props
   const { colors } = React.useContext(ThemeContext)
   const { t } = useTranslation() //i18n instance
 
-  const { _, canEdit } = getPermissions(asset.data.type, account.authorities[0])
+  // BUG arreglar por que cuando da fallo no puede leer asset.data.type
+  const { canView, canEdit } = getPermissions(asset.data.type, account.authorities[0])
 
   useEffect(() => {
     getAsset(isAuthorised, assetId)
   }, [getAsset, isAuthorised, assetId])
 
-  function update(newMetadata) {
-    // copy new metadata
-    const metadataUpdate = copyAssetMetadata(asset.metadata, newMetadata)
+  useEffect(() => {
+    if(asset != null){
+      getActions(asset.data.type)
+    }
+  }, [asset])
 
+  function update(newMetadata) {
+    
     // put metadata and prepare new asset
     let newAsset = { ...asset }
-    newAsset.metadata = metadataUpdate
+    newAsset.metadata = newMetadata 
 
     // update the asset
     updateAsset(newAsset)
@@ -95,14 +98,16 @@ function AssetDetailsScreen(props) {
             />
           )}
           <Form
-            onSubmit={(formData) =>
+            onSubmit={(formData) =>{
+              const newMetadata = copyAssetMetadata(asset.metadata, formData)
               confirm({
                 title: <Text6>{t('VALUES_UPDATE')}</Text6>,
-                message: <TableUpdate data={formData} />,
+                message: <TableUpdate dataBefore={asset.metadata} dataAfter={newMetadata} />,
                 acceptText: <Text3 color="currentColor">{t('UPDATE')}</Text3>,
                 cancelText: <Text3 color="currentColor">{t('CANCEL')}</Text3>,
-                onAccept: () => update(formData),
+                onAccept: () => update(newMetadata),
               })
+            }
             }>
             <View style={[styles.container, styles.mainContainer]}>
               <View style={styles.metadata}>
@@ -110,14 +115,12 @@ function AssetDetailsScreen(props) {
               </View>
               <View style={styles.assetView}>
                 <View style={styles.asset}>
-                  <Asset name={assetId} type={asset.data.type} hash={asset.hash} authorizathed={isAuthorised} />
+                  <Asset name={assetId} type={asset.data.type} hash={asset.hash} />
                 </View>
                 <Stack space={16}>
                   <View style={styles.buttons}>
                     {
-                      // FIXME cambiar para que solo el propietario del asset lo pueda hacer (asset.owner === account.trustosID)
-                    }
-                    {canEdit.length > 0 &&
+                    canEdit && canEdit.length > 0 &&
                       (edit_fields ? (
                         <ButtonDanger onPress={editAsset}>
                           <IconCloseRegular color="currentColor" />
@@ -129,34 +132,25 @@ function AssetDetailsScreen(props) {
                           {t('EDIT')}
                         </ButtonPrimary>
                       ))}
-                    {
-                      // FIXME cambiar para que solo el propietario del asset lo pueda hacer (asset.owner === account.trustosID)
-                    }
-                    <ButtonSecondary disabled={edit_fields} onPress={() => {}}>
-                      <IconIdCardRegular color="currentColor" />
-                      {t('TRANFER')}
-                    </ButtonSecondary>
-                    {
-                      // FIXME cambiar para que solo el propietario del asset lo pueda hacer (asset.owner === account.trustosID)
-                    }
-                    <ButtonSecondary disabled={edit_fields} onPress={() => {}}>
-                      <IconTeamRegular color="currentColor" />
-                      {t('AUTHORISE')}
-                    </ButtonSecondary>
                     <ButtonSecondary
                       disabled={edit_fields}
                       onPress={() => navigation.navigate('AssetTraceability', { assetId: assetId, isAuthorised: isAuthorised })}>
                       <IconRouteRegular color="currentColor" />
                       {t('TRACEABILITY')}
                     </ButtonSecondary>
-                    {
-                      // TODO poner dinamicamente por respuesta a llamada a la api de las transacciones del producto
-                    }
-                    {['Action 1', 'Action 2'].map((action) => (
-                      <ButtonSecondary key={action} disabled={edit_fields} onPress={() => console.log(action)}>
-                        {action}
-                      </ButtonSecondary>
-                    ))}
+                    {actions.map((action) => ( 
+                      ((action.repeat === -1 || 
+                        (asset.metadata.actions ?  
+                          asset.metadata.actions[action.name.trim().replace(" ", "_")] < action.repeat 
+                          : false))
+                          &&
+                        (<ButtonSecondary 
+                          key={action.name} 
+                          disabled={edit_fields} 
+                          onPress={() => navigation.navigate('AssetAction', { action: action.name })}>
+                          {action.name}
+                        </ButtonSecondary>)
+                    )))}
                   </View>
                 </Stack>
               </View>
@@ -175,6 +169,7 @@ const mapStateToProps = (state) => {
     fetching: state.assetDetails.fetching,
     error: state.assetDetails.error,
     successUpdate: state.assetDetails.successUpdate,
+    actions: state.assetDetails.actions,
     account: state.account.account,
   }
 }
@@ -184,6 +179,7 @@ const mapDispatchToProps = (dispatch) => {
     setSuccessUpdate: () => dispatch(AssetDetailsActions.assetDetailsSuccessUpdate()),
     getAsset: (isAuthorised, assetId) => dispatch(AssetDetailsActions.assetDetailsRequest(isAuthorised, assetId)),
     updateAsset: (newAsset) => dispatch(AssetDetailsActions.assetDetailsUpdate(newAsset)),
+    getActions: (assetType) => dispatch(AssetDetailsActions.assetDetailsActionRequest(assetType)),
   }
 }
 export default connect(mapStateToProps, mapDispatchToProps)(AssetDetailsScreen)
