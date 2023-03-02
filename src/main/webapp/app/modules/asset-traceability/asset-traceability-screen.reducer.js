@@ -16,6 +16,8 @@ const { Types, Creators } = createActions({
   assetTraceabilitySetTransactionSelect: ['transactionSelect'],
   assetTraceabilitySetTimestampInit: ['timestampInit'],
   assetTraceabilitySetTimestampEnd: ['timestampEnd'],
+  assetTraceabilityRequestAssetBefore: ['assetId'],
+  assetTraceabilitySuccessAssetBefore: ['nodes', 'links'],
 })
 
 export const AssetTraceabilityTypes = Types
@@ -32,6 +34,8 @@ export const INITIAL_STATE = Immutable({
   transactionSelect: 0,
   timestampInit: convertLocalDateToTimestamp(new Date(TODAY - SUBSTRACT_NUMBER_DAYS * ONE_DAY_MS)),
   timestampEnd: convertLocalDateToTimestamp(TODAY),
+  nodes : [],
+  links : []
 })
 
 /* ------------- Reducers ------------- */
@@ -81,6 +85,25 @@ export const setTimestampEnd = (state, { timestampEnd }) =>
     timestampEnd,
   })
 
+
+// request to init load the asset
+export const requestAssetBefore = (state, { assetId }) =>
+  state.merge({
+    fetching: true,
+    error: null,
+    nodes: [],
+    links: []
+  })
+
+// state sucess request completed
+export const successAssetBefore = (state, { nodes, links }) =>
+  state.merge({
+    fetching: false,
+    error: null,
+    nodes, 
+    links,
+  })
+
 /* ------------- Hookup Reducers To Types ------------- */
 
 export const reducer = createReducer(INITIAL_STATE, {
@@ -91,4 +114,6 @@ export const reducer = createReducer(INITIAL_STATE, {
   [Types.ASSET_TRACEABILITY_SET_TRANSACTION_SELECT]: setTransactionSelect,
   [Types.ASSET_TRACEABILITY_SET_TIMESTAMP_INIT]: setTimestampInit,
   [Types.ASSET_TRACEABILITY_SET_TIMESTAMP_END]: setTimestampEnd,
+  [Types.ASSET_TRACEABILITY_REQUEST_ASSET_BEFORE]: requestAssetBefore,
+  [Types.ASSET_TRACEABILITY_SUCCESS_ASSET_BEFORE]: successAssetBefore,
 })

@@ -1,11 +1,12 @@
 import React, { useEffect } from 'react'
-import { View } from 'react-native'
+import { Text, View } from 'react-native'
 import { useTranslation } from 'react-i18next'
 import AssetTraceabilityActions from './asset-traceability-screen.reducer'
 import { convertLocalDateToTimestamp, convertTimestampToLocalDate } from '../../shared/util/date-transforms'
 import Asset from '../../shared/components/asset/asset'
 import styles from './asset-traceability-screen.styles'
 import { connect } from 'react-redux'
+import { getImage } from '../../shared/util/asset-image-name'
 import {
   ThemeContext,
   Text10,
@@ -24,6 +25,7 @@ import {
 
 import Metadata from '../../shared/components/metadata/metadata'
 import { ScrollView } from 'react-native-gesture-handler'
+import Graph from './graph'
 
 function AssetTraceabilityScreen(props) {
   const { colors } = React.useContext(ThemeContext)
@@ -38,13 +40,17 @@ function AssetTraceabilityScreen(props) {
     transactionSelect,
     setTimestampInit,
     setTimestampEnd,
+    getAssetTraceabilityBefore,
+    nodes,
+    links
   } = props
   const heightScreen = useWindowHeight()
   const { t } = useTranslation() //i18n instance
 
   useEffect(() => {
-    getAssetTraceability(isAuthorised, assetId)
-  }, [getAssetTraceability, isAuthorised, assetId])
+    // getAssetTraceability(isAuthorised, assetId)
+    getAssetTraceabilityBefore(assetId)
+  }, [getAssetTraceabilityBefore, assetId])
 
   return (
     <>
@@ -55,7 +61,7 @@ function AssetTraceabilityScreen(props) {
           </View>
         </View>
       )}
-      {fetching && !traceability && (
+      {fetching && !traceability && nodes.length < 1  && (
         <View style={[styles.loading, { backgroundColor: colors.background }]}>
           <View style={styles.loadingText}>
             <Text10>Loading...</Text10>
@@ -63,7 +69,7 @@ function AssetTraceabilityScreen(props) {
           </View>
         </View>
       )}
-      {!error && !fetching && traceability && (
+      {!error && !fetching && nodes.length >= 1 && (
         <View style={[styles.container, styles.mainContainer, { backgroundColor: colors.background }]}>
           <View style={styles.listView}>
             <View style={styles.date}>
@@ -91,7 +97,9 @@ function AssetTraceabilityScreen(props) {
               </Form>
             </View>
             <Divider />
-            <View style={[styles.list, { height: heightScreen }]}>
+            <Graph nodes={nodes} links={links} width={1800} height={800}/>
+
+            {/* <View style={[styles.list, { height: heightScreen }]}>
               <ScrollView>
                 {traceability.transactions.map((transaction, index) => (
                   <View key={index + 'view'} style={styles.transaction}>
@@ -114,9 +122,9 @@ function AssetTraceabilityScreen(props) {
                   </View>
                 ))}
               </ScrollView>
-            </View>
+            </View> */}
           </View>
-          <View style={styles.assetView}>
+          {/* <View style={styles.assetView}>
             <View style={styles.asset}>
               <Asset
                 name={assetId}
@@ -130,7 +138,7 @@ function AssetTraceabilityScreen(props) {
                 data={traceability.transactions[transactionSelect].metadata}
               />
             </View>
-          </View>
+          </View> */}
         </View>
       )}
     </>
@@ -143,6 +151,8 @@ const mapStateToProps = (state) => {
     fetching: state.assetTraceability.fetching,
     traceability: state.assetTraceability.traceability,
     transactionSelect: state.assetTraceability.transactionSelect,
+    nodes : state.assetTraceability.nodes,
+    links : state.assetTraceability.links
   }
 }
 const mapDispatchToProps = (dispatch) => {
@@ -154,6 +164,7 @@ const mapDispatchToProps = (dispatch) => {
       dispatch(AssetTraceabilityActions.assetTraceabilitySetTransactionSelect(transactionSelect)),
     setTimestampInit: (timestampInit) => dispatch(AssetTraceabilityActions.assetTraceabilitySetTimestampInit(timestampInit)),
     setTimestampEnd: (timestampEnd) => dispatch(AssetTraceabilityActions.assetTraceabilitySetTimestampEnd(timestampEnd)),
+    getAssetTraceabilityBefore: (assetId) => dispatch(AssetTraceabilityActions.assetTraceabilityRequestAssetBefore(assetId)),
   }
 }
 export default connect(mapStateToProps, mapDispatchToProps)(AssetTraceabilityScreen)

@@ -1,0 +1,96 @@
+{
+    "assetId": "Pantalon@VN39iYGAGS",
+    "metadata": {
+        "actions": {
+            "Regalar": 0,
+            "Romper_pantalon": 1,
+            "Usar": 0
+        },
+        "color": "azul",
+        "width": "M"
+    },
+    "data": {
+        "assetBefore": null,
+        "type": "Pantalon"
+    }
+}
+{
+    "assetId": "Pantalon@merpYRDtCd",
+    "metadata": {
+        "actions": {
+            // aparecen en mayusculas por pruebas anteriores erroreas
+            "REGALAR": 0,
+            "ROMPER PANTALON": 0,
+            "USAR": 0,
+            "Romper_pantalon": 1
+        },
+        "color": "blanco",
+        "width": "XXS"
+    },
+    "data": {
+        "assetBefore": null,
+        "type": "Pantalon"
+    }
+}
+{
+    "assetId": "Romper pantalon@up7VHGvIWt",
+    "metadata": {
+        "damage": "343",
+        "actions": {}
+    },
+    "data": {
+        "type": "Romper pantalon",
+        "assetBefore": [
+            "Pantalon@VN39iYGAGS",
+            "Pantalon@merpYRDtCd"
+        ]
+    }
+}
+{
+    "assetId": "Ternero@8BA9dKPNcH",
+    "metadata": {
+        "height": "234",
+        "width": "234",
+        "actions": {
+            "Vacunar": 0
+        }
+    },
+    "data": {
+        "type": "Ternero",
+        "assetBefore": [
+            "Romper pantalon@up7VHGvIWt"
+        ]
+    }
+}
+{
+    "assetId": "Ternero@dI7ols8vfn",
+    "metadata": {
+        "height": "234",
+        "width": "234",
+        "actions": {
+            "Vacunar": 0
+        }
+    },
+    "data": {
+        "type": "Ternero",
+        "assetBefore": [
+            "Romper pantalon@up7VHGvIWt"
+        ]
+    }
+}
+{
+    "assetId": "Ternero@k8x2qjSztc",
+    "metadata": {
+        "height": "234",
+        "width": "234",
+        "actions": {
+            "Vacunar": 0
+        }
+    },
+    "data": {
+        "type": "Ternero",
+        "assetBefore": [
+            "Romper pantalon@up7VHGvIWt"
+        ]
+    }
+}
