@@ -8,14 +8,14 @@ const Graph = (props) => {
   let linksList =  JSON.parse(JSON.stringify(props.links));
   const svgRef = useRef();
 
-  const distanceLinks = 200
+  const distanceLinks = 250
   const gravity = -50
 
   const arrowLinkSize = 10
   const linkColor = "#999"
   const linkStrokeWidth = "2px"
 
-  const radiusNode = 15
+  const radiusNode = 20
 
   const fontFamilyNodeLabel = "Arial"
   const fontSizeNodeLabel = "20px"
@@ -95,8 +95,8 @@ const Graph = (props) => {
         node.attr('cx', d => d.x)
             .attr('cy', d => d.y);
 
-        label.attr('x', d => d.x-10)
-        .attr('y', d => d.y-20);
+        label.attr('x', d => d.x - 50)
+        .attr('y', d => d.y - 30);
       }
     }
 
