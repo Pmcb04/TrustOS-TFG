@@ -86,5 +86,7 @@
   "OUTPUT" : "Output",
   "FINAL" : "Final",
   "NEW" : "New",
-  "ERROR_NEXT_STEP": "One element is not selected or is empty"
+  "ERROR_NEXT_STEP": "One element is not selected or is empty",
+  "NOT_TRANSACTIONS_ASSET" : "Not found transactions",
+  "CLEAR" : "Clear"
 }

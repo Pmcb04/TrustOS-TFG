@@ -4,31 +4,31 @@ import { ApplicationStyles } from '../../shared/themes'
 export default StyleSheet.create({
   ...ApplicationStyles.screen,
   mainContainer: {
-    padding: 30,
     flex: 3,
     flexDirection: 'row',
   },
-  listView: {
-    flex: 1,
+  graphView: {
+    flex: 1.5,
+    borderWidth: 0.5,
+    borderStyle: 'solid',
+    borderRadius: 10,
+    margin: 15
+  },
+  assetView: {
+    flex: 0.5,
     padding: 5,
   },
-  list: {
+  listTransactions: {
+    flex: 1,
     padding: 5,
   },
   date: {
     margin: 10,
   },
-  assetView: {
-    flex: 2,
-    padding: 5,
-  },
   asset: {
     padding: 10,
   },
   metadata: {
-    padding: 10,
-  },
-  contentContainer: {
     padding: 10,
   },
   transaction: {

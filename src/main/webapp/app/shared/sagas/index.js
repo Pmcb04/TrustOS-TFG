@@ -41,7 +41,7 @@ import {
   changeOrder,
 } from '../../modules/my-assets/my-assets-screen.sagas'
 import { getAsset, updateAsset, getActions } from '../../modules/asset-details/asset-details-screen.sagas'
-import { getAssetTraceability, getAssetRangeTraceability } from '../../modules/asset-traceability/asset-traceability-screen.sagas'
+import { getAssetTraceability, getAssetRangeTraceability, getAssetTraceabilityBefore} from '../../modules/asset-traceability/asset-traceability-screen.sagas'
 import { createAsset, getActionsCreate } from '../../modules/asset-create/asset-create-screen.sagas'
 import { getAssetAction, createAssetAction, updateAssetAction, getActionsAction } from '../../modules/asset-action/asset-action-screen.sagas'
 /* ------------- API ------------- */
@@ -94,6 +94,7 @@ export default function* root() {
     // Asset Traceability
     takeLatest(AssetTraceabilityTypes.ASSET_TRACEABILITY_REQUEST, getAssetTraceability, api),
     takeLatest(AssetTraceabilityTypes.ASSET_TRACEABILITY_RANGE_REQUEST, getAssetRangeTraceability, api),
+    takeLatest(AssetTraceabilityTypes.ASSET_TRACEABILITY_REQUEST_ASSET_BEFORE, getAssetTraceabilityBefore, api),
 
     // Asset create
     takeLatest(AssetCreateTypes.ASSET_CREATE_REQUEST, createAsset, api),
