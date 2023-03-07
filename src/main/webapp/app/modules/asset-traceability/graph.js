@@ -1,11 +1,11 @@
 import React, { useRef, useEffect } from 'react';
 import * as d3 from 'd3';
-import { getImage } from '../../shared/util/asset-image-name';
 
 const Graph = (props) => {
 
   let nodesList = JSON.parse(JSON.stringify(props.nodes));
   let linksList =  JSON.parse(JSON.stringify(props.links));
+
   const svgRef = useRef();
 
   const distanceLinks = 250
@@ -16,11 +16,14 @@ const Graph = (props) => {
   const linkStrokeWidth = "2px"
 
   const radiusNode = 20
+  const colorNodeNotSelected = "blue"
+  const colorNodeSelected = "purple"
 
   const fontFamilyNodeLabel = "Arial"
   const fontSizeNodeLabel = "20px"
   const fontWidthNodeLabel = "bold"
   const fontColorNodeLabel = "black"
+
 
   useEffect(() => {
     const svg = d3.select(svgRef.current);
@@ -59,6 +62,7 @@ const Graph = (props) => {
         .data(nodesList)
         .enter()
         .append('circle')
+        .style("cursor", "pointer")
         .attr('r', radiusNode)
         .attr('fill', function(d) { return d.color; })
         .attr('svg', function(d) { return d.svg; })
@@ -78,8 +82,12 @@ const Graph = (props) => {
         .attr("font-width", fontWidthNodeLabel)
         .attr("fill", fontColorNodeLabel)
 
-    function clickNode(event,d){
-        console.log("El nodo", d.id, "a sido pulsado")
+    function clickNode(event,nodeClick){
+      nodesList.forEach((node, index) => {
+        if(node.id == props.nodeSelected) node.color = colorNodeNotSelected
+        if(node.id == nodeClick.id) node.color = colorNodeSelected
+      });
+      props.onClickNode(nodeClick.id, nodesList)
     }
 
     function ticked() {

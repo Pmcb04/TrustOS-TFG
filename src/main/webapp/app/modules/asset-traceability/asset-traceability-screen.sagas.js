@@ -15,7 +15,8 @@ export function* getAssetTraceabilityBefore(api, action){
   let links = []
 
   const response = yield getAsset(api, assetId)
-  nodes.push({id: response.assetId, color: "blue", type: response.data.type})
+  nodes.push({id: response.assetId, color: "purple", type: response.data.type})
+  yield put(AssetTraceabilityActions.assetTraceabilityRequest(false, response.assetId))
 
   const [newNodes, newLinks] = yield getAssetBefore(api, response, response.data.assetBefore, nodes, links)
   yield put(AssetTraceabilityActions.assetTraceabilitySuccessAssetBefore(newNodes, newLinks))
@@ -83,6 +84,7 @@ export function* getAssetRangeTraceability(api) {
   }
 
   const response = yield call(api.getAssetRangeTraceability, isAuthorised, assetId, body)
+  console.log(response.data)
   // success?
   if (response.ok) {
     yield put(AssetTraceabilityActions.assetTraceabilitySuccess(response.data))

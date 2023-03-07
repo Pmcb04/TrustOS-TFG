@@ -2,10 +2,6 @@ import { createReducer, createActions } from 'reduxsauce'
 import Immutable from 'seamless-immutable'
 import { convertLocalDateToTimestamp } from '../../shared/util/date-transforms'
 
-const TODAY = new Date()
-const SUBSTRACT_NUMBER_DAYS = 7
-const ONE_DAY_MS = 24 * 60 * 60 * 1000
-
 /* ------------- Types and Action Creators ------------- */
 
 const { Types, Creators } = createActions({
@@ -18,6 +14,7 @@ const { Types, Creators } = createActions({
   assetTraceabilitySetTimestampEnd: ['timestampEnd'],
   assetTraceabilityRequestAssetBefore: ['assetId'],
   assetTraceabilitySuccessAssetBefore: ['nodes', 'links'],
+  assetTraceabilityChangeAssetSelected: ['assetId', 'nodes']
 })
 
 export const AssetTraceabilityTypes = Types
@@ -32,8 +29,8 @@ export const INITIAL_STATE = Immutable({
   assetId: null,
   isAuthorised: null,
   transactionSelect: 0,
-  timestampInit: convertLocalDateToTimestamp(new Date(TODAY - SUBSTRACT_NUMBER_DAYS * ONE_DAY_MS)),
-  timestampEnd: convertLocalDateToTimestamp(TODAY),
+  timestampInit: 0,
+  timestampEnd: convertLocalDateToTimestamp(new Date()),
   nodes : [],
   links : []
 })
@@ -91,6 +88,7 @@ export const requestAssetBefore = (state, { assetId }) =>
   state.merge({
     fetching: true,
     error: null,
+    assetId,
     nodes: [],
     links: []
   })
@@ -104,6 +102,14 @@ export const successAssetBefore = (state, { nodes, links }) =>
     links,
   })
 
+export const changeSelected = (state, { assetId, nodes }) =>
+  state.merge({
+    fetching: false,
+    error: null,
+    assetId,
+    nodes, 
+})
+
 /* ------------- Hookup Reducers To Types ------------- */
 
 export const reducer = createReducer(INITIAL_STATE, {
@@ -116,4 +122,5 @@ export const reducer = createReducer(INITIAL_STATE, {
   [Types.ASSET_TRACEABILITY_SET_TIMESTAMP_END]: setTimestampEnd,
   [Types.ASSET_TRACEABILITY_REQUEST_ASSET_BEFORE]: requestAssetBefore,
   [Types.ASSET_TRACEABILITY_SUCCESS_ASSET_BEFORE]: successAssetBefore,
+  [Types.ASSET_TRACEABILITY_CHANGE_ASSET_SELECTED]: changeSelected,
 })

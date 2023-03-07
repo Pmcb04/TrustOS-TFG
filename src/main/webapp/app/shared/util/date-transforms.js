@@ -1,4 +1,6 @@
-export const convertLocalDateToString = (date) => {
+// field true if the date is put in a field date of telefonica mistica
+export const convertLocalDateToString = (date, field) => {
+  console.log("date", date)
   var d = new Date(date),
     month = '' + (d.getMonth() + 1),
     day = '' + d.getDate(),
@@ -13,6 +15,9 @@ export const convertLocalDateToString = (date) => {
   if (minutes.length < 2) minutes = '0' + minutes
   if (seconds.length < 2) seconds = '0' + seconds
 
+  console.log("field" ,field)
+
+  if(field) return [year, month, day].join('-') + 'T' + hours + ':' + minutes
   return [day, month, year].join('/') + ' ' + hours + ':' + minutes + ':' + seconds
 }
 
@@ -26,6 +31,6 @@ export const convertLocalDateToTimestamp = (date) => {
   return d.getTime() / 1000 // pass to timestamp
 }
 
-export const convertTimestampToLocalDate = (timestamp) => {
-  return convertLocalDateToString(new Date(timestamp * 1000))
+export const convertTimestampToLocalDate = (timestamp, field) => {
+  return convertLocalDateToString(new Date(timestamp * 1000), field)
 }
