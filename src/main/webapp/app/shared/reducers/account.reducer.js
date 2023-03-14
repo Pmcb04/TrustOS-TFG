@@ -9,6 +9,10 @@ const { Types, Creators } = createActions({
   accountUpdateRequest: ['account'],
   accountUpdateSuccess: [],
   accountUpdateFailure: ['error'],
+  accountAssetRequest: ['isAuthorised', 'assetId'],
+  accountAssetSuccess: ['asset'],
+  accountAssetFailure: ['error'],
+  accountAssetUpdate : ['metadata'],
   accountReset: [],
 })
 
@@ -22,6 +26,7 @@ export const INITIAL_STATE = Immutable({
   error: null,
   fetching: false,
   updating: false,
+  asset : null
 })
 
 /* ------------- Reducers ------------- */
@@ -36,7 +41,7 @@ export const success = (state, data) => {
 }
 
 // we've had a problem getting the account
-export const failure = (state, { error }) => state.merge({ fetching: false, updating: false, account: null, error })
+export const failure = (state, { error }) => state.merge({ fetching: false, updating: false, account: null, error, asset: null })
 
 // we're attempting to updating account settings
 export const updateRequest = (state) => state.merge({ updating: true })
@@ -46,6 +51,25 @@ export const updateSuccess = (state) => state.merge({ error: null, updating: fal
 
 // we've had a problem updating the account settings
 export const updateFailure = (state, { error }) => state.merge({ updating: false, error })
+
+// request to init load the asset
+export const assetRequest = (state, { isAuthorised, assetId }) =>
+  state.merge({
+    fetching: true,
+    error: null,
+    isAuthorised,
+    assetId,
+  })
+
+// state sucess request completed
+export const assetSuccess = (state, { asset }) =>
+  state.merge({
+    fetching: false,
+    error: null,
+    asset,
+  })
+
+  export const assetUpdate = (state) => state
 
 // reset the account reducer
 export const reset = () => INITIAL_STATE
@@ -59,6 +83,10 @@ export const reducer = createReducer(INITIAL_STATE, {
   [Types.ACCOUNT_UPDATE_REQUEST]: updateRequest,
   [Types.ACCOUNT_UPDATE_SUCCESS]: updateSuccess,
   [Types.ACCOUNT_UPDATE_FAILURE]: updateFailure,
+  [Types.ACCOUNT_ASSET_REQUEST]: assetRequest,
+  [Types.ACCOUNT_ASSET_SUCCESS]: assetSuccess,
+  [Types.ACCOUNT_ASSET_FAILURE]: failure,
+  [Types.ACCOUNT_ASSET_UPDATE]: assetUpdate,
   [Types.ACCOUNT_RESET]: reset,
 })
 

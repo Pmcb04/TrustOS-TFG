@@ -21,6 +21,7 @@ import {
   IconSunRegular,
   IconMoonRegular,
 } from '@telefonica/mistica'
+import Metadata from '../../../shared/components/metadata/metadata'
 
 function SettingsScreen(props) {
   const { account, getAccount, updating, error, updateAccount, getAsset } = props
@@ -80,14 +81,11 @@ function SettingsScreen(props) {
       keyboardDismissMode="on-drag">
       <Form onSubmit={onSubmit} initialValues={props.account}>
         <Stack fullWidth space={16}>
-          <Title2>{t('PROPERTIES')}</Title2>
+          <Title2>{t('CONFIGURATION')}</Title2>
           <TextField name="firstName" label={t('FIRST_NAME')} placeholder={t('ENTER_FIRST_NAME')} fullWidth />
           <TextField name="lastName" label={t('LAST_NAME')} placeholder={t('ENTER_LAST_NAME')} fullWidth />
           <EmailField name="email" label={t('EMAIL')} placeholder={t('ENTER_EMAIL')} fullWidth />
           <TextField name="imageUrl" label={t('IMAGE_PROFILE')} placeholder={t('ENTER_IMAGE_PROFILE')} fullWidth optional />
-          {
-            // TODO funcion para añadir las propiedades propias de cada rol
-          }
           <ListOptionsChips title={t('SELECT_LANGUAGE')} options={languages} defaultOption={language} callback={setLanguage} />
           <ListOptionsChips title={t('SELECT_THEME')} options={themes} defaultOption={theme} callback={setTheme} />
           <ButtonLayout align="full-width">

@@ -10,6 +10,7 @@ import InfoAccount from '../../shared/components/info-account/info-account'
 import { ScrollView } from 'react-native-gesture-handler'
 import ChangePasswordScreen from './password/change-password-screen'
 import SettingsScreen from './settings/settings-screen'
+import PropertiesScreen from './properties/properties-screen'
 
 function AccountScreen(props) {
   const { colors } = React.useContext(ThemeContext)
@@ -36,6 +37,10 @@ function AccountScreen(props) {
           </View>
         </ThemeVariant>
 
+        {/* <View style={[styles.properties, { borderColor: colors.border }]}> */}
+          <PropertiesScreen />
+        {/* </View> */}
+
         <View style={[styles.properties, { borderColor: colors.border }]}>
           <ChangePasswordScreen />
         </View>
@@ -43,12 +48,15 @@ function AccountScreen(props) {
         <View style={[styles.properties, { borderColor: colors.border }]}>
           <SettingsScreen />
         </View>
+        
       </View>
     </ScrollView>
   )
 }
 
-const mapStateToProps = (state) => ({ account: state.account.account })
+const mapStateToProps = (state) => ({ 
+  account: state.account.account
+})
 const mapDispatchToProps = (dispatch) => ({
   logout: () => dispatch(LoginActions.logoutRequest()),
 })

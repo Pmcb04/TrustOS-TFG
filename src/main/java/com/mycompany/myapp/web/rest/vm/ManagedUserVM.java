@@ -1,6 +1,7 @@
 package com.mycompany.myapp.web.rest.vm;
 
 import com.mycompany.myapp.service.dto.AdminUserDTO;
+import com.mycompany.myapp.service.dto.trustos.AssetDTO;
 import javax.validation.constraints.Size;
 
 /**
@@ -15,6 +16,8 @@ public class ManagedUserVM extends AdminUserDTO {
     @Size(min = PASSWORD_MIN_LENGTH, max = PASSWORD_MAX_LENGTH)
     private String password;
 
+    private AssetDTO assetDTO;
+
     public ManagedUserVM() {
         // Empty constructor needed for Jackson.
     }
@@ -25,6 +28,15 @@ public class ManagedUserVM extends AdminUserDTO {
 
     public void setPassword(String password) {
         this.password = password;
+    }
+
+
+    public AssetDTO getAssetDTO() {
+        return assetDTO;
+    }
+
+    public void setAssetDTO(AssetDTO assetDTO) {
+        this.assetDTO = assetDTO;
     }
 
     // prettier-ignore

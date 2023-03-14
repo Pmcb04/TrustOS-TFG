@@ -24,10 +24,10 @@ import { AssetActionTypes } from '../../modules/asset-action/asset-action-screen
 
 import { startup } from './startup.saga'
 import { login, logout, loginLoad } from '../../modules/login/login.sagas'
-import { register } from '../../modules/register/register.sagas'
+import { register, getRoles} from '../../modules/register/register.sagas'
 import { forgotPassword } from '../../modules/account/password-reset/forgot-password.sagas'
 import { changePassword } from '../../modules/account/password/change-password.sagas'
-import { getAccount, updateAccount } from '../../shared/sagas/account.sagas'
+import { getAccount, updateAccount, getAssetAccount,updateAssetAccount } from '../../shared/sagas/account.sagas'
 import UserSagas from '../../shared/sagas/user.sagas'
 // jhipster-react-native-saga-method-import-needle
 
@@ -63,7 +63,11 @@ export default function* root() {
     takeLatest(LoginTypes.LOGOUT_REQUEST, logout, api),
     // jhipster-react-native-saga-redux-connect-needle
 
+    // register
     takeLatest(RegisterTypes.REGISTER_REQUEST, register, api),
+    takeLatest(RegisterTypes.REGISTER_REQUEST_ROLES, getRoles, api),
+
+    // account
     takeLatest(ForgotPasswordTypes.FORGOT_PASSWORD_REQUEST, forgotPassword, api),
     takeLatest(ChangePasswordTypes.CHANGE_PASSWORD_REQUEST, changePassword, api),
     takeLatest(UserTypes.USER_REQUEST, UserSagas.getUser, api),
@@ -73,6 +77,8 @@ export default function* root() {
 
     takeLatest(AccountTypes.ACCOUNT_REQUEST, getAccount, api),
     takeLatest(AccountTypes.ACCOUNT_UPDATE_REQUEST, updateAccount, api),
+    takeLatest(AccountTypes.ACCOUNT_ASSET_REQUEST, getAssetAccount, api),
+    takeLatest(AccountTypes.ACCOUNT_ASSET_UPDATE, updateAssetAccount, api),
 
     // Asset list
     takeLatest(AssetListTypes.MY_ASSETS_REQUEST, getAssets, api),

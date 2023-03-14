@@ -22,7 +22,7 @@ public class AdminUserDTO {
 
     private Long id;
 
-    private String idTrustos;
+    private String assetId;
 
     @NotBlank
     @Pattern(regexp = Constants.LOGIN_REGEX)
@@ -59,15 +59,13 @@ public class AdminUserDTO {
 
     private Set<String> authorities;
 
-    private List<Product> products;
-
     public AdminUserDTO() {
         // Empty constructor needed for Jackson.
     }
 
     public AdminUserDTO(User user) {
         this.id = user.getId();
-        this.idTrustos = user.getIdTrustos();
+        this.assetId = user.getAssetId();
         this.login = user.getLogin();
         this.firstName = user.getFirstName();
         this.lastName = user.getLastName();
@@ -81,13 +79,6 @@ public class AdminUserDTO {
         this.lastModifiedBy = user.getLastModifiedBy();
         this.lastModifiedDate = user.getLastModifiedDate();
         this.authorities = user.getAuthorities().stream().map(Authority::getName).collect(Collectors.toSet());
-        // this.products =
-        //     user
-        //         .getAuthorities()
-        //         .stream()
-        //         .map(auth -> auth.getProducts().stream().collect(Collectors.toList()))
-        //         .flatMap(Collection::stream)
-        //         .collect(Collectors.toList());
     }
 
     public Long getId() {
@@ -98,12 +89,12 @@ public class AdminUserDTO {
         this.id = id;
     }
 
-    public String getIdTrustos() {
-        return idTrustos;
+    public String getAssetId() {
+        return assetId;
     }
 
-    public void setIdTrustos(String idTrustos) {
-        this.idTrustos = idTrustos;
+    public void setAssetId(String assetId) {
+        this.assetId = assetId;
     }
 
     public String getLogin() {
@@ -210,14 +201,6 @@ public class AdminUserDTO {
         this.authorities = authorities;
     }
 
-    public List<Product> getProducts() {
-        return products;
-    }
-
-    public void setProducts(List<Product> products) {
-        this.products = products;
-    }
-
     // prettier-ignore
     @Override
     public String toString() {
@@ -225,6 +208,7 @@ public class AdminUserDTO {
             "login='" + login + '\'' +
             ", firstName='" + firstName + '\'' +
             ", lastName='" + lastName + '\'' +
+            ", assetId='" + assetId + '\'' +
             ", email='" + email + '\'' +
             ", imageUrl='" + imageUrl + '\'' +
             ", activated=" + activated +
@@ -235,7 +219,6 @@ public class AdminUserDTO {
             ", lastModifiedBy='" + lastModifiedBy + '\'' +
             ", lastModifiedDate=" + lastModifiedDate +
             ", authorities=" + authorities +
-            ", products=" + products +
             "}";
     }
 }

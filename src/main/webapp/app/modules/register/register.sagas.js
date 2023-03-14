@@ -14,3 +14,17 @@ export function* register(api, { user }) {
     yield put(RegisterActions.registerFailure((response.data && response.data.title) || 'Registration failed'))
   }
 }
+
+export function* getRoles(api) {
+
+  const response = yield call(api.getRoles)
+  console.log("reponse", response)
+  // success?
+  if (response.ok) {
+    console.log('Register - OK')
+    yield put(RegisterActions.registerSuccessRoles(response.data))
+  } else {
+    console.log('Register - FAIL')
+    yield put(RegisterActions.registerFailure((response.data)))
+  }
+}

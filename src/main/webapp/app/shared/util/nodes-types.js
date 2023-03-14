@@ -5,5 +5,7 @@ export const TYPES = {
   BOTELLA: 'Botella',
   PANTALON: 'Pantalon',
   ROMPER_PANTALON: 'Romper pantalon',
-  USAR: 'Usar'
+  USAR: 'Usar',
+  ROLE_ADMIN: 'ROLE_ADMIN',
+  ROLE_USER: 'ROLE_USER'
 }

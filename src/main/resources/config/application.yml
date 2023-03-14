@@ -14,6 +14,10 @@
 # http://docs.spring.io/spring-boot/docs/current/reference/html/common-application-properties.html
 # ===================================================================
 
+trustos:
+  id: 'did:vtn:trustid:0106a4d4a997ac85895ed20cbdaafe6a58c5bd8d7311b446d11502bfe9942311'
+  password: 'KMv52hzgfQYW'
+
 ---
 # Conditionally disable springdoc on missing api-docs profile
 spring:

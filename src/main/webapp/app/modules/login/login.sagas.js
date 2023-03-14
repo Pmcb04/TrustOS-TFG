@@ -2,15 +2,16 @@ import { call, put, select, take } from 'redux-saga/effects'
 
 import LoginActions from './login.reducer'
 import AccountActions from '../../shared/reducers/account.reducer'
+import AppConfig from '../../config/app-config'
 
 export const selectAuthToken = (state) => state.login.authToken
 export const selectTrustosToken = (state) => state.login.trustosToken
 export const selectAccount = (state) => state.account.account
 
-function* loginTrustos(api, idTrustos, password) {
+function* loginTrustos(api) {
   const account = {
-    id: idTrustos,
-    password: 'KMv52hzgfQYW', // FIXME poner contraseña de el usuario (poner o nombre de login o una personalizada, esta ultima guardar en la base de datos)
+    id: AppConfig.idTrustos,
+    password: AppConfig.password,
   }
   const token = yield call(api.loginTrustOS, account)
   return token.data.message
@@ -35,7 +36,7 @@ export function* login(api, { username, password }) {
       yield take()
       account = yield select(selectAccount)
     }
-    const trustosToken = yield loginTrustos(api, account.idTrustos, password)
+    const trustosToken = yield loginTrustos(api)
     yield call(api.setTrustOSToken, trustosToken)
     yield put(LoginActions.loginSuccess(response.data.id_token, trustosToken))
     yield put({ type: 'RELOGIN_OK' })
