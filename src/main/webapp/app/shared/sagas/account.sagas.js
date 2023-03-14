@@ -1,7 +1,10 @@
-import { call, put } from 'redux-saga/effects'
+import { call, put, select} from 'redux-saga/effects'
 
 import AccountActions from '../reducers/account.reducer'
 import { callApi } from './call-api.saga'
+
+export const selectAssetId = (state) => state.account.account.assetId
+
 
 // attempts to account
 export function* getAccount(api) {
@@ -31,5 +34,32 @@ export function* updateAccount(api, action) {
   } else {
     console.log('AccountUpdate - FAIL')
     yield put(AccountActions.accountUpdateFailure((response.data && response.data.detail) || 'Failed to update account'))
+  }
+}
+
+
+export function* getAssetAccount(api) {
+  const isAuthorised = false
+  const assetId = yield select(selectAssetId)
+
+  const response = yield call(api.getAsset, isAuthorised, assetId)
+  // success?
+  if (response.ok) {
+    yield put(AccountActions.accountAssetSuccess(response.data))
+  } else {
+    yield put(AccountActions.accountAssetFailure(response.data))
+  }
+}
+
+export function* updateAssetAccount(api, action) {
+  const isAuthorised = false
+  const assetId = yield select(selectAssetId)
+  const {metadata} = action
+
+  const response = yield call(api.updateAsset, isAuthorised, assetId, metadata)
+
+  // success?
+  if (!response.ok) {
+    yield put(AccountActions.accountAssetFailure(response.data))
   }
 }

@@ -42,7 +42,7 @@ public class Authority implements Serializable {
     @OneToMany(fetch = FetchType.EAGER)
     @JoinTable(
         name = "jhi_authority_product",
-        joinColumns = { @JoinColumn(name = "athority_name", referencedColumnName = "name") },
+        joinColumns = { @JoinColumn(name = "authority_name", referencedColumnName = "name") },
         inverseJoinColumns = { @JoinColumn(name = "product_id", referencedColumnName = "id") }
     )
     @Cache(usage = CacheConcurrencyStrategy.NONSTRICT_READ_WRITE)

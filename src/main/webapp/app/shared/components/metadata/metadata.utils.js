@@ -9,6 +9,8 @@ import Pantalon from './pantalon/pantalon'
 import Ternero from './ternero/ternero'
 import Romper from './romper/romper'
 import Usar from './usar/usar'
+import ROLE_ADMIN from './role_admin/role_admin'
+import ROLE_USER from './role_user/role_user'
 
 import { permissionsBotella } from './botella/permissions'
 import { permissionsCoche } from './coche/permissions'
@@ -17,6 +19,8 @@ import { permissionsPantalon } from './pantalon/permissions'
 import { permissionsTernero } from './ternero/permissions'
 import { permissionsRomper } from './romper/permissions'
 import { permissionsUsar } from './usar/permissions'
+import { permissionsROLE_ADMIN } from './role_admin/permissions'
+import { permissionsROLE_USER } from './role_user/permissions'
 
 // TODO fichero autogenerado
 export function process(data, edit_fields, create, type, rol) {
@@ -35,6 +39,10 @@ export function process(data, edit_fields, create, type, rol) {
       return <Romper data={data} edit={edit_fields} create={create} rol={rol} />
     case TYPES.USAR:
       return <Usar data={data} edit={edit_fields} create={create} rol={rol} />
+    case TYPES.ROLE_USER:
+      return <ROLE_USER data={data} edit={edit_fields} create={create} rol={rol} />
+    case TYPES.ROLE_ADMIN:
+      return <ROLE_ADMIN data={data} edit={edit_fields} create={create} rol={rol} />
   }
 }
 
@@ -56,6 +64,10 @@ export function getPermissions(type, rol) {
       return permissionsRomper(rol)
     case TYPES.USAR:
       return permissionsUsar(rol)
+    case TYPES.ROLE_ADMIN:
+      return permissionsROLE_ADMIN(rol)
+    case TYPES.ROLE_USER:
+      return permissionsROLE_USER(rol)
     default: 
     return { canView, canEdit }
   }

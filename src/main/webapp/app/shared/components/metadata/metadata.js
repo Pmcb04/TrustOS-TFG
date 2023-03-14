@@ -6,14 +6,13 @@ import { connect } from 'react-redux'
 
 import { process } from './metadata.utils'
 import { ButtonPrimary, ThemeContext, FadeIn, Box } from '@telefonica/mistica'
-import { ScrollView } from 'react-native-gesture-handler'
 
 function Metadata(props) {
-  const { data, edit_fields, type, create, createWithButton, canEdit, account } = props
+  const { data, edit_fields, editWithoutButton, type, create, createWithButton, canEdit, account, register } = props
   const { colors } = React.useContext(ThemeContext)
   const { t } = useTranslation() //i18n instance
 
-  const asset = process(data || {}, edit_fields, create || createWithButton, type, account.authorities[0])
+  const asset = process(data || {}, edit_fields || editWithoutButton, create || createWithButton, type, register ? "ADMIN" : account.authorities[0])
 
   return (
     <View style={[styles.properties, { borderColor: colors.border }]}>

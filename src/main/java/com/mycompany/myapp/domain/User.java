@@ -32,9 +32,8 @@ public class User extends AbstractAuditingEntity implements Serializable {
     @SequenceGenerator(name = "sequenceGenerator")
     private Long id;
 
-    @NotNull
-    @Column(name = "id_trustos")
-    private String idTrustos;
+    @Column(name = "asset_id")
+    private String assetId;
 
     @NotNull
     @Pattern(regexp = Constants.LOGIN_REGEX)
@@ -108,12 +107,12 @@ public class User extends AbstractAuditingEntity implements Serializable {
         this.id = id;
     }
 
-    public String getIdTrustos() {
-        return idTrustos;
+    public String getAssetId() {
+        return assetId;
     }
 
-    public void setIdTrustos(String idTrustos) {
-        this.idTrustos = idTrustos;
+    public void setAssetId(String assetId) {
+        this.assetId = assetId;
     }
 
     public String getLogin() {
@@ -245,6 +244,7 @@ public class User extends AbstractAuditingEntity implements Serializable {
             "login='" + login + '\'' +
             ", firstName='" + firstName + '\'' +
             ", lastName='" + lastName + '\'' +
+            ", assetId='" + assetId + '\'' +
             ", email='" + email + '\'' +
             ", imageUrl='" + imageUrl + '\'' +
             ", activated='" + activated + '\'' +

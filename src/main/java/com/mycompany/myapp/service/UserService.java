@@ -1,14 +1,19 @@
 package com.mycompany.myapp.service;
 
+import com.mycompany.myapp.domain.User;
 import com.mycompany.myapp.config.Constants;
 import com.mycompany.myapp.domain.Authority;
-import com.mycompany.myapp.domain.User;
+import com.mycompany.myapp.domain.trustos.LoginTrustos;
+import com.mycompany.myapp.domain.trustos.Message;
+import com.mycompany.myapp.domain.trustos.Asset;
 import com.mycompany.myapp.repository.AuthorityRepository;
 import com.mycompany.myapp.repository.UserRepository;
 import com.mycompany.myapp.security.AuthoritiesConstants;
 import com.mycompany.myapp.security.SecurityUtils;
 import com.mycompany.myapp.service.dto.AdminUserDTO;
 import com.mycompany.myapp.service.dto.UserDTO;
+import com.mycompany.myapp.service.dto.trustos.AssetDTO;
+import com.mycompany.myapp.service.trustos.AssetService;
 import java.time.Instant;
 import java.time.temporal.ChronoUnit;
 import java.util.*;
@@ -23,6 +28,7 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import tech.jhipster.security.RandomUtil;
+import org.springframework.beans.factory.annotation.Value;
 
 /**
  * Service class for managing users.
@@ -41,16 +47,20 @@ public class UserService {
 
     private final CacheManager cacheManager;
 
+    private final AssetService assetService;
+
     public UserService(
         UserRepository userRepository,
         PasswordEncoder passwordEncoder,
         AuthorityRepository authorityRepository,
-        CacheManager cacheManager
+        CacheManager cacheManager,
+        AssetService assetService
     ) {
         this.userRepository = userRepository;
         this.passwordEncoder = passwordEncoder;
         this.authorityRepository = authorityRepository;
         this.cacheManager = cacheManager;
+        this.assetService = assetService;
     }
 
     public Optional<User> activateRegistration(String key) {
@@ -93,7 +103,21 @@ public class UserService {
             });
     }
 
-    public User registerUser(AdminUserDTO userDTO, String password) {
+
+    @Value("${trustos.id}")
+    private String id;
+
+    @Value("${trustos.password}")
+    private String password;
+
+    public LoginTrustos getTrustosLogin(){
+        LoginTrustos loginTrustos = new LoginTrustos();
+        loginTrustos.setId(this.id);
+        loginTrustos.setPassword(this.password);
+        return loginTrustos;
+    }
+
+    public User registerUser(AdminUserDTO userDTO, String password, AssetDTO assetDTO) {
         userRepository
             .findOneByLogin(userDTO.getLogin().toLowerCase())
             .ifPresent(existingUser -> {
@@ -113,8 +137,16 @@ public class UserService {
         User newUser = new User();
         String encryptedPassword = passwordEncoder.encode(password);
         newUser.setLogin(userDTO.getLogin().toLowerCase());
-        // TODO añadir registro de trustos
-        // new user gets initially a generated password
+
+        // create a asset in trustos
+        LoginTrustos login = getTrustosLogin();
+        System.out.println(login);
+        Message token = assetService.login(login);
+        System.out.println(token);
+        System.out.println(assetDTO);
+        Asset assetCreated = assetService.createAsset(assetDTO, "Bearer " + token.getMessage());
+
+        newUser.setAssetId(assetCreated.getAssetId());
         newUser.setPassword(encryptedPassword);
         newUser.setFirstName(userDTO.getFirstName());
         newUser.setLastName(userDTO.getLastName().toUpperCase());
@@ -129,7 +161,7 @@ public class UserService {
         // new user gets registration key
         newUser.setActivationKey(RandomUtil.generateActivationKey());
         Set<Authority> authorities = new HashSet<>();
-        authorityRepository.findById(AuthoritiesConstants.USER).ifPresent(authorities::add);
+        authorityRepository.findById(assetDTO.getData().get("type") + "").ifPresent(authorities::add);
         newUser.setAuthorities(authorities);
         userRepository.save(newUser);
         this.clearUserCaches(newUser);
@@ -150,7 +182,7 @@ public class UserService {
     public User createUser(AdminUserDTO userDTO) {
         User user = new User();
         user.setLogin(userDTO.getLogin().toLowerCase());
-        // TODO añadir registro de trustos
+        user.setAssetId(userDTO.getAssetId());
         user.setFirstName(userDTO.getFirstName());
         user.setLastName(userDTO.getLastName());
         if (userDTO.getEmail() != null) {
@@ -198,7 +230,7 @@ public class UserService {
             .map(user -> {
                 this.clearUserCaches(user);
                 user.setLogin(userDTO.getLogin().toLowerCase());
-                user.setIdTrustos(userDTO.getIdTrustos());
+                user.setAssetId(userDTO.getAssetId());
                 user.setFirstName(userDTO.getFirstName());
                 user.setLastName(userDTO.getLastName());
                 if (userDTO.getEmail() != null) {
