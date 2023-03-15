@@ -88,5 +88,6 @@
   "NEW" : "New",
   "ERROR_NEXT_STEP": "One element is not selected or is empty",
   "NOT_TRANSACTIONS_ASSET" : "Not found transactions",
-  "CLEAR" : "Clear"
+  "CLEAR" : "Clear",
+  "DETAILS" : "Details"
 }

@@ -11,12 +11,13 @@ import {
   Title2,
   ButtonLayout,
   ButtonPrimary,
+  ButtonSecondary,
   Form,
 } from '@telefonica/mistica'
 import Metadata from '../../../shared/components/metadata/metadata'
 
 function PropertiesScreen(props) {
-  const { updating, error, account, asset, getAsset, updateAsset } = props
+  const { updating, error, account, asset, getAsset, updateAsset, navigation } = props
   const { t, i18n } = useTranslation() //i18n instance
 
   const [errorMessage, setErrorMessage] = React.useState('')
@@ -51,8 +52,10 @@ function PropertiesScreen(props) {
       <Form onSubmit={onSubmit}>
         <Stack fullWidth space={16}>
           <Title2>{t('PROPERTIES')}</Title2>
-          { asset && <Metadata data={asset.metadata} editWithoutButton={true} type={asset.data.type} />}          <ButtonLayout align="full-width">
+          { asset && <Metadata data={asset.metadata} editWithoutButton={true} type={asset.data.type} />}          
+          <ButtonLayout align="full-width">
             <ButtonPrimary submit>{t('SAVE')}</ButtonPrimary>
+            {asset && <ButtonSecondary onPress={() =>navigation.navigate('AssetDetails', { assetId: asset.assetId, isAuthorised: false })}>{t('DETAILS')}</ButtonSecondary>}
           </ButtonLayout>
           {!!errorMessage && <Text style={styles.errorText}>{errorMessage}</Text>}
           {!!successMessage && <Text style={styles.successText}>{successMessage}</Text>}

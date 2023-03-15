@@ -37,9 +37,9 @@ function AccountScreen(props) {
           </View>
         </ThemeVariant>
 
-        {/* <View style={[styles.properties, { borderColor: colors.border }]}> */}
-          <PropertiesScreen />
-        {/* </View> */}
+       { account.assetId && <View style={[styles.properties, { borderColor: colors.border }]}>
+          <PropertiesScreen navigation={props.navigation} />
+        </View> }
 
         <View style={[styles.properties, { borderColor: colors.border }]}>
           <ChangePasswordScreen />
@@ -55,7 +55,7 @@ function AccountScreen(props) {
 }
 
 const mapStateToProps = (state) => ({ 
-  account: state.account.account
+  account: state.account.account,
 })
 const mapDispatchToProps = (dispatch) => ({
   logout: () => dispatch(LoginActions.logoutRequest()),
