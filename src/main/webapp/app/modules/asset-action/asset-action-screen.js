@@ -177,7 +177,6 @@ function AssetActionScreen(props) {
                             assetBefore: [stepInput, stepAction, stepOutput][indexStep - 1].map((element => element.ref.assetId)), 
                         }
                     }
-                    console.log(newAsset)
                     createAsset(newAsset)
                 }else {
                     let newMetadata = {...element.ref.metadata}
@@ -194,7 +193,6 @@ function AssetActionScreen(props) {
                         metadata: newMetadata,
                         data: element.ref.data
                     }
-                    console.log(updateNewAsset)
                     updateAsset(updateNewAsset)
 
                 }

@@ -27,7 +27,18 @@ public class ProductResource {
      * @return the {@link ResponseEntity} with status {@code 200 (OK)} and with body all product can be create a rol.
      */
     @GetMapping("/products/create/{rol}")
-    public ResponseEntity<List<ProductDTO>> getAllProductsByRol(@PathVariable String rol) {
+    public ResponseEntity<List<ProductDTO>> getAllProductsCanCreateByRol(@PathVariable String rol) {
+        return new ResponseEntity<>(productService.findAllCanCreateByRol(rol), HttpStatus.OK);
+    }
+
+    /**
+     * {@code GET /api/products/view} : get all products can be view a rol
+     *
+     * @param rol rol of user to identify what product can be view
+     * @return the {@link ResponseEntity} with status {@code 200 (OK)} and with body all product can be view a rol.
+     */
+    @GetMapping("/products/view/{rol}")
+    public ResponseEntity<List<ProductDTO>> getAllProductsCanViewByRol(@PathVariable String rol) {
         return new ResponseEntity<>(productService.findAllByRol(rol), HttpStatus.OK);
     }
 }

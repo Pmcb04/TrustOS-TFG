@@ -35,7 +35,6 @@ function RegisterScreen(props) {
 
   function create(metadata, type) {
     const assetId = addRandomString(type)
-    console.log("assetID", assetId)
     const newAsset = {
       assetId: assetId,
       metadata: metadata,
@@ -61,9 +60,6 @@ function RegisterScreen(props) {
     delete metadata.lastName
     delete metadata.login
     delete metadata.imageUrl
-
-    console.log("data", data)
-    console.log("metadata", metadata)
     
     const assetUser = create(metadata, data.rol)
     if(!error){

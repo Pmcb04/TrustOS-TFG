@@ -24,9 +24,12 @@
             <column name="product_id" type="bigint">
                 <constraints nullable="false"/>
             </column>
+            <column name="canCreate" type="boolean">
+                <constraints nullable="false"/>
+            </column>
         </createTable>
 
-        <addPrimaryKey columnNames="product_id, authority_name" tableName="jhi_authority_product"/>
+        <addPrimaryKey columnNames="product_id, authority_name, canCreate" tableName="jhi_authority_product"/>
 
 
         <addForeignKeyConstraint baseColumnNames="product_id"
@@ -56,6 +59,7 @@
             usePreparedStatements="true">
             <column name="authority_name" type="varchar(255)"/>
             <column name="product_id" type="numeric"/>
+            <column name="canCreate" type="boolean"/>
         </loadData>
 
     </changeSet>

@@ -67,6 +67,7 @@ const create = (baseURL = AppConfig.apiUrl) => {
   const removeTrustOSToken = () => api.deleteHeader('Api-Authorization')
   const getAssets = (isAuthorised) => api.get('api/trustos/assets', {}, { params: { isAuthorised: isAuthorised } })
   const getAssetsCreate = (rol) => api.get('api/products/create/' + rol, {}, {})
+  const getAssetsView = (rol) => api.get('api/products/view/' + rol, {}, {})
   const getAsset = (isAuthorised, assetId) => api.get('api/trustos/assets/' + assetId, {}, { params: { isAuthorised: isAuthorised } })
   const updateAsset = (isAuthorised, assetId, newMetadata) =>
     api.post('api/trustos/assets/' + assetId + '/update', newMetadata, { params: { isAuthorised: isAuthorised } })
@@ -112,6 +113,7 @@ const create = (baseURL = AppConfig.apiUrl) => {
     removeTrustOSToken,
     getAssets,
     getAssetsCreate,
+    getAssetsView,
     getAsset,
     updateAsset,
     getAssetTraceability,

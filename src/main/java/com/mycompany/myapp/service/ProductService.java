@@ -24,6 +24,10 @@ public class ProductService {
         this.productMapper = productMapper;
     }
 
+    public List<ProductDTO> findAllCanCreateByRol(String rol) {
+        return productMapper.productsToProductsDTOs(productRepository.findAllCanCreateByRol(rol));
+    }
+
     public List<ProductDTO> findAllByRol(String rol) {
         return productMapper.productsToProductsDTOs(productRepository.findAllByRol(rol));
     }

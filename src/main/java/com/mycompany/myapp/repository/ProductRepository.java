@@ -18,4 +18,14 @@ public interface ProductRepository extends JpaRepository<Product, Long> {
         nativeQuery = true
     )
     List<Product> findAllByRol(@Param("rol") String rol);
+
+    @Query(
+        value = "SELECT jhi_product.id, jhi_product.name FROM jhi_product" +
+        " INNER JOIN jhi_authority_product ON jhi_product.id = jhi_authority_product.product_id" +
+        " INNER JOIN jhi_authority ON jhi_authority_product.authority_name = jhi_authority.name" +
+        " WHERE jhi_authority_product.authority_name=:rol" + 
+        " AND jhi_authority_product." + '"' + "canCreate" + '"' + "= true",
+        nativeQuery = true
+    )
+    List<Product> findAllCanCreateByRol(@Param("rol") String rol);
 }

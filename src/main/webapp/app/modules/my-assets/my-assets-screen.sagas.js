@@ -18,14 +18,14 @@ export function* getAssets(api) {
   const order = yield select(selectOrder)
 
   yield getAssetCreate(api)
+  const productsView = yield getAssetView(api)
 
   let assetsOwner = []
   let assetsAuthorised = []
 
   if (showOwner) {
     assetsOwner = yield call(api.getAssets, false)
-    // TODO eliminar para otra cuenta la ultima condicion de Ternero
-    assetsOwner.data = assetsOwner.data.filter((e) => e !== 'Ternero#xcryscrq34')
+    assetsOwner.data = assetsOwner.data.filter((assetId) => assetId !== 'Ternero#xcryscrq34' && productsView.some((product) => assetId.includes(product.name) ))
     assetsOwner = yield putIsAuthorisedFlag(assetsOwner.data, false)
   }
 
@@ -57,6 +57,16 @@ export function* getAssetCreate(api) {
   const products = yield call(api.getAssetsCreate, authorities[0])
   if (products.ok) {
     yield put(MyAssetsActions.myAssetsCreateSuccess(products.data))
+  } else {
+    yield put(MyAssetsActions.myAssetsFailure(products.data))
+  }
+}
+
+export function* getAssetView(api) {
+  const authorities = yield select(selectAuthorities)
+  const products = yield call(api.getAssetsView, authorities[0])
+  if (products.ok) {
+    return products.data
   } else {
     yield put(MyAssetsActions.myAssetsFailure(products.data))
   }

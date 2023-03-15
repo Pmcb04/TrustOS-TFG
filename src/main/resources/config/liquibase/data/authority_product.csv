@@ -1,7 +1,7 @@
-authority_name;product_id
-ROLE_ADMIN;1
-ROLE_ADMIN;2
-ROLE_ADMIN;3
-ROLE_USER;3
-ROLE_USER;4
-ROLE_USER;5
+authority_name;product_id;canCreate
+ROLE_ADMIN;1;true
+ROLE_ADMIN;2;false
+ROLE_ADMIN;3;true
+ROLE_USER;3;true
+ROLE_USER;4;true
+ROLE_USER;5;false
