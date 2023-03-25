@@ -13,10 +13,14 @@
     <semanticResources>TFG_TrustOS_Traceability.gmfmap</semanticResources>
     <semanticResources>TFG_TrustOS_Traceability.gmftool</semanticResources>
     <semanticResources>TFG_TrustOS_Traceability.gmfgen</semanticResources>
-    <semanticResources>../eugenia/bread.trust</semanticResources>
-    <semanticResources>../eugenia/bread.trustd</semanticResources>
     <semanticResources>../eugenia/car.trust</semanticResources>
     <semanticResources>../eugenia/car.trustd</semanticResources>
+    <semanticResources>http://www.example.org/TraceabilityMM</semanticResources>
+    <semanticResources>http://www.eclipse.org/ocl/1.1.0/oclstdlib.ecore</semanticResources>
+    <semanticResources>http://www.eclipse.org/acceleo/mtl/3.0/mtlnonstdlib.ecore</semanticResources>
+    <semanticResources>../eugenia/bread.trust</semanticResources>
+    <semanticResources>../eugenia/bread.trustd</semanticResources>
+    <semanticResources>../model/bread.xmi</semanticResources>
     <ownedViews xmi:type="viewpoint:DView" xmi:id="_me7-UMllEe2SEaax0w7tKg">
       <viewpoint xmi:type="description:Viewpoint" href="platform:/plugin/org.eclipse.emf.ecoretools.design/description/ecore.odesign#//@ownedViewpoints[name='Design']"/>
       <ownedRepresentationDescriptors xmi:type="viewpoint:DRepresentationDescriptor" xmi:id="_miir8MllEe2SEaax0w7tKg" name="TFG_TrustOS_Traceability" repPath="#_mgF04MllEe2SEaax0w7tKg">

@@ -1,0 +1,19 @@
+[comment encoding = UTF-8 /]
+[**
+ * The documentation of the module generate.
+ */]
+[module generate('http://www.example.org/TraceabilityMM')]
+[import TFG::TrustOS::Traceability::generate::main::data /]
+[import TFG::TrustOS::Traceability::generate::main::components /]
+[import TFG::TrustOS::Traceability::generate::main::util /]
+
+[**
+ * The documentation of the template generateSystem.
+ * @param aSystem
+ */]
+[template public generateSystem(system : System)]
+[comment @main/]
+[generateAllCSV()/]
+[generateAllComponents(system)/]
+[generateUtil(system)/]
+[/template]

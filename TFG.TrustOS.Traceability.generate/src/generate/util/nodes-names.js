@@ -1,0 +1,15 @@
+export const NAMES = {
+    SAL: 'Sal',
+    MASAMADRE: 'MasaMadre',
+    DINERO: 'Dinero',
+    ACEITE: 'Aceite',
+    REALIZARMASA: 'RealizarMasa',
+    COCINAR: 'Cocinar',
+    AZUCAR: 'Azucar',
+    HARINA: 'Harina',
+    MASA: 'Masa',
+    VENDER: 'Vender',
+    PAN: 'Pan',
+    LEVADURA: 'Levadura',
+    SEPARARMASA: 'SepararMasa',
+}

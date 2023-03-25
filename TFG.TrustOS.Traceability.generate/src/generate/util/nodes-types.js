@@ -1,0 +1,17 @@
+export const TYPES = {
+	LEVADURA: 'Levadura',
+	MASAMADRE: 'MasaMadre',
+	PROVEEDOR: 'Proveedor',
+	HARINA: 'Harina',
+	ACEITE: 'Aceite',
+	DINERO: 'Dinero',
+	SAL: 'Sal',
+	VENDER: 'Vender',
+	PANADERO: 'Panadero',
+	SEPARARMASA: 'SepararMasa',
+	REALIZARMASA: 'RealizarMasa',
+	AZUCAR: 'Azucar',
+	MASA: 'Masa',
+	PAN: 'Pan',
+	COCINAR: 'Cocinar',
+}

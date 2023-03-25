@@ -1,0 +1,244 @@
+[comment encoding = UTF-8 /]
+[**
+ * The documentation of the module generate.
+ */]
+[module util('http://www.example.org/TraceabilityMM')]
+[import TFG::TrustOS::Traceability::generate::main::queries /]
+
+[**
+ * The documentation of the template generateUtil.
+ * @param aSystem
+ */]
+[template public generateUtil(system : System)]
+[comment @main/]
+[generateTypesNamesUtil(system)/]
+[generateMetadataUtil(system)/]
+[generateAuthoritiesConstants(system)/]
+[generateActions(system)/]
+[generateGetAction(system)/]
+[/template]
+
+
+
+[**
+ * Template to generate the images-asset.js file, it indicate the icon of each type of node
+ * @param system : System base to start the generate
+ */]
+
+[template private generateTypesNamesUtil(system : System)]
+[file ('util/nodes-names.js', false, 'UTF-8')]
+export const NAMES = {
+  [for (node : Node | getAllNodesUniques(system))]
+    [replaceWhitespaceByUnderline(node.name.toUpper())/]: '[node.name/]',
+  [/for]
+}
+[/file]
+
+[file ('util/nodes-types.js', false, 'UTF-8')]
+export const TYPES = {
+   [for (asset : Asset | getAllAssetsUnique(system))]
+	[replaceWhitespaceByUnderline(asset.type.toUpper())/]: '[replaceUnderlineByWhitespaces(asset.type)/]',
+   [/for]
+}
+[/file]
+
+[file ('util/asset-images-name.js', false, 'UTF-8')]
+import React from 'react'
+import { IconFolderRegular, IconBoxRegular, IconUserAccountRegular, IconFileErrorRegular } from '@telefonica/mistica'
+
+import { TYPES } from './nodes-types'
+
+const SIZE_ICONS = 50
+
+export function getImage(type) {
+  switch (type) {
+    [for (asset : Asset | getAllAssetsUnique(system))]
+    case TYPES.[replaceWhitespaceByUnderline(asset.type.toUpper())/]:
+	[if (asset.oclIsTypeOf(ProductConf))]
+		return <IconBoxRegular size={SIZE_ICONS} />
+	[elseif (asset.oclIsTypeOf(TransactionConf))]
+		return <IconFolderRegular size={SIZE_ICONS} />
+	[elseif (asset.oclIsTypeOf(RolConf))]
+		return <IconUserAccountRegular size={SIZE_ICONS} />
+	[/if]
+    [/for]
+    default:
+      return <IconFileErrorRegular size={SIZE_ICONS} />
+  }
+}
+
+
+export function addRandomString(name) {
+  return name + '@' + alphaNumberRandom(10)
+}
+
+function alphaNumberRandom(length) {
+  let result = ''
+  const characters = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789'
+  const charactersLength = characters.length
+  let counter = 0
+  while (counter < length) {
+    result += characters.charAt(Math.floor(Math.random() * charactersLength))
+    counter += 1
+  }
+  return result
+}
+
+[/file]
+[/template]
+
+
+[**
+ * Template to generate metadata.utils.js. It contains the call to inizialite the components with its permissions
+ * @param system : System base to start the generate
+ */]
+[template private generateMetadataUtil(system: System)]
+[file ('metadata/metadata.utils.js', false, 'UTF-8')]
+import React from 'react'
+
+import { TYPES } from '../../util/nodes-types'
+
+[for (asset : Asset | getAllAssetsUnique(system))]
+import [eliminateWhitespaces(asset.type)/] from './nodes/[eliminateWhitespaces(asset.type)/]'
+[/for]
+
+[for (asset : Asset | getAllAssetsUnique(system))]
+import { permissions[eliminateWhitespaces(asset.type)/] } from './permissions/[eliminateWhitespaces(asset.type)/]'
+[/for]
+
+export function process(data, edit_fields, create, type, rol) {
+  switch (type) {
+	[for (asset : Asset | getAllAssetsUnique(system))]
+      case TYPES.[replaceWhitespaceByUnderline(asset.type.toUpper())/]:
+        return <[eliminateWhitespaces(asset.type)/] data={data} edit={edit_fields} create={create} rol={rol} />
+	[/for]
+  }
+}
+
+export function getPermissions(type, rol) {
+  switch (type) {
+	[for (asset : Asset | getAllAssetsUnique(system))]
+	case TYPES.[replaceWhitespaceByUnderline(asset.type.toUpper())/]:
+        return permissions[asset.type/](rol)
+	[/for]
+  }
+}
+[/file]
+[/template]
+
+
+[**
+ * Template to generate AuthoritiesConstants.java. It contains all constanst to per rol in the system
+ * @param system : System base to start the generate
+ */]
+[template private generateAuthoritiesConstants(system: System)]
+[file ('java/AuthoritiesConstants.java', false, 'UTF-8')]
+package com.mycompany.myapp.security;
+
+/**
+ * Constants for Spring Security authorities.
+ */
+public final class AuthoritiesConstants {
+
+    public static final String ADMIN = "ROLE_ADMIN";
+
+    public static final String USER = "ROLE_USER";
+
+    public static final String ANONYMOUS = "ROLE_ANONYMOUS";
+
+	[for (rol : RolConf | getRoles(system))]
+    public static final String [rol.type.toUpper()/] = "[rol.type.toUpper()/]";
+ 
+	[/for]
+
+    private AuthoritiesConstants() {}
+}
+
+[/file]
+[/template]
+
+[**
+ * Template to generate all actions in the system
+ * @param system : System base to start the generate
+ */]
+[template private generateActions(system : System)]
+[for (transaction : Transaction | system.getTransactions())]
+[generateAction(transaction)/]
+[/for]
+[/template]
+
+[**
+ * Template to generate a config of one asset in the action page
+ * @param system : System base to start the generate
+ */]
+[template private jsonAsset(name : String, type: String ,create: Boolean)]
+{
+	title: NAMES.[name/],
+	type: TYPES.[type/],
+	create: [create.toString()/],
+},
+[/template]
+
+[**
+ * Template to generate one action.
+ * @param system : System base to start the generate
+ */]
+[template private generateAction(transaction : Transaction)]
+[file ('asset-action/actions/' + eliminateWhitespaces(transaction.name) + '.js', false, 'UTF-8')]
+
+import { TYPES } from '../../../shared/util/nodes-types'
+import { NAMES } from '../../../shared/util/nodes-names'
+
+export default {
+    input : [ '[' /] 
+		[for (node : Node | transaction.previous_product)]
+		[jsonAsset(replaceWhitespaceByUnderline(node.name.toUpper()), replaceWhitespaceByUnderline(node.getAsset().type.toUpper()), false)/]
+		[/for]
+    [ ']' /],
+
+    action : [ '[' /] 
+        [jsonAsset(replaceWhitespaceByUnderline(transaction.name).toUpper(),replaceWhitespaceByUnderline(transaction.getAsset().type.toUpper()), true)/]
+    [ ']' /],
+
+    output : [ '[' /] 
+        [for (node : Node | transaction.next_product)]
+		[jsonAsset(replaceWhitespaceByUnderline(node.name.toUpper()),replaceWhitespaceByUnderline(node.getAsset().type.toUpper()), true)/]
+		[/for]
+    [ ']' /]
+}
+[/file]
+[/template]
+
+[**
+ * Template to generate the asset-action-screen.util.js. It contains the method to get all actions declared
+ * @param system : System base to start the generate
+ */]
+[template private generateGetAction(system : System)]
+[file ('asset-action/asset-action-screen.util.js', false, 'UTF-8')]
+import { TYPES } from '../../shared/util/nodes-types'
+
+[for (transaction : Transaction | system.getTransactions())]
+import [eliminateWhitespaces(transaction.name)/] from './actions/[eliminateWhitespaces(transaction.name)/]'
+[/for]
+
+export function getAction(action) {
+    let stepInput = [ '[' /][ ']' /] 
+    let stepAction = [ '[' /][ ']' /] 
+    let stepOutput = [ '[' /][ ']' /] 
+    switch (action) {
+	[for (transaction : Transaction | system.getTransactions())]
+		case TYPES.[replaceWhitespaceByUnderline(transaction.getAsset().type.toUpper())/]:
+	        stepInput = [eliminateWhitespaces(transaction.name)/].input
+	        stepAction = [eliminateWhitespaces(transaction.name)/].action
+	        stepOutput = [eliminateWhitespaces(transaction.name)/].output
+	        break
+	[/for]
+		default:
+			break
+    }
+  
+    return { stepInput, stepAction, stepOutput }
+}
+[/file]
+[/template]
+

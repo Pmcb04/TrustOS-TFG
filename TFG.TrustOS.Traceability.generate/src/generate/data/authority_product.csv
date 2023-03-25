@@ -1,0 +1,10 @@
+authority_name;product_id;canCreate
+Panadero;Azucar;false
+Panadero;Levadura;false
+Panadero;MasaMadre;true
+Panadero;Masa;true
+Panadero;Harina;false
+Panadero;Pan;true
+Panadero;Aceite;false
+Panadero;Dinero;true
+Panadero;Sal;false

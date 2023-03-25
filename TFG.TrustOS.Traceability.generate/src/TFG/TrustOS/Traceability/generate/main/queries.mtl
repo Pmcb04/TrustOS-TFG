@@ -1,0 +1,243 @@
+[comment encoding = UTF-8 /]
+[**
+ * The documentation of the module util.
+ */]
+[module queries('http://www.example.org/TraceabilityMM')]
+
+[**
+ * Get a set of all products
+ * @param system : System to get all products
+ */]
+[query public getProducts(system : System) : OrderedSet(Product) = 
+	system.nodes->selectByType(Product)->asOrderedSet() 
+/]
+
+[**
+ * Get a set of all transactions
+ * @param system : System to get all transactions
+ */]
+[query public getTransactions(system : System) : OrderedSet(Transaction) = 
+	system.nodes->selectByType(Transaction)->asOrderedSet() 
+/]
+
+[**
+ * Get a set of all roles
+ * @param system : System to get all roles
+ */]
+[query public getRoles(system : System) : Set(RolConf) = 
+	system.assets->selectByType(RolConf)->asSet() 
+/]
+
+[**
+ * Get a asset of a node
+ * @param node : Node to get the asset
+ */]
+[query public getAsset(node : Node) : Asset = 
+	if (node.oclIsTypeOf(Product)) then node.oclAsType(Product).productconf
+	else 
+		if (node.oclIsTypeOf(Transaction)) then node.oclAsType(Transaction).transactionconf
+		else node.name
+		endif
+	endif
+/]
+
+[**
+ * Get a type of a node
+ * @param node : Node to get the type
+ */]
+[query public getType(node : Node) : String = 
+	getAsset(node).type
+/]
+
+[**
+ * Get a properties of a node
+ * @param node : Node to get the properties
+ */]
+[query public getProperties(node : Node) : Set(Property) = 
+	getAsset(node).properties
+/]
+
+
+[**
+ * Get all nodes uniques in the system
+ * @param system : System to get all nodes
+ */]
+[query public getAllNodesUniques(system : System) : Set(Node) = 
+	system.nodes->asSequence()->asSet()
+/]
+
+[**
+ * Get all assets uniques in the system
+ * @param system : System to get all assetid
+ */]
+[query public getAllAssetsUnique(system : System) : Set(Asset) = 
+	system.assets->asSequence()->asSet()
+/]
+
+[**
+ * Get all assets ProductConf uniques in the system
+ * @param system : System to get all assetid
+ */]
+[query public getAllAssetsProductConfUnique(system : System) : Set(ProductConf) = 
+	system.assets->selectByType(ProductConf)->asSet()
+/]
+
+[**
+ * Get all assets TransactionConf uniques in the system
+ * @param system : System to get all assetid
+ */]
+[query public getAllAssetsTransactionConfUnique(system : System) : Set(TransactionConf) = 
+	system.assets->selectByType(TransactionConf)->asSet()
+/]
+
+[**
+ * Get all assets RolConf uniques in the system
+ * @param system : System to get all assetid
+ */]
+[query public getAllAssetsRolConfUnique(system : System) : Set(RolConf) = 
+	system.assets->selectByType(RolConf)->asSet()
+/]
+
+
+[**
+ * Get the index of one productConf
+ *  @param system : System to get all productConf
+ *  @param productConf : ProductConf to get the index 
+ */]
+[query public getIndexProductConf(system: System, productConf : ProductConf) : Integer = 
+	getAllAssetsProductConfUnique(system)->asSequence()->indexOf(productConf)
+/]
+
+
+[**
+ * Get the index of one transactionConf
+ *  @param system : System to get all transactionConf
+ *  @param transactionConf : TransactionConf to get the index 
+ */]
+[query public getIndexTransactionConf(system: System, transactionConf : TransactionConf) : Integer = 
+	getAllAssetsTransactionConfUnique(system)->asSequence()->indexOf(transactionConf)
+/]
+
+[**
+ * Get all roles that can access to a product.
+ * @param node : Node to calculate the roles to access it
+ */]
+[query public getRolesAccessTo(node: Node) : Set(RolConf) = 
+	getAsset(node).properties.allow.eInverse(RolConf)->asSequence()->asSet() 
+/]
+
+
+[**
+ * Get all roles that can access to a product.
+ * @param asset : Asset to calculate the roles to access it
+ */]
+[query public getRolesAccessTo(asset: Asset) : Set(RolConf) = 
+	asset.properties.allow.eInverse(RolConf)->asSequence()->asSet() 
+/]
+
+[**
+ * Return true if rol can view and false if role can't
+ * IMPORTANT: Only get the objects and attribute in level 1 of properties because asset.properties
+ * @param rol : RolConf to calculate the properties to access it
+ * @param asset : Asset to get the properties
+ */]
+[query public canView(rol : RolConf, asset: Asset) : Boolean = 
+	if (getPropertiesCanView(rol, asset)->size() > 0) then true
+	else false
+	endif
+/]
+
+[**
+ * Get all properties can view a rol in a asset
+ * IMPORTANT: Only get the objects and attribute in level 1 of properties because asset.properties
+ * @param rol : RolConf to calculate the properties to access it
+ * @param asset : Asset to get the properties
+ */]
+[query public getPropertiesCanView(rol : RolConf, asset: Asset) : Set(Property) = 
+	asset.properties->intersection(
+		rol.permissions->selectByType(View).refers->asSet()
+		->union(rol.permissions->selectByType(Permission).refers->asSet()))
+/]
+
+[**
+ * Return true if rol can edit and false if role can't
+ * IMPORTANT: Only get the objects and attribute in level 1 of properties because asset.properties
+ * @param rol : RolConf to calculate the properties to access it
+ * @param asset : Asset to get the properties
+ */]
+[query public canEdit(rol : RolConf, asset: Asset) : Boolean = 
+	if (getPropertiesCanEdit(rol, asset)->size() > 0) then true
+	else false
+	endif
+/]
+
+[**
+ * Get all properties can edit a rol in a asset
+ * IMPORTANT: Only get the objects and attribute in level 1 of properties because asset.properties
+ * @param rol : RolConf to calculate the properties to access it
+ * @param asset : Asset to get the properties
+ */]
+[query public getPropertiesCanEdit(rol : RolConf, asset: Asset) : Set(Property) = 
+	asset.properties->intersection(
+		rol.permissions->selectByType(Edit).refers->asSet()
+		->union(rol.permissions->selectByType(Permission).refers->asSet()))
+/]
+
+
+[**
+ * Return true if rol can create and false if role can't
+ * IMPORTANT: Only get the objects and attribute in level 1 of properties because asset.properties
+ * @param rol : RolConf to calculate the properties to access it
+ * @param asset : Asset to get the properties
+ */]
+[query public canCreate(rol : RolConf, asset: Asset) : Boolean = 
+	if (getPropertiesCanCreate(rol, asset)->size() > 0) then true
+	else false
+	endif
+/]
+
+[**
+ * Get all properties can create a rol in a asset
+ * IMPORTANT: Only get the objects and attribute in level 1 of properties because asset.properties
+ * @param rol : RolConf to calculate the properties to access it
+ * @param asset : Asset to get the properties
+ */]
+[query public getPropertiesCanCreate(rol : RolConf, asset: Asset) : Set(Property) = 
+	asset.properties->intersection(
+		rol.permissions->selectByType(Create).refers->asSet()
+		->union(rol.permissions->selectByType(Permission).refers->asSet()))
+/]
+
+[**
+ * Eliminate the whitespaces in one string
+ * @param string : String to eliminate the whitespaces
+ */]
+[query public eliminateWhitespaces(string : String) : String = 
+	string.toUpperFirst().substituteAll(' ', '')
+/]
+
+[**
+ * Subsitute the whitespaces by underline
+ * @param string : String to replace the whitespaces
+ */]
+[query public replaceWhitespaceByUnderline(string : String) : String = 
+	string.toUpperFirst().substituteAll(' ', '_')
+/]
+
+[**
+ * Subsitute the underline by whitespaces
+ * @param string : String to replace the underline
+ */]
+[query public replaceUnderlineByWhitespaces(string : String) : String = 
+	string.toUpperFirst().substituteAll('_', ' ')
+/]
+
+[**
+ * Choose the title of the property
+ * @param property: Property to evaluate the title
+ */]
+[query public chooseTitle(property : Property) : String = 
+	if (property.title.oclIsUndefined()) then property.id.toUpperFirst()
+	else property.title
+	endif
+/]

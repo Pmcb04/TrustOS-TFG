@@ -1,0 +1,218 @@
+[comment encoding = UTF-8 /]
+[**
+ * The documentation of the module components.
+ */]
+[module components('http://www.example.org/TraceabilityMM')]
+[import TFG::TrustOS::Traceability::generate::main::queries /]
+
+[**
+ * Template to generate all products necessary to Metadata use
+ * @param system : System base to start the generate
+ */]
+[template public generateAllComponents(system: System)]
+[comment @main/]
+[for (asset: Asset | getAllAssetsUnique(system))]
+[generateComponent(asset)/]
+[generatePermissions(asset)/]
+[/for]
+[/template]
+
+[**
+ * Template to generate one product to use in Metadata
+ * @param asset : Asset to start generate the component
+ */]
+[template private generateComponent(asset : Asset)]
+[file ('metadata/nodes/' + eliminateWhitespaces(asset.type) + '.js', false, 'UTF-8')]
+import React, {useEffect} from 'react'
+import Property from '../../property/property'
+import PropertyBox from '../../property-box/property-box'
+import { Select, TextField, Title1, IntegerField, DecimalField, DoubleField, Switch, Box, RowList } from '@telefonica/mistica'
+import { permissions[asset.type/] } from '../permissions/[asset.type/]'
+
+function [eliminateWhitespaces(asset.type)/](props) {
+
+	const { data, rol, create, edit } = props
+	const { canView, canEdit } = permissions[asset.type/](rol)
+	[for (property: Property | asset.properties)]
+	[generateStates(property, null, false)/]
+	[/for]
+
+	useEffect(() => {
+		[for (property: Property | asset.properties)]
+		[generateStates(property, null, true)/]
+		[/for]
+	}, [ '[' /] data [ ']' /] )  
+
+	return (
+	    <Box>
+			[for (property: Property | asset.properties)]
+			[generateFields(property, null)/]
+			[/for]
+		</Box>
+	)
+}
+
+export default [eliminateWhitespaces(asset.type)/]
+[/file]
+[/template]
+
+[**
+ * Template to generate all states necessary to one component
+ * @param property : Property of Node to generate
+ * @param propertyFather : String with the name of property father (if it haven't is null)
+ * @param useEffect : Boolean to determinate if the state will generate in useEffect block or not
+ */]
+[template private generateStates(property: Property, propertyFather : String, useEffect: Boolean)]
+[if (property.oclIsTypeOf(Object))][for (p: Property | property.oclAsType(Object).properties)][if (propertyFather.oclIsUndefined())][generateStates(p, property.id, useEffect)/][else][generateStates(p, propertyFather + '_' + property.id,useEffect)/][/if][/for][else][if (useEffect)][generateStateUseEffect(property.oclAsType(Attribute), chooseNameProperty(property.id, propertyFather, '_'))/][else][generateState(property.oclAsType(Attribute), chooseNameProperty(property.id, propertyFather, '_'))/][/if][/if]
+[/template]
+
+[**
+ * Template to generate the options of states
+ * @param property : Attribute to generate the state
+ * @param propertyFather : String with the name of property father (if it haven't is null)
+ */]
+[template private generateState(property: Attribute, propertyFather: String)]
+[if (property.values->size() > 0)]const [ '[' /][propertyFather/], set_[propertyFather/][ ']' /] = React.useState(data.[propertyFather/])[/if]
+[/template]
+
+[**
+ * Template to generate the options of states in the useEffect block
+ * @param property : Attribute to generate the state
+ * @param propertyFather : String with the name of property father (if it haven't is null)
+ */]
+[template private generateStateUseEffect(property: Attribute, propertyFather: String)]
+[if (property.values->size() > 0)]set_[propertyFather/](data.[propertyFather/])[/if]
+[/template]
+
+[**
+ * Template to generate all filds necessary to one component
+ * @param property : Property of node to generate
+ * @param propertyFather : String with the name of property father (if it haven't is null)
+ */]
+[template private generateFields(property: Property, propertyFather : String)]
+{(create || canView.includes('[chooseNameProperty(property.id, propertyFather, '.')/]')) && (
+[if (property.oclIsTypeOf(Object))]
+	[propertyBox(property, propertyFather)/]
+[else]
+	[property(property, propertyFather)/]
+[/if]
+)}
+[/template]
+
+[**
+ * Template generate in react native a Property Box component
+ * @param property : Property of Node to generate
+ * @param propertyFather : String with the name of property father (if it haven't is null)
+ */]
+[template private propertyBox(property: Property, propertyFather : String)]
+<PropertyBox title={'[chooseTitle(property)/]'} key={'[chooseNameProperty(property.id, propertyFather, '.')/]'}>
+[for (p: Property | property.oclAsType(Object).properties)]
+[if (propertyFather.oclIsUndefined())][generateFields(p, property.id)/][else][generateFields(p, propertyFather + '.' + property.id)/][/if]
+[/for]
+</PropertyBox>
+[/template]
+
+[**
+ * Template generate in react native a Property component
+ * @param property : Property of Node to generate
+ * @param propertyFather : String with the name of property father (if it haven't is null)
+ */]
+
+[template private property(property: Property, propertyFather : String)]
+<Property
+  title="[chooseTitle(property)/]"
+  key={'property-[chooseNameProperty(property.id, propertyFather, '.')/]'}
+  value={[dataProperty(property)/][chooseNameProperty(property.id, propertyFather, '.')/] ? [dataProperty(property)/][chooseNameProperty(property.id, propertyFather, '.')/].toString() : null}
+  edit={create ? true : canEdit.includes('[chooseNameProperty(property.id, propertyFather, '.')/]') ? edit : false}>
+  [generateField(property.oclAsType(Attribute), chooseNameProperty(property.id, propertyFather, '.'))/]
+</Property>
+[/template]
+
+[**
+ * Template to print de data of a property, if the property doesn't have any value don't print
+ * @param property : Property of Node to generate
+ */]
+[template private dataProperty(property : Property)]
+[if (property.oclAsType(Attribute).values->size() <= 0)]data.[/if]
+[/template]
+
+[**
+ * Template choose what name put in the property access in the field
+ * @param propertyName : String with the name of property to evaluate
+ * @param propertyFather : String with the name of father's property to evaluate
+ * @param delimiter : String to separete the propertyName and propertyFather
+ */]
+[template private chooseNameProperty(propertyName : String, propertyFather: String, delimiter : String)]
+[if (propertyFather.oclIsUndefined())][propertyName/][else][propertyFather/][delimiter/][propertyName/][/if]
+[/template]
+
+[**
+ * Template to generate the options of fields
+ * @param property : Attribute to generate the field
+ * @param propertyFather : String with the name of property father (if it haven't is null)
+ */]
+[template private generateField(property: Attribute, propertyFather: String)]
+[if (property.values->size() > 0)]
+  <Select
+	fullWidth
+    name={'[property.id/]'} 
+    key={'property-[propertyFather/]'}
+    onChangeValue={(value) => set_[propertyFather/](value)}
+    value={[propertyFather/] ? [propertyFather/].toString() : null}
+    options={[ '[' /] 
+	[for (value : Value | property.values)]
+			{ value: '[value.name/]', text: '[value.name/]' },
+	[/for]
+		[ ']' /]}
+  />
+[elseif (property.type.toString() = 'Boolean')]<Checkbox name="[property.id/]" key={'property-[propertyFather/]'} checked={data.[propertyFather/] ? data.[propertyFather/] : false}/>
+[else]<[getTypeField(property.type)/] fullWidth name="[property.id/]" key={'property-[propertyFather/]'} defaultValue={data.[propertyFather/] ? data.[propertyFather/].toString() : null} />[/if]
+[/template]
+
+[**
+ * Template to get the type of the field
+ * @param type : Attribute type of the Attribte class to evaluate
+ */]
+[template private getTypeField(type: EType)]
+[if (type.toString() = 'String' )]TextField
+[elseif(type.toString() = 'Number' )]IntegerField
+[elseif(type.toString() = 'Decimal' )]DecimalField
+[elseif(type.toString() = 'Date' )]DateTimeField
+[elseif(type.toString() = 'Email' )]EmailField
+[/if]
+[/template]
+
+[**
+ * Template to generate the permissions of the roles in the app to  edit and view the component generated
+ * @param asset : Asset to start the generate the permissions of it
+ * @para roles : Set of roles that will can access to the product
+ */]
+[template private generatePermissions(asset: Asset)]
+[file ('metadata/permissions/' + eliminateWhitespaces(asset.type) + '.js', false, 'UTF-8')]
+export function permissions[eliminateWhitespaces(asset.type)/](rol) {
+  let canView = [ '[' /][ ']' /] 
+  let canEdit = [ '[' /][ ']' /]
+  switch (rol) {
+	[for (rol: RolConf | getRolesAccessTo(asset))]
+		case '[rol.type/]':
+		canView = ['['/][for (property : Property | getPropertiesCanView(rol, asset)) separator (',')][printPropertyPermission(property,null)/][/for][']'/]
+		canEdit = ['['/][for (property : Property | getPropertiesCanEdit(rol, asset)) separator (',')][printPropertyPermission(property,null)/][/for][']'/]
+		break
+	[/for]
+		default:
+		break
+  }
+
+  return { canView, canEdit }
+}
+[/file]
+[/template]
+
+[**
+ * Template to generate the print all permission
+ * @param property : Property of Node to generate
+ * @param propertyFather : String with the name of property father (if it haven't is null)
+ */]
+[template private printPropertyPermission(property: Property, propertyFather: String)]
+[if (property.oclIsTypeOf(Object))]'[property.id/]',[for (p : Property | property.oclAsType(Object).properties) separator (',')][printPropertyPermission(p,property.id)/][/for][else]'[chooseNameProperty(property.id, propertyFather, '.')/]'[/if]
+[/template]
