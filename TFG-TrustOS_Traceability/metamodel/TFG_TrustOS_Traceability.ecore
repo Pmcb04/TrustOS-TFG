@@ -3,6 +3,14 @@
     xmlns:ecore="http://www.eclipse.org/emf/2002/Ecore" name="TraceabilityMM" nsURI="http://www.example.org/TraceabilityMM"
     nsPrefix="TraceabilityMM">
   <eAnnotations source="gmf"/>
+  <eAnnotations source="http://www.eclipse.org/OCL/Import">
+    <details key="ecore" value="http://www.eclipse.org/emf/2002/Ecore"/>
+  </eAnnotations>
+  <eAnnotations source="http://www.eclipse.org/emf/2002/Ecore">
+    <details key="invocationDelegates" value="http://www.eclipse.org/emf/2002/Ecore/OCL/Pivot"/>
+    <details key="settingDelegates" value="http://www.eclipse.org/emf/2002/Ecore/OCL/Pivot"/>
+    <details key="validationDelegates" value="http://www.eclipse.org/emf/2002/Ecore/OCL/Pivot"/>
+  </eAnnotations>
   <eClassifiers xsi:type="ecore:EClass" name="Node" abstract="true">
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="name" lowerBound="1" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
   </eClassifiers>
@@ -104,6 +112,20 @@
         defaultValueLiteral="false"/>
     <eStructuralFeatures xsi:type="ecore:EReference" name="transaction" lowerBound="1"
         upperBound="-1" eType="#//Transaction" eOpposite="#//Transaction/transactionconf"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="isTransactionInfinite"
+        lowerBound="1" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EBoolean"
+        volatile="true" transient="true" derived="true">
+      <eAnnotations source="http://www.eclipse.org/emf/2002/Ecore/OCL/Pivot">
+        <details key="derivation" value="self.repeat = -1"/>
+      </eAnnotations>
+    </eStructuralFeatures>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="isTransactionFinal" lowerBound="1"
+        eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EBoolean" volatile="true"
+        transient="true" derived="true">
+      <eAnnotations source="http://www.eclipse.org/emf/2002/Ecore/OCL/Pivot">
+        <details key="derivation" value="self.final"/>
+      </eAnnotations>
+    </eStructuralFeatures>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="ProductConf" eSuperTypes="#//Asset">
     <eAnnotations source="http://www.obeo.fr/dsl/dnc/archetype">
@@ -118,6 +140,12 @@
       <details key="tool.name" value="Product Configuration"/>
       <details key="tool.description" value="Create a configuration for product"/>
     </eAnnotations>
+    <eAnnotations source="http://www.eclipse.org/emf/2002/Ecore">
+      <details key="constraints" value="transactionsFinals"/>
+    </eAnnotations>
+    <eAnnotations source="http://www.eclipse.org/emf/2002/Ecore/OCL/Pivot">
+      <details key="transactionsFinals" value="self.product.next_transaction.transactionconf->select(isTransactionInfinite)->size() >= 1 implies self.product.next_transaction.transactionconf->select(isTransactionFinal)->size() >= 1"/>
+    </eAnnotations>
     <eStructuralFeatures xsi:type="ecore:EReference" name="product" lowerBound="1"
         upperBound="-1" eType="#//Product" eOpposite="#//Product/productconf"/>
   </eClassifiers>
@@ -130,6 +158,15 @@
       <details key="svg.uri" value="platform:/plugin/TFG-TrustOS_Traceability/icons/SVG/rolConf.svg"/>
       <details key="tool.name" value="Rol Configuration"/>
       <details key="tool.description" value="Create a configuration for rol"/>
+    </eAnnotations>
+    <eAnnotations source="http://www.eclipse.org/emf/2002/Ecore">
+      <details key="constraints" value="onePermissionTotal noMoreOneEdit noMoreOneView noMoreOneCreate"/>
+    </eAnnotations>
+    <eAnnotations source="http://www.eclipse.org/emf/2002/Ecore/OCL/Pivot">
+      <details key="onePermissionTotal" value="self.permissions->selectByType(Permission)->size() &lt;= 1"/>
+      <details key="noMoreOneEdit" value="self.permissions->selectByType(Edit)->size() &lt;= 1"/>
+      <details key="noMoreOneView" value="self.permissions->selectByType(View)->size() &lt;= 1"/>
+      <details key="noMoreOneCreate" value="self.permissions->selectByType(Create)->size() &lt;= 1"/>
     </eAnnotations>
     <eStructuralFeatures xsi:type="ecore:EReference" name="permissions" lowerBound="1"
         upperBound="-1" eType="#//Permission">
@@ -236,9 +273,15 @@
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="name" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="Property" abstract="true">
+    <eAnnotations source="http://www.eclipse.org/emf/2002/Ecore">
+      <details key="constraints" value="propertiesAllow"/>
+    </eAnnotations>
+    <eAnnotations source="http://www.eclipse.org/emf/2002/Ecore/OCL/Pivot">
+      <details key="propertiesAllow" value=" (self.oclContainer().oclIsTypeOf(ProductConf) or self.oclContainer().oclIsTypeOf(TransactionConf)) implies self.allow->size() > 0"/>
+    </eAnnotations>
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="id" lowerBound="1" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="title" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
-    <eStructuralFeatures xsi:type="ecore:EReference" name="allow" lowerBound="1" upperBound="-1"
+    <eStructuralFeatures xsi:type="ecore:EReference" name="allow" upperBound="-1"
         eType="#//Permission" eOpposite="#//Permission/refers"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="Attribute" eSuperTypes="#//Property">

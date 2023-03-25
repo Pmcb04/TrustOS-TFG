@@ -21,6 +21,8 @@ import org.eclipse.emf.ecore.EObject;
  *
  * @see TraceabilityMM.TraceabilityMMPackage#getProperty()
  * @model abstract="true"
+ *        annotation="http://www.eclipse.org/emf/2002/Ecore constraints='propertiesAllow'"
+ *        annotation="http://www.eclipse.org/emf/2002/Ecore/OCL/Pivot propertiesAllow=' (self.oclContainer().oclIsTypeOf(ProductConf) or self.oclContainer().oclIsTypeOf(TransactionConf)) implies self.allow-&gt;size() &gt; 0'"
  * @generated
  */
 public interface Property extends EObject {
@@ -63,7 +65,7 @@ public interface Property extends EObject {
 	 * @return the value of the '<em>Allow</em>' reference list.
 	 * @see TraceabilityMM.TraceabilityMMPackage#getProperty_Allow()
 	 * @see TraceabilityMM.Permission#getRefers
-	 * @model opposite="refers" required="true"
+	 * @model opposite="refers"
 	 * @generated
 	 */
 	EList<Permission> getAllow();

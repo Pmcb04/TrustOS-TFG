@@ -21,6 +21,8 @@ import org.eclipse.emf.ecore.EReference;
  * <!-- end-user-doc -->
  * @see TraceabilityMM.TraceabilityMMFactory
  * @model kind="package"
+ *        annotation="http://www.eclipse.org/OCL/Import ecore='http://www.eclipse.org/emf/2002/Ecore'"
+ *        annotation="http://www.eclipse.org/emf/2002/Ecore invocationDelegates='http://www.eclipse.org/emf/2002/Ecore/OCL/Pivot' settingDelegates='http://www.eclipse.org/emf/2002/Ecore/OCL/Pivot' validationDelegates='http://www.eclipse.org/emf/2002/Ecore/OCL/Pivot'"
  * @generated
  */
 public interface TraceabilityMMPackage extends EPackage {
@@ -357,13 +359,31 @@ public interface TraceabilityMMPackage extends EPackage {
 	int TRANSACTION_CONF__TRANSACTION = ASSET_FEATURE_COUNT + 2;
 
 	/**
+	 * The feature id for the '<em><b>Is Transaction Infinite</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int TRANSACTION_CONF__IS_TRANSACTION_INFINITE = ASSET_FEATURE_COUNT + 3;
+
+	/**
+	 * The feature id for the '<em><b>Is Transaction Final</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int TRANSACTION_CONF__IS_TRANSACTION_FINAL = ASSET_FEATURE_COUNT + 4;
+
+	/**
 	 * The number of structural features of the '<em>Transaction Conf</em>' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int TRANSACTION_CONF_FEATURE_COUNT = ASSET_FEATURE_COUNT + 3;
+	int TRANSACTION_CONF_FEATURE_COUNT = ASSET_FEATURE_COUNT + 5;
 
 	/**
 	 * The feature id for the '<em><b>Type</b></em>' attribute.
@@ -848,6 +868,28 @@ public interface TraceabilityMMPackage extends EPackage {
 	EReference getTransactionConf_Transaction();
 
 	/**
+	 * Returns the meta object for the attribute '{@link TraceabilityMM.TransactionConf#isIsTransactionInfinite <em>Is Transaction Infinite</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the attribute '<em>Is Transaction Infinite</em>'.
+	 * @see TraceabilityMM.TransactionConf#isIsTransactionInfinite()
+	 * @see #getTransactionConf()
+	 * @generated
+	 */
+	EAttribute getTransactionConf_IsTransactionInfinite();
+
+	/**
+	 * Returns the meta object for the attribute '{@link TraceabilityMM.TransactionConf#isIsTransactionFinal <em>Is Transaction Final</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the attribute '<em>Is Transaction Final</em>'.
+	 * @see TraceabilityMM.TransactionConf#isIsTransactionFinal()
+	 * @see #getTransactionConf()
+	 * @generated
+	 */
+	EAttribute getTransactionConf_IsTransactionFinal();
+
+	/**
 	 * Returns the meta object for the attribute '{@link TraceabilityMM.TransactionConf#isFinal <em>Final</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -1326,6 +1368,22 @@ public interface TraceabilityMMPackage extends EPackage {
 		 * @generated
 		 */
 		EReference TRANSACTION_CONF__TRANSACTION = eINSTANCE.getTransactionConf_Transaction();
+
+		/**
+		 * The meta object literal for the '<em><b>Is Transaction Infinite</b></em>' attribute feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EAttribute TRANSACTION_CONF__IS_TRANSACTION_INFINITE = eINSTANCE.getTransactionConf_IsTransactionInfinite();
+
+		/**
+		 * The meta object literal for the '<em><b>Is Transaction Final</b></em>' attribute feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EAttribute TRANSACTION_CONF__IS_TRANSACTION_FINAL = eINSTANCE.getTransactionConf_IsTransactionFinal();
 
 		/**
 		 * The meta object literal for the '<em><b>Final</b></em>' attribute feature.

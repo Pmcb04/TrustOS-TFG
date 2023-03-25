@@ -30,6 +30,8 @@
       <genFeatures createChild="false" ecoreFeature="ecore:EAttribute TFG_TrustOS_Traceability.ecore#//TransactionConf/repeat"/>
       <genFeatures createChild="false" ecoreFeature="ecore:EAttribute TFG_TrustOS_Traceability.ecore#//TransactionConf/final"/>
       <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference TFG_TrustOS_Traceability.ecore#//TransactionConf/transaction"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute TFG_TrustOS_Traceability.ecore#//TransactionConf/isTransactionInfinite"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute TFG_TrustOS_Traceability.ecore#//TransactionConf/isTransactionFinal"/>
     </genClasses>
     <genClasses ecoreClass="TFG_TrustOS_Traceability.ecore#//ProductConf">
       <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference TFG_TrustOS_Traceability.ecore#//ProductConf/product"/>

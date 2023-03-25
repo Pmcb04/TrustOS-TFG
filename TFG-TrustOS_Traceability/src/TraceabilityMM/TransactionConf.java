@@ -17,6 +17,8 @@ import org.eclipse.emf.common.util.EList;
  *   <li>{@link TraceabilityMM.TransactionConf#getRepeat <em>Repeat</em>}</li>
  *   <li>{@link TraceabilityMM.TransactionConf#isFinal <em>Final</em>}</li>
  *   <li>{@link TraceabilityMM.TransactionConf#getTransaction <em>Transaction</em>}</li>
+ *   <li>{@link TraceabilityMM.TransactionConf#isIsTransactionInfinite <em>Is Transaction Infinite</em>}</li>
+ *   <li>{@link TraceabilityMM.TransactionConf#isIsTransactionFinal <em>Is Transaction Final</em>}</li>
  * </ul>
  *
  * @see TraceabilityMM.TraceabilityMMPackage#getTransactionConf()
@@ -70,6 +72,60 @@ public interface TransactionConf extends Asset {
 	 * @generated
 	 */
 	EList<Transaction> getTransaction();
+
+	/**
+	 * Returns the value of the '<em><b>Is Transaction Infinite</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <p>
+	 * If the meaning of the '<em>Is Transaction Infinite</em>' attribute isn't clear,
+	 * there really should be more of a description here...
+	 * </p>
+	 * <!-- end-user-doc -->
+	 * @return the value of the '<em>Is Transaction Infinite</em>' attribute.
+	 * @see #setIsTransactionInfinite(boolean)
+	 * @see TraceabilityMM.TraceabilityMMPackage#getTransactionConf_IsTransactionInfinite()
+	 * @model required="true" transient="true" volatile="true" derived="true"
+	 *        annotation="http://www.eclipse.org/emf/2002/Ecore/OCL/Pivot derivation='self.repeat = -1'"
+	 * @generated
+	 */
+	boolean isIsTransactionInfinite();
+
+	/**
+	 * Sets the value of the '{@link TraceabilityMM.TransactionConf#isIsTransactionInfinite <em>Is Transaction Infinite</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @param value the new value of the '<em>Is Transaction Infinite</em>' attribute.
+	 * @see #isIsTransactionInfinite()
+	 * @generated
+	 */
+	void setIsTransactionInfinite(boolean value);
+
+	/**
+	 * Returns the value of the '<em><b>Is Transaction Final</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <p>
+	 * If the meaning of the '<em>Is Transaction Final</em>' attribute isn't clear,
+	 * there really should be more of a description here...
+	 * </p>
+	 * <!-- end-user-doc -->
+	 * @return the value of the '<em>Is Transaction Final</em>' attribute.
+	 * @see #setIsTransactionFinal(boolean)
+	 * @see TraceabilityMM.TraceabilityMMPackage#getTransactionConf_IsTransactionFinal()
+	 * @model required="true" transient="true" volatile="true" derived="true"
+	 *        annotation="http://www.eclipse.org/emf/2002/Ecore/OCL/Pivot derivation='self.final'"
+	 * @generated
+	 */
+	boolean isIsTransactionFinal();
+
+	/**
+	 * Sets the value of the '{@link TraceabilityMM.TransactionConf#isIsTransactionFinal <em>Is Transaction Final</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @param value the new value of the '<em>Is Transaction Final</em>' attribute.
+	 * @see #isIsTransactionFinal()
+	 * @generated
+	 */
+	void setIsTransactionFinal(boolean value);
 
 	/**
 	 * Returns the value of the '<em><b>Final</b></em>' attribute.

@@ -29,6 +29,8 @@ import org.eclipse.emf.ecore.util.InternalEList;
  *   <li>{@link TraceabilityMM.impl.TransactionConfImpl#getRepeat <em>Repeat</em>}</li>
  *   <li>{@link TraceabilityMM.impl.TransactionConfImpl#isFinal <em>Final</em>}</li>
  *   <li>{@link TraceabilityMM.impl.TransactionConfImpl#getTransaction <em>Transaction</em>}</li>
+ *   <li>{@link TraceabilityMM.impl.TransactionConfImpl#isIsTransactionInfinite <em>Is Transaction Infinite</em>}</li>
+ *   <li>{@link TraceabilityMM.impl.TransactionConfImpl#isIsTransactionFinal <em>Is Transaction Final</em>}</li>
  * </ul>
  *
  * @generated
@@ -81,6 +83,24 @@ public class TransactionConfImpl extends AssetImpl implements TransactionConf {
 	 */
 	protected EList<Transaction> transaction;
 	/**
+	 * The cached setting delegate for the '{@link #isIsTransactionInfinite() <em>Is Transaction Infinite</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #isIsTransactionInfinite()
+	 * @generated
+	 * @ordered
+	 */
+	protected EStructuralFeature.Internal.SettingDelegate IS_TRANSACTION_INFINITE__ESETTING_DELEGATE = ((EStructuralFeature.Internal)TraceabilityMMPackage.Literals.TRANSACTION_CONF__IS_TRANSACTION_INFINITE).getSettingDelegate();
+	/**
+	 * The cached setting delegate for the '{@link #isIsTransactionFinal() <em>Is Transaction Final</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #isIsTransactionFinal()
+	 * @generated
+	 * @ordered
+	 */
+	protected EStructuralFeature.Internal.SettingDelegate IS_TRANSACTION_FINAL__ESETTING_DELEGATE = ((EStructuralFeature.Internal)TraceabilityMMPackage.Literals.TRANSACTION_CONF__IS_TRANSACTION_FINAL).getSettingDelegate();
+	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
@@ -130,6 +150,42 @@ public class TransactionConfImpl extends AssetImpl implements TransactionConf {
 			transaction = new EObjectWithInverseResolvingEList<Transaction>(Transaction.class, this, TraceabilityMMPackage.TRANSACTION_CONF__TRANSACTION, TraceabilityMMPackage.TRANSACTION__TRANSACTIONCONF);
 		}
 		return transaction;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public boolean isIsTransactionInfinite() {
+		return (Boolean)IS_TRANSACTION_INFINITE__ESETTING_DELEGATE.dynamicGet(this, null, 0, true, false);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public void setIsTransactionInfinite(boolean newIsTransactionInfinite) {
+		IS_TRANSACTION_INFINITE__ESETTING_DELEGATE.dynamicSet(this, null, 0, newIsTransactionInfinite);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public boolean isIsTransactionFinal() {
+		return (Boolean)IS_TRANSACTION_FINAL__ESETTING_DELEGATE.dynamicGet(this, null, 0, true, false);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public void setIsTransactionFinal(boolean newIsTransactionFinal) {
+		IS_TRANSACTION_FINAL__ESETTING_DELEGATE.dynamicSet(this, null, 0, newIsTransactionFinal);
 	}
 
 	/**
@@ -196,6 +252,10 @@ public class TransactionConfImpl extends AssetImpl implements TransactionConf {
 				return isFinal();
 			case TraceabilityMMPackage.TRANSACTION_CONF__TRANSACTION:
 				return getTransaction();
+			case TraceabilityMMPackage.TRANSACTION_CONF__IS_TRANSACTION_INFINITE:
+				return isIsTransactionInfinite();
+			case TraceabilityMMPackage.TRANSACTION_CONF__IS_TRANSACTION_FINAL:
+				return isIsTransactionFinal();
 		}
 		return super.eGet(featureID, resolve, coreType);
 	}
@@ -219,6 +279,12 @@ public class TransactionConfImpl extends AssetImpl implements TransactionConf {
 				getTransaction().clear();
 				getTransaction().addAll((Collection<? extends Transaction>)newValue);
 				return;
+			case TraceabilityMMPackage.TRANSACTION_CONF__IS_TRANSACTION_INFINITE:
+				setIsTransactionInfinite((Boolean)newValue);
+				return;
+			case TraceabilityMMPackage.TRANSACTION_CONF__IS_TRANSACTION_FINAL:
+				setIsTransactionFinal((Boolean)newValue);
+				return;
 		}
 		super.eSet(featureID, newValue);
 	}
@@ -240,6 +306,12 @@ public class TransactionConfImpl extends AssetImpl implements TransactionConf {
 			case TraceabilityMMPackage.TRANSACTION_CONF__TRANSACTION:
 				getTransaction().clear();
 				return;
+			case TraceabilityMMPackage.TRANSACTION_CONF__IS_TRANSACTION_INFINITE:
+				IS_TRANSACTION_INFINITE__ESETTING_DELEGATE.dynamicUnset(this, null, 0);
+				return;
+			case TraceabilityMMPackage.TRANSACTION_CONF__IS_TRANSACTION_FINAL:
+				IS_TRANSACTION_FINAL__ESETTING_DELEGATE.dynamicUnset(this, null, 0);
+				return;
 		}
 		super.eUnset(featureID);
 	}
@@ -258,6 +330,10 @@ public class TransactionConfImpl extends AssetImpl implements TransactionConf {
 				return final_ != FINAL_EDEFAULT;
 			case TraceabilityMMPackage.TRANSACTION_CONF__TRANSACTION:
 				return transaction != null && !transaction.isEmpty();
+			case TraceabilityMMPackage.TRANSACTION_CONF__IS_TRANSACTION_INFINITE:
+				return IS_TRANSACTION_INFINITE__ESETTING_DELEGATE.dynamicIsSet(this, null, 0);
+			case TraceabilityMMPackage.TRANSACTION_CONF__IS_TRANSACTION_FINAL:
+				return IS_TRANSACTION_FINAL__ESETTING_DELEGATE.dynamicIsSet(this, null, 0);
 		}
 		return super.eIsSet(featureID);
 	}

@@ -1,0 +1,47 @@
+ROLCONF
+---------------
+
+*invariante para definir que solo haya un Permssion
+invariant onePermissionTotal: self.permissions->selectByType(Permission)->size() <= 1;
+
+*invariante para definir que solo haya un Edit
+invariant noMoreOneEdit: self.permissions->selectByType(Edit)->size() <= 1;
+
+*invariante para definir que solo haya un View
+invariant noMoreOneView: self.permissions->selectByType(View)->size() <= 1;
+
+*Invariante para definir que solo haya un Create
+invariant noMoreOneCreate: self.permissions->selectByType(Create)->size() <= 1;
+				
+				
+PRODUCTCONF
+-------------
+
+*Invariante para definir que si hay al menos una transaccion infinita debe haber al menos una trasaccion final
+invariant transactionsFinals: self.product.next_transaction.transactionconf->select(isTransactionInfinite)->size() >= 1 implies self.product.next_transaction.transactionconf->select(isTransactionFinal)->size() >= 1;
+
+
+TRANSACTIONCONF
+-----------------
+
+
+*Atributo derivado para evaluar la definicion de transacción infinita
+attribute isTransactionInfinite : Boolean[1] { derived transient volatile }
+{
+	initial: self.repeat = -1;
+}
+
+
+*Atributo deriavado para evaluar la definicion de transaccion final
+
+attribute isTransactionFinal : Boolean[1] { derived transient volatile }
+{
+	initial: self.final;
+}
+
+				
+PROPERTY
+-----------------
+
+* Invariante para definir que los ProductConf y los TransactionConf deben tener sus propedades enlazadas a algun permiso
+invariant propertiesAllow: (self.oclContainer().oclIsTypeOf(ProductConf) or self.oclContainer().oclIsTypeOf(TransactionConf)) implies self.allow->size() > 0;

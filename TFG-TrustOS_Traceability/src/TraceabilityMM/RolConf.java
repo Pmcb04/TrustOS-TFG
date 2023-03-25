@@ -19,6 +19,8 @@ import org.eclipse.emf.common.util.EList;
  *
  * @see TraceabilityMM.TraceabilityMMPackage#getRolConf()
  * @model annotation="gmf.node label='type' border.width='0' border.color='220,31,31' border.style='solid' svg.uri='platform:/plugin/TFG-TrustOS_Traceability/icons/SVG/rolConf.svg' tool.name='Rol Configuration' tool.description='Create a configuration for rol'"
+ *        annotation="http://www.eclipse.org/emf/2002/Ecore constraints='onePermissionTotal noMoreOneEdit noMoreOneView noMoreOneCreate'"
+ *        annotation="http://www.eclipse.org/emf/2002/Ecore/OCL/Pivot onePermissionTotal='self.permissions-&gt;selectByType(Permission)-&gt;size() &lt;= 1' noMoreOneEdit='self.permissions-&gt;selectByType(Edit)-&gt;size() &lt;= 1' noMoreOneView='self.permissions-&gt;selectByType(View)-&gt;size() &lt;= 1' noMoreOneCreate='self.permissions-&gt;selectByType(Create)-&gt;size() &lt;= 1'"
  * @generated
  */
 public interface RolConf extends Asset {

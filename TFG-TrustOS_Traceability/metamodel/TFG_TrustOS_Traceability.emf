@@ -1,4 +1,6 @@
 @gmf
+@"http://www.eclipse.org/OCL/Import"(ecore="http://www.eclipse.org/emf/2002/Ecore")
+@Ecore(invocationDelegates="http://www.eclipse.org/emf/2002/Ecore/OCL/Pivot", settingDelegates="http://www.eclipse.org/emf/2002/Ecore/OCL/Pivot", validationDelegates="http://www.eclipse.org/emf/2002/Ecore/OCL/Pivot")
 @namespace(uri="http://www.example.org/TraceabilityMM", prefix="TraceabilityMM")
 package TraceabilityMM;
 
@@ -6,121 +8,59 @@ abstract class Node {
   attr String[1] name;
 }
 
-@gmf.node(
-	label="name", 
-	label.icon="false", 
-	figure="svg", 
-	svg.uri="platform:/plugin/TFG-TrustOS_Traceability/icons/SVG/transaction.svg",
-	tool.name="Transaction",
-	tool.description="Create a transaction"
-)
+@gmf.node(label="name", label.icon="false", figure="svg", svg.uri="platform:/plugin/TFG-TrustOS_Traceability/icons/SVG/transaction.svg", tool.name="Transaction", tool.description="Create a transaction")
 @"http://www.obeo.fr/dsl/dnc/archetype"(archetype="Description")
 class Transaction extends Node {
 
-  @gmf.link(
-  	target.decoration="arrow", 
-  	style="dash", 
-  	color="0,38,175",
-  	tool.name="Transaction configuration",
-	tool.description="Link a transaction to it configuration"
-  )
+  @gmf.link(target.decoration="arrow", style="dash", color="0,38,175", tool.name="Transaction configuration", tool.description="Link a transaction to it configuration")
   ref TransactionConf[1]#transaction transactionconf;
 
-  @gmf.link(
-  	source="previous_transaction", 
-  	target="next_product", 
-  	target.decoration="filledclosedarrow", 
-  	style="solid", 
-  	color="0,0,0",
-  	tool.name="Next product",
-  	tool.description="Link the transaction to next product"
-  )
+  @gmf.link(source="previous_transaction", target="next_product", target.decoration="filledclosedarrow", style="solid", color="0,0,0", tool.name="Next product", tool.description="Link the transaction to next product")
   ref Product[+]#previous_transaction next_product;
   ref Product[*]#next_transaction previous_product;
 }
 
-@gmf.node(
-	label="name", 
-	label.icon="false", 
-	figure="svg", 
-	svg.uri="platform:/plugin/TFG-TrustOS_Traceability/icons/SVG/product.svg",
-	tool.name="Product",
-	tool.description="Create a product"
-)
+@gmf.node(label="name", label.icon="false", figure="svg", svg.uri="platform:/plugin/TFG-TrustOS_Traceability/icons/SVG/product.svg", tool.name="Product", tool.description="Create a product")
 @"http://www.obeo.fr/dsl/dnc/archetype"(archetype="Description")
 class Product extends Node {
 
   @gmf.link(target.decoration="arrow", style="dash", color="0,174,102")
-    @gmf.link(
-  	target.decoration="arrow", 
-  	style="dash", 
-  	color="0,174,102",
-  	tool.name="Product configuration",
-	tool.description="Link a product to it configuration"
-  )
+  @gmf.link(target.decoration="arrow", style="dash", color="0,174,102", tool.name="Product configuration", tool.description="Link a product to it configuration")
   ref ProductConf[1]#product productconf;
   ref Transaction[*]#next_product previous_transaction;
 
-
-  @gmf.link(
-  	source="previous_product", 
-  	target="next_transaction", 
-  	target.decoration="filledclosedarrow", 
-  	style="solid", 
-  	color="0,0,0",
-  	tool.name="Next transaction",
-  	tool.description="Link the product to next transaction"
-  )
+  @gmf.link(source="previous_product", target="next_transaction", target.decoration="filledclosedarrow", style="solid", color="0,0,0", tool.name="Next transaction", tool.description="Link the product to next transaction")
   ref Transaction[*]#previous_product next_transaction;
 }
 
 @"http://www.obeo.fr/dsl/dnc/archetype"(archetype="MomentInterval")
-@gmf.node(
-	label="type", 
-	border.width="0", 
-	border.color="0,38,175", 
-	border.style="solid", 
-	svg.uri="platform:/plugin/TFG-TrustOS_Traceability/icons/SVG/transactionConf.svg",
-	tool.name="Transaction Configuration",
-	tool.description="Create a configuration for transaction"
-)
+@gmf.node(label="type", border.width="0", border.color="0,38,175", border.style="solid", svg.uri="platform:/plugin/TFG-TrustOS_Traceability/icons/SVG/transactionConf.svg", tool.name="Transaction Configuration", tool.description="Create a configuration for transaction")
 class TransactionConf extends Asset {
   attr int[1] repeat = 1;
   attr boolean[1] final = false;
   ref Transaction[+]#transactionconf transaction;
+
+  @"http://www.eclipse.org/emf/2002/Ecore/OCL/Pivot"(derivation="self.repeat = -1")
+  volatile transient derived attr boolean[1] isTransactionInfinite;
+
+  @"http://www.eclipse.org/emf/2002/Ecore/OCL/Pivot"(derivation="self.final")
+  volatile transient derived attr boolean[1] isTransactionFinal;
 }
 
 @"http://www.obeo.fr/dsl/dnc/archetype"(archetype="Description")
-@gmf.node(
-	label="type", 
-	border.width="0", 
-	border.color="0,174,102", 
-	border.style="solid", 
-	svg.uri="platform:/plugin/TFG-TrustOS_Traceability/icons/SVG/productConf.svg",
-	tool.name="Product Configuration",
-	tool.description="Create a configuration for product"
-)
+@gmf.node(label="type", border.width="0", border.color="0,174,102", border.style="solid", svg.uri="platform:/plugin/TFG-TrustOS_Traceability/icons/SVG/productConf.svg", tool.name="Product Configuration", tool.description="Create a configuration for product")
+@Ecore(constraints="transactionsFinals")
+@"http://www.eclipse.org/emf/2002/Ecore/OCL/Pivot"(transactionsFinals="self.product.next_transaction.transactionconf->select(isTransactionInfinite)->size() >= 1 implies self.product.next_transaction.transactionconf->select(isTransactionFinal)->size() >= 1")
 class ProductConf extends Asset {
   ref Product[+]#productconf product;
 }
 
-@gmf.node(
-	label="type", 
-	border.width="0", 
-	border.color="220,31,31", 
-	border.style="solid", 
-	svg.uri="platform:/plugin/TFG-TrustOS_Traceability/icons/SVG/rolConf.svg",
-	tool.name="Rol Configuration",
-	tool.description="Create a configuration for rol"
-)
+@gmf.node(label="type", border.width="0", border.color="220,31,31", border.style="solid", svg.uri="platform:/plugin/TFG-TrustOS_Traceability/icons/SVG/rolConf.svg", tool.name="Rol Configuration", tool.description="Create a configuration for rol")
+@Ecore(constraints="onePermissionTotal noMoreOneEdit noMoreOneView noMoreOneCreate")
+@"http://www.eclipse.org/emf/2002/Ecore/OCL/Pivot"(onePermissionTotal="self.permissions->selectByType(Permission)->size() <= 1", noMoreOneEdit="self.permissions->selectByType(Edit)->size() <= 1", noMoreOneView="self.permissions->selectByType(View)->size() <= 1", noMoreOneCreate="self.permissions->selectByType(Create)->size() <= 1")
 class RolConf extends Asset {
-  @gmf.link(
-  	target.decoration="arrow",
-  	style="dash", 
-  	color="220,31,31",
-  	tool.name="Permission of a rol",
-  	tool.description="Link the rol to it permissions"
-  )
+
+  @gmf.link(target.decoration="arrow", style="dash", color="220,31,31", tool.name="Permission of a rol", tool.description="Link the rol to it permissions")
   ref Permission[+] permissions;
 }
 
@@ -131,60 +71,27 @@ abstract class Asset {
   val Property[+] properties;
 }
 
-@gmf.node(
-	label="name", 
-	label.icon="false", 
-	figure="svg", 
-	svg.uri="platform:/plugin/TFG-TrustOS_Traceability/icons/SVG/permission.svg",
-	tool.name="Permission to do all",
-	tool.description="Create a permission to do all for a rol"
-)
+@gmf.node(label="name", label.icon="false", figure="svg", svg.uri="platform:/plugin/TFG-TrustOS_Traceability/icons/SVG/permission.svg", tool.name="Permission to do all", tool.description="Create a permission to do all for a rol")
 @"http://www.obeo.fr/dsl/dnc/archetype"(archetype="MomentInterval")
 class Permission {
 
-  @gmf.link(
-  	target.decoration="arrow", 
-  	style="dash", 
-  	color="192,192,192",
-  	tool.name="Properties allow",
-  	tool.description="Link the properties that the permission allow"
-  )
+  @gmf.link(target.decoration="arrow", style="dash", color="192,192,192", tool.name="Properties allow", tool.description="Link the properties that the permission allow")
   ref Property[+]#allow refers;
   attr String[1] name;
 }
 
-@gmf.node(
-	label="name", 
-	label.icon="false", 
-	figure="svg", 
-	svg.uri="platform:/plugin/TFG-TrustOS_Traceability/icons/SVG/edit.svg",
-	tool.name="Permission to edit",
-	tool.description="Create a permission to edit for a rol"
-)
+@gmf.node(label="name", label.icon="false", figure="svg", svg.uri="platform:/plugin/TFG-TrustOS_Traceability/icons/SVG/edit.svg", tool.name="Permission to edit", tool.description="Create a permission to edit for a rol")
 @"http://www.obeo.fr/dsl/dnc/archetype"(archetype="MomentInterval")
 class Edit extends Permission {
 }
 
-@gmf.node(
-	label="name", 
-	label.icon="false", 
-	figure="svg", 
-	svg.uri="platform:/plugin/TFG-TrustOS_Traceability/icons/SVG/create.svg",
-	tool.name="Permission to create",
-	tool.description="Create a permission to create for a rol"
-)
+@gmf.node(label="name", label.icon="false", figure="svg", svg.uri="platform:/plugin/TFG-TrustOS_Traceability/icons/SVG/create.svg", tool.name="Permission to create", tool.description="Create a permission to create for a rol")
 @"http://www.obeo.fr/dsl/dnc/archetype"(archetype="MomentInterval")
 class Create extends Permission {
 }
 
-@gmf.node(
-	label="name", 
-	label.icon="false", 
-	figure="svg", 
-	svg.uri="platform:/plugin/TFG-TrustOS_Traceability/icons/SVG/view.svg",
-	tool.name="Permission to view",
-	tool.description="Create a permission to view for a rol"
-)@"http://www.obeo.fr/dsl/dnc/archetype"(archetype="MomentInterval")
+@gmf.node(label="name", label.icon="false", figure="svg", svg.uri="platform:/plugin/TFG-TrustOS_Traceability/icons/SVG/view.svg", tool.name="Permission to view", tool.description="Create a permission to view for a rol")
+@"http://www.obeo.fr/dsl/dnc/archetype"(archetype="MomentInterval")
 class View extends Permission {
 }
 
@@ -198,47 +105,30 @@ class System {
   attr String name;
 }
 
+@Ecore(constraints="propertiesAllow")
+@"http://www.eclipse.org/emf/2002/Ecore/OCL/Pivot"(propertiesAllow=" (self.oclContainer().oclIsTypeOf(ProductConf) or self.oclContainer().oclIsTypeOf(TransactionConf)) implies self.allow->size() > 0")
 abstract class Property {
   attr String[1] ~id;
   attr String title;
-  ref Permission[+]#refers allow;
+  ref Permission[*]#refers allow;
 }
 
-@gmf.node(
-	label="id", 
-	label.icon="false", 
-	figure="svg", 
-	svg.uri="platform:/plugin/TFG-TrustOS_Traceability/icons/SVG/attribute.svg",
-	tool.name="Attribute",
-	tool.description="Create a attribute in a configuration"
-)
+@gmf.node(label="id", label.icon="false", figure="svg", svg.uri="platform:/plugin/TFG-TrustOS_Traceability/icons/SVG/attribute.svg", tool.name="Attribute", tool.description="Create a attribute in a configuration")
 class Attribute extends Property {
+
   @gmf.compartment(collapsible="true", layout="list")
   val Value[*] values;
   attr EType[1] type;
 }
 
-@gmf.node(
-	label="id", 
-	label.icon="false", 
-	figure="svg", 
-	svg.uri="platform:/plugin/TFG-TrustOS_Traceability/icons/SVG/objet.svg",
-	tool.name="Object",
-	tool.description="Create a object of attributes in a configuration"
-)class Object extends Property {
+@gmf.node(label="id", label.icon="false", figure="svg", svg.uri="platform:/plugin/TFG-TrustOS_Traceability/icons/SVG/objet.svg", tool.name="Object", tool.description="Create a object of attributes in a configuration")
+class Object extends Property {
 
   @gmf.compartment(collapsible="true", layout="list")
   val Property[2..*] properties;
 }
 
-@gmf.node(
-	label="name", 
-	label.icon="false", 
-	figure="svg", 
-	svg.uri="platform:/plugin/TFG-TrustOS_Traceability/icons/SVG/value.svg",
-	tool.name="Value of attribute",
-	tool.description="Create a value of one attribute"
-)
+@gmf.node(label="name", label.icon="false", figure="svg", svg.uri="platform:/plugin/TFG-TrustOS_Traceability/icons/SVG/value.svg", tool.name="Value of attribute", tool.description="Create a value of one attribute")
 class Value {
   attr String name;
 }

@@ -31,6 +31,7 @@ public class TraceabilityMMAllTests extends TestSuite {
 	 */
 	public static Test suite() {
 		TestSuite suite = new TraceabilityMMAllTests("TraceabilityMM Tests");
+		suite.addTest(TraceabilityMMTests.suite());
 		return suite;
 	}
 

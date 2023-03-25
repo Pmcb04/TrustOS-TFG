@@ -211,6 +211,15 @@ public class TraceabilityMMPackageImpl extends EPackageImpl implements Traceabil
 		// Initialize created meta-data
 		theTraceabilityMMPackage.initializePackageContents();
 
+		// Register package validator
+		EValidator.Registry.INSTANCE.put
+			(theTraceabilityMMPackage,
+			 new EValidator.Descriptor() {
+				 public EValidator getEValidator() {
+					 return TraceabilityMMValidator.INSTANCE;
+				 }
+			 });
+
 		// Mark meta-data to indicate it can't be changed
 		theTraceabilityMMPackage.freeze();
 
@@ -262,6 +271,24 @@ public class TraceabilityMMPackageImpl extends EPackageImpl implements Traceabil
 	 */
 	public EReference getTransactionConf_Transaction() {
 		return (EReference)transactionConfEClass.getEStructuralFeatures().get(2);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EAttribute getTransactionConf_IsTransactionInfinite() {
+		return (EAttribute)transactionConfEClass.getEStructuralFeatures().get(3);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EAttribute getTransactionConf_IsTransactionFinal() {
+		return (EAttribute)transactionConfEClass.getEStructuralFeatures().get(4);
 	}
 
 	/**
@@ -660,6 +687,8 @@ public class TraceabilityMMPackageImpl extends EPackageImpl implements Traceabil
 		createEAttribute(transactionConfEClass, TRANSACTION_CONF__REPEAT);
 		createEAttribute(transactionConfEClass, TRANSACTION_CONF__FINAL);
 		createEReference(transactionConfEClass, TRANSACTION_CONF__TRANSACTION);
+		createEAttribute(transactionConfEClass, TRANSACTION_CONF__IS_TRANSACTION_INFINITE);
+		createEAttribute(transactionConfEClass, TRANSACTION_CONF__IS_TRANSACTION_FINAL);
 
 		productConfEClass = createEClass(PRODUCT_CONF);
 		createEReference(productConfEClass, PRODUCT_CONF__PRODUCT);
@@ -763,6 +792,8 @@ public class TraceabilityMMPackageImpl extends EPackageImpl implements Traceabil
 		initEAttribute(getTransactionConf_Repeat(), ecorePackage.getEInt(), "repeat", "1", 1, 1, TransactionConf.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEAttribute(getTransactionConf_Final(), ecorePackage.getEBoolean(), "final", "false", 1, 1, TransactionConf.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEReference(getTransactionConf_Transaction(), this.getTransaction(), this.getTransaction_Transactionconf(), "transaction", null, 1, -1, TransactionConf.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEAttribute(getTransactionConf_IsTransactionInfinite(), ecorePackage.getEBoolean(), "isTransactionInfinite", null, 1, 1, TransactionConf.class, IS_TRANSIENT, IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, IS_DERIVED, IS_ORDERED);
+		initEAttribute(getTransactionConf_IsTransactionFinal(), ecorePackage.getEBoolean(), "isTransactionFinal", null, 1, 1, TransactionConf.class, IS_TRANSIENT, IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, IS_DERIVED, IS_ORDERED);
 
 		initEClass(productConfEClass, ProductConf.class, "ProductConf", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 		initEReference(getProductConf_Product(), this.getProduct(), this.getProduct_Productconf(), "product", null, 1, -1, ProductConf.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
@@ -793,7 +824,7 @@ public class TraceabilityMMPackageImpl extends EPackageImpl implements Traceabil
 		initEClass(propertyEClass, Property.class, "Property", IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 		initEAttribute(getProperty_Id(), ecorePackage.getEString(), "id", null, 1, 1, Property.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEAttribute(getProperty_Title(), ecorePackage.getEString(), "title", null, 0, 1, Property.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-		initEReference(getProperty_Allow(), this.getPermission(), this.getPermission_Refers(), "allow", null, 1, -1, Property.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEReference(getProperty_Allow(), this.getPermission(), this.getPermission_Refers(), "allow", null, 0, -1, Property.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
 		initEClass(attributeEClass, Attribute.class, "Attribute", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 		initEReference(getAttribute_Values(), this.getValue(), null, "values", null, 0, -1, Attribute.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
@@ -820,12 +851,18 @@ public class TraceabilityMMPackageImpl extends EPackageImpl implements Traceabil
 		// Create annotations
 		// gmf
 		createGmfAnnotations();
+		// http://www.eclipse.org/OCL/Import
+		createImportAnnotations();
+		// http://www.eclipse.org/emf/2002/Ecore
+		createEcoreAnnotations();
 		// gmf.node
 		createGmf_1Annotations();
 		// http://www.obeo.fr/dsl/dnc/archetype
 		createArchetypeAnnotations();
 		// gmf.link
 		createGmf_2Annotations();
+		// http://www.eclipse.org/emf/2002/Ecore/OCL/Pivot
+		createPivotAnnotations();
 		// gmf.compartment
 		createGmf_3Annotations();
 		// emf.gen
@@ -846,6 +883,58 @@ public class TraceabilityMMPackageImpl extends EPackageImpl implements Traceabil
 		  (this,
 		   source,
 		   new String[] {
+		   });
+	}
+
+	/**
+	 * Initializes the annotations for <b>http://www.eclipse.org/OCL/Import</b>.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	protected void createImportAnnotations() {
+		String source = "http://www.eclipse.org/OCL/Import";
+		addAnnotation
+		  (this,
+		   source,
+		   new String[] {
+			   "ecore", "http://www.eclipse.org/emf/2002/Ecore"
+		   });
+	}
+
+	/**
+	 * Initializes the annotations for <b>http://www.eclipse.org/emf/2002/Ecore</b>.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	protected void createEcoreAnnotations() {
+		String source = "http://www.eclipse.org/emf/2002/Ecore";
+		addAnnotation
+		  (this,
+		   source,
+		   new String[] {
+			   "invocationDelegates", "http://www.eclipse.org/emf/2002/Ecore/OCL/Pivot",
+			   "settingDelegates", "http://www.eclipse.org/emf/2002/Ecore/OCL/Pivot",
+			   "validationDelegates", "http://www.eclipse.org/emf/2002/Ecore/OCL/Pivot"
+		   });
+		addAnnotation
+		  (productConfEClass,
+		   source,
+		   new String[] {
+			   "constraints", "transactionsFinals"
+		   });
+		addAnnotation
+		  (rolConfEClass,
+		   source,
+		   new String[] {
+			   "constraints", "onePermissionTotal noMoreOneEdit noMoreOneView noMoreOneCreate"
+		   });
+		addAnnotation
+		  (propertyEClass,
+		   source,
+		   new String[] {
+			   "constraints", "propertiesAllow"
 		   });
 	}
 
@@ -1171,6 +1260,49 @@ public class TraceabilityMMPackageImpl extends EPackageImpl implements Traceabil
 			   "color", "192,192,192",
 			   "tool.name", "Properties allow",
 			   "tool.description", "Link the properties that the permission allow"
+		   });
+	}
+
+	/**
+	 * Initializes the annotations for <b>http://www.eclipse.org/emf/2002/Ecore/OCL/Pivot</b>.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	protected void createPivotAnnotations() {
+		String source = "http://www.eclipse.org/emf/2002/Ecore/OCL/Pivot";
+		addAnnotation
+		  (getTransactionConf_IsTransactionInfinite(),
+		   source,
+		   new String[] {
+			   "derivation", "self.repeat = -1"
+		   });
+		addAnnotation
+		  (getTransactionConf_IsTransactionFinal(),
+		   source,
+		   new String[] {
+			   "derivation", "self.final"
+		   });
+		addAnnotation
+		  (productConfEClass,
+		   source,
+		   new String[] {
+			   "transactionsFinals", "self.product.next_transaction.transactionconf->select(isTransactionInfinite)->size() >= 1 implies self.product.next_transaction.transactionconf->select(isTransactionFinal)->size() >= 1"
+		   });
+		addAnnotation
+		  (rolConfEClass,
+		   source,
+		   new String[] {
+			   "onePermissionTotal", "self.permissions->selectByType(Permission)->size() <= 1",
+			   "noMoreOneEdit", "self.permissions->selectByType(Edit)->size() <= 1",
+			   "noMoreOneView", "self.permissions->selectByType(View)->size() <= 1",
+			   "noMoreOneCreate", "self.permissions->selectByType(Create)->size() <= 1"
+		   });
+		addAnnotation
+		  (propertyEClass,
+		   source,
+		   new String[] {
+			   "propertiesAllow", " (self.oclContainer().oclIsTypeOf(ProductConf) or self.oclContainer().oclIsTypeOf(TransactionConf)) implies self.allow->size() > 0"
 		   });
 	}
 

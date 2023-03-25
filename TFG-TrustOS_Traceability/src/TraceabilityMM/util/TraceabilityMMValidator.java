@@ -101,38 +101,38 @@ public class TraceabilityMMValidator extends EObjectValidator {
 	@Override
 	protected boolean validate(int classifierID, Object value, DiagnosticChain diagnostics, Map<Object, Object> context) {
 		switch (classifierID) {
-			case TraceabilityMMPackage.TRANSACTION_CONF:
-				return validateTransactionConf((TransactionConf)value, diagnostics, context);
-			case TraceabilityMMPackage.SYSTEM:
-				return validateSystem((TraceabilityMM.System)value, diagnostics, context);
-			case TraceabilityMMPackage.PERMISSION:
-				return validatePermission((Permission)value, diagnostics, context);
-			case TraceabilityMMPackage.VIEW:
-				return validateView((View)value, diagnostics, context);
-			case TraceabilityMMPackage.CREATE:
-				return validateCreate((Create)value, diagnostics, context);
-			case TraceabilityMMPackage.EDIT:
-				return validateEdit((Edit)value, diagnostics, context);
-			case TraceabilityMMPackage.PRODUCT_CONF:
-				return validateProductConf((ProductConf)value, diagnostics, context);
+			case TraceabilityMMPackage.NODE:
+				return validateNode((Node)value, diagnostics, context);
 			case TraceabilityMMPackage.TRANSACTION:
 				return validateTransaction((Transaction)value, diagnostics, context);
 			case TraceabilityMMPackage.PRODUCT:
 				return validateProduct((Product)value, diagnostics, context);
+			case TraceabilityMMPackage.TRANSACTION_CONF:
+				return validateTransactionConf((TransactionConf)value, diagnostics, context);
+			case TraceabilityMMPackage.PRODUCT_CONF:
+				return validateProductConf((ProductConf)value, diagnostics, context);
+			case TraceabilityMMPackage.ROL_CONF:
+				return validateRolConf((RolConf)value, diagnostics, context);
+			case TraceabilityMMPackage.ASSET:
+				return validateAsset((Asset)value, diagnostics, context);
+			case TraceabilityMMPackage.PERMISSION:
+				return validatePermission((Permission)value, diagnostics, context);
+			case TraceabilityMMPackage.EDIT:
+				return validateEdit((Edit)value, diagnostics, context);
+			case TraceabilityMMPackage.CREATE:
+				return validateCreate((Create)value, diagnostics, context);
+			case TraceabilityMMPackage.VIEW:
+				return validateView((View)value, diagnostics, context);
+			case TraceabilityMMPackage.SYSTEM:
+				return validateSystem((TraceabilityMM.System)value, diagnostics, context);
+			case TraceabilityMMPackage.PROPERTY:
+				return validateProperty((Property)value, diagnostics, context);
 			case TraceabilityMMPackage.ATTRIBUTE:
 				return validateAttribute((Attribute)value, diagnostics, context);
 			case TraceabilityMMPackage.OBJECT:
 				return validateObject((TraceabilityMM.Object)value, diagnostics, context);
-			case TraceabilityMMPackage.NODE:
-				return validateNode((Node)value, diagnostics, context);
-			case TraceabilityMMPackage.ASSET:
-				return validateAsset((Asset)value, diagnostics, context);
-			case TraceabilityMMPackage.PROPERTY:
-				return validateProperty((Property)value, diagnostics, context);
 			case TraceabilityMMPackage.VALUE:
 				return validateValue((Value)value, diagnostics, context);
-			case TraceabilityMMPackage.ROL_CONF:
-				return validateRolConf((RolConf)value, diagnostics, context);
 			case TraceabilityMMPackage.ETYPE:
 				return validateEType((EType)value, diagnostics, context);
 			default:
@@ -146,17 +146,7 @@ public class TraceabilityMMValidator extends EObjectValidator {
 	 * @generated
 	 */
 	public boolean validateTransactionConf(TransactionConf transactionConf, DiagnosticChain diagnostics, Map<Object, Object> context) {
-		if (!validate_NoCircularContainment(transactionConf, diagnostics, context)) return false;
-		boolean result = validate_EveryMultiplicityConforms(transactionConf, diagnostics, context);
-		if (result || diagnostics != null) result &= validate_EveryDataValueConforms(transactionConf, diagnostics, context);
-		if (result || diagnostics != null) result &= validate_EveryReferenceIsContained(transactionConf, diagnostics, context);
-		if (result || diagnostics != null) result &= validate_EveryBidirectionalReferenceIsPaired(transactionConf, diagnostics, context);
-		if (result || diagnostics != null) result &= validate_EveryProxyResolves(transactionConf, diagnostics, context);
-		if (result || diagnostics != null) result &= validate_UniqueID(transactionConf, diagnostics, context);
-		if (result || diagnostics != null) result &= validate_EveryKeyUnique(transactionConf, diagnostics, context);
-		if (result || diagnostics != null) result &= validate_EveryMapEntryUnique(transactionConf, diagnostics, context);
-		if (result || diagnostics != null) result &= validateAsset_unlessOneProperty(transactionConf, diagnostics, context);
-		return result;
+		return validate_EveryDefaultConstraint(transactionConf, diagnostics, context);
 	}
 
 	/**
@@ -219,7 +209,6 @@ public class TraceabilityMMValidator extends EObjectValidator {
 		if (result || diagnostics != null) result &= validate_UniqueID(productConf, diagnostics, context);
 		if (result || diagnostics != null) result &= validate_EveryKeyUnique(productConf, diagnostics, context);
 		if (result || diagnostics != null) result &= validate_EveryMapEntryUnique(productConf, diagnostics, context);
-		if (result || diagnostics != null) result &= validateAsset_unlessOneProperty(productConf, diagnostics, context);
 		if (result || diagnostics != null) result &= validateProductConf_transactionsFinals(productConf, diagnostics, context);
 		return result;
 	}
@@ -230,8 +219,7 @@ public class TraceabilityMMValidator extends EObjectValidator {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	protected static final String PRODUCT_CONF__TRANSACTIONS_FINALS__EEXPRESSION = "self.product.next_transaction.transactionconf->select(isTransactionInfinite)->size() >= 1 implies \n" +
-		"\t\t\t\t\t\t\t\t\t\t\tself.product.next_transaction.transactionconf->select(isTransactionFinal)->size() >= 1";
+	protected static final String PRODUCT_CONF__TRANSACTIONS_FINALS__EEXPRESSION = "self.product.next_transaction.transactionconf->select(isTransactionInfinite)->size() >= 1 implies self.product.next_transaction.transactionconf->select(isTransactionFinal)->size() >= 1";
 
 	/**
 	 * Validates the transactionsFinals constraint of '<em>Product Conf</em>'.
@@ -278,7 +266,17 @@ public class TraceabilityMMValidator extends EObjectValidator {
 	 * @generated
 	 */
 	public boolean validateAttribute(Attribute attribute, DiagnosticChain diagnostics, Map<Object, Object> context) {
-		return validate_EveryDefaultConstraint(attribute, diagnostics, context);
+		if (!validate_NoCircularContainment(attribute, diagnostics, context)) return false;
+		boolean result = validate_EveryMultiplicityConforms(attribute, diagnostics, context);
+		if (result || diagnostics != null) result &= validate_EveryDataValueConforms(attribute, diagnostics, context);
+		if (result || diagnostics != null) result &= validate_EveryReferenceIsContained(attribute, diagnostics, context);
+		if (result || diagnostics != null) result &= validate_EveryBidirectionalReferenceIsPaired(attribute, diagnostics, context);
+		if (result || diagnostics != null) result &= validate_EveryProxyResolves(attribute, diagnostics, context);
+		if (result || diagnostics != null) result &= validate_UniqueID(attribute, diagnostics, context);
+		if (result || diagnostics != null) result &= validate_EveryKeyUnique(attribute, diagnostics, context);
+		if (result || diagnostics != null) result &= validate_EveryMapEntryUnique(attribute, diagnostics, context);
+		if (result || diagnostics != null) result &= validateProperty_propertiesAllow(attribute, diagnostics, context);
+		return result;
 	}
 
 	/**
@@ -287,7 +285,17 @@ public class TraceabilityMMValidator extends EObjectValidator {
 	 * @generated
 	 */
 	public boolean validateObject(TraceabilityMM.Object object, DiagnosticChain diagnostics, Map<Object, Object> context) {
-		return validate_EveryDefaultConstraint(object, diagnostics, context);
+		if (!validate_NoCircularContainment(object, diagnostics, context)) return false;
+		boolean result = validate_EveryMultiplicityConforms(object, diagnostics, context);
+		if (result || diagnostics != null) result &= validate_EveryDataValueConforms(object, diagnostics, context);
+		if (result || diagnostics != null) result &= validate_EveryReferenceIsContained(object, diagnostics, context);
+		if (result || diagnostics != null) result &= validate_EveryBidirectionalReferenceIsPaired(object, diagnostics, context);
+		if (result || diagnostics != null) result &= validate_EveryProxyResolves(object, diagnostics, context);
+		if (result || diagnostics != null) result &= validate_UniqueID(object, diagnostics, context);
+		if (result || diagnostics != null) result &= validate_EveryKeyUnique(object, diagnostics, context);
+		if (result || diagnostics != null) result &= validate_EveryMapEntryUnique(object, diagnostics, context);
+		if (result || diagnostics != null) result &= validateProperty_propertiesAllow(object, diagnostics, context);
+		return result;
 	}
 
 	/**
@@ -305,46 +313,7 @@ public class TraceabilityMMValidator extends EObjectValidator {
 	 * @generated
 	 */
 	public boolean validateAsset(Asset asset, DiagnosticChain diagnostics, Map<Object, Object> context) {
-		if (!validate_NoCircularContainment(asset, diagnostics, context)) return false;
-		boolean result = validate_EveryMultiplicityConforms(asset, diagnostics, context);
-		if (result || diagnostics != null) result &= validate_EveryDataValueConforms(asset, diagnostics, context);
-		if (result || diagnostics != null) result &= validate_EveryReferenceIsContained(asset, diagnostics, context);
-		if (result || diagnostics != null) result &= validate_EveryBidirectionalReferenceIsPaired(asset, diagnostics, context);
-		if (result || diagnostics != null) result &= validate_EveryProxyResolves(asset, diagnostics, context);
-		if (result || diagnostics != null) result &= validate_UniqueID(asset, diagnostics, context);
-		if (result || diagnostics != null) result &= validate_EveryKeyUnique(asset, diagnostics, context);
-		if (result || diagnostics != null) result &= validate_EveryMapEntryUnique(asset, diagnostics, context);
-		if (result || diagnostics != null) result &= validateAsset_unlessOneProperty(asset, diagnostics, context);
-		return result;
-	}
-
-	/**
-	 * The cached validation expression for the unlessOneProperty constraint of '<em>Asset</em>'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	protected static final String ASSET__UNLESS_ONE_PROPERTY__EEXPRESSION = "self.properties->size() > 0";
-
-	/**
-	 * Validates the unlessOneProperty constraint of '<em>Asset</em>'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public boolean validateAsset_unlessOneProperty(Asset asset, DiagnosticChain diagnostics, Map<Object, Object> context) {
-		return
-			validate
-				(TraceabilityMMPackage.Literals.ASSET,
-				 asset,
-				 diagnostics,
-				 context,
-				 "http://www.eclipse.org/emf/2002/Ecore/OCL/Pivot",
-				 "unlessOneProperty",
-				 ASSET__UNLESS_ONE_PROPERTY__EEXPRESSION,
-				 Diagnostic.ERROR,
-				 DIAGNOSTIC_SOURCE,
-				 0);
+		return validate_EveryDefaultConstraint(asset, diagnostics, context);
 	}
 
 	/**
@@ -353,7 +322,46 @@ public class TraceabilityMMValidator extends EObjectValidator {
 	 * @generated
 	 */
 	public boolean validateProperty(Property property, DiagnosticChain diagnostics, Map<Object, Object> context) {
-		return validate_EveryDefaultConstraint(property, diagnostics, context);
+		if (!validate_NoCircularContainment(property, diagnostics, context)) return false;
+		boolean result = validate_EveryMultiplicityConforms(property, diagnostics, context);
+		if (result || diagnostics != null) result &= validate_EveryDataValueConforms(property, diagnostics, context);
+		if (result || diagnostics != null) result &= validate_EveryReferenceIsContained(property, diagnostics, context);
+		if (result || diagnostics != null) result &= validate_EveryBidirectionalReferenceIsPaired(property, diagnostics, context);
+		if (result || diagnostics != null) result &= validate_EveryProxyResolves(property, diagnostics, context);
+		if (result || diagnostics != null) result &= validate_UniqueID(property, diagnostics, context);
+		if (result || diagnostics != null) result &= validate_EveryKeyUnique(property, diagnostics, context);
+		if (result || diagnostics != null) result &= validate_EveryMapEntryUnique(property, diagnostics, context);
+		if (result || diagnostics != null) result &= validateProperty_propertiesAllow(property, diagnostics, context);
+		return result;
+	}
+
+	/**
+	 * The cached validation expression for the propertiesAllow constraint of '<em>Property</em>'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	protected static final String PROPERTY__PROPERTIES_ALLOW__EEXPRESSION = " (self.oclContainer().oclIsTypeOf(ProductConf) or self.oclContainer().oclIsTypeOf(TransactionConf)) implies self.allow->size() > 0";
+
+	/**
+	 * Validates the propertiesAllow constraint of '<em>Property</em>'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public boolean validateProperty_propertiesAllow(Property property, DiagnosticChain diagnostics, Map<Object, Object> context) {
+		return
+			validate
+				(TraceabilityMMPackage.Literals.PROPERTY,
+				 property,
+				 diagnostics,
+				 context,
+				 "http://www.eclipse.org/emf/2002/Ecore/OCL/Pivot",
+				 "propertiesAllow",
+				 PROPERTY__PROPERTIES_ALLOW__EEXPRESSION,
+				 Diagnostic.ERROR,
+				 DIAGNOSTIC_SOURCE,
+				 0);
 	}
 
 	/**
@@ -380,26 +388,28 @@ public class TraceabilityMMValidator extends EObjectValidator {
 		if (result || diagnostics != null) result &= validate_UniqueID(rolConf, diagnostics, context);
 		if (result || diagnostics != null) result &= validate_EveryKeyUnique(rolConf, diagnostics, context);
 		if (result || diagnostics != null) result &= validate_EveryMapEntryUnique(rolConf, diagnostics, context);
-		if (result || diagnostics != null) result &= validateAsset_unlessOneProperty(rolConf, diagnostics, context);
-		if (result || diagnostics != null) result &= validateRolConf_permissionOrEditCreateView(rolConf, diagnostics, context);
+		if (result || diagnostics != null) result &= validateRolConf_onePermissionTotal(rolConf, diagnostics, context);
+		if (result || diagnostics != null) result &= validateRolConf_noMoreOneEdit(rolConf, diagnostics, context);
+		if (result || diagnostics != null) result &= validateRolConf_noMoreOneView(rolConf, diagnostics, context);
+		if (result || diagnostics != null) result &= validateRolConf_noMoreOneCreate(rolConf, diagnostics, context);
 		return result;
 	}
 
 	/**
-	 * The cached validation expression for the permissionOrEditCreateView constraint of '<em>Rol Conf</em>'.
+	 * The cached validation expression for the onePermissionTotal constraint of '<em>Rol Conf</em>'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	protected static final String ROL_CONF__PERMISSION_OR_EDIT_CREATE_VIEW__EEXPRESSION = "self.numPermissionsTotal = 1 or (self.numPermissionsTotal = 0 and (self.numPermissionsEdit = 1 or self.numPermissionsCreate = 1 or self.numPermissionsView = 1))";
+	protected static final String ROL_CONF__ONE_PERMISSION_TOTAL__EEXPRESSION = "self.permissions->selectByType(Permission)->size() <= 1";
 
 	/**
-	 * Validates the permissionOrEditCreateView constraint of '<em>Rol Conf</em>'.
+	 * Validates the onePermissionTotal constraint of '<em>Rol Conf</em>'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public boolean validateRolConf_permissionOrEditCreateView(RolConf rolConf, DiagnosticChain diagnostics, Map<Object, Object> context) {
+	public boolean validateRolConf_onePermissionTotal(RolConf rolConf, DiagnosticChain diagnostics, Map<Object, Object> context) {
 		return
 			validate
 				(TraceabilityMMPackage.Literals.ROL_CONF,
@@ -407,8 +417,95 @@ public class TraceabilityMMValidator extends EObjectValidator {
 				 diagnostics,
 				 context,
 				 "http://www.eclipse.org/emf/2002/Ecore/OCL/Pivot",
-				 "permissionOrEditCreateView",
-				 ROL_CONF__PERMISSION_OR_EDIT_CREATE_VIEW__EEXPRESSION,
+				 "onePermissionTotal",
+				 ROL_CONF__ONE_PERMISSION_TOTAL__EEXPRESSION,
+				 Diagnostic.ERROR,
+				 DIAGNOSTIC_SOURCE,
+				 0);
+	}
+
+	/**
+	 * The cached validation expression for the noMoreOneEdit constraint of '<em>Rol Conf</em>'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	protected static final String ROL_CONF__NO_MORE_ONE_EDIT__EEXPRESSION = "self.permissions->selectByType(Edit)->size() <= 1";
+
+	/**
+	 * Validates the noMoreOneEdit constraint of '<em>Rol Conf</em>'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public boolean validateRolConf_noMoreOneEdit(RolConf rolConf, DiagnosticChain diagnostics, Map<Object, Object> context) {
+		return
+			validate
+				(TraceabilityMMPackage.Literals.ROL_CONF,
+				 rolConf,
+				 diagnostics,
+				 context,
+				 "http://www.eclipse.org/emf/2002/Ecore/OCL/Pivot",
+				 "noMoreOneEdit",
+				 ROL_CONF__NO_MORE_ONE_EDIT__EEXPRESSION,
+				 Diagnostic.ERROR,
+				 DIAGNOSTIC_SOURCE,
+				 0);
+	}
+
+	/**
+	 * The cached validation expression for the noMoreOneView constraint of '<em>Rol Conf</em>'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	protected static final String ROL_CONF__NO_MORE_ONE_VIEW__EEXPRESSION = "self.permissions->selectByType(View)->size() <= 1";
+
+	/**
+	 * Validates the noMoreOneView constraint of '<em>Rol Conf</em>'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public boolean validateRolConf_noMoreOneView(RolConf rolConf, DiagnosticChain diagnostics, Map<Object, Object> context) {
+		return
+			validate
+				(TraceabilityMMPackage.Literals.ROL_CONF,
+				 rolConf,
+				 diagnostics,
+				 context,
+				 "http://www.eclipse.org/emf/2002/Ecore/OCL/Pivot",
+				 "noMoreOneView",
+				 ROL_CONF__NO_MORE_ONE_VIEW__EEXPRESSION,
+				 Diagnostic.ERROR,
+				 DIAGNOSTIC_SOURCE,
+				 0);
+	}
+
+	/**
+	 * The cached validation expression for the noMoreOneCreate constraint of '<em>Rol Conf</em>'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	protected static final String ROL_CONF__NO_MORE_ONE_CREATE__EEXPRESSION = "self.permissions->selectByType(Create)->size() <= 1";
+
+	/**
+	 * Validates the noMoreOneCreate constraint of '<em>Rol Conf</em>'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public boolean validateRolConf_noMoreOneCreate(RolConf rolConf, DiagnosticChain diagnostics, Map<Object, Object> context) {
+		return
+			validate
+				(TraceabilityMMPackage.Literals.ROL_CONF,
+				 rolConf,
+				 diagnostics,
+				 context,
+				 "http://www.eclipse.org/emf/2002/Ecore/OCL/Pivot",
+				 "noMoreOneCreate",
+				 ROL_CONF__NO_MORE_ONE_CREATE__EEXPRESSION,
 				 Diagnostic.ERROR,
 				 DIAGNOSTIC_SOURCE,
 				 0);
