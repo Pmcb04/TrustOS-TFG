@@ -1,0 +1,138 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<TraceabilityMM:System xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:TraceabilityMM="http://www.example.org/TraceabilityMM">
+  <nodes xsi:type="TraceabilityMM:Transaction" name="MontarEsqueleto" transactionconf="//@assets.11" next_product="//@nodes.8" previous_product="//@nodes.7"/>
+  <nodes xsi:type="TraceabilityMM:Product" name="Rueda4" productconf="//@assets.4" next_transaction="//@nodes.13"/>
+  <nodes xsi:type="TraceabilityMM:Product" name="Volante" productconf="//@assets.6" next_transaction="//@nodes.15"/>
+  <nodes xsi:type="TraceabilityMM:Product" name="Plastico" productconf="//@assets.0" next_transaction="//@nodes.9"/>
+  <nodes xsi:type="TraceabilityMM:Product" name="Rueda1" productconf="//@assets.4" next_transaction="//@nodes.13"/>
+  <nodes xsi:type="TraceabilityMM:Product" name="Rueda2" productconf="//@assets.4" next_transaction="//@nodes.13"/>
+  <nodes xsi:type="TraceabilityMM:Product" name="Rueda3" productconf="//@assets.4" next_transaction="//@nodes.13"/>
+  <nodes xsi:type="TraceabilityMM:Product" name="Metal" productconf="//@assets.2" next_transaction="//@nodes.0"/>
+  <nodes xsi:type="TraceabilityMM:Product" name="Esqueleto" productconf="//@assets.3" previous_transaction="//@nodes.0" next_transaction="//@nodes.11"/>
+  <nodes xsi:type="TraceabilityMM:Transaction" name="MontarCarroceria" transactionconf="//@assets.12" next_product="//@nodes.10" previous_product="//@nodes.3"/>
+  <nodes xsi:type="TraceabilityMM:Product" name="Carroceria" productconf="//@assets.1" previous_transaction="//@nodes.9" next_transaction="//@nodes.11"/>
+  <nodes xsi:type="TraceabilityMM:Transaction" name="MontarBase" transactionconf="//@assets.13" next_product="//@nodes.12" previous_product="//@nodes.8 //@nodes.10"/>
+  <nodes xsi:type="TraceabilityMM:Product" name="Base" productconf="//@assets.15" previous_transaction="//@nodes.11" next_transaction="//@nodes.13"/>
+  <nodes xsi:type="TraceabilityMM:Transaction" name="MontarRuedas" transactionconf="//@assets.8" next_product="//@nodes.14" previous_product="//@nodes.12 //@nodes.4 //@nodes.5 //@nodes.6 //@nodes.1"/>
+  <nodes xsi:type="TraceabilityMM:Product" name="CocheFase1" productconf="//@assets.7" previous_transaction="//@nodes.13" next_transaction="//@nodes.15"/>
+  <nodes xsi:type="TraceabilityMM:Transaction" name="MontarVolante" transactionconf="//@assets.10" next_product="//@nodes.19" previous_product="//@nodes.2 //@nodes.14"/>
+  <nodes xsi:type="TraceabilityMM:Product" name="Motor" productconf="//@assets.5" next_transaction="//@nodes.17"/>
+  <nodes xsi:type="TraceabilityMM:Transaction" name="MontarMotor" transactionconf="//@assets.9" next_product="//@nodes.20" previous_product="//@nodes.16 //@nodes.19"/>
+  <nodes xsi:type="TraceabilityMM:Transaction" name="Pintar" transactionconf="//@assets.16" next_product="//@nodes.23" previous_product="//@nodes.20"/>
+  <nodes xsi:type="TraceabilityMM:Product" name="CocheFase2" productconf="//@assets.19" previous_transaction="//@nodes.15" next_transaction="//@nodes.17"/>
+  <nodes xsi:type="TraceabilityMM:Product" name="CocheFase3" productconf="//@assets.20" previous_transaction="//@nodes.17" next_transaction="//@nodes.18 //@nodes.22"/>
+  <nodes xsi:type="TraceabilityMM:Product" name="Coche" productconf="//@assets.21" previous_transaction="//@nodes.22"/>
+  <nodes xsi:type="TraceabilityMM:Transaction" name="Vender" transactionconf="//@assets.23" next_product="//@nodes.21" previous_product="//@nodes.20 //@nodes.23"/>
+  <nodes xsi:type="TraceabilityMM:Product" name="CocheFase4" productconf="//@assets.24" previous_transaction="//@nodes.18" next_transaction="//@nodes.22"/>
+  <assets xsi:type="TraceabilityMM:ProductConf" type="Plastico" product="//@nodes.3">
+    <properties xsi:type="TraceabilityMM:Attribute" id="fechaCompra" allow="//@permissions.0"/>
+  </assets>
+  <assets xsi:type="TraceabilityMM:ProductConf" type="Carroceria" product="//@nodes.10">
+    <properties xsi:type="TraceabilityMM:Attribute" id="peso" type="Decimal"/>
+    <properties xsi:type="TraceabilityMM:Attribute" id="altura" type="Decimal"/>
+  </assets>
+  <assets xsi:type="TraceabilityMM:ProductConf" type="Metal" product="//@nodes.7">
+    <properties xsi:type="TraceabilityMM:Attribute" id="fechaCompra" allow="//@permissions.0"/>
+  </assets>
+  <assets xsi:type="TraceabilityMM:ProductConf" type="Esqueleto" product="//@nodes.8">
+    <properties xsi:type="TraceabilityMM:Attribute" id="peso" type="Decimal"/>
+    <properties xsi:type="TraceabilityMM:Attribute" id="altura" type="Decimal"/>
+  </assets>
+  <assets xsi:type="TraceabilityMM:ProductConf" type="Rueda" product="//@nodes.4 //@nodes.6 //@nodes.1 //@nodes.5">
+    <properties xsi:type="TraceabilityMM:Attribute" id="altura" title="Altura" allow="//@permissions.0" type="Number"/>
+    <properties xsi:type="TraceabilityMM:Attribute" id="indCarg" title="Indice de carga" allow="//@permissions.0" type="Number"/>
+    <properties xsi:type="TraceabilityMM:Attribute" id="vMax" title="Velocidad máxima" allow="//@permissions.0">
+      <values name="V"/>
+      <values name="H"/>
+      <values name="R"/>
+    </properties>
+    <properties xsi:type="TraceabilityMM:Attribute" id="diametro" allow="//@permissions.0" type="Decimal"/>
+    <properties xsi:type="TraceabilityMM:Attribute" id="anchura" allow="//@permissions.0" type="Decimal"/>
+  </assets>
+  <assets xsi:type="TraceabilityMM:ProductConf" type="Motor" product="//@nodes.16">
+    <properties xsi:type="TraceabilityMM:Attribute" id="potencia" type="Number"/>
+  </assets>
+  <assets xsi:type="TraceabilityMM:ProductConf" type="Volante" product="//@nodes.2">
+    <properties xsi:type="TraceabilityMM:Attribute" id="diametro" allow="//@permissions.0" type="Decimal"/>
+  </assets>
+  <assets xsi:type="TraceabilityMM:ProductConf" type="CocheFase1" product="//@nodes.14">
+    <properties xsi:type="TraceabilityMM:Attribute" id="altura" type="Decimal"/>
+    <properties xsi:type="TraceabilityMM:Attribute" id="peso" type="Decimal"/>
+  </assets>
+  <assets xsi:type="TraceabilityMM:TransactionConf" type="MontarRuedas" transaction="//@nodes.13">
+    <properties xsi:type="TraceabilityMM:Attribute" id="fechaMontaje" title="Fecha de montaje" type="Date"/>
+  </assets>
+  <assets xsi:type="TraceabilityMM:TransactionConf" type="MontarMotor" transaction="//@nodes.17">
+    <properties xsi:type="TraceabilityMM:Attribute" id="fechaMontaje" title="Fecha de montaje" type="Date"/>
+  </assets>
+  <assets xsi:type="TraceabilityMM:TransactionConf" type="MontarVolante" transaction="//@nodes.15">
+    <properties xsi:type="TraceabilityMM:Attribute" id="fechaMontaje" title="Fecha de montaje" type="Date"/>
+  </assets>
+  <assets xsi:type="TraceabilityMM:TransactionConf" type="MontarEsqueleto" transaction="//@nodes.0">
+    <properties xsi:type="TraceabilityMM:Attribute" id="fechaMontaje" title="Fecha de montaje" type="Date"/>
+  </assets>
+  <assets xsi:type="TraceabilityMM:TransactionConf" type="MontarCarroceria" transaction="//@nodes.9">
+    <properties xsi:type="TraceabilityMM:Attribute" id="fechaMontaje"/>
+  </assets>
+  <assets xsi:type="TraceabilityMM:TransactionConf" type="MontarBase" transaction="//@nodes.11">
+    <properties xsi:type="TraceabilityMM:Attribute" id="fechaMontaje" title="Fecha de montaje" type="Date"/>
+  </assets>
+  <assets xsi:type="TraceabilityMM:RolConf" type="Maquina" permissions="//@permissions.2 //@permissions.3">
+    <properties xsi:type="TraceabilityMM:Attribute" id="company" title=""/>
+  </assets>
+  <assets xsi:type="TraceabilityMM:ProductConf" type="Base" product="//@nodes.12">
+    <properties xsi:type="TraceabilityMM:Object" id="dimensiones">
+      <properties xsi:type="TraceabilityMM:Attribute" id="altura"/>
+      <properties xsi:type="TraceabilityMM:Attribute" id="anchura"/>
+    </properties>
+    <properties xsi:type="TraceabilityMM:Attribute" id="peso" type="Decimal"/>
+    <properties xsi:type="TraceabilityMM:Attribute" id="identificador"/>
+  </assets>
+  <assets xsi:type="TraceabilityMM:TransactionConf" type="Pintar" repeat="-1" transaction="//@nodes.18">
+    <properties xsi:type="TraceabilityMM:Attribute" id="color">
+      <values name="Blanco"/>
+      <values name="Negro"/>
+      <values name="Azul"/>
+      <values name="Verde"/>
+    </properties>
+  </assets>
+  <assets xsi:type="TraceabilityMM:RolConf" type="Mecanico" permissions="//@permissions.1">
+    <properties xsi:type="TraceabilityMM:Attribute" id="taller"/>
+  </assets>
+  <assets xsi:type="TraceabilityMM:RolConf" type="Pintor">
+    <properties xsi:type="TraceabilityMM:Attribute" id="estudio"/>
+  </assets>
+  <assets xsi:type="TraceabilityMM:ProductConf" type="CocheFase2" product="//@nodes.19">
+    <properties xsi:type="TraceabilityMM:Attribute" id="altura" type="Decimal"/>
+    <properties xsi:type="TraceabilityMM:Attribute" id="peso" type="Decimal"/>
+  </assets>
+  <assets xsi:type="TraceabilityMM:ProductConf" type="CocheFase3" product="//@nodes.20">
+    <properties xsi:type="TraceabilityMM:Attribute" id="altura" type="Decimal"/>
+    <properties xsi:type="TraceabilityMM:Attribute" id="peso" type="Decimal"/>
+  </assets>
+  <assets xsi:type="TraceabilityMM:ProductConf" type="Coche" product="//@nodes.21">
+    <properties xsi:type="TraceabilityMM:Attribute" id="altura" type="Decimal"/>
+    <properties xsi:type="TraceabilityMM:Attribute" id="peso" type="Decimal"/>
+  </assets>
+  <assets xsi:type="TraceabilityMM:RolConf" type="Operario">
+    <properties xsi:type="TraceabilityMM:Attribute" id="zona">
+      <values name="A"/>
+      <values name="B"/>
+      <values name="C"/>
+    </properties>
+  </assets>
+  <assets xsi:type="TraceabilityMM:TransactionConf" type="Vender" final="true" transaction="//@nodes.22">
+    <properties xsi:type="TraceabilityMM:Attribute" id="fechaVenta"/>
+  </assets>
+  <assets xsi:type="TraceabilityMM:ProductConf" type="CocheFase4" product="//@nodes.23">
+    <properties xsi:type="TraceabilityMM:Attribute" id="altura" type="Decimal"/>
+    <properties xsi:type="TraceabilityMM:Attribute" id="peso" type="Decimal"/>
+  </assets>
+  <assets xsi:type="TraceabilityMM:RolConf" type="Vendedor" permissions="//@permissions.0">
+    <properties xsi:type="TraceabilityMM:Attribute" id="company"/>
+  </assets>
+  <permissions xsi:type="TraceabilityMM:Create" refers="//@assets.4/@properties.0 //@assets.4/@properties.1 //@assets.4/@properties.3 //@assets.4/@properties.2 //@assets.4/@properties.4 //@assets.6/@properties.0 //@assets.0/@properties.0 //@assets.2/@properties.0" name="vendedor"/>
+  <permissions xsi:type="TraceabilityMM:Create" name="mecanico"/>
+  <permissions name="maquina"/>
+  <permissions xsi:type="TraceabilityMM:Create" name="maquina"/>
+</TraceabilityMM:System>

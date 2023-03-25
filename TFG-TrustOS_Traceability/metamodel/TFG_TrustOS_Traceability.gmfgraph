@@ -1,0 +1,241 @@
+<?xml version="1.0" encoding="ASCII"?>
+<gmfgraph:Canvas xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:gmfgraph="http://www.eclipse.org/gmf/2006/GraphicalDefinition" name="TraceabilityMM">
+  <figures name="Default">
+    <figures xsi:type="gmfgraph:PolylineDecoration" name="TransactionTransactionconfFigureTargetDecoration"/>
+    <figures xsi:type="gmfgraph:PolygonDecoration" name="FilledClosedArrow">
+      <template/>
+      <template x="-2" y="2"/>
+      <template x="-2" y="-2"/>
+      <template/>
+    </figures>
+    <figures xsi:type="gmfgraph:PolylineDecoration" name="ProductProductconfFigureTargetDecoration"/>
+    <figures xsi:type="gmfgraph:PolygonDecoration" name="FilledClosedArrow">
+      <template/>
+      <template x="-2" y="2"/>
+      <template x="-2" y="-2"/>
+      <template/>
+    </figures>
+    <figures xsi:type="gmfgraph:PolylineDecoration" name="RolConfPermissionsFigureTargetDecoration"/>
+    <figures xsi:type="gmfgraph:PolylineDecoration" name="PermissionRefersFigureTargetDecoration"/>
+    <descriptors name="TransactionFigure">
+      <actualFigure xsi:type="gmfgraph:SVGFigure" name="TransactionFigure" documentURI="platform:/plugin/TFG-TrustOS_Traceability/icons/SVG/transaction.svg">
+        <border xsi:type="gmfgraph:MarginBorder">
+          <insets top="5" left="5" bottom="5" right="5"/>
+        </border>
+        <children xsi:type="gmfgraph:Label" name="TransactionLabelFigure" text="Transaction"/>
+      </actualFigure>
+      <accessors accessor="getFigureTransactionLabelFigure" figure="//@figures.0/@descriptors.0/@actualFigure/@children.0"/>
+    </descriptors>
+    <descriptors name="ProductFigure">
+      <actualFigure xsi:type="gmfgraph:SVGFigure" name="ProductFigure" documentURI="platform:/plugin/TFG-TrustOS_Traceability/icons/SVG/product.svg">
+        <border xsi:type="gmfgraph:MarginBorder">
+          <insets top="5" left="5" bottom="5" right="5"/>
+        </border>
+        <children xsi:type="gmfgraph:Label" name="ProductLabelFigure" text="Product"/>
+      </actualFigure>
+      <accessors accessor="getFigureProductLabelFigure" figure="//@figures.0/@descriptors.1/@actualFigure/@children.0"/>
+    </descriptors>
+    <descriptors name="TransactionConfFigure">
+      <actualFigure xsi:type="gmfgraph:RoundedRectangle" name="TransactionConfFigure" lineWidth="0">
+        <foregroundColor xsi:type="gmfgraph:RGBColor" green="38" blue="175"/>
+        <border xsi:type="gmfgraph:MarginBorder">
+          <insets top="5" left="5" bottom="5" right="5"/>
+        </border>
+        <children xsi:type="gmfgraph:Label" name="TransactionConfLabelFigure" text="TransactionConf">
+          <maximumSize dx="10000" dy="50"/>
+        </children>
+        <children xsi:type="gmfgraph:Rectangle" name="TransactionConfPropertiesCompartmentFigure" outline="false"/>
+      </actualFigure>
+      <accessors accessor="getFigureTransactionConfLabelFigure" figure="//@figures.0/@descriptors.2/@actualFigure/@children.0"/>
+      <accessors accessor="getTransactionConfPropertiesCompartmentFigure" figure="//@figures.0/@descriptors.2/@actualFigure/@children.1"/>
+    </descriptors>
+    <descriptors name="ProductConfFigure">
+      <actualFigure xsi:type="gmfgraph:RoundedRectangle" name="ProductConfFigure" lineWidth="0">
+        <foregroundColor xsi:type="gmfgraph:RGBColor" green="174" blue="102"/>
+        <border xsi:type="gmfgraph:MarginBorder">
+          <insets top="5" left="5" bottom="5" right="5"/>
+        </border>
+        <children xsi:type="gmfgraph:Label" name="ProductConfLabelFigure" text="ProductConf">
+          <maximumSize dx="10000" dy="50"/>
+        </children>
+        <children xsi:type="gmfgraph:Rectangle" name="ProductConfPropertiesCompartmentFigure" outline="false"/>
+      </actualFigure>
+      <accessors accessor="getFigureProductConfLabelFigure" figure="//@figures.0/@descriptors.3/@actualFigure/@children.0"/>
+      <accessors accessor="getProductConfPropertiesCompartmentFigure" figure="//@figures.0/@descriptors.3/@actualFigure/@children.1"/>
+    </descriptors>
+    <descriptors name="RolConfFigure">
+      <actualFigure xsi:type="gmfgraph:RoundedRectangle" name="RolConfFigure" lineWidth="0">
+        <foregroundColor xsi:type="gmfgraph:RGBColor" red="220" green="31" blue="31"/>
+        <border xsi:type="gmfgraph:MarginBorder">
+          <insets top="5" left="5" bottom="5" right="5"/>
+        </border>
+        <children xsi:type="gmfgraph:Label" name="RolConfLabelFigure" text="RolConf">
+          <maximumSize dx="10000" dy="50"/>
+        </children>
+        <children xsi:type="gmfgraph:Rectangle" name="RolConfPropertiesCompartmentFigure" outline="false"/>
+      </actualFigure>
+      <accessors accessor="getFigureRolConfLabelFigure" figure="//@figures.0/@descriptors.4/@actualFigure/@children.0"/>
+      <accessors accessor="getRolConfPropertiesCompartmentFigure" figure="//@figures.0/@descriptors.4/@actualFigure/@children.1"/>
+    </descriptors>
+    <descriptors name="PermissionFigure">
+      <actualFigure xsi:type="gmfgraph:SVGFigure" name="PermissionFigure" documentURI="platform:/plugin/TFG-TrustOS_Traceability/icons/SVG/permission.svg">
+        <border xsi:type="gmfgraph:MarginBorder">
+          <insets top="5" left="5" bottom="5" right="5"/>
+        </border>
+        <children xsi:type="gmfgraph:Label" name="PermissionLabelFigure" text="Permission"/>
+      </actualFigure>
+      <accessors accessor="getFigurePermissionLabelFigure" figure="//@figures.0/@descriptors.5/@actualFigure/@children.0"/>
+    </descriptors>
+    <descriptors name="EditFigure">
+      <actualFigure xsi:type="gmfgraph:SVGFigure" name="EditFigure" documentURI="platform:/plugin/TFG-TrustOS_Traceability/icons/SVG/edit.svg">
+        <border xsi:type="gmfgraph:MarginBorder">
+          <insets top="5" left="5" bottom="5" right="5"/>
+        </border>
+        <children xsi:type="gmfgraph:Label" name="EditLabelFigure" text="Edit"/>
+      </actualFigure>
+      <accessors accessor="getFigureEditLabelFigure" figure="//@figures.0/@descriptors.6/@actualFigure/@children.0"/>
+    </descriptors>
+    <descriptors name="CreateFigure">
+      <actualFigure xsi:type="gmfgraph:SVGFigure" name="CreateFigure" documentURI="platform:/plugin/TFG-TrustOS_Traceability/icons/SVG/create.svg">
+        <border xsi:type="gmfgraph:MarginBorder">
+          <insets top="5" left="5" bottom="5" right="5"/>
+        </border>
+        <children xsi:type="gmfgraph:Label" name="CreateLabelFigure" text="Create"/>
+      </actualFigure>
+      <accessors accessor="getFigureCreateLabelFigure" figure="//@figures.0/@descriptors.7/@actualFigure/@children.0"/>
+    </descriptors>
+    <descriptors name="ViewFigure">
+      <actualFigure xsi:type="gmfgraph:SVGFigure" name="ViewFigure" documentURI="platform:/plugin/TFG-TrustOS_Traceability/icons/SVG/view.svg">
+        <border xsi:type="gmfgraph:MarginBorder">
+          <insets top="5" left="5" bottom="5" right="5"/>
+        </border>
+        <children xsi:type="gmfgraph:Label" name="ViewLabelFigure" text="View"/>
+      </actualFigure>
+      <accessors accessor="getFigureViewLabelFigure" figure="//@figures.0/@descriptors.8/@actualFigure/@children.0"/>
+    </descriptors>
+    <descriptors name="AttributeFigure">
+      <actualFigure xsi:type="gmfgraph:SVGFigure" name="AttributeFigure" documentURI="platform:/plugin/TFG-TrustOS_Traceability/icons/SVG/attribute.svg">
+        <border xsi:type="gmfgraph:MarginBorder">
+          <insets top="5" left="5" bottom="5" right="5"/>
+        </border>
+        <children xsi:type="gmfgraph:Label" name="AttributeLabelFigure" text="Attribute">
+          <maximumSize dx="10000" dy="50"/>
+        </children>
+        <children xsi:type="gmfgraph:Rectangle" name="AttributeValuesCompartmentFigure" outline="false"/>
+      </actualFigure>
+      <accessors accessor="getFigureAttributeLabelFigure" figure="//@figures.0/@descriptors.9/@actualFigure/@children.0"/>
+      <accessors accessor="getAttributeValuesCompartmentFigure" figure="//@figures.0/@descriptors.9/@actualFigure/@children.1"/>
+    </descriptors>
+    <descriptors name="ObjectFigure">
+      <actualFigure xsi:type="gmfgraph:SVGFigure" name="ObjectFigure" documentURI="platform:/plugin/TFG-TrustOS_Traceability/icons/SVG/objet.svg">
+        <border xsi:type="gmfgraph:MarginBorder">
+          <insets top="5" left="5" bottom="5" right="5"/>
+        </border>
+        <children xsi:type="gmfgraph:Label" name="ObjectLabelFigure" text="Object">
+          <maximumSize dx="10000" dy="50"/>
+        </children>
+        <children xsi:type="gmfgraph:Rectangle" name="ObjectPropertiesCompartmentFigure" outline="false"/>
+      </actualFigure>
+      <accessors accessor="getFigureObjectLabelFigure" figure="//@figures.0/@descriptors.10/@actualFigure/@children.0"/>
+      <accessors accessor="getObjectPropertiesCompartmentFigure" figure="//@figures.0/@descriptors.10/@actualFigure/@children.1"/>
+    </descriptors>
+    <descriptors name="ValueFigure">
+      <actualFigure xsi:type="gmfgraph:SVGFigure" name="ValueFigure" documentURI="platform:/plugin/TFG-TrustOS_Traceability/icons/SVG/value.svg">
+        <border xsi:type="gmfgraph:MarginBorder">
+          <insets top="5" left="5" bottom="5" right="5"/>
+        </border>
+        <children xsi:type="gmfgraph:Label" name="ValueLabelFigure" text="Value"/>
+      </actualFigure>
+      <accessors accessor="getFigureValueLabelFigure" figure="//@figures.0/@descriptors.11/@actualFigure/@children.0"/>
+    </descriptors>
+    <descriptors name="TransactionTransactionconfFigure">
+      <actualFigure xsi:type="gmfgraph:PolylineConnection" name="TransactionTransactionconfFigure" lineKind="LINE_DASH" targetDecoration="//@figures.0/@figures.0">
+        <foregroundColor xsi:type="gmfgraph:RGBColor" green="38" blue="175"/>
+      </actualFigure>
+    </descriptors>
+    <descriptors name="TransactionTransactionconfExternalLabelFigure">
+      <actualFigure xsi:type="gmfgraph:Label" name="TransactionTransactionconfExternalLabel"/>
+    </descriptors>
+    <descriptors name="TransactionNext_productFigure">
+      <actualFigure xsi:type="gmfgraph:PolylineConnection" name="TransactionNext_productFigure" targetDecoration="//@figures.0/@figures.1">
+        <foregroundColor xsi:type="gmfgraph:RGBColor"/>
+      </actualFigure>
+    </descriptors>
+    <descriptors name="TransactionNext_productExternalLabelFigure">
+      <actualFigure xsi:type="gmfgraph:Label" name="TransactionNext_productExternalLabel"/>
+    </descriptors>
+    <descriptors name="ProductProductconfFigure">
+      <actualFigure xsi:type="gmfgraph:PolylineConnection" name="ProductProductconfFigure" lineKind="LINE_DASH" targetDecoration="//@figures.0/@figures.2">
+        <foregroundColor xsi:type="gmfgraph:RGBColor" green="174" blue="102"/>
+      </actualFigure>
+    </descriptors>
+    <descriptors name="ProductProductconfExternalLabelFigure">
+      <actualFigure xsi:type="gmfgraph:Label" name="ProductProductconfExternalLabel"/>
+    </descriptors>
+    <descriptors name="ProductNext_transactionFigure">
+      <actualFigure xsi:type="gmfgraph:PolylineConnection" name="ProductNext_transactionFigure" targetDecoration="//@figures.0/@figures.3">
+        <foregroundColor xsi:type="gmfgraph:RGBColor"/>
+      </actualFigure>
+    </descriptors>
+    <descriptors name="ProductNext_transactionExternalLabelFigure">
+      <actualFigure xsi:type="gmfgraph:Label" name="ProductNext_transactionExternalLabel"/>
+    </descriptors>
+    <descriptors name="RolConfPermissionsFigure">
+      <actualFigure xsi:type="gmfgraph:PolylineConnection" name="RolConfPermissionsFigure" lineKind="LINE_DASH" targetDecoration="//@figures.0/@figures.4">
+        <foregroundColor xsi:type="gmfgraph:RGBColor" red="220" green="31" blue="31"/>
+      </actualFigure>
+    </descriptors>
+    <descriptors name="RolConfPermissionsExternalLabelFigure">
+      <actualFigure xsi:type="gmfgraph:Label" name="RolConfPermissionsExternalLabel"/>
+    </descriptors>
+    <descriptors name="PermissionRefersFigure">
+      <actualFigure xsi:type="gmfgraph:PolylineConnection" name="PermissionRefersFigure" lineKind="LINE_DASH" targetDecoration="//@figures.0/@figures.5">
+        <foregroundColor xsi:type="gmfgraph:RGBColor" red="192" green="192" blue="192"/>
+      </actualFigure>
+    </descriptors>
+    <descriptors name="PermissionRefersExternalLabelFigure">
+      <actualFigure xsi:type="gmfgraph:Label" name="PermissionRefersExternalLabel"/>
+    </descriptors>
+  </figures>
+  <nodes name="Transaction" figure="TransactionFigure"/>
+  <nodes name="Product" figure="ProductFigure"/>
+  <nodes name="TransactionConf" figure="TransactionConfFigure"/>
+  <nodes name="ProductConf" figure="ProductConfFigure"/>
+  <nodes name="RolConf" figure="RolConfFigure"/>
+  <nodes name="Permission" figure="PermissionFigure"/>
+  <nodes name="Edit" figure="EditFigure"/>
+  <nodes name="Create" figure="CreateFigure"/>
+  <nodes name="View" figure="ViewFigure"/>
+  <nodes name="Attribute" figure="AttributeFigure"/>
+  <nodes name="Object" figure="ObjectFigure"/>
+  <nodes name="Value" figure="ValueFigure"/>
+  <connections name="TransactionTransactionconf" figure="TransactionTransactionconfFigure"/>
+  <connections name="TransactionNext_product" figure="TransactionNext_productFigure"/>
+  <connections name="ProductProductconf" figure="ProductProductconfFigure"/>
+  <connections name="ProductNext_transaction" figure="ProductNext_transactionFigure"/>
+  <connections name="RolConfPermissions" figure="RolConfPermissionsFigure"/>
+  <connections name="PermissionRefers" figure="PermissionRefersFigure"/>
+  <compartments name="TransactionConfPropertiesCompartment" figure="TransactionConfFigure" collapsible="true" accessor="//@figures.0/@descriptors.2/@accessors.1"/>
+  <compartments name="ProductConfPropertiesCompartment" figure="ProductConfFigure" collapsible="true" accessor="//@figures.0/@descriptors.3/@accessors.1"/>
+  <compartments name="RolConfPropertiesCompartment" figure="RolConfFigure" collapsible="true" accessor="//@figures.0/@descriptors.4/@accessors.1"/>
+  <compartments name="AttributeValuesCompartment" figure="AttributeFigure" collapsible="true" accessor="//@figures.0/@descriptors.9/@accessors.1"/>
+  <compartments name="ObjectPropertiesCompartment" figure="ObjectFigure" collapsible="true" accessor="//@figures.0/@descriptors.10/@accessors.1"/>
+  <labels name="TransactionLabel" figure="TransactionFigure" elementIcon="false" accessor="//@figures.0/@descriptors.0/@accessors.0"/>
+  <labels name="ProductLabel" figure="ProductFigure" elementIcon="false" accessor="//@figures.0/@descriptors.1/@accessors.0"/>
+  <labels name="TransactionConfLabel" figure="TransactionConfFigure" accessor="//@figures.0/@descriptors.2/@accessors.0"/>
+  <labels name="ProductConfLabel" figure="ProductConfFigure" accessor="//@figures.0/@descriptors.3/@accessors.0"/>
+  <labels name="RolConfLabel" figure="RolConfFigure" accessor="//@figures.0/@descriptors.4/@accessors.0"/>
+  <labels name="PermissionLabel" figure="PermissionFigure" elementIcon="false" accessor="//@figures.0/@descriptors.5/@accessors.0"/>
+  <labels name="EditLabel" figure="EditFigure" elementIcon="false" accessor="//@figures.0/@descriptors.6/@accessors.0"/>
+  <labels name="CreateLabel" figure="CreateFigure" elementIcon="false" accessor="//@figures.0/@descriptors.7/@accessors.0"/>
+  <labels name="ViewLabel" figure="ViewFigure" elementIcon="false" accessor="//@figures.0/@descriptors.8/@accessors.0"/>
+  <labels name="AttributeLabel" figure="AttributeFigure" elementIcon="false" accessor="//@figures.0/@descriptors.9/@accessors.0"/>
+  <labels name="ObjectLabel" figure="ObjectFigure" elementIcon="false" accessor="//@figures.0/@descriptors.10/@accessors.0"/>
+  <labels name="ValueLabel" figure="ValueFigure" elementIcon="false" accessor="//@figures.0/@descriptors.11/@accessors.0"/>
+  <labels name="TransactionTransactionconfExternalLabel" figure="TransactionTransactionconfExternalLabelFigure" elementIcon="false"/>
+  <labels name="TransactionNext_productExternalLabel" figure="TransactionNext_productExternalLabelFigure" elementIcon="false"/>
+  <labels name="ProductProductconfExternalLabel" figure="ProductProductconfExternalLabelFigure" elementIcon="false"/>
+  <labels name="ProductNext_transactionExternalLabel" figure="ProductNext_transactionExternalLabelFigure" elementIcon="false"/>
+  <labels name="RolConfPermissionsExternalLabel" figure="RolConfPermissionsExternalLabelFigure" elementIcon="false"/>
+  <labels name="PermissionRefersExternalLabel" figure="PermissionRefersExternalLabelFigure" elementIcon="false"/>
+</gmfgraph:Canvas>

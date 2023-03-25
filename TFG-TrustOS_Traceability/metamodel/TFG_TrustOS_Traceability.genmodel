@@ -1,0 +1,73 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<genmodel:GenModel xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:ecore="http://www.eclipse.org/emf/2002/Ecore"
+    xmlns:genmodel="http://www.eclipse.org/emf/2002/GenModel" copyrightText="" modelDirectory="/TFG-TrustOS_Traceability/src"
+    modelPluginID="TFG-TrustOS_Traceability" modelName="TraceabilityMM" importerID="org.eclipse.emf.importer.ecore"
+    complianceLevel="6.0" copyrightFields="false">
+  <foreignModel>TFG_TrustOS_Traceability.emf</foreignModel>
+  <genPackages prefix="TraceabilityMM" disposableProviderFactory="true" ecorePackage="TFG_TrustOS_Traceability.ecore#/">
+    <genEnums typeSafeEnumCompatible="false" ecoreEnum="TFG_TrustOS_Traceability.ecore#//EType">
+      <genEnumLiterals ecoreEnumLiteral="TFG_TrustOS_Traceability.ecore#//EType/String"/>
+      <genEnumLiterals ecoreEnumLiteral="TFG_TrustOS_Traceability.ecore#//EType/Number"/>
+      <genEnumLiterals ecoreEnumLiteral="TFG_TrustOS_Traceability.ecore#//EType/Decimal"/>
+      <genEnumLiterals ecoreEnumLiteral="TFG_TrustOS_Traceability.ecore#//EType/Boolean"/>
+      <genEnumLiterals ecoreEnumLiteral="TFG_TrustOS_Traceability.ecore#//EType/Date"/>
+      <genEnumLiterals ecoreEnumLiteral="TFG_TrustOS_Traceability.ecore#//EType/Email"/>
+    </genEnums>
+    <genClasses image="false" ecoreClass="TFG_TrustOS_Traceability.ecore#//Node">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute TFG_TrustOS_Traceability.ecore#//Node/name"/>
+    </genClasses>
+    <genClasses ecoreClass="TFG_TrustOS_Traceability.ecore#//Transaction">
+      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference TFG_TrustOS_Traceability.ecore#//Transaction/transactionconf"/>
+      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference TFG_TrustOS_Traceability.ecore#//Transaction/next_product"/>
+      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference TFG_TrustOS_Traceability.ecore#//Transaction/previous_product"/>
+    </genClasses>
+    <genClasses ecoreClass="TFG_TrustOS_Traceability.ecore#//Product">
+      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference TFG_TrustOS_Traceability.ecore#//Product/productconf"/>
+      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference TFG_TrustOS_Traceability.ecore#//Product/previous_transaction"/>
+      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference TFG_TrustOS_Traceability.ecore#//Product/next_transaction"/>
+    </genClasses>
+    <genClasses ecoreClass="TFG_TrustOS_Traceability.ecore#//TransactionConf">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute TFG_TrustOS_Traceability.ecore#//TransactionConf/repeat"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute TFG_TrustOS_Traceability.ecore#//TransactionConf/final"/>
+      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference TFG_TrustOS_Traceability.ecore#//TransactionConf/transaction"/>
+    </genClasses>
+    <genClasses ecoreClass="TFG_TrustOS_Traceability.ecore#//ProductConf">
+      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference TFG_TrustOS_Traceability.ecore#//ProductConf/product"/>
+    </genClasses>
+    <genClasses ecoreClass="TFG_TrustOS_Traceability.ecore#//RolConf">
+      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference TFG_TrustOS_Traceability.ecore#//RolConf/permissions"/>
+    </genClasses>
+    <genClasses image="false" ecoreClass="TFG_TrustOS_Traceability.ecore#//Asset">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute TFG_TrustOS_Traceability.ecore#//Asset/type"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference TFG_TrustOS_Traceability.ecore#//Asset/properties"/>
+    </genClasses>
+    <genClasses ecoreClass="TFG_TrustOS_Traceability.ecore#//Permission">
+      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference TFG_TrustOS_Traceability.ecore#//Permission/refers"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute TFG_TrustOS_Traceability.ecore#//Permission/name"/>
+    </genClasses>
+    <genClasses ecoreClass="TFG_TrustOS_Traceability.ecore#//Edit"/>
+    <genClasses ecoreClass="TFG_TrustOS_Traceability.ecore#//Create"/>
+    <genClasses ecoreClass="TFG_TrustOS_Traceability.ecore#//View"/>
+    <genClasses ecoreClass="TFG_TrustOS_Traceability.ecore#//System">
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference TFG_TrustOS_Traceability.ecore#//System/nodes"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference TFG_TrustOS_Traceability.ecore#//System/assets"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference TFG_TrustOS_Traceability.ecore#//System/permissions"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute TFG_TrustOS_Traceability.ecore#//System/name"/>
+    </genClasses>
+    <genClasses image="false" ecoreClass="TFG_TrustOS_Traceability.ecore#//Property">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute TFG_TrustOS_Traceability.ecore#//Property/id"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute TFG_TrustOS_Traceability.ecore#//Property/title"/>
+      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference TFG_TrustOS_Traceability.ecore#//Property/allow"/>
+    </genClasses>
+    <genClasses ecoreClass="TFG_TrustOS_Traceability.ecore#//Attribute">
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference TFG_TrustOS_Traceability.ecore#//Attribute/values"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute TFG_TrustOS_Traceability.ecore#//Attribute/type"/>
+    </genClasses>
+    <genClasses ecoreClass="TFG_TrustOS_Traceability.ecore#//Object">
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference TFG_TrustOS_Traceability.ecore#//Object/properties"/>
+    </genClasses>
+    <genClasses ecoreClass="TFG_TrustOS_Traceability.ecore#//Value">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute TFG_TrustOS_Traceability.ecore#//Value/name"/>
+    </genClasses>
+  </genPackages>
+</genmodel:GenModel>
