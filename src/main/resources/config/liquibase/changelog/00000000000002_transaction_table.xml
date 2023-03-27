@@ -1,0 +1,76 @@
+<?xml version="1.0" encoding="utf-8"?>
+<databaseChangeLog
+    xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+    xmlns:ext="http://www.liquibase.org/xml/ns/dbchangelog-ext"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-latest.xsd
+                        http://www.liquibase.org/xml/ns/dbchangelog-ext http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-ext.xsd">
+
+
+    <changeSet id="00000000000003" author="admin">
+        <createTable tableName="jhi_transaction">
+            <column name="id" type="bigint">
+                <constraints primaryKey="true" nullable="false"/>
+            </column>
+            <column name="name" type="varchar(255)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="repeat" type="bigint">
+                <constraints nullable="false"/>
+            </column>
+        </createTable>
+
+        <createTable tableName="jhi_product_transaction">
+            <column name="product_id" type="bigint">
+                <constraints nullable="false"/>
+            </column>
+            <column name="transaction_id" type="bigint">
+                <constraints nullable="false"/>
+            </column>
+            <column name="authority_name" type="varchar(255)">
+                <constraints nullable="false"/>
+            </column>
+        </createTable>
+
+        <addPrimaryKey columnNames="product_id, transaction_id, authority_name" tableName="jhi_product_transaction"/>
+
+
+        <addForeignKeyConstraint baseColumnNames="product_id"
+                                 baseTableName="jhi_product_transaction"
+                                 constraintName="fk_product_id"
+                                 referencedColumnNames="id"
+                                 referencedTableName="jhi_product"/>
+
+        <addForeignKeyConstraint baseColumnNames="transaction_id"
+                                 baseTableName="jhi_product_transaction"
+                                 constraintName="fk_transaction_id"
+                                 referencedColumnNames="id"
+                                 referencedTableName="jhi_transaction"/>
+
+        <addForeignKeyConstraint baseColumnNames="authority_name"
+                                 baseTableName="jhi_product_transaction"
+                                 constraintName="fk_authority_name"
+                                 referencedColumnNames="name"
+                                 referencedTableName="jhi_authority"/>
+
+        <loadData
+            file="config/liquibase/data/transaction.csv"
+            separator=";"
+            tableName="jhi_transaction"
+            usePreparedStatements="true">
+            <column name="id" type="numeric"/>
+        </loadData>
+
+        <loadData
+            file="config/liquibase/data/product_transaction.csv"
+            separator=";"
+            tableName="jhi_product_transaction"
+            usePreparedStatements="true">
+            <column name="product_id" type="numeric"/>
+            <column name="transaction_id" type="numeric"/>
+            <column name="authority_name" type="varchar(255)" />
+        </loadData>
+
+    </changeSet>
+
+</databaseChangeLog>
