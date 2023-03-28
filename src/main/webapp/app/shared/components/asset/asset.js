@@ -1,5 +1,5 @@
 import React from 'react'
-import { DataCard, Tag, IconFingerprintRegular, IconShieldRegular,IconLockClosedRegular, IconAdnRegular, Text4, Text1, Stack, ThemeContext, Inline } from '@telefonica/mistica'
+import { DataCard, Tag, IconFingerprintRegular, IconShieldRegular,IconLockClosedRegular, IconLockOpenRegular, IconAdnRegular, Text4, Text1, Stack, ThemeContext, Inline } from '@telefonica/mistica'
 import { useTranslation } from 'react-i18next'
 import { getImage } from '../../util/asset-image-name'
 
@@ -15,6 +15,7 @@ function Asset(props) {
         <Inline>
           <Tag Icon={IconFingerprintRegular} type="active">{type ? type : 'Asset'}</Tag>
           {final && <Tag Icon={IconLockClosedRegular} type="error">{t('CLOSED')}</Tag>}
+          {!final && <Tag Icon={IconLockOpenRegular} type="success">{t('OPEN')}</Tag>}
         </Inline>}
       title={
         <Text4 truncate color={colors.textPrimary}>

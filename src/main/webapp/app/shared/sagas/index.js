@@ -84,6 +84,8 @@ export default function* root() {
     takeLatest(AssetListTypes.MY_ASSETS_REQUEST, getAssets, api),
     takeLatest(AssetListTypes.MY_ASSETS_SET_SHOW_OWNER, getAssets, api),
     takeLatest(AssetListTypes.MY_ASSETS_SET_SHOW_AUTHORIZATHED, getAssets, api),
+    takeLatest(AssetListTypes.MY_ASSETS_SET_SHOW_STATE_CLOSED, getAssets, api),
+    takeLatest(AssetListTypes.MY_ASSETS_SET_SHOW_STATE_OPEN, getAssets, api),
     takeLatest(AssetListTypes.MY_ASSETS_CHANGE_OFFSET, loadAssetsAgain, api),
     takeLatest(AssetListTypes.MY_ASSETS_SUCCESS, loadNextAssets, api),
     takeLatest(AssetListTypes.MY_ASSETS_LOAD_NEXT_CONTENT, loadNextAssets, api),

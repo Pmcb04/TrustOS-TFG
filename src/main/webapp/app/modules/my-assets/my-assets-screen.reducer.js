@@ -15,6 +15,8 @@ const { Types, Creators } = createActions({
   myAssetsSetOrder: ['order'],
   myAssetsSetShowOwner: ['showOwner'],
   myAssetsSetShowAuthorizathed: ['showAuthorizathed'],
+  myAssetsSetShowStateClosed: ['showStateClosed'],
+  myAssetsSetShowStateOpen: ['showStateOpen'],
   myAssetsSetAssetsLoaded: ['assetsLoaded'],
   myAssetsSearch: ['search'],
   myAssetsCreate: [],
@@ -40,6 +42,8 @@ export const INITIAL_STATE = Immutable({
   order: 'natural',
   showOwner: true,
   showAuthorizathed: false,
+  showStateOpen: true,
+  showStateClosed: true,
   products: [],
   successCreate: false,
 })
@@ -117,6 +121,13 @@ export const setShowOwner = (state, { showOwner }) => state.merge({ showOwner })
 // set showAuthorizathed to state
 export const setShowAuthorizathed = (state, { showAuthorizathed }) => state.merge({ showAuthorizathed })
 
+// set showStateClosed to state
+export const setShowStateClosed = (state, { showStateClosed }) => state.merge({ showStateClosed })
+
+// set showStateOpen to state
+export const setShowStateOpen = (state, { showStateOpen }) => state.merge({ showStateOpen })
+
+
 // set assetCreated to state
 export const setSuccessCreate = (state) => state.merge({ successCreate: !state.successCreate })
 
@@ -142,5 +153,7 @@ export const reducer = createReducer(INITIAL_STATE, {
   [Types.MY_ASSETS_CREATE_SUCCESS]: setCreateSuccess,
   [Types.MY_ASSETS_SET_SHOW_OWNER]: setShowOwner,
   [Types.MY_ASSETS_SET_SHOW_AUTHORIZATHED]: setShowAuthorizathed,
+  [Types.MY_ASSETS_SET_SHOW_STATE_CLOSED]: setShowStateClosed,
+  [Types.MY_ASSETS_SET_SHOW_STATE_OPEN]: setShowStateOpen,
   [Types.MY_ASSETS_SET_SUCCESS_CREATED]: setSuccessCreate,
 })

@@ -90,5 +90,7 @@
   "NOT_TRANSACTIONS_ASSET" : "No se encontraron transacciones",
   "CLEAR" : "Limpiar",
   "DETAILS" : "Detalles",
-  "CLOSED" : "Cerrado"
+  "CLOSED" : "Cerrado",
+  "OPEN" : "Abierto",
+  "STATE" : "Estado"
 }
