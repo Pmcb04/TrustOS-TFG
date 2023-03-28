@@ -13,11 +13,14 @@ public class TransactionDTO {
     public TransactionDTO(Transaction transaction) {
         this.name = transaction.getName();
         this.repeat = transaction.getRepeat();
+        this.finalTransaction = transaction.getFinalTransaction();
     }
 
     private String name;
 
-    private Long repeat; 
+    private Long repeat;
+
+    private boolean finalTransaction; 
 
     public String getName() {
         return name;
@@ -35,12 +38,21 @@ public class TransactionDTO {
         this.repeat = repeat;
     }
 
+    public boolean getFinalTransaction() {
+        return this.finalTransaction;
+    }
+
+    public void setFinalTransaction(boolean finalTransaction) {
+        this.finalTransaction = finalTransaction;
+    }
+
     // prettier-ignore
     @Override
     public String toString() {
         return "TransactionDTO{" +
             "name='" + name + '\'' +
             "repeat='" + repeat + '\'' +
+            "finalTransaction='" + finalTransaction + '\'' +
             "}";
     }
 }

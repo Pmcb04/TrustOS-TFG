@@ -5,3 +5,5 @@ ROLE_ADMIN;3;true
 ROLE_USER;3;true
 ROLE_USER;4;true
 ROLE_USER;5;false
+ROLE_ADMIN;6;false
+ROLE_ADMIN;7;false

@@ -89,5 +89,6 @@
   "ERROR_NEXT_STEP": "Un elemento no está selecionado o está vacio",
   "NOT_TRANSACTIONS_ASSET" : "No se encontraron transacciones",
   "CLEAR" : "Limpiar",
-  "DETAILS" : "Detalles"
+  "DETAILS" : "Detalles",
+  "CLOSED" : "Cerrado"
 }

@@ -5,5 +5,7 @@ export const NAMES = {
   BOTELLA: 'Botella',
   PANTALON: 'Pantalon',
   ROMPER_PANTALON: 'Romper pantalon',
-  USAR: "Usar"
+  USAR: "Usar",
+  CARNE : "Carne",
+  SACRIFICARTERNERO: "Sacrificar Ternero"
 }

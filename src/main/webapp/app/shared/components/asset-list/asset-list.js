@@ -28,6 +28,7 @@ function AssetList(props) {
             name={itemData.item.assetId}
             type={itemData.item.data.type}
             hash={itemData.item.hash}
+            final={itemData.item.metadata.final != null ? itemData.item.metadata.final : true}
           />
         </View>
       </TouchableWithoutFeedback>

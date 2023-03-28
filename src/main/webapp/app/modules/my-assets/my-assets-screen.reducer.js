@@ -39,7 +39,7 @@ export const INITIAL_STATE = Immutable({
   search: '',
   order: 'natural',
   showOwner: true,
-  showAuthorizathed: true,
+  showAuthorizathed: false,
   products: [],
   successCreate: false,
 })

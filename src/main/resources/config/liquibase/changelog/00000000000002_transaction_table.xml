@@ -18,6 +18,9 @@
             <column name="repeat" type="bigint">
                 <constraints nullable="false"/>
             </column>
+            <column name="final_transaction" type="boolean">
+                <constraints nullable="false"/>
+            </column>
         </createTable>
 
         <createTable tableName="jhi_product_transaction">
@@ -59,6 +62,7 @@
             tableName="jhi_transaction"
             usePreparedStatements="true">
             <column name="id" type="numeric"/>
+            <column name="final_transaction" type="boolean"/>
         </loadData>
 
         <loadData

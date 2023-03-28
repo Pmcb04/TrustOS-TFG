@@ -165,8 +165,24 @@ function AssetActionScreen(props) {
 
         {[stepInput, stepAction, stepOutput].map((step, indexStep) => {
             {step.map((element, indexElement) => { 
+
+                let newMetadata = {...element.ref.metadata}
+
+                // always close the action because you cant do anything with the action 
+                // and known that the action it is done
+                if(step == stepAction) newMetadata.final = true 
+                else {
+                // closed asset in the step input
+                if(step == stepInput && actions.some((a) => a.name === action).finalTransaction == true) {
+                    newMetadata.final = true
+                }else {
+                    newMetadata.final = false
+                }
+                }
+
+          
+ 
                 if(element.create) {
-                    let newMetadata = {...element.ref.metadata}
                     let newActions = getActionsMetadata(indexStep + indexElement + (indexStep != 0 ? 1 : 0)) 
                     newMetadata.actions = newActions
                     let newAsset = {
@@ -179,7 +195,6 @@ function AssetActionScreen(props) {
                     }
                     createAsset(newAsset)
                 }else {
-                    let newMetadata = {...element.ref.metadata}
                     let newActions = {...newMetadata.actions}
                     if(newActions[action.trim().replace(' ', '_')]){
                         newActions[action.trim().replace(' ', '_')] += 1

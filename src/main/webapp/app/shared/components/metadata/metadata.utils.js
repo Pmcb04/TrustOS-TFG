@@ -11,6 +11,8 @@ import Romper from './romper/romper'
 import Usar from './usar/usar'
 import ROLE_ADMIN from './role_admin/role_admin'
 import ROLE_USER from './role_user/role_user'
+import SacrificarTernero from './sacrificarTernero/sacrificarTernero'
+import Carne from './carne/carne'
 
 import { permissionsBotella } from './botella/permissions'
 import { permissionsCoche } from './coche/permissions'
@@ -21,6 +23,8 @@ import { permissionsRomper } from './romper/permissions'
 import { permissionsUsar } from './usar/permissions'
 import { permissionsROLE_ADMIN } from './role_admin/permissions'
 import { permissionsROLE_USER } from './role_user/permissions'
+import { permissionsSacrificarTernero } from './sacrificarTernero/permissions'
+import { permissionsCarne } from './carne/permissions'
 
 // TODO fichero autogenerado
 export function process(data, edit_fields, create, type, rol) {
@@ -43,6 +47,10 @@ export function process(data, edit_fields, create, type, rol) {
       return <ROLE_USER data={data} edit={edit_fields} create={create} rol={rol} />
     case TYPES.ROLE_ADMIN:
       return <ROLE_ADMIN data={data} edit={edit_fields} create={create} rol={rol} />
+      case TYPES.SACRIFICARTERNERO:
+        return <SacrificarTernero data={data} edit={edit_fields} create={create} rol={rol} />
+        case TYPES.CARNE:
+          return <Carne data={data} edit={edit_fields} create={create} rol={rol} />
   }
 }
 
@@ -68,6 +76,10 @@ export function getPermissions(type, rol) {
       return permissionsROLE_ADMIN(rol)
     case TYPES.ROLE_USER:
       return permissionsROLE_USER(rol)
+      case TYPES.SACRIFICARTERNERO:
+        return permissionsSacrificarTernero(rol)
+        case TYPES.CARNE:
+        return permissionsCarne(rol)
     default: 
     return { canView, canEdit }
   }

@@ -27,8 +27,10 @@ function AssetCreateScreen(props) {
 
   function create(metadata) {
     const assetId = addRandomString(type)
-    // delete metadata.name
+    // actions in the metadata
     metadata.actions = metadataActions()
+    // flag if the asset is final (no more actions)
+    metadata.final = false
     const newAsset = {
       assetId: assetId,
       metadata: metadata,

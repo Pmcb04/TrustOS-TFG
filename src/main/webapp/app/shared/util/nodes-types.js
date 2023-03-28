@@ -7,5 +7,7 @@ export const TYPES = {
   ROMPER_PANTALON: 'Romper pantalon',
   USAR: 'Usar',
   ROLE_ADMIN: 'ROLE_ADMIN',
-  ROLE_USER: 'ROLE_USER'
+  ROLE_USER: 'ROLE_USER',
+  CARNE: "Carne",
+  SACRIFICARTERNERO : "Sacrificar Ternero"
 }
