@@ -22,7 +22,6 @@ function Step(props){
     return (
         <View style={styles.column}>
             {props.list.map((element, index) => {
-                
                 const listOptions = 
                     [...props.assets]
                         .filter((asset) => asset.assetId.split("@", 1) == element.type) // filter by type 
@@ -114,7 +113,8 @@ function AssetActionScreen(props) {
     found ? found.ref.listOption = assetAction.assetId : null
 
     const [step, setStep] = useState(0)
-    const [errorNextStep, setErrorNextStep] = useState(false)
+    const [errorNextStepEmpty, setErrorNextStepEmpty] = useState(false)
+    const [errorNextStepFinalTransaction, setErrorNextstepFinalTransaction] = useState(false)
 
     function metadataIsEmpty(metadata){
         return Object.keys(metadata).length == 0
@@ -122,14 +122,17 @@ function AssetActionScreen(props) {
 
     const stepDecrement = () => {
         setStep((prevStep) => prevStep - 1)
-        setErrorNextStep(false)
+        setErrorNextStepEmpty(false)
     }
     const stepIncrement = () => {
-        if(![stepInput, stepAction, stepOutput][step].some((element => metadataIsEmpty(element.ref.metadata)))){
-            setErrorNextStep(false)
-            setStep((prevStep) => prevStep + 1)
+        if([stepInput, stepAction, stepOutput][step].some((element => metadataIsEmpty(element.ref.metadata)))){
+            setErrorNextStepEmpty(true)
+        }else if([stepInput, stepAction, stepOutput][step].some((element => element.ref.metadata.final != null ? element.ref.metadata.final : true))){
+            setErrorNextstepFinalTransaction(true)
         }else{
-            setErrorNextStep(true)
+            setErrorNextStepEmpty(false)
+            setErrorNextstepFinalTransaction(false)
+            setStep((prevStep) => prevStep + 1)
         }
     }
 
@@ -273,7 +276,9 @@ function AssetActionScreen(props) {
                     <IconArrowLineRightRegular color="currentColor"/>
                 </ButtonPrimary>
             </ButtonLayout>
-            {errorNextStep && <View style={{textAlign: 'center'}}><Text4 color={colors.error}>{t('ERROR_NEXT_STEP')}</Text4></View>}
+            {errorNextStepEmpty && <View style={{textAlign: 'center'}}><Text4 color={colors.error}>{t('ERROR_NEXT_STEP')}</Text4></View>}
+            {errorNextStepFinalTransaction && <View style={{textAlign: 'center'}}><Text4 color={colors.error}>{t('ERROR_FINAL_TRANSACTION')}</Text4></View>}
+            
             <View style={ styles.table}>
                 {step == 0 && (<Step assets={assets} finalAction={false} list={stepInput}></Step>)}
                 {step == 1 && (<Step assets={assets} finalAction={true} list={stepAction}></Step>)}

@@ -88,7 +88,6 @@ function AssetDetailsScreen(props) {
       )}
       {!error && !fetching && asset && (
         <View style={[styles.container, { backgroundColor: colors.background }]}>
-          {console.log("canedit", canEdit)}
           {successUpdate && (
             <Callout
               icon={<IconSuccess />}

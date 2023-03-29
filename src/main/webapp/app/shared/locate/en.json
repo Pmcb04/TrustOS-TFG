@@ -93,5 +93,6 @@
   "CLOSED" : "Closed",
   "OPEN" : "Open",
   "STATE" : "State",
-  "TIMESTAMP" : "Timestamp" 
+  "TIMESTAMP" : "Timestamp",
+  "ERROR_FINAL_TRANSACTION": "Someone state element is final and can't be selected" 
 }

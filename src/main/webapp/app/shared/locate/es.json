@@ -93,5 +93,6 @@
   "CLOSED" : "Cerrado",
   "OPEN" : "Abierto",
   "STATE" : "Estado",
-  "TIMESTAMP" : "Creado" 
+  "TIMESTAMP" : "Creado",
+  "ERROR_FINAL_TRANSACTION": "Hay algun elemento que su estado es final y no puede ser seleccionado" 
 }

@@ -54,7 +54,12 @@ const AssetWithProperties = React.forwardRef((props, ref) => {
                 options={options}
               />
             )}
-            <Asset name={name} type={type} final={finalAction} hash={!create && assetList[indexAsset] ? assetList[indexAsset].hash : null} timestamp={!create && assetList[indexAsset] ? assetList[indexAsset].datetime : null}/>
+            <Asset 
+              name={name}
+              type={type} 
+              final={!create && assetList[indexAsset] ? assetList[indexAsset].metadata.final != null ? assetList[indexAsset].metadata.final : true : false} 
+              hash={!create && assetList[indexAsset] ? assetList[indexAsset].hash : null} 
+              timestamp={!create && assetList[indexAsset] ? assetList[indexAsset].datetime : null}/>
             {(create || name != null) && (
               <Metadata data={metadata} type={type} create={create} />
             )}
