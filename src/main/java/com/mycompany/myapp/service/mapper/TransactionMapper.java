@@ -30,6 +30,7 @@ public class TransactionMapper {
             transaction.setId(null);
             transaction.setName(transactionDTO.getName());
             transaction.setRepeat(transactionDTO.getRepeat());
+            transaction.setFinalTransaction(transactionDTO.getFinalTransaction());
             return transaction;
         }
     }

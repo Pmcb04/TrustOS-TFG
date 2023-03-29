@@ -1,13 +1,14 @@
 package com.mycompany.myapp.service;
 
-import java.util.List;
-
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import com.mycompany.myapp.repository.TransactionRepository;
 import com.mycompany.myapp.service.dto.TransactionDTO;
 import com.mycompany.myapp.service.mapper.TransactionMapper;
+
+import java.util.*;
+import java.util.stream.*;
 
 /**
  * Service class for managing products.
@@ -27,5 +28,9 @@ public class TransactionService {
 
     public List<TransactionDTO> findAllByProductRol(String productName, String rol) {
         return transactionMapper.transactionsToTransactionsDTOs(transactionRepository.findAllByAssetRol(productName, rol));
+    }
+
+    public Set<TransactionDTO> findAllByProduct(String productName) {
+        return new HashSet<TransactionDTO>(transactionMapper.transactionsToTransactionsDTOs(transactionRepository.findAllByAsset(productName)));
     }
 }

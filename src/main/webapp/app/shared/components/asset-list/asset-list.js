@@ -28,6 +28,8 @@ function AssetList(props) {
             name={itemData.item.assetId}
             type={itemData.item.data.type}
             hash={itemData.item.hash}
+            timestamp={itemData.item.datetime}
+            final={itemData.item.metadata.final != null ? itemData.item.metadata.final : true}
           />
         </View>
       </TouchableWithoutFeedback>

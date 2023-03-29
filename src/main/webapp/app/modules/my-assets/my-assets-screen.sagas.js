@@ -10,22 +10,27 @@ export const selectOrder = (state) => state.myAssets.order
 export const selectAssetsLoaded = (state) => state.myAssets.assetsLoaded
 export const selectShowOwner = (state) => state.myAssets.showOwner
 export const selectShowAuthorizathed = (state) => state.myAssets.showAuthorizathed
+export const selectShowStateClosed = (state) => state.myAssets.showStateClosed
+export const selectShowStateOpen = (state) => state.myAssets.showStateOpen
 export const selectAuthorities = (state) => state.account.account.authorities
 
 export function* getAssets(api) {
   const showOwner = yield select(selectShowOwner)
   const showAuthorizathed = yield select(selectShowAuthorizathed)
   const order = yield select(selectOrder)
+  
 
   yield getAssetCreate(api)
   const productsView = yield getAssetView(api)
+
+  console.log(productsView)
 
   let assetsOwner = []
   let assetsAuthorised = []
 
   if (showOwner) {
     assetsOwner = yield call(api.getAssets, false)
-    assetsOwner.data = assetsOwner.data.filter((assetId) => assetId !== 'Ternero#xcryscrq34' && productsView.some((product) => assetId.includes(product.name) ))
+    assetsOwner.data = assetsOwner.data.filter((assetId) => assetId !== 'Ternero#xcryscrq34' && productsView.some((product) => assetId.split("@", 1) == product.name ))
     assetsOwner = yield putIsAuthorisedFlag(assetsOwner.data, false)
   }
 
@@ -105,15 +110,29 @@ export function* loadAssetsAgain(api) {
 }
 
 function* loadAssets(api, assets) {
+
+  const showStateClosed = yield select(selectShowStateClosed)
+  const showStateOpen = yield select(selectShowStateOpen)
+
   let assetsLoaded = []
   // set assets loaded
 
   const response = yield all(assets.map((asset) => call(api.getAsset, asset.isAuthorised, asset.assetId)))
 
+  console.log("this",response)
+
   // for each reponse  check if it is diferent of null
   response.forEach((asset, index) => {
-    asset.data.isAuthorised = assets[index].isAuthorised
-    assetsLoaded.push(asset.data)
+    if(asset.ok){
+      asset.data.isAuthorised = assets[index].isAuthorised
+      if(((showStateClosed && (asset.data.metadata.final == null || asset.data.metadata.final == true)))){
+        assetsLoaded.push(asset.data)
+      }
+      if (((showStateOpen && asset.data.metadata.final == false))) {
+        assetsLoaded.push(asset.data)
+      }
+    }
+
   })
 
   // set list of asset in state

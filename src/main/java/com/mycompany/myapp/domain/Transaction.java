@@ -34,6 +34,10 @@ public class Transaction implements Serializable {
     @NotNull
     private Long repeat;
 
+    @NotNull
+    @Column(name = "final_transaction")
+    private boolean finalTransaction;
+
     public Long getId() {
         return id;
     }
@@ -58,6 +62,14 @@ public class Transaction implements Serializable {
         this.repeat = repeat;
     }
 
+    public boolean getFinalTransaction() {
+        return this.finalTransaction;
+    }
+
+    public void setFinalTransaction(boolean finalTransaction) {
+        this.finalTransaction = finalTransaction;
+    }
+
     @Override
     public boolean equals(Object o) {
         if (this == o) {
@@ -80,6 +92,7 @@ public class Transaction implements Serializable {
         return "Transaction{" +
             "name='" + name + '\'' +
             "repeat='" + repeat + '\'' +
+            "finalTransaction='" + finalTransaction + '\'' +
             "}";
     }
 }

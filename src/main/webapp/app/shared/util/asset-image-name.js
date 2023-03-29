@@ -16,6 +16,10 @@ export function getImage(type) {
       return <IconBoxRegular size={SIZE_ICONS} />
     case TYPES.ROMPER:
       return <IconFolderRegular size={SIZE_ICONS} />
+      case TYPES.SACRIFICARTERNERO:
+        return <IconFolderRegular size={SIZE_ICONS} />
+        case TYPES.CARNE:
+          return <IconBoxRegular size={SIZE_ICONS} />
     default:
       return <IconBoxRegular size={SIZE_ICONS} />
   }

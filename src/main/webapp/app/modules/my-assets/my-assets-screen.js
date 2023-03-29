@@ -25,6 +25,8 @@ import {
   Row,
   Callout,
   IconSuccess,
+  Text10,
+  Spinner
 } from '@telefonica/mistica'
 const NUM_COLUMNS = 3
 
@@ -45,6 +47,8 @@ function MyAssetsScreen(props) {
     products,
     successCreate,
     setSuccessCreate,
+    error, 
+    fetching
   } = props
 
   let typeCreateAssetSelected = ''
@@ -54,74 +58,97 @@ function MyAssetsScreen(props) {
     getAssets()
   }, [])
 
-  return (
-    <View style={[styles.container, styles.mainContainer, { backgroundColor: colors.background }]}>
-      {props.route.params != null && successCreate ? (
-        <View style={styles.callout}>
-          <Callout
-            icon={<IconSuccess />}
-            onClose={setSuccessCreate}
-            title={t('ASSET_CREATE')}
-            description={t('ASSET_WITH_ID_CREATE', { assetId: props.route.params.assetId })}
-            button={
-              <ButtonPrimary small onPress={setSuccessCreate}>
-                {t('ACCEPT')}
-              </ButtonPrimary>
-            }
-          />
-        </View>
-      ) : null}
-      <View style={styles.header}>
-        <SearchField onChangeValue={search} fullWidth name="search" label={t('SEARCH')} />
 
-        <ButtonPrimary
-          onPress={() => {
-            getAssetsCreate()
-            confirm({
-              message: (
-                <View style={styles.container}>
-                  {products && (
-                    <ScrollView>
-                      <RadioGroup onChange={(value) => (typeCreateAssetSelected = value)} defaultValue={typeCreateAssetSelected}>
-                        <RowList>
-                          {products.map((type, i) => (
-                            <Row key={i} asset={getImage(type.name)} title={type.name} radioValue={type.name} value={type.name} />
-                          ))}
-                        </RowList>
-                      </RadioGroup>
-                    </ScrollView>
-                  )}
-                </View>
-              ),
-              acceptText: t('CREATE'),
-              cancelText: t('CANCEL'),
-              onAccept: () => navigation.navigate('AssetCreate', { type: typeCreateAssetSelected }),
-            })
-          }}>
-          <IconAddMoreRegular color="currentColor" />
-          {t('CREATE')}
-        </ButtonPrimary>
-      </View>
-      <View style={styles.content}>
-        <View style={styles.list}>
-          <AssetList navigation={navigation} data={assetsLoaded} numColums={NUM_COLUMNS} />
-          <FixedFooterLayout>
-            <ButtonLayout align="center">
-              <ButtonLink small disabled={index === 1} onPress={previous}>
-                {t('PREVIOUS')}
-              </ButtonLink>
-              <ButtonLink small disabled={index * offset >= numAssets} onPress={next}>
-                {t('NEXT')}
-              </ButtonLink>
-            </ButtonLayout>
-          </FixedFooterLayout>
-        </View>
-        <View style={styles.menu}>
-          <MenuFilter />
+  
+  return (
+    <>
+
+    {error && (
+      <View style={[styles.loading, { backgroundColor: colors.background }]}>
+        <View style={styles.loadingText}>
+          <Text10>Asset with id {assetId} not found...</Text10>
         </View>
       </View>
-    </View>
-  )
+    )}
+    {fetching && (
+      <View style={[styles.loading, { backgroundColor: colors.background }]}>
+        <View style={styles.loadingText}>
+          <Text10>Loading...</Text10>
+          <Spinner size={64} />
+        </View>
+      </View>
+    )}
+    {!error && !fetching && assetsLoaded && (
+      <View style={[styles.container, styles.mainContainer, { backgroundColor: colors.background }]}>
+        {props.route.params != null && successCreate ? (
+          <View style={styles.callout}>
+            <Callout
+              icon={<IconSuccess />}
+              onClose={setSuccessCreate}
+              title={t('ASSET_CREATE')}
+              description={t('ASSET_WITH_ID_CREATE', { assetId: props.route.params.assetId })}
+              button={
+                <ButtonPrimary small onPress={setSuccessCreate}>
+                  {t('ACCEPT')}
+                </ButtonPrimary>
+              }
+            />
+          </View>
+        ) : null}
+
+      <View style={styles.header}>
+          <SearchField onChangeValue={search} fullWidth name="search" label={t('SEARCH')} />
+
+          <ButtonPrimary
+            onPress={() => {
+              getAssetsCreate()
+              confirm({
+                message: (
+                  <View style={styles.container}>
+                    {products && (
+                      <ScrollView>
+                        <RadioGroup onChange={(value) => (typeCreateAssetSelected = value)} defaultValue={typeCreateAssetSelected}>
+                          <RowList>
+                            {products.map((type, i) => (
+                              <Row key={i} asset={getImage(type.name)} title={type.name} radioValue={type.name} value={type.name} />
+                            ))}
+                          </RowList>
+                        </RadioGroup>
+                      </ScrollView>
+                    )}
+                  </View>
+                ),
+                acceptText: t('CREATE'),
+                cancelText: t('CANCEL'),
+                onAccept: () => navigation.navigate('AssetCreate', { type: typeCreateAssetSelected }),
+              })
+            }}>
+            <IconAddMoreRegular color="currentColor" />
+            {t('CREATE')}
+          </ButtonPrimary>
+        </View>
+        <View style={styles.content}>
+          <View style={styles.list}>
+            <AssetList navigation={navigation} data={assetsLoaded} numColums={NUM_COLUMNS} />
+            <FixedFooterLayout>
+              <ButtonLayout align="center">
+                <ButtonLink small disabled={index === 1} onPress={previous}>
+                  {t('PREVIOUS')}
+                </ButtonLink>
+                <ButtonLink small disabled={index * offset >= numAssets} onPress={next}>
+                  {t('NEXT')}
+                </ButtonLink>
+              </ButtonLayout>
+            </FixedFooterLayout>
+          </View>
+          <View style={styles.menu}>
+            <MenuFilter />
+          </View>
+        </View>
+      </View>
+     )}
+    </>
+    )
 }
 
 const mapStateToProps = (state) => ({
@@ -131,6 +158,8 @@ const mapStateToProps = (state) => ({
   assetsLoaded: state.myAssets.assetsLoaded,
   products: state.myAssets.products,
   successCreate: state.myAssets.successCreate,
+  fetching: state.myAssets.fetching,
+  error: state.myAssets.error,
 })
 const mapDispatchToProps = (dispatch) => ({
   getAssets: () => dispatch(MyAssetsActions.myAssetsRequest()),

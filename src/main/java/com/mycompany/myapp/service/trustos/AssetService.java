@@ -13,7 +13,11 @@ import com.mycompany.myapp.domain.trustos.LoginTrustos;
 import com.mycompany.myapp.domain.trustos.Message;
 import com.mycompany.myapp.domain.trustos.Transaction;
 import com.mycompany.myapp.service.dto.trustos.AssetDTO;
+import com.mycompany.myapp.service.dto.TransactionDTO;
+import com.mycompany.myapp.service.TransactionService;
 import com.mycompany.myapp.util.TrustOS;
+import java.util.*;
+import java.util.stream.*; 
 
 /**
  * Service class for managing assets.
@@ -25,7 +29,13 @@ public class AssetService {
 
     private final TrustOS trustos = new TrustOS();
 
+    private final TransactionService transactionService;
+
     private final String TRACK_URL = "/track";
+
+    public AssetService(TransactionService transactionService) {
+        this.transactionService = transactionService;
+    }
 
     /**
      * Login in track module
@@ -44,6 +54,16 @@ public class AssetService {
      * @param token     jwt token to access the TrustOS platform
      */
     public Asset createAsset(AssetDTO assetDTO, String token) {
+        Set<TransactionDTO> transactions = transactionService.findAllByProduct(assetDTO.getData().get("type") + "");
+        Map<String, Object> newMetadata = assetDTO.getMetadata();
+
+        JsonObject transactionJson = new JsonObject();
+        for (TransactionDTO transaction : transactions) {
+            transactionJson.addProperty(transaction.getName().toString().trim().replace(" ", "_"), "0");
+        }
+        newMetadata.put("actions", transactionJson);
+        assetDTO.setMetadata(newMetadata);
+
         JsonObject body = JsonParser.parseString(gson.toJson(assetDTO, AssetDTO.class)).getAsJsonObject();
         return new Gson().fromJson(trustos.post(TRACK_URL + "/asset/create", body, token).get("output"), Asset.class);
     }

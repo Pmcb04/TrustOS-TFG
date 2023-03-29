@@ -89,5 +89,9 @@
   "ERROR_NEXT_STEP": "One element is not selected or is empty",
   "NOT_TRANSACTIONS_ASSET" : "Not found transactions",
   "CLEAR" : "Clear",
-  "DETAILS" : "Details"
+  "DETAILS" : "Details",
+  "CLOSED" : "Closed",
+  "OPEN" : "Open",
+  "STATE" : "State",
+  "TIMESTAMP" : "Timestamp" 
 }

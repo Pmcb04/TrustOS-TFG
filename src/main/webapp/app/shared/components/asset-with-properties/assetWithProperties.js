@@ -12,7 +12,7 @@ import AssetActionActions from '../../../modules/asset-action/asset-action-scree
 
 
 const AssetWithProperties = React.forwardRef((props, ref) => {
-  const { title, type, create, listOption, assetRef, indexAsset, getAsset, assetList, options } = props
+  const { title, type, create, listOption, finalAction, assetRef, indexAsset, getAsset, assetList, options } = props
   const [name, setName] = useState(listOption || assetRef.assetId )
   const [metadata, setMetadata] = useState(create ? assetRef.metadata ? assetRef.metadata : {} : {})
 
@@ -54,7 +54,7 @@ const AssetWithProperties = React.forwardRef((props, ref) => {
                 options={options}
               />
             )}
-            <Asset name={name} type={type} hash={!create && assetList[indexAsset] ? assetList[indexAsset].hash : null}/>
+            <Asset name={name} type={type} final={finalAction} hash={!create && assetList[indexAsset] ? assetList[indexAsset].hash : null} timestamp={!create && assetList[indexAsset] ? assetList[indexAsset].datetime : null}/>
             {(create || name != null) && (
               <Metadata data={metadata} type={type} create={create} />
             )}

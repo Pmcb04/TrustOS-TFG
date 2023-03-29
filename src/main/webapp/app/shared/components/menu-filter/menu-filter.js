@@ -9,7 +9,8 @@ import MyAssetsActions from '../../../modules/my-assets/my-assets-screen.reducer
 
 function MenuFilter(props) {
   const { t } = useTranslation()
-  const { changeOffset, offset, setOrder, order, showOwner, showAuthorizathed, setShowOwner, setShowAuthorizathed } = props
+  const { changeOffset, offset, setOrder, order, showOwner, showAuthorizathed,
+     setShowOwner, setShowAuthorizathed, setShowStateClosed, showStateClosed, setShowStateOpen, showStateOpen } = props
   return (
     <ScrollView>
       <Boxed>
@@ -69,6 +70,38 @@ function MenuFilter(props) {
 
         <View style={[styles.authorizathed, styles.dataFilter]}>
           <View style={styles.title}>
+            <Text5>{t('STATE')}</Text5>
+          </View>
+          <Inline space={'evenly'} alignItems="center">
+            <Checkbox
+              onChange={(value) => setShowStateClosed(value)}
+              defaultChecked={showStateClosed}
+              name="closed-yes"
+              render={({ labelId, checked }) => (
+                <Chip active={checked} id={labelId}>
+                  {t('CLOSED')}
+                </Chip>
+              )}
+            />
+            <Checkbox
+              onChange={(value) => setShowStateOpen(value)}
+              defaultChecked={showStateOpen}
+              name="closed-no"
+              render={({ labelId, checked }) => (
+                <Chip active={checked} id={labelId}>
+                  {t('OPEN')}
+                </Chip>
+              )}
+            />
+          </Inline>
+        </View>
+
+        <View style={styles.divider}>
+          <Divider />
+        </View>
+
+        <View style={[styles.authorizathed, styles.dataFilter]}>
+          <View style={styles.title}>
             <Text5>{t('OWNERSHIP')}</Text5>
           </View>
           <Inline space={'evenly'} alignItems="center">
@@ -104,6 +137,8 @@ const mapStateToProps = (state) => {
     order: state.myAssets.order,
     showOwner: state.myAssets.showOwner,
     showAuthorizathed: state.myAssets.showAuthorizathed,
+    showStateClosed: state.myAssets.showStateClosed,
+    showStateOpen: state.myAssets.showStateOpen,
   }
 }
 const mapDispatchToProps = (dispatch) => {
@@ -112,6 +147,9 @@ const mapDispatchToProps = (dispatch) => {
     setOrder: (order) => dispatch(MyAssetsActions.myAssetsSetOrder(order)),
     setShowOwner: (showOwner) => dispatch(MyAssetsActions.myAssetsSetShowOwner(showOwner)),
     setShowAuthorizathed: (showAuthorizathed) => dispatch(MyAssetsActions.myAssetsSetShowAuthorizathed(showAuthorizathed)),
+    setShowStateClosed: (showStateClosed) => dispatch(MyAssetsActions.myAssetsSetShowStateClosed(showStateClosed)),
+    setShowStateOpen: (showStateOpen) => dispatch(MyAssetsActions.myAssetsSetShowStateOpen(showStateOpen)),
+  
   }
 }
 export default connect(mapStateToProps, mapDispatchToProps)(MenuFilter)

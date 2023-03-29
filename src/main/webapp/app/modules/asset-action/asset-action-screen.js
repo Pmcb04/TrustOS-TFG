@@ -3,7 +3,8 @@ import { View } from 'react-native'
 import { connect } from 'react-redux'
 import { ThemeContext, ButtonPrimary, IconOfferFilled, 
     Stack, Stepper , ButtonLayout, Box, Text5, Text4, Text10,
-    Inline,IconArrowLineRightRegular,IconArrowLineLeftRegular } from '@telefonica/mistica'
+    Inline,IconArrowLineRightRegular,IconArrowLineLeftRegular, IconFingerprintRegular, Tag,
+    IconLockOpenRegular, IconLockClosedRegular } from '@telefonica/mistica'
 import { useTranslation } from 'react-i18next'
 
 import styles from './asset-action-screen.styles'
@@ -24,7 +25,7 @@ function Step(props){
                 
                 const listOptions = 
                     [...props.assets]
-                        .filter((asset) => asset.assetId.includes(element.type)) // filter by type 
+                        .filter((asset) => asset.assetId.split("@", 1) == element.type) // filter by type 
                         .map((asset) => (
                             { value: asset.assetId, text: asset.assetId }
                         ))
@@ -35,6 +36,7 @@ function Step(props){
                         create={element.create} 
                         assetRef={element.ref}
                         indexAsset={index}
+                        finalAction={props.finalAction}
                         listOption={element.ref.listOption} 
                         options ={listOptions}
                     />     
@@ -46,7 +48,7 @@ function Step(props){
 
 function TableResume(props) {
     const { colors } = React.useContext(ThemeContext)
-    const {title, type, create, assetId, metadata} = props
+    const {title, type, create, assetId, metadata, stepFinal} = props
     const { t } = useTranslation() //i18n instance
 
     return (
@@ -59,10 +61,22 @@ function TableResume(props) {
                         <Text5 key={'assetId'}>{assetId}</Text5>
                     </Inline>
                 </Inline>
-
+                <Inline key={"inline-type"} alignItems='center' space='between'>
+                <Text4 light key={'type-state'}>{t('STATE')}</Text4>
+                    <Inline>
+                        {!stepFinal && props.final && <Inline>
+                            <Tag Icon={IconLockOpenRegular} type="success">{t('OPEN')}</Tag>
+                            <IconArrowLineRightRegular key={'arrow'} size={16} />
+                            <Tag Icon={IconLockClosedRegular} type="error">{t('CLOSED')}</Tag>
+                        </Inline>}
+                        {stepFinal && <Inline>
+                            <Tag Icon={IconLockOpenRegular} type="success">{t('OPEN')}</Tag>
+                        </Inline>}
+                    </Inline>
+                </Inline>
                 <Inline key={"inline-type"} alignItems='center' space='between'>
                     <Text4 light key={'type-name'}>{t('TYPE')}</Text4>
-                    <Text4 light key={'type'}>{type}</Text4>
+                    <Tag Icon={IconFingerprintRegular} type="active">{type ? type : 'Asset'}</Tag>
                 </Inline>
 
                 <Inline key={"inline-title"} alignItems='center' space='between'>
@@ -79,7 +93,7 @@ function TableResume(props) {
 }
 
 function AssetActionScreen(props) {
-    const { action } = props.route.params
+    const { action, final } = props.route.params
     const { assetAction, assets, reset, createAsset, updateAsset, fetching, error, actions, getActions, actionsList} = props
     const { colors } = React.useContext(ThemeContext)
     const { t } = useTranslation() //i18n instance
@@ -132,7 +146,7 @@ function AssetActionScreen(props) {
         return element.ref.assetId
     }
 
-    function tablesSteps(){
+    function tablesSteps(final){
         return (
             <Box>
                 {[stepInput, stepAction, stepOutput].map((step, index) => {
@@ -145,7 +159,9 @@ function AssetActionScreen(props) {
                                 create={element.create} 
                                 type={element.ref.type} 
                                 title={element.ref.title} 
+                                final={final}
                                 assetId={chooseAssetId(element)} 
+                                stepFinal={step === stepOutput}
                                 metadata={element.ref.metadata}>
                             </TableResume>
                         ))}
@@ -157,18 +173,34 @@ function AssetActionScreen(props) {
 
     function createAssets(){
 
-        function getActionsMetadata(index){
-            let metadataActions = {}
-            actionsList[index] ? actionsList[index].map((action) => metadataActions[action.name.trim().replace(" ", "_")] = 0) : null
-            return metadataActions
-        }
+        // function getActionsMetadata(index){
+        //     let metadataActions = {}
+        //     actionsList[index] ? actionsList[index].map((action) => metadataActions[action.name.trim().replace(" ", "_")] = 0) : null
+        //     return metadataActions
+        // }
 
         {[stepInput, stepAction, stepOutput].map((step, indexStep) => {
             {step.map((element, indexElement) => { 
+
+                let newMetadata = {...element.ref.metadata}
+
+                // always close the action because you cant do anything with the action 
+                // and known that the action it is done
+                if(step == stepAction) newMetadata.final = true 
+                else {
+                // closed asset in the step input
+                if(step == stepInput && final == true) {
+                    newMetadata.final = true
+                }else {
+                    newMetadata.final = false
+                }
+                }
+
+          
+ 
                 if(element.create) {
-                    let newMetadata = {...element.ref.metadata}
-                    let newActions = getActionsMetadata(indexStep + indexElement + (indexStep != 0 ? 1 : 0)) 
-                    newMetadata.actions = newActions
+                    // let newActions = getActionsMetadata(indexStep + indexElement + (indexStep != 0 ? 1 : 0)) 
+                    // newMetadata.actions = newActions
                     let newAsset = {
                         assetId: element.ref.assetId,
                         metadata: newMetadata,
@@ -179,7 +211,6 @@ function AssetActionScreen(props) {
                     }
                     createAsset(newAsset)
                 }else {
-                    let newMetadata = {...element.ref.metadata}
                     let newActions = {...newMetadata.actions}
                     if(newActions[action.trim().replace(' ', '_')]){
                         newActions[action.trim().replace(' ', '_')] += 1
@@ -244,12 +275,12 @@ function AssetActionScreen(props) {
             </ButtonLayout>
             {errorNextStep && <View style={{textAlign: 'center'}}><Text4 color={colors.error}>{t('ERROR_NEXT_STEP')}</Text4></View>}
             <View style={ styles.table}>
-                {step == 0 && (<Step assets={assets} list={stepInput}></Step>)}
-                {step == 1 && (<Step assets={assets} list={stepAction}></Step>)}
-                {step == 2 && (<Step assets={assets} list={stepOutput}></Step>)}
+                {step == 0 && (<Step assets={assets} finalAction={false} list={stepInput}></Step>)}
+                {step == 1 && (<Step assets={assets} finalAction={true} list={stepAction}></Step>)}
+                {step == 2 && (<Step assets={assets} finalAction={false} list={stepOutput}></Step>)}
                 {step == 3 && (<View style={styles.column}> 
                                     <Text4 key="text"><IconOfferFilled key="icon" size={32}/>{t('NEW')}</Text4>
-                                    {tablesSteps()}
+                                    {tablesSteps(final)}
                                     <ButtonPrimary onPress={() => createAssets()}>
                                     {t('CREATE')}
                                     </ButtonPrimary>
