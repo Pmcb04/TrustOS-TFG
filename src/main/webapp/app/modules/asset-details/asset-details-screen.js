@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react'
+import React, { useEffect, useState } from 'react'
 import { View } from 'react-native'
 import { useTranslation } from 'react-i18next'
 
@@ -36,9 +36,8 @@ function AssetDetailsScreen(props) {
   const { editAsset, edit_fields, getAsset, asset, fetching, error, updateAsset, setSuccessUpdate, successUpdate, account, getActions, actions } = props
   const { colors } = React.useContext(ThemeContext)
   const { t } = useTranslation() //i18n instance
-
-  // BUG arreglar por que cuando da fallo no puede leer asset.data.type
-  const { canView, canEdit } = getPermissions(asset.data.type, account.authorities[0])
+  const [canEdit, setCanEdit] = React.useState([])
+  const [canView, setCanView] = React.useState([])
 
   useEffect(() => {
     getAsset(isAuthorised, assetId)
@@ -47,8 +46,12 @@ function AssetDetailsScreen(props) {
   useEffect(() => {
     if(asset != null){
       getActions(asset.data.type)
+      const permissions = getPermissions(asset.data.type, account.authorities[0])
+      setCanView(permissions.canView)
+      setCanEdit(permissions.canEdit)
     }
   }, [asset])
+
 
   function update(newMetadata) {
     
@@ -85,6 +88,7 @@ function AssetDetailsScreen(props) {
       )}
       {!error && !fetching && asset && (
         <View style={[styles.container, { backgroundColor: colors.background }]}>
+          {console.log("canedit", canEdit)}
           {successUpdate && (
             <Callout
               icon={<IconSuccess />}
