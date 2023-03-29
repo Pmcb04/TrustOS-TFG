@@ -84,7 +84,7 @@ export function* getAssetRangeTraceability(api) {
   }
 
   const response = yield call(api.getAssetRangeTraceability, isAuthorised, assetId, body)
-  console.log(response.data)
+  
   // success?
   if (response.ok) {
     yield put(AssetTraceabilityActions.assetTraceabilitySuccess(response.data))

@@ -23,8 +23,6 @@ export function* getAssets(api) {
   yield getAssetCreate(api)
   const productsView = yield getAssetView(api)
 
-  console.log(productsView)
-
   let assetsOwner = []
   let assetsAuthorised = []
 
@@ -118,8 +116,6 @@ function* loadAssets(api, assets) {
   // set assets loaded
 
   const response = yield all(assets.map((asset) => call(api.getAsset, asset.isAuthorised, asset.assetId)))
-
-  console.log("this",response)
 
   // for each reponse  check if it is diferent of null
   response.forEach((asset, index) => {

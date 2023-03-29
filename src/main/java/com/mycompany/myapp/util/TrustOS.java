@@ -44,12 +44,8 @@ public class TrustOS {
 
         // check response
         if (response.getStatusCode() == HttpStatus.OK) {
-            System.out.println("Request Successful");
-            System.out.println(response.getBody());
             return JsonParser.parseString(response.getBody()).getAsJsonObject();
         } else {
-            System.out.println("Request Failed");
-            System.out.println(response.getStatusCode());
             return null;
         }
     }
@@ -76,12 +72,8 @@ public class TrustOS {
 
         // check response
         if (response.getStatusCode() == HttpStatus.OK) {
-            System.out.println("Request Successful");
-            System.out.println(response.getBody());
             return JsonParser.parseString(response.getBody()).getAsJsonObject();
         } else {
-            System.out.println("Request Failed");
-            System.out.println(response.getStatusCode());
             return null;
         }
     }

@@ -18,7 +18,6 @@ export function* register(api, { user }) {
 export function* getRoles(api) {
 
   const response = yield call(api.getRoles)
-  console.log("reponse", response)
   // success?
   if (response.ok) {
     console.log('Register - OK')

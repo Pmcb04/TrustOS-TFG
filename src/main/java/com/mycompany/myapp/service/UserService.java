@@ -140,10 +140,7 @@ public class UserService {
 
         // create a asset in trustos
         LoginTrustos login = getTrustosLogin();
-        System.out.println(login);
         Message token = assetService.login(login);
-        System.out.println(token);
-        System.out.println(assetDTO);
         Asset assetCreated = assetService.createAsset(assetDTO, "Bearer " + token.getMessage());
 
         newUser.setAssetId(assetCreated.getAssetId());
