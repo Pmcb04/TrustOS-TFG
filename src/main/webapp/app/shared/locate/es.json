@@ -92,5 +92,6 @@
   "DETAILS" : "Detalles",
   "CLOSED" : "Cerrado",
   "OPEN" : "Abierto",
-  "STATE" : "Estado"
+  "STATE" : "Estado",
+  "TIMESTAMP" : "Creado" 
 }

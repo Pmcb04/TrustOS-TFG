@@ -94,6 +94,8 @@ function AssetTraceabilityScreen(props) {
               <Asset
                 name={assetSelected}
                 type={traceability.data.type}
+                final={traceability.transactions[transactionSelect].metadata.final != null ? traceability.transactions[transactionSelect].metadata.final : true}
+                timestamp={traceability.transactions[transactionSelect].timestamp}
                 hash={traceability.transactions.length > 0 ? traceability.transactions[transactionSelect].hash : null}
               />
             </View>

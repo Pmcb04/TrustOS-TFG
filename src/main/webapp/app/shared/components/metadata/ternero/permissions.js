@@ -8,6 +8,10 @@ export function permissionsTernero(rol) {
       canView = ['height', 'width']
       canEdit = ['height', 'width']
       break
+      case 'ROLE_USER':
+        canView = ['height', 'width']
+        canEdit = []
+        break
   }
 
   return { canView, canEdit }

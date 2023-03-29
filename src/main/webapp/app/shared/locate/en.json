@@ -92,5 +92,6 @@
   "DETAILS" : "Details",
   "CLOSED" : "Closed",
   "OPEN" : "Open",
-  "STATE" : "State"
+  "STATE" : "State",
+  "TIMESTAMP" : "Timestamp" 
 }

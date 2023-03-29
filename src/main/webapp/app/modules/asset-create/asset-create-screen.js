@@ -19,18 +19,12 @@ function AssetCreateScreen(props) {
   const { colors } = React.useContext(ThemeContext)
   const { t } = useTranslation() //i18n instance
 
-  function metadataActions(){
-    metadataActions = {}
-    actions.map((action) => metadataActions[action.name.trim().replace(" ", "_")] = 0)
-    return metadataActions
-  }
 
   function create(metadata) {
     const assetId = addRandomString(type)
-    // actions in the metadata
-    metadata.actions = metadataActions()
-    // flag if the asset is final (no more actions)
-    metadata.final = false
+
+    metadata.final = false;
+
     const newAsset = {
       assetId: assetId,
       metadata: metadata,

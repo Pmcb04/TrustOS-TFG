@@ -116,7 +116,7 @@ function AssetDetailsScreen(props) {
               </View>
               <View style={styles.assetView}>
                 <View style={styles.asset}>
-                  <Asset name={assetId} type={asset.data.type} hash={asset.hash} final={asset.metadata.final != null ? asset.metadata.final : true}/>
+                  <Asset name={assetId} type={asset.data.type} hash={asset.hash} timestamp={asset.datetime} final={asset.metadata.final != null ? asset.metadata.final : true}/>
                 </View>
                 <Stack space={16}>
                   <View style={styles.buttons}>
@@ -148,7 +148,7 @@ function AssetDetailsScreen(props) {
                         (<ButtonSecondary 
                           key={action.name} 
                           disabled={edit_fields} 
-                          onPress={() => navigation.navigate('AssetAction', { action: action.name })}>
+                          onPress={() => navigation.navigate('AssetAction', { action: action.name, final: action.finalTransaction })}>
                           {action.finalTransaction && <IconLockClosedRegular color="currentColor" />}
                           {action.name}
                         </ButtonSecondary>)
