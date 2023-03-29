@@ -23,12 +23,14 @@ export function* getAssets(api) {
   yield getAssetCreate(api)
   const productsView = yield getAssetView(api)
 
+  console.log(productsView)
+
   let assetsOwner = []
   let assetsAuthorised = []
 
   if (showOwner) {
     assetsOwner = yield call(api.getAssets, false)
-    assetsOwner.data = assetsOwner.data.filter((assetId) => assetId !== 'Ternero#xcryscrq34' && productsView.some((product) => assetId.includes(product.name) ))
+    assetsOwner.data = assetsOwner.data.filter((assetId) => assetId !== 'Ternero#xcryscrq34' && productsView.some((product) => assetId.split("@", 1) == product.name ))
     assetsOwner = yield putIsAuthorisedFlag(assetsOwner.data, false)
   }
 

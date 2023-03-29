@@ -25,7 +25,7 @@ function Step(props){
                 
                 const listOptions = 
                     [...props.assets]
-                        .filter((asset) => asset.assetId.includes(element.type)) // filter by type 
+                        .filter((asset) => asset.assetId.split("@", 1) == element.type) // filter by type 
                         .map((asset) => (
                             { value: asset.assetId, text: asset.assetId }
                         ))
