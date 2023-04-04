@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<TraceabilityMM:System xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:TraceabilityMM="http://www.example.org/TraceabilityMM">
+<TraceabilityMM:System xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:TraceabilityMM="http://www.example.org/TraceabilityMM" name="bread">
   <nodes xsi:type="TraceabilityMM:Product" name="Sal" productconf="//@assets.5" next_transaction="//@nodes.5"/>
   <nodes xsi:type="TraceabilityMM:Product" name="Azucar" productconf="//@assets.4" next_transaction="//@nodes.5"/>
   <nodes xsi:type="TraceabilityMM:Product" name="Aceite" productconf="//@assets.2" next_transaction="//@nodes.5"/>
@@ -13,7 +13,7 @@
   <nodes xsi:type="TraceabilityMM:Product" name="Pan" productconf="//@assets.11" previous_transaction="//@nodes.9" next_transaction="//@nodes.11"/>
   <nodes xsi:type="TraceabilityMM:Transaction" name="Vender" transactionconf="//@assets.13" next_product="//@nodes.12" previous_product="//@nodes.10"/>
   <nodes xsi:type="TraceabilityMM:Product" name="Dinero" productconf="//@assets.14" previous_transaction="//@nodes.11"/>
-  <assets xsi:type="TraceabilityMM:RolConf" type="Panadero" permissions="//@permissions.0 //@permissions.2">
+  <assets xsi:type="TraceabilityMM:RolConf" type="Panadero" permissions="//@permissions.0 //@permissions.1">
     <properties xsi:type="TraceabilityMM:Attribute" id="direccion"/>
   </assets>
   <assets xsi:type="TraceabilityMM:ProductConf" type="Harina" product="//@nodes.3">
@@ -68,7 +68,7 @@
   <assets xsi:type="TraceabilityMM:ProductConf" type="Pan" product="//@nodes.10">
     <properties xsi:type="TraceabilityMM:Attribute" id="nombre" allow="//@permissions.0"/>
   </assets>
-  <assets xsi:type="TraceabilityMM:RolConf" type="Proveedor" permissions="//@permissions.1">
+  <assets xsi:type="TraceabilityMM:RolConf" type="Proveedor" permissions="//@permissions.2">
     <properties xsi:type="TraceabilityMM:Attribute" id="contacto"/>
   </assets>
   <assets xsi:type="TraceabilityMM:TransactionConf" type="Vender" final="true" transaction="//@nodes.11">
@@ -78,6 +78,6 @@
     <properties xsi:type="TraceabilityMM:Attribute" id="cantidad" title="" allow="//@permissions.0" type="Decimal"/>
   </assets>
   <permissions refers="//@assets.6/@properties.0 //@assets.7/@properties.0 //@assets.8/@properties.0 //@assets.9/@properties.0 //@assets.10/@properties.0 //@assets.11/@properties.0 //@assets.13/@properties.0 //@assets.14/@properties.0" name="panadero"/>
-  <permissions xsi:type="TraceabilityMM:Create" refers="//@assets.3/@properties.0 //@assets.2/@properties.0 //@assets.2/@properties.1 //@assets.4/@properties.0 //@assets.5/@properties.0 //@assets.1/@properties.0" name="prooveedor"/>
   <permissions xsi:type="TraceabilityMM:View" refers="//@assets.3/@properties.0 //@assets.2/@properties.0 //@assets.2/@properties.1 //@assets.4/@properties.0 //@assets.5/@properties.0 //@assets.1/@properties.0" name="panadero"/>
+  <permissions refers="//@assets.1/@properties.0 //@assets.5/@properties.0 //@assets.4/@properties.0 //@assets.2/@properties.0 //@assets.2/@properties.1 //@assets.3/@properties.0" name="proveedor"/>
 </TraceabilityMM:System>

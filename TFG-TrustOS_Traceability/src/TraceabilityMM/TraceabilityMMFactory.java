@@ -139,6 +139,15 @@ public interface TraceabilityMMFactory extends EFactory {
 	Value createValue();
 
 	/**
+	 * Returns a new object of class '<em>Temporal Transaction</em>'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return a new object of class '<em>Temporal Transaction</em>'.
+	 * @generated
+	 */
+	TemporalTransaction createTemporalTransaction();
+
+	/**
 	 * Returns the package supported by this factory.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->

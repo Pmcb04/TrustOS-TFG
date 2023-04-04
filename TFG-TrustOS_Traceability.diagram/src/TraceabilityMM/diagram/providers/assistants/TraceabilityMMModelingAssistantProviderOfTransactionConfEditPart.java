@@ -65,6 +65,7 @@ public class TraceabilityMMModelingAssistantProviderOfTransactionConfEditPart
 			IElementType relationshipType) {
 		List<IElementType> types = new ArrayList<IElementType>();
 		if (relationshipType == TraceabilityMM.diagram.providers.TraceabilityMMElementTypes.TransactionTransactionconf_4001) {
+			types.add(TraceabilityMM.diagram.providers.TraceabilityMMElementTypes.TemporalTransaction_2016);
 			types.add(TraceabilityMM.diagram.providers.TraceabilityMMElementTypes.Transaction_2001);
 		}
 		return types;

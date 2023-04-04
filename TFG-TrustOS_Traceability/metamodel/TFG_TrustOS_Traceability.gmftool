@@ -93,6 +93,15 @@
       </tools>
       <tools
           xsi:type="gmftool:CreationTool"
+          title="Temporal transaction"
+          description="Create a temporal transaction">
+        <smallIcon
+            xsi:type="gmftool:DefaultImage"/>
+        <largeIcon
+            xsi:type="gmftool:DefaultImage"/>
+      </tools>
+      <tools
+          xsi:type="gmftool:CreationTool"
           title="Transaction"
           description="Create a transaction">
         <smallIcon

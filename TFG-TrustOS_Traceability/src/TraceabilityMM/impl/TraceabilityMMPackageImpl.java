@@ -15,6 +15,8 @@ import TraceabilityMM.ProductConf;
 import TraceabilityMM.Property;
 import TraceabilityMM.Rol;
 import TraceabilityMM.RolConf;
+import TraceabilityMM.TemporalTransaction;
+import TraceabilityMM.TermporalTransaction;
 import TraceabilityMM.TraceabilityMMFactory;
 import TraceabilityMM.TraceabilityMMPackage;
 import TraceabilityMM.Transaction;
@@ -150,6 +152,13 @@ public class TraceabilityMMPackageImpl extends EPackageImpl implements Traceabil
 	 * @generated
 	 */
 	private EClass valueEClass = null;
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	private EClass temporalTransactionEClass = null;
 
 	/**
 	 * <!-- begin-user-doc -->
@@ -638,6 +647,15 @@ public class TraceabilityMMPackageImpl extends EPackageImpl implements Traceabil
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	public EClass getTemporalTransaction() {
+		return temporalTransactionEClass;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
 	public EEnum getEType() {
 		return eTypeEEnum;
 	}
@@ -731,6 +749,8 @@ public class TraceabilityMMPackageImpl extends EPackageImpl implements Traceabil
 		valueEClass = createEClass(VALUE);
 		createEAttribute(valueEClass, VALUE__NAME);
 
+		temporalTransactionEClass = createEClass(TEMPORAL_TRANSACTION);
+
 		// Create enums
 		eTypeEEnum = createEEnum(ETYPE);
 	}
@@ -773,6 +793,7 @@ public class TraceabilityMMPackageImpl extends EPackageImpl implements Traceabil
 		viewEClass.getESuperTypes().add(this.getPermission());
 		attributeEClass.getESuperTypes().add(this.getProperty());
 		objectEClass.getESuperTypes().add(this.getProperty());
+		temporalTransactionEClass.getESuperTypes().add(this.getTransaction());
 
 		// Initialize classes and features; add operations and parameters
 		initEClass(nodeEClass, Node.class, "Node", IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
@@ -790,10 +811,10 @@ public class TraceabilityMMPackageImpl extends EPackageImpl implements Traceabil
 
 		initEClass(transactionConfEClass, TransactionConf.class, "TransactionConf", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 		initEAttribute(getTransactionConf_Repeat(), ecorePackage.getEInt(), "repeat", "1", 1, 1, TransactionConf.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-		initEAttribute(getTransactionConf_Final(), ecorePackage.getEBoolean(), "final", "false", 1, 1, TransactionConf.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEAttribute(getTransactionConf_Final(), ecorePackage.getEBoolean(), "final", "true", 1, 1, TransactionConf.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEReference(getTransactionConf_Transaction(), this.getTransaction(), this.getTransaction_Transactionconf(), "transaction", null, 1, -1, TransactionConf.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-		initEAttribute(getTransactionConf_IsTransactionInfinite(), ecorePackage.getEBoolean(), "isTransactionInfinite", null, 1, 1, TransactionConf.class, IS_TRANSIENT, IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, IS_DERIVED, IS_ORDERED);
-		initEAttribute(getTransactionConf_IsTransactionFinal(), ecorePackage.getEBoolean(), "isTransactionFinal", null, 1, 1, TransactionConf.class, IS_TRANSIENT, IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, IS_DERIVED, IS_ORDERED);
+		initEAttribute(getTransactionConf_IsTransactionInfinite(), ecorePackage.getEBoolean(), "isTransactionInfinite", "false", 1, 1, TransactionConf.class, IS_TRANSIENT, IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, IS_DERIVED, IS_ORDERED);
+		initEAttribute(getTransactionConf_IsTransactionFinal(), ecorePackage.getEBoolean(), "isTransactionFinal", "true", 1, 1, TransactionConf.class, IS_TRANSIENT, IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, IS_DERIVED, IS_ORDERED);
 
 		initEClass(productConfEClass, ProductConf.class, "ProductConf", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 		initEReference(getProductConf_Product(), this.getProduct(), this.getProduct_Productconf(), "product", null, 1, -1, ProductConf.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
@@ -835,6 +856,8 @@ public class TraceabilityMMPackageImpl extends EPackageImpl implements Traceabil
 
 		initEClass(valueEClass, Value.class, "Value", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 		initEAttribute(getValue_Name(), ecorePackage.getEString(), "name", null, 0, 1, Value.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+
+		initEClass(temporalTransactionEClass, TemporalTransaction.class, "TemporalTransaction", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 
 		// Initialize enums and add enum literals
 		initEEnum(eTypeEEnum, EType.class, "EType");
@@ -1144,6 +1167,17 @@ public class TraceabilityMMPackageImpl extends EPackageImpl implements Traceabil
 			   "svg.uri", "platform:/plugin/TFG-TrustOS_Traceability/icons/SVG/value.svg",
 			   "tool.name", "Value of attribute",
 			   "tool.description", "Create a value of one attribute"
+		   });
+		addAnnotation
+		  (temporalTransactionEClass,
+		   source,
+		   new String[] {
+			   "label", "name",
+			   "label.icon", "false",
+			   "figure", "svg",
+			   "svg.uri", "platform:/plugin/TFG-TrustOS_Traceability/icons/SVG/temporalTransaction.svg",
+			   "tool.name", "Temporal transaction",
+			   "tool.description", "Create a temporal transaction"
 		   });
 	}
 

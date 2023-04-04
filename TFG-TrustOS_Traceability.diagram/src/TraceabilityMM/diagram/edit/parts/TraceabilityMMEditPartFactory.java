@@ -26,6 +26,12 @@ public class TraceabilityMMEditPartFactory implements EditPartFactory {
 			case TraceabilityMM.diagram.edit.parts.SystemEditPart.VISUAL_ID:
 				return new TraceabilityMM.diagram.edit.parts.SystemEditPart(view);
 
+			case TraceabilityMM.diagram.edit.parts.TemporalTransactionEditPart.VISUAL_ID:
+				return new TraceabilityMM.diagram.edit.parts.TemporalTransactionEditPart(view);
+
+			case TraceabilityMM.diagram.edit.parts.TemporalTransactionNameEditPart.VISUAL_ID:
+				return new TraceabilityMM.diagram.edit.parts.TemporalTransactionNameEditPart(view);
+
 			case TraceabilityMM.diagram.edit.parts.TransactionEditPart.VISUAL_ID:
 				return new TraceabilityMM.diagram.edit.parts.TransactionEditPart(view);
 

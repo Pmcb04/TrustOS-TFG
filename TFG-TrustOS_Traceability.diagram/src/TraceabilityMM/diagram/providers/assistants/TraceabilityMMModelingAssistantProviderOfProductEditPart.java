@@ -58,6 +58,9 @@ public class TraceabilityMMModelingAssistantProviderOfProductEditPart
 		if (targetEditPart instanceof TraceabilityMM.diagram.edit.parts.ProductConfEditPart) {
 			types.add(TraceabilityMM.diagram.providers.TraceabilityMMElementTypes.ProductProductconf_4003);
 		}
+		if (targetEditPart instanceof TraceabilityMM.diagram.edit.parts.TemporalTransactionEditPart) {
+			types.add(TraceabilityMM.diagram.providers.TraceabilityMMElementTypes.ProductNext_transaction_4004);
+		}
 		if (targetEditPart instanceof TraceabilityMM.diagram.edit.parts.TransactionEditPart) {
 			types.add(TraceabilityMM.diagram.providers.TraceabilityMMElementTypes.ProductNext_transaction_4004);
 		}
@@ -84,6 +87,7 @@ public class TraceabilityMMModelingAssistantProviderOfProductEditPart
 		if (relationshipType == TraceabilityMM.diagram.providers.TraceabilityMMElementTypes.ProductProductconf_4003) {
 			types.add(TraceabilityMM.diagram.providers.TraceabilityMMElementTypes.ProductConf_2004);
 		} else if (relationshipType == TraceabilityMM.diagram.providers.TraceabilityMMElementTypes.ProductNext_transaction_4004) {
+			types.add(TraceabilityMM.diagram.providers.TraceabilityMMElementTypes.TemporalTransaction_2016);
 			types.add(TraceabilityMM.diagram.providers.TraceabilityMMElementTypes.Transaction_2001);
 		}
 		return types;
@@ -126,6 +130,7 @@ public class TraceabilityMMModelingAssistantProviderOfProductEditPart
 			IElementType relationshipType) {
 		List<IElementType> types = new ArrayList<IElementType>();
 		if (relationshipType == TraceabilityMM.diagram.providers.TraceabilityMMElementTypes.TransactionNext_product_4002) {
+			types.add(TraceabilityMM.diagram.providers.TraceabilityMMElementTypes.TemporalTransaction_2016);
 			types.add(TraceabilityMM.diagram.providers.TraceabilityMMElementTypes.Transaction_2001);
 		}
 		return types;

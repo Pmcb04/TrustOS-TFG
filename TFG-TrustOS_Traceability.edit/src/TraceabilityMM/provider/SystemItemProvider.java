@@ -194,6 +194,11 @@ public class SystemItemProvider
 
 		newChildDescriptors.add
 			(createChildParameter
+				(TraceabilityMMPackage.Literals.SYSTEM__NODES,
+				 TraceabilityMMFactory.eINSTANCE.createTemporalTransaction()));
+
+		newChildDescriptors.add
+			(createChildParameter
 				(TraceabilityMMPackage.Literals.SYSTEM__ASSETS,
 				 TraceabilityMMFactory.eINSTANCE.createTransactionConf()));
 

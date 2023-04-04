@@ -11,6 +11,26 @@
         href="TFG_TrustOS_Traceability.ecore#//System/nodes"/>
     <ownedChild>
       <domainMetaElement
+          href="TFG_TrustOS_Traceability.ecore#//TemporalTransaction"/>
+      <labelMappings
+          xsi:type="gmfmap:FeatureLabelMapping">
+        <diagramLabel
+            href="TFG_TrustOS_Traceability.gmfgraph#TemporalTransactionLabel"/>
+        <features
+            href="TFG_TrustOS_Traceability.ecore#//Node/name"/>
+      </labelMappings>
+      <tool
+          xsi:type="gmftool:CreationTool"
+          href="TFG_TrustOS_Traceability.gmftool#//@palette/@tools.0/@tools.9"/>
+      <diagramNode
+          href="TFG_TrustOS_Traceability.gmfgraph#TemporalTransaction"/>
+    </ownedChild>
+  </nodes>
+  <nodes>
+    <containmentFeature
+        href="TFG_TrustOS_Traceability.ecore#//System/nodes"/>
+    <ownedChild>
+      <domainMetaElement
           href="TFG_TrustOS_Traceability.ecore#//Transaction"/>
       <labelMappings
           xsi:type="gmfmap:FeatureLabelMapping">
@@ -21,7 +41,7 @@
       </labelMappings>
       <tool
           xsi:type="gmftool:CreationTool"
-          href="TFG_TrustOS_Traceability.gmftool#//@palette/@tools.0/@tools.9"/>
+          href="TFG_TrustOS_Traceability.gmftool#//@palette/@tools.0/@tools.10"/>
       <diagramNode
           href="TFG_TrustOS_Traceability.gmfgraph#Transaction"/>
     </ownedChild>
@@ -62,11 +82,11 @@
       </labelMappings>
       <tool
           xsi:type="gmftool:CreationTool"
-          href="TFG_TrustOS_Traceability.gmftool#//@palette/@tools.0/@tools.10"/>
+          href="TFG_TrustOS_Traceability.gmftool#//@palette/@tools.0/@tools.11"/>
       <diagramNode
           href="TFG_TrustOS_Traceability.gmfgraph#TransactionConf"/>
       <children
-          compartment="//@nodes.2/@ownedChild/@compartments.0">
+          compartment="//@nodes.3/@ownedChild/@compartments.0">
         <containmentFeature
             href="TFG_TrustOS_Traceability.ecore#//Asset/properties"/>
         <ownedChild
@@ -86,7 +106,7 @@
           <diagramNode
               href="TFG_TrustOS_Traceability.gmfgraph#Attribute"/>
           <children
-              compartment="//@nodes.2/@ownedChild/@children.0/@ownedChild/@compartments.0">
+              compartment="//@nodes.3/@ownedChild/@children.0/@ownedChild/@compartments.0">
             <containmentFeature
                 href="TFG_TrustOS_Traceability.ecore#//Attribute/values"/>
             <ownedChild>
@@ -101,20 +121,20 @@
               </labelMappings>
               <tool
                   xsi:type="gmftool:CreationTool"
-                  href="TFG_TrustOS_Traceability.gmftool#//@palette/@tools.0/@tools.11"/>
+                  href="TFG_TrustOS_Traceability.gmftool#//@palette/@tools.0/@tools.12"/>
               <diagramNode
                   href="TFG_TrustOS_Traceability.gmfgraph#Value"/>
             </ownedChild>
           </children>
           <compartments
-              children="//@nodes.2/@ownedChild/@children.0/@ownedChild/@children.0">
+              children="//@nodes.3/@ownedChild/@children.0/@ownedChild/@children.0">
             <compartment
                 href="TFG_TrustOS_Traceability.gmfgraph#AttributeValuesCompartment"/>
           </compartments>
         </ownedChild>
       </children>
       <children
-          compartment="//@nodes.2/@ownedChild/@compartments.0">
+          compartment="//@nodes.3/@ownedChild/@compartments.0">
         <containmentFeature
             href="TFG_TrustOS_Traceability.ecore#//Asset/properties"/>
         <ownedChild
@@ -134,26 +154,26 @@
           <diagramNode
               href="TFG_TrustOS_Traceability.gmfgraph#Object"/>
           <children
-              compartment="//@nodes.2/@ownedChild/@children.1/@ownedChild/@compartments.0"
-              referencedChild="//@nodes.2/@ownedChild/@children.0/@ownedChild">
+              compartment="//@nodes.3/@ownedChild/@children.1/@ownedChild/@compartments.0"
+              referencedChild="//@nodes.3/@ownedChild/@children.0/@ownedChild">
             <containmentFeature
                 href="TFG_TrustOS_Traceability.ecore#//Object/properties"/>
           </children>
           <children
-              compartment="//@nodes.2/@ownedChild/@children.1/@ownedChild/@compartments.0"
-              referencedChild="//@nodes.2/@ownedChild/@children.1/@ownedChild">
+              compartment="//@nodes.3/@ownedChild/@children.1/@ownedChild/@compartments.0"
+              referencedChild="//@nodes.3/@ownedChild/@children.1/@ownedChild">
             <containmentFeature
                 href="TFG_TrustOS_Traceability.ecore#//Object/properties"/>
           </children>
           <compartments
-              children="//@nodes.2/@ownedChild/@children.1/@ownedChild/@children.0 //@nodes.2/@ownedChild/@children.1/@ownedChild/@children.1">
+              children="//@nodes.3/@ownedChild/@children.1/@ownedChild/@children.0 //@nodes.3/@ownedChild/@children.1/@ownedChild/@children.1">
             <compartment
                 href="TFG_TrustOS_Traceability.gmfgraph#ObjectPropertiesCompartment"/>
           </compartments>
         </ownedChild>
       </children>
       <compartments
-          children="//@nodes.2/@ownedChild/@children.0 //@nodes.2/@ownedChild/@children.1">
+          children="//@nodes.3/@ownedChild/@children.0 //@nodes.3/@ownedChild/@children.1">
         <compartment
             href="TFG_TrustOS_Traceability.gmfgraph#TransactionConfPropertiesCompartment"/>
       </compartments>
@@ -179,19 +199,19 @@
       <diagramNode
           href="TFG_TrustOS_Traceability.gmfgraph#ProductConf"/>
       <children
-          compartment="//@nodes.3/@ownedChild/@compartments.0"
-          referencedChild="//@nodes.2/@ownedChild/@children.0/@ownedChild">
+          compartment="//@nodes.4/@ownedChild/@compartments.0"
+          referencedChild="//@nodes.3/@ownedChild/@children.0/@ownedChild">
         <containmentFeature
             href="TFG_TrustOS_Traceability.ecore#//Asset/properties"/>
       </children>
       <children
-          compartment="//@nodes.3/@ownedChild/@compartments.0"
-          referencedChild="//@nodes.2/@ownedChild/@children.1/@ownedChild">
+          compartment="//@nodes.4/@ownedChild/@compartments.0"
+          referencedChild="//@nodes.3/@ownedChild/@children.1/@ownedChild">
         <containmentFeature
             href="TFG_TrustOS_Traceability.ecore#//Asset/properties"/>
       </children>
       <compartments
-          children="//@nodes.3/@ownedChild/@children.0 //@nodes.3/@ownedChild/@children.1">
+          children="//@nodes.4/@ownedChild/@children.0 //@nodes.4/@ownedChild/@children.1">
         <compartment
             href="TFG_TrustOS_Traceability.gmfgraph#ProductConfPropertiesCompartment"/>
       </compartments>
@@ -217,19 +237,19 @@
       <diagramNode
           href="TFG_TrustOS_Traceability.gmfgraph#RolConf"/>
       <children
-          compartment="//@nodes.4/@ownedChild/@compartments.0"
-          referencedChild="//@nodes.2/@ownedChild/@children.0/@ownedChild">
+          compartment="//@nodes.5/@ownedChild/@compartments.0"
+          referencedChild="//@nodes.3/@ownedChild/@children.0/@ownedChild">
         <containmentFeature
             href="TFG_TrustOS_Traceability.ecore#//Asset/properties"/>
       </children>
       <children
-          compartment="//@nodes.4/@ownedChild/@compartments.0"
-          referencedChild="//@nodes.2/@ownedChild/@children.1/@ownedChild">
+          compartment="//@nodes.5/@ownedChild/@compartments.0"
+          referencedChild="//@nodes.3/@ownedChild/@children.1/@ownedChild">
         <containmentFeature
             href="TFG_TrustOS_Traceability.ecore#//Asset/properties"/>
       </children>
       <compartments
-          children="//@nodes.4/@ownedChild/@children.0 //@nodes.4/@ownedChild/@children.1">
+          children="//@nodes.5/@ownedChild/@children.0 //@nodes.5/@ownedChild/@children.1">
         <compartment
             href="TFG_TrustOS_Traceability.gmfgraph#RolConfPropertiesCompartment"/>
       </compartments>

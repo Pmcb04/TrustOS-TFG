@@ -114,6 +114,9 @@ public class TraceabilityMMNavigatorLabelProvider extends LabelProvider
 		case TraceabilityMM.diagram.edit.parts.RolConfEditPart.VISUAL_ID:
 			return getImage("Navigator?TopLevelNode?http://www.example.org/TraceabilityMM?RolConf", //$NON-NLS-1$
 					TraceabilityMM.diagram.providers.TraceabilityMMElementTypes.RolConf_2014);
+		case TraceabilityMM.diagram.edit.parts.TemporalTransactionEditPart.VISUAL_ID:
+			return getImage("Navigator?TopLevelNode?http://www.example.org/TraceabilityMM?TemporalTransaction", //$NON-NLS-1$
+					TraceabilityMM.diagram.providers.TraceabilityMMElementTypes.TemporalTransaction_2016);
 		case TraceabilityMM.diagram.edit.parts.AttributeEditPart.VISUAL_ID:
 			return getImage("Navigator?Node?http://www.example.org/TraceabilityMM?Attribute", //$NON-NLS-1$
 					TraceabilityMM.diagram.providers.TraceabilityMMElementTypes.Attribute_3001);
@@ -227,6 +230,8 @@ public class TraceabilityMMNavigatorLabelProvider extends LabelProvider
 			return getPermission_2013Text(view);
 		case TraceabilityMM.diagram.edit.parts.RolConfEditPart.VISUAL_ID:
 			return getRolConf_2014Text(view);
+		case TraceabilityMM.diagram.edit.parts.TemporalTransactionEditPart.VISUAL_ID:
+			return getTemporalTransaction_2016Text(view);
 		case TraceabilityMM.diagram.edit.parts.AttributeEditPart.VISUAL_ID:
 			return getAttribute_3001Text(view);
 		case TraceabilityMM.diagram.edit.parts.ObjectEditPart.VISUAL_ID:
@@ -434,6 +439,25 @@ public class TraceabilityMMNavigatorLabelProvider extends LabelProvider
 		} else {
 			TraceabilityMM.diagram.part.TraceabilityMMDiagramEditorPlugin.getInstance()
 					.logError("Parser was not found for label " + 5019); //$NON-NLS-1$
+			return ""; //$NON-NLS-1$
+		}
+	}
+
+	/**
+	* @generated
+	*/
+	private String getTemporalTransaction_2016Text(View view) {
+		IParser parser = TraceabilityMM.diagram.providers.TraceabilityMMParserProvider.getParser(
+				TraceabilityMM.diagram.providers.TraceabilityMMElementTypes.TemporalTransaction_2016,
+				view.getElement() != null ? view.getElement() : view,
+				TraceabilityMM.diagram.part.TraceabilityMMVisualIDRegistry
+						.getType(TraceabilityMM.diagram.edit.parts.TemporalTransactionNameEditPart.VISUAL_ID));
+		if (parser != null) {
+			return parser.getPrintString(new EObjectAdapter(view.getElement() != null ? view.getElement() : view),
+					ParserOptions.NONE.intValue());
+		} else {
+			TraceabilityMM.diagram.part.TraceabilityMMDiagramEditorPlugin.getInstance()
+					.logError("Parser was not found for label " + 5026); //$NON-NLS-1$
 			return ""; //$NON-NLS-1$
 		}
 	}

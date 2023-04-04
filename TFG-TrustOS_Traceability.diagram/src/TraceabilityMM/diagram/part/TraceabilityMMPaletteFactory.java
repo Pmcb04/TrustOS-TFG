@@ -44,9 +44,10 @@ public class TraceabilityMMPaletteFactory {
 		paletteContainer.add(createProduct7CreationTool());
 		paletteContainer.add(createProductConfiguration8CreationTool());
 		paletteContainer.add(createRolConfiguration9CreationTool());
-		paletteContainer.add(createTransaction10CreationTool());
-		paletteContainer.add(createTransactionConfiguration11CreationTool());
-		paletteContainer.add(createValueofattribute12CreationTool());
+		paletteContainer.add(createTemporaltransaction10CreationTool());
+		paletteContainer.add(createTransaction11CreationTool());
+		paletteContainer.add(createTransactionConfiguration12CreationTool());
+		paletteContainer.add(createValueofattribute13CreationTool());
 		return paletteContainer;
 	}
 
@@ -209,12 +210,27 @@ public class TraceabilityMMPaletteFactory {
 	/**
 	* @generated
 	*/
-	private ToolEntry createTransaction10CreationTool() {
+	private ToolEntry createTemporaltransaction10CreationTool() {
 		DefaultNodeToolEntry entry = new DefaultNodeToolEntry(
-				TraceabilityMM.diagram.part.Messages.Transaction10CreationTool_title,
-				TraceabilityMM.diagram.part.Messages.Transaction10CreationTool_desc, Collections
+				TraceabilityMM.diagram.part.Messages.Temporaltransaction10CreationTool_title,
+				TraceabilityMM.diagram.part.Messages.Temporaltransaction10CreationTool_desc, Collections.singletonList(
+						TraceabilityMM.diagram.providers.TraceabilityMMElementTypes.TemporalTransaction_2016));
+		entry.setId("createTemporaltransaction10CreationTool"); //$NON-NLS-1$
+		entry.setSmallIcon(TraceabilityMM.diagram.providers.TraceabilityMMElementTypes.getImageDescriptor(
+				TraceabilityMM.diagram.providers.TraceabilityMMElementTypes.TemporalTransaction_2016));
+		entry.setLargeIcon(entry.getSmallIcon());
+		return entry;
+	}
+
+	/**
+	* @generated
+	*/
+	private ToolEntry createTransaction11CreationTool() {
+		DefaultNodeToolEntry entry = new DefaultNodeToolEntry(
+				TraceabilityMM.diagram.part.Messages.Transaction11CreationTool_title,
+				TraceabilityMM.diagram.part.Messages.Transaction11CreationTool_desc, Collections
 						.singletonList(TraceabilityMM.diagram.providers.TraceabilityMMElementTypes.Transaction_2001));
-		entry.setId("createTransaction10CreationTool"); //$NON-NLS-1$
+		entry.setId("createTransaction11CreationTool"); //$NON-NLS-1$
 		entry.setSmallIcon(TraceabilityMM.diagram.providers.TraceabilityMMElementTypes
 				.getImageDescriptor(TraceabilityMM.diagram.providers.TraceabilityMMElementTypes.Transaction_2001));
 		entry.setLargeIcon(entry.getSmallIcon());
@@ -224,13 +240,13 @@ public class TraceabilityMMPaletteFactory {
 	/**
 	* @generated
 	*/
-	private ToolEntry createTransactionConfiguration11CreationTool() {
+	private ToolEntry createTransactionConfiguration12CreationTool() {
 		DefaultNodeToolEntry entry = new DefaultNodeToolEntry(
-				TraceabilityMM.diagram.part.Messages.TransactionConfiguration11CreationTool_title,
-				TraceabilityMM.diagram.part.Messages.TransactionConfiguration11CreationTool_desc,
+				TraceabilityMM.diagram.part.Messages.TransactionConfiguration12CreationTool_title,
+				TraceabilityMM.diagram.part.Messages.TransactionConfiguration12CreationTool_desc,
 				Collections.singletonList(
 						TraceabilityMM.diagram.providers.TraceabilityMMElementTypes.TransactionConf_2003));
-		entry.setId("createTransactionConfiguration11CreationTool"); //$NON-NLS-1$
+		entry.setId("createTransactionConfiguration12CreationTool"); //$NON-NLS-1$
 		entry.setSmallIcon(TraceabilityMM.diagram.providers.TraceabilityMMElementTypes
 				.getImageDescriptor(TraceabilityMM.diagram.providers.TraceabilityMMElementTypes.TransactionConf_2003));
 		entry.setLargeIcon(entry.getSmallIcon());
@@ -240,12 +256,12 @@ public class TraceabilityMMPaletteFactory {
 	/**
 	* @generated
 	*/
-	private ToolEntry createValueofattribute12CreationTool() {
+	private ToolEntry createValueofattribute13CreationTool() {
 		DefaultNodeToolEntry entry = new DefaultNodeToolEntry(
-				TraceabilityMM.diagram.part.Messages.Valueofattribute12CreationTool_title,
-				TraceabilityMM.diagram.part.Messages.Valueofattribute12CreationTool_desc,
+				TraceabilityMM.diagram.part.Messages.Valueofattribute13CreationTool_title,
+				TraceabilityMM.diagram.part.Messages.Valueofattribute13CreationTool_desc,
 				Collections.singletonList(TraceabilityMM.diagram.providers.TraceabilityMMElementTypes.Value_3005));
-		entry.setId("createValueofattribute12CreationTool"); //$NON-NLS-1$
+		entry.setId("createValueofattribute13CreationTool"); //$NON-NLS-1$
 		entry.setSmallIcon(TraceabilityMM.diagram.providers.TraceabilityMMElementTypes
 				.getImageDescriptor(TraceabilityMM.diagram.providers.TraceabilityMMElementTypes.Value_3005));
 		entry.setLargeIcon(entry.getSmallIcon());

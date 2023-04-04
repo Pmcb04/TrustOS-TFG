@@ -13,7 +13,7 @@
  */]
 [template public generateSystem(system : System)]
 [comment @main/]
-[generateAllCSV()/]
+[generateAllCSV(system)/]
 [generateAllComponents(system)/]
 [generateUtil(system)/]
 [/template]

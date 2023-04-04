@@ -148,6 +148,15 @@
       </actualFigure>
       <accessors accessor="getFigureValueLabelFigure" figure="//@figures.0/@descriptors.11/@actualFigure/@children.0"/>
     </descriptors>
+    <descriptors name="TemporalTransactionFigure">
+      <actualFigure xsi:type="gmfgraph:SVGFigure" name="TemporalTransactionFigure" documentURI="platform:/plugin/TFG-TrustOS_Traceability/icons/SVG/temporalTransaction.svg">
+        <border xsi:type="gmfgraph:MarginBorder">
+          <insets top="5" left="5" bottom="5" right="5"/>
+        </border>
+        <children xsi:type="gmfgraph:Label" name="TemporalTransactionLabelFigure" text="TemporalTransaction"/>
+      </actualFigure>
+      <accessors accessor="getFigureTemporalTransactionLabelFigure" figure="//@figures.0/@descriptors.12/@actualFigure/@children.0"/>
+    </descriptors>
     <descriptors name="TransactionTransactionconfFigure">
       <actualFigure xsi:type="gmfgraph:PolylineConnection" name="TransactionTransactionconfFigure" lineKind="LINE_DASH" targetDecoration="//@figures.0/@figures.0">
         <foregroundColor xsi:type="gmfgraph:RGBColor" green="38" blue="175"/>
@@ -209,6 +218,7 @@
   <nodes name="Attribute" figure="AttributeFigure"/>
   <nodes name="Object" figure="ObjectFigure"/>
   <nodes name="Value" figure="ValueFigure"/>
+  <nodes name="TemporalTransaction" figure="TemporalTransactionFigure"/>
   <connections name="TransactionTransactionconf" figure="TransactionTransactionconfFigure"/>
   <connections name="TransactionNext_product" figure="TransactionNext_productFigure"/>
   <connections name="ProductProductconf" figure="ProductProductconfFigure"/>
@@ -232,6 +242,7 @@
   <labels name="AttributeLabel" figure="AttributeFigure" elementIcon="false" accessor="//@figures.0/@descriptors.9/@accessors.0"/>
   <labels name="ObjectLabel" figure="ObjectFigure" elementIcon="false" accessor="//@figures.0/@descriptors.10/@accessors.0"/>
   <labels name="ValueLabel" figure="ValueFigure" elementIcon="false" accessor="//@figures.0/@descriptors.11/@accessors.0"/>
+  <labels name="TemporalTransactionLabel" figure="TemporalTransactionFigure" elementIcon="false" accessor="//@figures.0/@descriptors.12/@accessors.0"/>
   <labels name="TransactionTransactionconfExternalLabel" figure="TransactionTransactionconfExternalLabelFigure" elementIcon="false"/>
   <labels name="TransactionNext_productExternalLabel" figure="TransactionNext_productExternalLabelFigure" elementIcon="false"/>
   <labels name="ProductProductconfExternalLabel" figure="ProductProductconfExternalLabelFigure" elementIcon="false"/>

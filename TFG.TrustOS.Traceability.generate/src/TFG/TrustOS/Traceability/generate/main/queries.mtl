@@ -237,7 +237,7 @@
  * @param property: Property to evaluate the title
  */]
 [query public chooseTitle(property : Property) : String = 
-	if (property.title.oclIsUndefined()) then property.id.toUpperFirst()
+	if (property.title.oclIsUndefined() or property.title.oclIsInvalid() or property.title = '') then property.id.toUpperFirst()
 	else property.title
 	endif
 /]

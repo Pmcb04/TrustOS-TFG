@@ -27,6 +27,10 @@ public class SystemItemSemanticEditPolicy
 	* @generated
 	*/
 	protected Command getCreateCommand(CreateElementRequest req) {
+		if (TraceabilityMM.diagram.providers.TraceabilityMMElementTypes.TemporalTransaction_2016 == req
+				.getElementType()) {
+			return getGEFWrapper(new TraceabilityMM.diagram.edit.commands.TemporalTransactionCreateCommand(req));
+		}
 		if (TraceabilityMM.diagram.providers.TraceabilityMMElementTypes.Transaction_2001 == req.getElementType()) {
 			return getGEFWrapper(new TraceabilityMM.diagram.edit.commands.TransactionCreateCommand(req));
 		}

@@ -804,6 +804,61 @@ public interface TraceabilityMMPackage extends EPackage {
 	int VALUE_FEATURE_COUNT = 1;
 
 	/**
+	 * The meta object id for the '{@link TraceabilityMM.impl.TemporalTransactionImpl <em>Temporal Transaction</em>}' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see TraceabilityMM.impl.TemporalTransactionImpl
+	 * @see TraceabilityMM.impl.TraceabilityMMPackageImpl#getTemporalTransaction()
+	 * @generated
+	 */
+	int TEMPORAL_TRANSACTION = 16;
+
+	/**
+	 * The feature id for the '<em><b>Name</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int TEMPORAL_TRANSACTION__NAME = TRANSACTION__NAME;
+
+	/**
+	 * The feature id for the '<em><b>Transactionconf</b></em>' reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int TEMPORAL_TRANSACTION__TRANSACTIONCONF = TRANSACTION__TRANSACTIONCONF;
+
+	/**
+	 * The feature id for the '<em><b>Next product</b></em>' reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int TEMPORAL_TRANSACTION__NEXT_PRODUCT = TRANSACTION__NEXT_PRODUCT;
+
+	/**
+	 * The feature id for the '<em><b>Previous product</b></em>' reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int TEMPORAL_TRANSACTION__PREVIOUS_PRODUCT = TRANSACTION__PREVIOUS_PRODUCT;
+
+	/**
+	 * The number of structural features of the '<em>Temporal Transaction</em>' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int TEMPORAL_TRANSACTION_FEATURE_COUNT = TRANSACTION_FEATURE_COUNT + 0;
+
+	/**
 	 * The meta object id for the '{@link TraceabilityMM.EType <em>EType</em>}' enum.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -811,7 +866,7 @@ public interface TraceabilityMMPackage extends EPackage {
 	 * @see TraceabilityMM.impl.TraceabilityMMPackageImpl#getEType()
 	 * @generated
 	 */
-	int ETYPE = 16;
+	int ETYPE = 17;
 
 
 	/**
@@ -1294,6 +1349,16 @@ public interface TraceabilityMMPackage extends EPackage {
 	EAttribute getValue_Name();
 
 	/**
+	 * Returns the meta object for class '{@link TraceabilityMM.TemporalTransaction <em>Temporal Transaction</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for class '<em>Temporal Transaction</em>'.
+	 * @see TraceabilityMM.TemporalTransaction
+	 * @generated
+	 */
+	EClass getTemporalTransaction();
+
+	/**
 	 * Returns the meta object for enum '{@link TraceabilityMM.EType <em>EType</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -1716,6 +1781,16 @@ public interface TraceabilityMMPackage extends EPackage {
 		 * @generated
 		 */
 		EAttribute VALUE__NAME = eINSTANCE.getValue_Name();
+
+		/**
+		 * The meta object literal for the '{@link TraceabilityMM.impl.TemporalTransactionImpl <em>Temporal Transaction</em>}' class.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @see TraceabilityMM.impl.TemporalTransactionImpl
+		 * @see TraceabilityMM.impl.TraceabilityMMPackageImpl#getTemporalTransaction()
+		 * @generated
+		 */
+		EClass TEMPORAL_TRANSACTION = eINSTANCE.getTemporalTransaction();
 
 		/**
 		 * The meta object literal for the '{@link TraceabilityMM.EType <em>EType</em>}' enum.

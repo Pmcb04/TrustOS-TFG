@@ -13,6 +13,8 @@ import TraceabilityMM.Product;
 import TraceabilityMM.ProductConf;
 import TraceabilityMM.Property;
 import TraceabilityMM.RolConf;
+import TraceabilityMM.TemporalTransaction;
+import TraceabilityMM.TermporalTransaction;
 import TraceabilityMM.TraceabilityMMPackage;
 import TraceabilityMM.Transaction;
 import TraceabilityMM.TransactionConf;
@@ -133,6 +135,8 @@ public class TraceabilityMMValidator extends EObjectValidator {
 				return validateObject((TraceabilityMM.Object)value, diagnostics, context);
 			case TraceabilityMMPackage.VALUE:
 				return validateValue((Value)value, diagnostics, context);
+			case TraceabilityMMPackage.TEMPORAL_TRANSACTION:
+				return validateTemporalTransaction((TemporalTransaction)value, diagnostics, context);
 			case TraceabilityMMPackage.ETYPE:
 				return validateEType((EType)value, diagnostics, context);
 			default:
@@ -371,6 +375,15 @@ public class TraceabilityMMValidator extends EObjectValidator {
 	 */
 	public boolean validateValue(Value value, DiagnosticChain diagnostics, Map<Object, Object> context) {
 		return validate_EveryDefaultConstraint(value, diagnostics, context);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public boolean validateTemporalTransaction(TemporalTransaction temporalTransaction, DiagnosticChain diagnostics, Map<Object, Object> context) {
+		return validate_EveryDefaultConstraint(temporalTransaction, diagnostics, context);
 	}
 
 	/**

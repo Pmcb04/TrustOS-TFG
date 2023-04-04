@@ -67,6 +67,10 @@ public class TraceabilityMMDiagramUpdater {
 			TraceabilityMM.Node childElement = (TraceabilityMM.Node) it.next();
 			int visualID = TraceabilityMM.diagram.part.TraceabilityMMVisualIDRegistry.getNodeVisualID(view,
 					childElement);
+			if (visualID == TraceabilityMM.diagram.edit.parts.TemporalTransactionEditPart.VISUAL_ID) {
+				result.add(new TraceabilityMM.diagram.part.TraceabilityMMNodeDescriptor(childElement, visualID));
+				continue;
+			}
 			if (visualID == TraceabilityMM.diagram.edit.parts.TransactionEditPart.VISUAL_ID) {
 				result.add(new TraceabilityMM.diagram.part.TraceabilityMMNodeDescriptor(childElement, visualID));
 				continue;
@@ -326,6 +330,8 @@ public class TraceabilityMMDiagramUpdater {
 		switch (TraceabilityMM.diagram.part.TraceabilityMMVisualIDRegistry.getVisualID(view)) {
 		case TraceabilityMM.diagram.edit.parts.SystemEditPart.VISUAL_ID:
 			return getSystem_1000ContainedLinks(view);
+		case TraceabilityMM.diagram.edit.parts.TemporalTransactionEditPart.VISUAL_ID:
+			return getTemporalTransaction_2016ContainedLinks(view);
 		case TraceabilityMM.diagram.edit.parts.TransactionEditPart.VISUAL_ID:
 			return getTransaction_2001ContainedLinks(view);
 		case TraceabilityMM.diagram.edit.parts.ProductEditPart.VISUAL_ID:
@@ -363,6 +369,8 @@ public class TraceabilityMMDiagramUpdater {
 	*/
 	public static List<TraceabilityMM.diagram.part.TraceabilityMMLinkDescriptor> getIncomingLinks(View view) {
 		switch (TraceabilityMM.diagram.part.TraceabilityMMVisualIDRegistry.getVisualID(view)) {
+		case TraceabilityMM.diagram.edit.parts.TemporalTransactionEditPart.VISUAL_ID:
+			return getTemporalTransaction_2016IncomingLinks(view);
 		case TraceabilityMM.diagram.edit.parts.TransactionEditPart.VISUAL_ID:
 			return getTransaction_2001IncomingLinks(view);
 		case TraceabilityMM.diagram.edit.parts.ProductEditPart.VISUAL_ID:
@@ -400,6 +408,8 @@ public class TraceabilityMMDiagramUpdater {
 	*/
 	public static List<TraceabilityMM.diagram.part.TraceabilityMMLinkDescriptor> getOutgoingLinks(View view) {
 		switch (TraceabilityMM.diagram.part.TraceabilityMMVisualIDRegistry.getVisualID(view)) {
+		case TraceabilityMM.diagram.edit.parts.TemporalTransactionEditPart.VISUAL_ID:
+			return getTemporalTransaction_2016OutgoingLinks(view);
 		case TraceabilityMM.diagram.edit.parts.TransactionEditPart.VISUAL_ID:
 			return getTransaction_2001OutgoingLinks(view);
 		case TraceabilityMM.diagram.edit.parts.ProductEditPart.VISUAL_ID:
@@ -438,6 +448,18 @@ public class TraceabilityMMDiagramUpdater {
 	public static List<TraceabilityMM.diagram.part.TraceabilityMMLinkDescriptor> getSystem_1000ContainedLinks(
 			View view) {
 		return Collections.emptyList();
+	}
+
+	/**
+	 * @generated
+	 */
+	public static List<TraceabilityMM.diagram.part.TraceabilityMMLinkDescriptor> getTemporalTransaction_2016ContainedLinks(
+			View view) {
+		TraceabilityMM.TemporalTransaction modelElement = (TraceabilityMM.TemporalTransaction) view.getElement();
+		LinkedList<TraceabilityMM.diagram.part.TraceabilityMMLinkDescriptor> result = new LinkedList<TraceabilityMM.diagram.part.TraceabilityMMLinkDescriptor>();
+		result.addAll(getOutgoingFeatureModelFacetLinks_Transaction_Transactionconf_4001(modelElement));
+		result.addAll(getOutgoingFeatureModelFacetLinks_Transaction_Next_product_4002(modelElement));
+		return result;
 	}
 
 	/**
@@ -571,6 +593,19 @@ public class TraceabilityMMDiagramUpdater {
 	public static List<TraceabilityMM.diagram.part.TraceabilityMMLinkDescriptor> getObject_3004ContainedLinks(
 			View view) {
 		return Collections.emptyList();
+	}
+
+	/**
+	 * @generated
+	 */
+	public static List<TraceabilityMM.diagram.part.TraceabilityMMLinkDescriptor> getTemporalTransaction_2016IncomingLinks(
+			View view) {
+		TraceabilityMM.TemporalTransaction modelElement = (TraceabilityMM.TemporalTransaction) view.getElement();
+		Map<EObject, Collection<EStructuralFeature.Setting>> crossReferences = EcoreUtil.CrossReferencer
+				.find(view.eResource().getResourceSet().getResources());
+		LinkedList<TraceabilityMM.diagram.part.TraceabilityMMLinkDescriptor> result = new LinkedList<TraceabilityMM.diagram.part.TraceabilityMMLinkDescriptor>();
+		result.addAll(getIncomingFeatureModelFacetLinks_Product_Next_transaction_4004(modelElement, crossReferences));
+		return result;
 	}
 
 	/**
@@ -740,6 +775,18 @@ public class TraceabilityMMDiagramUpdater {
 				.find(view.eResource().getResourceSet().getResources());
 		LinkedList<TraceabilityMM.diagram.part.TraceabilityMMLinkDescriptor> result = new LinkedList<TraceabilityMM.diagram.part.TraceabilityMMLinkDescriptor>();
 		result.addAll(getIncomingFeatureModelFacetLinks_Permission_Refers_4005(modelElement, crossReferences));
+		return result;
+	}
+
+	/**
+	 * @generated
+	 */
+	public static List<TraceabilityMM.diagram.part.TraceabilityMMLinkDescriptor> getTemporalTransaction_2016OutgoingLinks(
+			View view) {
+		TraceabilityMM.TemporalTransaction modelElement = (TraceabilityMM.TemporalTransaction) view.getElement();
+		LinkedList<TraceabilityMM.diagram.part.TraceabilityMMLinkDescriptor> result = new LinkedList<TraceabilityMM.diagram.part.TraceabilityMMLinkDescriptor>();
+		result.addAll(getOutgoingFeatureModelFacetLinks_Transaction_Transactionconf_4001(modelElement));
+		result.addAll(getOutgoingFeatureModelFacetLinks_Transaction_Next_product_4002(modelElement));
 		return result;
 	}
 

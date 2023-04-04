@@ -1,0 +1,16 @@
+authority_name;product_id;canCreate
+Maquina;1;true
+Maquina;2;false
+Maquina;4;true
+Maquina;8;false
+Maquina;12;true
+Pintor;11;false
+Operario;1;false
+Operario;5;false
+Operario;7;true
+Operario;9;false
+Operario;10;true
+Mecanico;6;false
+Mecanico;7;false
+Mecanico;11;true
+Vendedor;3;true

@@ -371,6 +371,29 @@ public class TraceabilityMMItemProviderAdapterFactory extends TraceabilityMMAdap
 	}
 
 	/**
+	 * This keeps track of the one adapter used for all {@link TraceabilityMM.TemporalTransaction} instances.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	protected TemporalTransactionItemProvider temporalTransactionItemProvider;
+
+	/**
+	 * This creates an adapter for a {@link TraceabilityMM.TemporalTransaction}.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public Adapter createTemporalTransactionAdapter() {
+		if (temporalTransactionItemProvider == null) {
+			temporalTransactionItemProvider = new TemporalTransactionItemProvider(this);
+		}
+
+		return temporalTransactionItemProvider;
+	}
+
+	/**
 	 * This returns the root adapter factory that contains this factory.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -482,6 +505,7 @@ public class TraceabilityMMItemProviderAdapterFactory extends TraceabilityMMAdap
 		if (attributeItemProvider != null) attributeItemProvider.dispose();
 		if (objectItemProvider != null) objectItemProvider.dispose();
 		if (valueItemProvider != null) valueItemProvider.dispose();
+		if (temporalTransactionItemProvider != null) temporalTransactionItemProvider.dispose();
 	}
 
 }

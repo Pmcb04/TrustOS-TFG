@@ -12,6 +12,8 @@ import TraceabilityMM.Product;
 import TraceabilityMM.ProductConf;
 import TraceabilityMM.Rol;
 import TraceabilityMM.RolConf;
+import TraceabilityMM.TemporalTransaction;
+import TraceabilityMM.TermporalTransaction;
 import TraceabilityMM.TraceabilityMMFactory;
 import TraceabilityMM.TraceabilityMMPackage;
 import TraceabilityMM.Transaction;
@@ -85,6 +87,7 @@ public class TraceabilityMMFactoryImpl extends EFactoryImpl implements Traceabil
 			case TraceabilityMMPackage.ATTRIBUTE: return createAttribute();
 			case TraceabilityMMPackage.OBJECT: return createObject();
 			case TraceabilityMMPackage.VALUE: return createValue();
+			case TraceabilityMMPackage.TEMPORAL_TRANSACTION: return createTemporalTransaction();
 			default:
 				throw new IllegalArgumentException("The class '" + eClass.getName() + "' is not a valid classifier");
 		}
@@ -248,6 +251,16 @@ public class TraceabilityMMFactoryImpl extends EFactoryImpl implements Traceabil
 	public Value createValue() {
 		ValueImpl value = new ValueImpl();
 		return value;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public TemporalTransaction createTemporalTransaction() {
+		TemporalTransactionImpl temporalTransaction = new TemporalTransactionImpl();
+		return temporalTransaction;
 	}
 
 	/**

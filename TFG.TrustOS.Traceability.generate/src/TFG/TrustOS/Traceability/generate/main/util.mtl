@@ -19,14 +19,13 @@
 [/template]
 
 
-
 [**
  * Template to generate the images-asset.js file, it indicate the icon of each type of node
  * @param system : System base to start the generate
  */]
 
 [template private generateTypesNamesUtil(system : System)]
-[file ('util/nodes-names.js', false, 'UTF-8')]
+[file ('generate/' + system.name + '/util/nodes-names.js', false, 'UTF-8')]
 export const NAMES = {
   [for (node : Node | getAllNodesUniques(system))]
     [replaceWhitespaceByUnderline(node.name.toUpper())/]: '[node.name/]',
@@ -34,7 +33,7 @@ export const NAMES = {
 }
 [/file]
 
-[file ('util/nodes-types.js', false, 'UTF-8')]
+[file ('generate/' + system.name + '/util/nodes-types.js', false, 'UTF-8')]
 export const TYPES = {
    [for (asset : Asset | getAllAssetsUnique(system))]
 	[replaceWhitespaceByUnderline(asset.type.toUpper())/]: '[replaceUnderlineByWhitespaces(asset.type)/]',
@@ -42,7 +41,7 @@ export const TYPES = {
 }
 [/file]
 
-[file ('util/asset-images-name.js', false, 'UTF-8')]
+[file ('generate/' + system.name + '/util/asset-image-name.js', false, 'UTF-8')]
 import React from 'react'
 import { IconFolderRegular, IconBoxRegular, IconUserAccountRegular, IconFileErrorRegular } from '@telefonica/mistica'
 
@@ -93,7 +92,7 @@ function alphaNumberRandom(length) {
  * @param system : System base to start the generate
  */]
 [template private generateMetadataUtil(system: System)]
-[file ('metadata/metadata.utils.js', false, 'UTF-8')]
+[file ('generate/' + system.name + '/metadata/metadata.utils.js', false, 'UTF-8')]
 import React from 'react'
 
 import { TYPES } from '../../util/nodes-types'
@@ -116,11 +115,15 @@ export function process(data, edit_fields, create, type, rol) {
 }
 
 export function getPermissions(type, rol) {
+  let canView = [ '[' /][ ']' /] 
+  let canEdit = [ '[' /][ ']' /] 
   switch (type) {
 	[for (asset : Asset | getAllAssetsUnique(system))]
 	case TYPES.[replaceWhitespaceByUnderline(asset.type.toUpper())/]:
         return permissions[asset.type/](rol)
 	[/for]
+	default: 
+    return { canView, canEdit }
   }
 }
 [/file]
@@ -132,7 +135,7 @@ export function getPermissions(type, rol) {
  * @param system : System base to start the generate
  */]
 [template private generateAuthoritiesConstants(system: System)]
-[file ('java/AuthoritiesConstants.java', false, 'UTF-8')]
+[file ('generate/' + system.name + '/java/AuthoritiesConstants.java', false, 'UTF-8')]
 package com.mycompany.myapp.security;
 
 /**
@@ -163,7 +166,7 @@ public final class AuthoritiesConstants {
  */]
 [template private generateActions(system : System)]
 [for (transaction : Transaction | system.getTransactions())]
-[generateAction(transaction)/]
+[generateAction(transaction, system.name)/]
 [/for]
 [/template]
 
@@ -182,9 +185,10 @@ public final class AuthoritiesConstants {
 [**
  * Template to generate one action.
  * @param system : System base to start the generate
+ * @param pathSystem : Path to start generate the page
  */]
-[template private generateAction(transaction : Transaction)]
-[file ('asset-action/actions/' + eliminateWhitespaces(transaction.name) + '.js', false, 'UTF-8')]
+[template private generateAction(transaction : Transaction, pathSystem : String)]
+[file ('generate/' + pathSystem + '/asset-action/actions/' + eliminateWhitespaces(transaction.name) + '.js', false, 'UTF-8')]
 
 import { TYPES } from '../../../shared/util/nodes-types'
 import { NAMES } from '../../../shared/util/nodes-names'
@@ -214,7 +218,7 @@ export default {
  * @param system : System base to start the generate
  */]
 [template private generateGetAction(system : System)]
-[file ('asset-action/asset-action-screen.util.js', false, 'UTF-8')]
+[file ('generate/' + system.name + '/asset-action/asset-action-screen.util.js', false, 'UTF-8')]
 import { TYPES } from '../../shared/util/nodes-types'
 
 [for (transaction : Transaction | system.getTransactions())]

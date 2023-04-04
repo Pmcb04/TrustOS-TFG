@@ -1,0 +1,9 @@
+id;name;repeat;final_transaction
+1;Pintar;-1;false
+2;MontarBase;1;true
+3;MontarMotor;1;true
+4;MontarEsqueleto;1;true
+5;MontarVolante;1;true
+6;MontarRuedas;1;true
+7;MontarCarroceria;1;true
+8;Vender;1;true

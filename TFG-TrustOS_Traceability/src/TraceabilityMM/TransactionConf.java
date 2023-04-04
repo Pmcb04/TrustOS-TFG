@@ -75,6 +75,7 @@ public interface TransactionConf extends Asset {
 
 	/**
 	 * Returns the value of the '<em><b>Is Transaction Infinite</b></em>' attribute.
+	 * The default value is <code>"false"</code>.
 	 * <!-- begin-user-doc -->
 	 * <p>
 	 * If the meaning of the '<em>Is Transaction Infinite</em>' attribute isn't clear,
@@ -84,7 +85,7 @@ public interface TransactionConf extends Asset {
 	 * @return the value of the '<em>Is Transaction Infinite</em>' attribute.
 	 * @see #setIsTransactionInfinite(boolean)
 	 * @see TraceabilityMM.TraceabilityMMPackage#getTransactionConf_IsTransactionInfinite()
-	 * @model required="true" transient="true" volatile="true" derived="true"
+	 * @model default="false" required="true" transient="true" volatile="true" derived="true"
 	 *        annotation="http://www.eclipse.org/emf/2002/Ecore/OCL/Pivot derivation='self.repeat = -1'"
 	 * @generated
 	 */
@@ -102,6 +103,7 @@ public interface TransactionConf extends Asset {
 
 	/**
 	 * Returns the value of the '<em><b>Is Transaction Final</b></em>' attribute.
+	 * The default value is <code>"true"</code>.
 	 * <!-- begin-user-doc -->
 	 * <p>
 	 * If the meaning of the '<em>Is Transaction Final</em>' attribute isn't clear,
@@ -111,7 +113,7 @@ public interface TransactionConf extends Asset {
 	 * @return the value of the '<em>Is Transaction Final</em>' attribute.
 	 * @see #setIsTransactionFinal(boolean)
 	 * @see TraceabilityMM.TraceabilityMMPackage#getTransactionConf_IsTransactionFinal()
-	 * @model required="true" transient="true" volatile="true" derived="true"
+	 * @model default="true" required="true" transient="true" volatile="true" derived="true"
 	 *        annotation="http://www.eclipse.org/emf/2002/Ecore/OCL/Pivot derivation='self.final'"
 	 * @generated
 	 */
@@ -129,7 +131,7 @@ public interface TransactionConf extends Asset {
 
 	/**
 	 * Returns the value of the '<em><b>Final</b></em>' attribute.
-	 * The default value is <code>"false"</code>.
+	 * The default value is <code>"true"</code>.
 	 * <!-- begin-user-doc -->
 	 * <p>
 	 * If the meaning of the '<em>Final</em>' attribute isn't clear,
@@ -139,7 +141,7 @@ public interface TransactionConf extends Asset {
 	 * @return the value of the '<em>Final</em>' attribute.
 	 * @see #setFinal(boolean)
 	 * @see TraceabilityMM.TraceabilityMMPackage#getTransactionConf_Final()
-	 * @model default="false" required="true"
+	 * @model default="true" required="true"
 	 * @generated
 	 */
 	boolean isFinal();

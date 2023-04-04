@@ -109,19 +109,19 @@
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="repeat" lowerBound="1"
         eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EInt" defaultValueLiteral="1"/>
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="final" lowerBound="1" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EBoolean"
-        defaultValueLiteral="false"/>
+        defaultValueLiteral="true"/>
     <eStructuralFeatures xsi:type="ecore:EReference" name="transaction" lowerBound="1"
         upperBound="-1" eType="#//Transaction" eOpposite="#//Transaction/transactionconf"/>
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="isTransactionInfinite"
         lowerBound="1" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EBoolean"
-        volatile="true" transient="true" derived="true">
+        volatile="true" transient="true" defaultValueLiteral="false" derived="true">
       <eAnnotations source="http://www.eclipse.org/emf/2002/Ecore/OCL/Pivot">
         <details key="derivation" value="self.repeat = -1"/>
       </eAnnotations>
     </eStructuralFeatures>
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="isTransactionFinal" lowerBound="1"
         eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EBoolean" volatile="true"
-        transient="true" derived="true">
+        transient="true" defaultValueLiteral="true" derived="true">
       <eAnnotations source="http://www.eclipse.org/emf/2002/Ecore/OCL/Pivot">
         <details key="derivation" value="self.final"/>
       </eAnnotations>
@@ -337,5 +337,15 @@
     <eLiterals name="Boolean" value="3"/>
     <eLiterals name="Date" value="4"/>
     <eLiterals name="Email" value="5"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="TemporalTransaction" eSuperTypes="#//Transaction">
+    <eAnnotations source="gmf.node">
+      <details key="label" value="name"/>
+      <details key="label.icon" value="false"/>
+      <details key="figure" value="svg"/>
+      <details key="svg.uri" value="platform:/plugin/TFG-TrustOS_Traceability/icons/SVG/temporalTransaction.svg"/>
+      <details key="tool.name" value="Temporal transaction"/>
+      <details key="tool.description" value="Create a temporal transaction"/>
+    </eAnnotations>
   </eClassifiers>
 </ecore:EPackage>

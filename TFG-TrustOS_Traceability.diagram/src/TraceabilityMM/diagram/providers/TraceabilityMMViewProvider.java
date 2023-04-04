@@ -130,6 +130,7 @@ public class TraceabilityMMViewProvider extends AbstractProvider implements IVie
 					return false; // foreign diagram
 				}
 				switch (visualID) {
+				case TraceabilityMM.diagram.edit.parts.TemporalTransactionEditPart.VISUAL_ID:
 				case TraceabilityMM.diagram.edit.parts.TransactionEditPart.VISUAL_ID:
 				case TraceabilityMM.diagram.edit.parts.ProductEditPart.VISUAL_ID:
 				case TraceabilityMM.diagram.edit.parts.TransactionConfEditPart.VISUAL_ID:
@@ -154,7 +155,8 @@ public class TraceabilityMMViewProvider extends AbstractProvider implements IVie
 				}
 			}
 		}
-		return TraceabilityMM.diagram.edit.parts.TransactionEditPart.VISUAL_ID == visualID
+		return TraceabilityMM.diagram.edit.parts.TemporalTransactionEditPart.VISUAL_ID == visualID
+				|| TraceabilityMM.diagram.edit.parts.TransactionEditPart.VISUAL_ID == visualID
 				|| TraceabilityMM.diagram.edit.parts.ProductEditPart.VISUAL_ID == visualID
 				|| TraceabilityMM.diagram.edit.parts.TransactionConfEditPart.VISUAL_ID == visualID
 				|| TraceabilityMM.diagram.edit.parts.ProductConfEditPart.VISUAL_ID == visualID
@@ -219,6 +221,8 @@ public class TraceabilityMMViewProvider extends AbstractProvider implements IVie
 			visualID = TraceabilityMM.diagram.part.TraceabilityMMVisualIDRegistry.getVisualID(semanticHint);
 		}
 		switch (visualID) {
+		case TraceabilityMM.diagram.edit.parts.TemporalTransactionEditPart.VISUAL_ID:
+			return createTemporalTransaction_2016(domainElement, containerView, index, persisted, preferencesHint);
 		case TraceabilityMM.diagram.edit.parts.TransactionEditPart.VISUAL_ID:
 			return createTransaction_2001(domainElement, containerView, index, persisted, preferencesHint);
 		case TraceabilityMM.diagram.edit.parts.ProductEditPart.VISUAL_ID:
@@ -275,6 +279,45 @@ public class TraceabilityMMViewProvider extends AbstractProvider implements IVie
 		}
 		// can never happen, provided #provides(CreateEdgeViewOperation) is correct
 		return null;
+	}
+
+	/**
+	* @generated
+	*/
+	public Node createTemporalTransaction_2016(EObject domainElement, View containerView, int index, boolean persisted,
+			PreferencesHint preferencesHint) {
+		Shape node = NotationFactory.eINSTANCE.createShape();
+		node.setLayoutConstraint(NotationFactory.eINSTANCE.createBounds());
+		node.setType(TraceabilityMM.diagram.part.TraceabilityMMVisualIDRegistry
+				.getType(TraceabilityMM.diagram.edit.parts.TemporalTransactionEditPart.VISUAL_ID));
+		ViewUtil.insertChildView(containerView, node, index, persisted);
+		node.setElement(domainElement);
+		stampShortcut(containerView, node);
+		// initializeFromPreferences 
+		final IPreferenceStore prefStore = (IPreferenceStore) preferencesHint.getPreferenceStore();
+
+		org.eclipse.swt.graphics.RGB lineRGB = PreferenceConverter.getColor(prefStore,
+				IPreferenceConstants.PREF_LINE_COLOR);
+		ViewUtil.setStructuralFeatureValue(node, NotationPackage.eINSTANCE.getLineStyle_LineColor(),
+				FigureUtilities.RGBToInteger(lineRGB));
+		FontStyle nodeFontStyle = (FontStyle) node.getStyle(NotationPackage.Literals.FONT_STYLE);
+		if (nodeFontStyle != null) {
+			FontData fontData = PreferenceConverter.getFontData(prefStore, IPreferenceConstants.PREF_DEFAULT_FONT);
+			nodeFontStyle.setFontName(fontData.getName());
+			nodeFontStyle.setFontHeight(fontData.getHeight());
+			nodeFontStyle.setBold((fontData.getStyle() & SWT.BOLD) != 0);
+			nodeFontStyle.setItalic((fontData.getStyle() & SWT.ITALIC) != 0);
+			org.eclipse.swt.graphics.RGB fontRGB = PreferenceConverter.getColor(prefStore,
+					IPreferenceConstants.PREF_FONT_COLOR);
+			nodeFontStyle.setFontColor(FigureUtilities.RGBToInteger(fontRGB).intValue());
+		}
+		org.eclipse.swt.graphics.RGB fillRGB = PreferenceConverter.getColor(prefStore,
+				IPreferenceConstants.PREF_FILL_COLOR);
+		ViewUtil.setStructuralFeatureValue(node, NotationPackage.eINSTANCE.getFillStyle_FillColor(),
+				FigureUtilities.RGBToInteger(fillRGB));
+		Node label5026 = createLabel(node, TraceabilityMM.diagram.part.TraceabilityMMVisualIDRegistry
+				.getType(TraceabilityMM.diagram.edit.parts.TemporalTransactionNameEditPart.VISUAL_ID));
+		return node;
 	}
 
 	/**

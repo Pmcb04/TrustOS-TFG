@@ -71,5 +71,6 @@
     <genClasses ecoreClass="TFG_TrustOS_Traceability.ecore#//Value">
       <genFeatures createChild="false" ecoreFeature="ecore:EAttribute TFG_TrustOS_Traceability.ecore#//Value/name"/>
     </genClasses>
+    <genClasses ecoreClass="TFG_TrustOS_Traceability.ecore#//TemporalTransaction"/>
   </genPackages>
 </genmodel:GenModel>

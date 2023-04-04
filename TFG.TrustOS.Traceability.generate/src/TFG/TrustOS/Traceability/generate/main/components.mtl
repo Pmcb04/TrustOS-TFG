@@ -12,21 +12,22 @@
 [template public generateAllComponents(system: System)]
 [comment @main/]
 [for (asset: Asset | getAllAssetsUnique(system))]
-[generateComponent(asset)/]
-[generatePermissions(asset)/]
+[generateComponent(asset, system.name)/]
+[generatePermissions(asset, system.name)/]
 [/for]
 [/template]
 
 [**
  * Template to generate one product to use in Metadata
  * @param asset : Asset to start generate the component
+ * @param pathSystem : name of folder that begin the page to generate
  */]
-[template private generateComponent(asset : Asset)]
-[file ('metadata/nodes/' + eliminateWhitespaces(asset.type) + '.js', false, 'UTF-8')]
+[template private generateComponent(asset : Asset, pathSystem : String)]
+[file ('generate/' + pathSystem + '/metadata/nodes/' + eliminateWhitespaces(asset.type) + '.js', false, 'UTF-8')]
 import React, {useEffect} from 'react'
 import Property from '../../property/property'
 import PropertyBox from '../../property-box/property-box'
-import { Select, TextField, Title1, IntegerField, DecimalField, DoubleField, Switch, Box, RowList } from '@telefonica/mistica'
+import { Select, TextField, Title1, IntegerField, DecimalField, DateTimeField, EmailField, DoubleField, Switch, Box, RowList, Checkbox } from '@telefonica/mistica'
 import { permissions[asset.type/] } from '../permissions/[asset.type/]'
 
 function [eliminateWhitespaces(asset.type)/](props) {
@@ -185,10 +186,11 @@ export default [eliminateWhitespaces(asset.type)/]
 [**
  * Template to generate the permissions of the roles in the app to  edit and view the component generated
  * @param asset : Asset to start the generate the permissions of it
- * @para roles : Set of roles that will can access to the product
+ * @param roles : Set of roles that will can access to the product
+ * @param pathSystem : name of folder that begin the page to generate
  */]
-[template private generatePermissions(asset: Asset)]
-[file ('metadata/permissions/' + eliminateWhitespaces(asset.type) + '.js', false, 'UTF-8')]
+[template private generatePermissions(asset: Asset, pathSystem: String)]
+[file ('generate/' +  pathSystem + '/metadata/permissions/' + eliminateWhitespaces(asset.type) + '.js', false, 'UTF-8')]
 export function permissions[eliminateWhitespaces(asset.type)/](rol) {
   let canView = [ '[' /][ ']' /] 
   let canEdit = [ '[' /][ ']' /]
@@ -200,6 +202,10 @@ export function permissions[eliminateWhitespaces(asset.type)/](rol) {
 		break
 	[/for]
 		default:
+		[if (asset.oclIsTypeOf(RolConf))]
+		canView = ['['/][for (property : Property | asset.properties) separator (',')][printPropertyPermission(property,null)/][/for][']'/]
+		canEdit = ['['/][for (property : Property | asset.properties) separator (',')][printPropertyPermission(property,null)/][/for][']'/]
+		[/if]
 		break
   }
 

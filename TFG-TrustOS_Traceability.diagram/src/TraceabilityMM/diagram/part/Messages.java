@@ -346,32 +346,42 @@ public class Messages extends NLS {
 	/**
 	* @generated
 	*/
-	public static String Transaction10CreationTool_title;
+	public static String Temporaltransaction10CreationTool_title;
 
 	/**
 	* @generated
 	*/
-	public static String Transaction10CreationTool_desc;
+	public static String Temporaltransaction10CreationTool_desc;
 
 	/**
 	* @generated
 	*/
-	public static String TransactionConfiguration11CreationTool_title;
+	public static String Transaction11CreationTool_title;
 
 	/**
 	* @generated
 	*/
-	public static String TransactionConfiguration11CreationTool_desc;
+	public static String Transaction11CreationTool_desc;
 
 	/**
 	* @generated
 	*/
-	public static String Valueofattribute12CreationTool_title;
+	public static String TransactionConfiguration12CreationTool_title;
 
 	/**
 	* @generated
 	*/
-	public static String Valueofattribute12CreationTool_desc;
+	public static String TransactionConfiguration12CreationTool_desc;
+
+	/**
+	* @generated
+	*/
+	public static String Valueofattribute13CreationTool_title;
+
+	/**
+	* @generated
+	*/
+	public static String Valueofattribute13CreationTool_desc;
 
 	/**
 	* @generated
@@ -552,6 +562,16 @@ public class Messages extends NLS {
 	* @generated
 	*/
 	public static String NavigatorGroupName_RolConf_2014_outgoinglinks;
+
+	/**
+	* @generated
+	*/
+	public static String NavigatorGroupName_TemporalTransaction_2016_outgoinglinks;
+
+	/**
+	* @generated
+	*/
+	public static String NavigatorGroupName_TemporalTransaction_2016_incominglinks;
 
 	/**
 	* @generated

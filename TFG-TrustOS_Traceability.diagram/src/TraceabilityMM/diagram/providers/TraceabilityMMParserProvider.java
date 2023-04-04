@@ -24,6 +24,24 @@ public class TraceabilityMMParserProvider extends AbstractProvider implements IP
 	/**
 	* @generated
 	*/
+	private IParser temporalTransactionName_5026Parser;
+
+	/**
+	* @generated
+	*/
+	private IParser getTemporalTransactionName_5026Parser() {
+		if (temporalTransactionName_5026Parser == null) {
+			EAttribute[] features = new EAttribute[] { TraceabilityMM.TraceabilityMMPackage.eINSTANCE.getNode_Name() };
+			TraceabilityMM.diagram.parsers.MessageFormatParser parser = new TraceabilityMM.diagram.parsers.MessageFormatParser(
+					features);
+			temporalTransactionName_5026Parser = parser;
+		}
+		return temporalTransactionName_5026Parser;
+	}
+
+	/**
+	* @generated
+	*/
 	private IParser transactionName_5001Parser;
 
 	/**
@@ -286,6 +304,8 @@ public class TraceabilityMMParserProvider extends AbstractProvider implements IP
 	*/
 	protected IParser getParser(int visualID) {
 		switch (visualID) {
+		case TraceabilityMM.diagram.edit.parts.TemporalTransactionNameEditPart.VISUAL_ID:
+			return getTemporalTransactionName_5026Parser();
 		case TraceabilityMM.diagram.edit.parts.TransactionNameEditPart.VISUAL_ID:
 			return getTransactionName_5001Parser();
 		case TraceabilityMM.diagram.edit.parts.ProductNameEditPart.VISUAL_ID:

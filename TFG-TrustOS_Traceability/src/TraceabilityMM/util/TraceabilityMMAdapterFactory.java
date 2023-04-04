@@ -14,6 +14,8 @@ import TraceabilityMM.ProductConf;
 import TraceabilityMM.Property;
 import TraceabilityMM.Rol;
 import TraceabilityMM.RolConf;
+import TraceabilityMM.TemporalTransaction;
+import TraceabilityMM.TermporalTransaction;
 import TraceabilityMM.TraceabilityMMPackage;
 import TraceabilityMM.Transaction;
 import TraceabilityMM.TransactionConf;
@@ -146,6 +148,10 @@ public class TraceabilityMMAdapterFactory extends AdapterFactoryImpl {
 			@Override
 			public Adapter caseValue(Value object) {
 				return createValueAdapter();
+			}
+			@Override
+			public Adapter caseTemporalTransaction(TemporalTransaction object) {
+				return createTemporalTransactionAdapter();
 			}
 			@Override
 			public Adapter defaultCase(EObject object) {
@@ -388,6 +394,20 @@ public class TraceabilityMMAdapterFactory extends AdapterFactoryImpl {
 	 * @generated
 	 */
 	public Adapter createValueAdapter() {
+		return null;
+	}
+
+	/**
+	 * Creates a new adapter for an object of class '{@link TraceabilityMM.TemporalTransaction <em>Temporal Transaction</em>}'.
+	 * <!-- begin-user-doc -->
+	 * This default implementation returns null so that we can easily ignore cases;
+	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
+	 * <!-- end-user-doc -->
+	 * @return the new adapter.
+	 * @see TraceabilityMM.TemporalTransaction
+	 * @generated
+	 */
+	public Adapter createTemporalTransactionAdapter() {
 		return null;
 	}
 

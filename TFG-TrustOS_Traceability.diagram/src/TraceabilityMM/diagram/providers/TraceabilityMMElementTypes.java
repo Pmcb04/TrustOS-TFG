@@ -52,6 +52,11 @@ public class TraceabilityMMElementTypes {
 	/**
 	* @generated
 	*/
+	public static final IElementType TemporalTransaction_2016 = getElementType(
+			"TFG-TrustOS_Traceability.diagram.TemporalTransaction_2016"); //$NON-NLS-1$
+	/**
+	* @generated
+	*/
 	public static final IElementType Transaction_2001 = getElementType(
 			"TFG-TrustOS_Traceability.diagram.Transaction_2001"); //$NON-NLS-1$
 	/**
@@ -180,6 +185,9 @@ public class TraceabilityMMElementTypes {
 
 			elements.put(System_1000, TraceabilityMM.TraceabilityMMPackage.eINSTANCE.getSystem());
 
+			elements.put(TemporalTransaction_2016,
+					TraceabilityMM.TraceabilityMMPackage.eINSTANCE.getTemporalTransaction());
+
 			elements.put(Transaction_2001, TraceabilityMM.TraceabilityMMPackage.eINSTANCE.getTransaction());
 
 			elements.put(Product_2002, TraceabilityMM.TraceabilityMMPackage.eINSTANCE.getProduct());
@@ -242,6 +250,7 @@ public class TraceabilityMMElementTypes {
 		if (KNOWN_ELEMENT_TYPES == null) {
 			KNOWN_ELEMENT_TYPES = new HashSet<IElementType>();
 			KNOWN_ELEMENT_TYPES.add(System_1000);
+			KNOWN_ELEMENT_TYPES.add(TemporalTransaction_2016);
 			KNOWN_ELEMENT_TYPES.add(Transaction_2001);
 			KNOWN_ELEMENT_TYPES.add(Product_2002);
 			KNOWN_ELEMENT_TYPES.add(TransactionConf_2003);
@@ -273,6 +282,8 @@ public class TraceabilityMMElementTypes {
 		switch (visualID) {
 		case TraceabilityMM.diagram.edit.parts.SystemEditPart.VISUAL_ID:
 			return System_1000;
+		case TraceabilityMM.diagram.edit.parts.TemporalTransactionEditPart.VISUAL_ID:
+			return TemporalTransaction_2016;
 		case TraceabilityMM.diagram.edit.parts.TransactionEditPart.VISUAL_ID:
 			return Transaction_2001;
 		case TraceabilityMM.diagram.edit.parts.ProductEditPart.VISUAL_ID:

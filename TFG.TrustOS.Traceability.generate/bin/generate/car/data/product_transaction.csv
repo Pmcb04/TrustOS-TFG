@@ -1,0 +1,13 @@
+product_id;transaction_id;authority_name
+1;6;Operario
+2;4;Maquina
+4;2;Maquina
+5;6;Operario
+6;3;Mecanico
+7;3;Mecanico
+8;7;Maquina
+9;5;Operario
+10;5;Operario
+11;1;Pintor
+11;8;Vendedor
+12;2;Maquina

@@ -21,7 +21,8 @@ public class TraceabilityMMModelingAssistantProviderOfSystemEditPart
 	@Override
 
 	public List<IElementType> getTypesForPopupBar(IAdaptable host) {
-		List<IElementType> types = new ArrayList<IElementType>(9);
+		List<IElementType> types = new ArrayList<IElementType>(10);
+		types.add(TraceabilityMM.diagram.providers.TraceabilityMMElementTypes.TemporalTransaction_2016);
 		types.add(TraceabilityMM.diagram.providers.TraceabilityMMElementTypes.Transaction_2001);
 		types.add(TraceabilityMM.diagram.providers.TraceabilityMMElementTypes.Product_2002);
 		types.add(TraceabilityMM.diagram.providers.TraceabilityMMElementTypes.TransactionConf_2003);

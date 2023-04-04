@@ -1,0 +1,15 @@
+authority_name;product_id;canCreate
+Proveedor;1;true
+Proveedor;5;true
+Proveedor;7;true
+Proveedor;8;true
+Proveedor;9;true
+Panadero;1;false
+Panadero;2;true
+Panadero;3;true
+Panadero;4;true
+Panadero;5;false
+Panadero;6;true
+Panadero;7;false
+Panadero;8;false
+Panadero;9;false

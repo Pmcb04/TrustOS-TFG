@@ -113,6 +113,10 @@ public class TraceabilityMMVisualIDRegistry {
 		}
 		switch (containerVisualID) {
 		case TraceabilityMM.diagram.edit.parts.SystemEditPart.VISUAL_ID:
+			if (TraceabilityMM.TraceabilityMMPackage.eINSTANCE.getTemporalTransaction()
+					.isSuperTypeOf(domainElement.eClass())) {
+				return TraceabilityMM.diagram.edit.parts.TemporalTransactionEditPart.VISUAL_ID;
+			}
 			if (TraceabilityMM.TraceabilityMMPackage.eINSTANCE.getTransaction().isSuperTypeOf(domainElement.eClass())) {
 				return TraceabilityMM.diagram.edit.parts.TransactionEditPart.VISUAL_ID;
 			}
@@ -217,6 +221,9 @@ public class TraceabilityMMVisualIDRegistry {
 		}
 		switch (containerVisualID) {
 		case TraceabilityMM.diagram.edit.parts.SystemEditPart.VISUAL_ID:
+			if (TraceabilityMM.diagram.edit.parts.TemporalTransactionEditPart.VISUAL_ID == nodeVisualID) {
+				return true;
+			}
 			if (TraceabilityMM.diagram.edit.parts.TransactionEditPart.VISUAL_ID == nodeVisualID) {
 				return true;
 			}
@@ -242,6 +249,11 @@ public class TraceabilityMMVisualIDRegistry {
 				return true;
 			}
 			if (TraceabilityMM.diagram.edit.parts.PermissionEditPart.VISUAL_ID == nodeVisualID) {
+				return true;
+			}
+			break;
+		case TraceabilityMM.diagram.edit.parts.TemporalTransactionEditPart.VISUAL_ID:
+			if (TraceabilityMM.diagram.edit.parts.TemporalTransactionNameEditPart.VISUAL_ID == nodeVisualID) {
 				return true;
 			}
 			break;
@@ -484,6 +496,7 @@ public class TraceabilityMMVisualIDRegistry {
 		case TraceabilityMM.diagram.edit.parts.CreateEditPart.VISUAL_ID:
 		case TraceabilityMM.diagram.edit.parts.ViewEditPart.VISUAL_ID:
 		case TraceabilityMM.diagram.edit.parts.PermissionEditPart.VISUAL_ID:
+		case TraceabilityMM.diagram.edit.parts.TemporalTransactionEditPart.VISUAL_ID:
 		case TraceabilityMM.diagram.edit.parts.ValueEditPart.VISUAL_ID:
 			return true;
 		default:

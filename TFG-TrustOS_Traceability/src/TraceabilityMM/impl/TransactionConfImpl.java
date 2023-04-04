@@ -63,7 +63,7 @@ public class TransactionConfImpl extends AssetImpl implements TransactionConf {
 	 * @generated
 	 * @ordered
 	 */
-	protected static final boolean FINAL_EDEFAULT = false;
+	protected static final boolean FINAL_EDEFAULT = true;
 	/**
 	 * The cached value of the '{@link #isFinal() <em>Final</em>}' attribute.
 	 * <!-- begin-user-doc -->

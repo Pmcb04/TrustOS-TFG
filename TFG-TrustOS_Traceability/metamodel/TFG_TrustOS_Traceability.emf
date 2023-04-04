@@ -37,14 +37,14 @@ class Product extends Node {
 @gmf.node(label="type", border.width="0", border.color="0,38,175", border.style="solid", svg.uri="platform:/plugin/TFG-TrustOS_Traceability/icons/SVG/transactionConf.svg", tool.name="Transaction Configuration", tool.description="Create a configuration for transaction")
 class TransactionConf extends Asset {
   attr int[1] repeat = 1;
-  attr boolean[1] final = false;
+  attr boolean[1] final = true;
   ref Transaction[+]#transactionconf transaction;
 
   @"http://www.eclipse.org/emf/2002/Ecore/OCL/Pivot"(derivation="self.repeat = -1")
-  volatile transient derived attr boolean[1] isTransactionInfinite;
+  volatile transient derived attr boolean[1] isTransactionInfinite = false;
 
   @"http://www.eclipse.org/emf/2002/Ecore/OCL/Pivot"(derivation="self.final")
-  volatile transient derived attr boolean[1] isTransactionFinal;
+  volatile transient derived attr boolean[1] isTransactionFinal = true;
 }
 
 @"http://www.obeo.fr/dsl/dnc/archetype"(archetype="Description")
@@ -140,5 +140,9 @@ enum EType {
   Boolean = 3;
   Date = 4;
   Email = 5;
+}
+
+@gmf.node(label="name", label.icon="false", figure="svg", svg.uri="platform:/plugin/TFG-TrustOS_Traceability/icons/SVG/temporalTransaction.svg", tool.name="Temporal transaction", tool.description="Create a temporal transaction")
+class TemporalTransaction extends Transaction {
 }
 

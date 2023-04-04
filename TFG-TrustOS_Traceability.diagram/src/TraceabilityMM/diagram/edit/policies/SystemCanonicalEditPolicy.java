@@ -101,6 +101,7 @@ public class SystemCanonicalEditPolicy extends CanonicalEditPolicy {
 	private boolean isMyDiagramElement(View view) {
 		int visualID = TraceabilityMM.diagram.part.TraceabilityMMVisualIDRegistry.getVisualID(view);
 		switch (visualID) {
+		case TraceabilityMM.diagram.edit.parts.TemporalTransactionEditPart.VISUAL_ID:
 		case TraceabilityMM.diagram.edit.parts.TransactionEditPart.VISUAL_ID:
 		case TraceabilityMM.diagram.edit.parts.ProductEditPart.VISUAL_ID:
 		case TraceabilityMM.diagram.edit.parts.TransactionConfEditPart.VISUAL_ID:
@@ -271,6 +272,14 @@ public class SystemCanonicalEditPolicy extends CanonicalEditPolicy {
 			if (!domain2NotationMap.containsKey(view.getElement())) {
 				result.addAll(
 						TraceabilityMM.diagram.part.TraceabilityMMDiagramUpdater.getSystem_1000ContainedLinks(view));
+			}
+			domain2NotationMap.putView(view.getElement(), view);
+			break;
+		}
+		case TraceabilityMM.diagram.edit.parts.TemporalTransactionEditPart.VISUAL_ID: {
+			if (!domain2NotationMap.containsKey(view.getElement())) {
+				result.addAll(TraceabilityMM.diagram.part.TraceabilityMMDiagramUpdater
+						.getTemporalTransaction_2016ContainedLinks(view));
 			}
 			domain2NotationMap.putView(view.getElement(), view);
 			break;

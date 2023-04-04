@@ -231,6 +231,10 @@ public class TraceabilityMMNavigatorContentProvider implements ICommonContentPro
 			Collection<View> connectedViews;
 			connectedViews = getChildrenByType(Collections.singleton(sv),
 					TraceabilityMM.diagram.part.TraceabilityMMVisualIDRegistry
+							.getType(TraceabilityMM.diagram.edit.parts.TemporalTransactionEditPart.VISUAL_ID));
+			result.addAll(createNavigatorItems(connectedViews, parentElement, false));
+			connectedViews = getChildrenByType(Collections.singleton(sv),
+					TraceabilityMM.diagram.part.TraceabilityMMVisualIDRegistry
 							.getType(TraceabilityMM.diagram.edit.parts.TransactionEditPart.VISUAL_ID));
 			result.addAll(createNavigatorItems(connectedViews, parentElement, false));
 			connectedViews = getChildrenByType(Collections.singleton(sv),
@@ -558,6 +562,37 @@ public class TraceabilityMMNavigatorContentProvider implements ICommonContentPro
 			return result.toArray();
 		}
 
+		case TraceabilityMM.diagram.edit.parts.TemporalTransactionEditPart.VISUAL_ID: {
+			LinkedList<TraceabilityMM.diagram.navigator.TraceabilityMMAbstractNavigatorItem> result = new LinkedList<TraceabilityMM.diagram.navigator.TraceabilityMMAbstractNavigatorItem>();
+			Node sv = (Node) view;
+			TraceabilityMM.diagram.navigator.TraceabilityMMNavigatorGroup outgoinglinks = new TraceabilityMM.diagram.navigator.TraceabilityMMNavigatorGroup(
+					TraceabilityMM.diagram.part.Messages.NavigatorGroupName_TemporalTransaction_2016_outgoinglinks,
+					"icons/outgoingLinksNavigatorGroup.gif", parentElement); //$NON-NLS-1$
+			TraceabilityMM.diagram.navigator.TraceabilityMMNavigatorGroup incominglinks = new TraceabilityMM.diagram.navigator.TraceabilityMMNavigatorGroup(
+					TraceabilityMM.diagram.part.Messages.NavigatorGroupName_TemporalTransaction_2016_incominglinks,
+					"icons/incomingLinksNavigatorGroup.gif", parentElement); //$NON-NLS-1$
+			Collection<View> connectedViews;
+			connectedViews = getOutgoingLinksByType(Collections.singleton(sv),
+					TraceabilityMM.diagram.part.TraceabilityMMVisualIDRegistry
+							.getType(TraceabilityMM.diagram.edit.parts.TransactionTransactionconfEditPart.VISUAL_ID));
+			outgoinglinks.addChildren(createNavigatorItems(connectedViews, outgoinglinks, true));
+			connectedViews = getOutgoingLinksByType(Collections.singleton(sv),
+					TraceabilityMM.diagram.part.TraceabilityMMVisualIDRegistry
+							.getType(TraceabilityMM.diagram.edit.parts.TransactionNext_productEditPart.VISUAL_ID));
+			outgoinglinks.addChildren(createNavigatorItems(connectedViews, outgoinglinks, true));
+			connectedViews = getIncomingLinksByType(Collections.singleton(sv),
+					TraceabilityMM.diagram.part.TraceabilityMMVisualIDRegistry
+							.getType(TraceabilityMM.diagram.edit.parts.ProductNext_transactionEditPart.VISUAL_ID));
+			incominglinks.addChildren(createNavigatorItems(connectedViews, incominglinks, true));
+			if (!outgoinglinks.isEmpty()) {
+				result.add(outgoinglinks);
+			}
+			if (!incominglinks.isEmpty()) {
+				result.add(incominglinks);
+			}
+			return result.toArray();
+		}
+
 		case TraceabilityMM.diagram.edit.parts.AttributeEditPart.VISUAL_ID: {
 			LinkedList<TraceabilityMM.diagram.navigator.TraceabilityMMAbstractNavigatorItem> result = new LinkedList<TraceabilityMM.diagram.navigator.TraceabilityMMAbstractNavigatorItem>();
 			Node sv = (Node) view;
@@ -684,6 +719,10 @@ public class TraceabilityMMNavigatorContentProvider implements ICommonContentPro
 			target.addChildren(createNavigatorItems(connectedViews, target, true));
 			connectedViews = getLinksSourceByType(Collections.singleton(sv),
 					TraceabilityMM.diagram.part.TraceabilityMMVisualIDRegistry
+							.getType(TraceabilityMM.diagram.edit.parts.TemporalTransactionEditPart.VISUAL_ID));
+			source.addChildren(createNavigatorItems(connectedViews, source, true));
+			connectedViews = getLinksSourceByType(Collections.singleton(sv),
+					TraceabilityMM.diagram.part.TraceabilityMMVisualIDRegistry
 							.getType(TraceabilityMM.diagram.edit.parts.TransactionEditPart.VISUAL_ID));
 			source.addChildren(createNavigatorItems(connectedViews, source, true));
 			if (!target.isEmpty()) {
@@ -709,6 +748,10 @@ public class TraceabilityMMNavigatorContentProvider implements ICommonContentPro
 					TraceabilityMM.diagram.part.TraceabilityMMVisualIDRegistry
 							.getType(TraceabilityMM.diagram.edit.parts.ProductEditPart.VISUAL_ID));
 			target.addChildren(createNavigatorItems(connectedViews, target, true));
+			connectedViews = getLinksSourceByType(Collections.singleton(sv),
+					TraceabilityMM.diagram.part.TraceabilityMMVisualIDRegistry
+							.getType(TraceabilityMM.diagram.edit.parts.TemporalTransactionEditPart.VISUAL_ID));
+			source.addChildren(createNavigatorItems(connectedViews, source, true));
 			connectedViews = getLinksSourceByType(Collections.singleton(sv),
 					TraceabilityMM.diagram.part.TraceabilityMMVisualIDRegistry
 							.getType(TraceabilityMM.diagram.edit.parts.TransactionEditPart.VISUAL_ID));
@@ -759,6 +802,10 @@ public class TraceabilityMMNavigatorContentProvider implements ICommonContentPro
 					TraceabilityMM.diagram.part.Messages.NavigatorGroupName_ProductNext_transaction_4004_source,
 					"icons/linkSourceNavigatorGroup.gif", parentElement); //$NON-NLS-1$
 			Collection<View> connectedViews;
+			connectedViews = getLinksTargetByType(Collections.singleton(sv),
+					TraceabilityMM.diagram.part.TraceabilityMMVisualIDRegistry
+							.getType(TraceabilityMM.diagram.edit.parts.TemporalTransactionEditPart.VISUAL_ID));
+			target.addChildren(createNavigatorItems(connectedViews, target, true));
 			connectedViews = getLinksTargetByType(Collections.singleton(sv),
 					TraceabilityMM.diagram.part.TraceabilityMMVisualIDRegistry
 							.getType(TraceabilityMM.diagram.edit.parts.TransactionEditPart.VISUAL_ID));
