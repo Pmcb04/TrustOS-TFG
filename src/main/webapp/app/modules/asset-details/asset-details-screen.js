@@ -158,8 +158,9 @@ function AssetDetailsScreen(props) {
                                       asset.metadata.actions[action.name.trim().replace(" ", "_")] + 1 === action.repeat 
                                       : false)
                           })}>
-                          {action.finalTransaction && asset.metadata.actions ?  
-                                      asset.metadata.actions[action.name.trim().replace(" ", "_")] + 1 === action.repeat : false &&
+                          {(action.finalTransaction && asset.metadata.actions ?  
+                                      asset.metadata.actions[action.name.trim().replace(" ", "_")] + 1 === action.repeat 
+                                      : false) &&
                                        <IconLockClosedRegular color="currentColor" />}
                           {!action.finalTransaction && action.repeat == -1 && <IconInfinityRegular color="currentColor" />}
                           {action.name}

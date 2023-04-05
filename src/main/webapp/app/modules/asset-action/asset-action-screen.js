@@ -63,7 +63,7 @@ function TableResume(props) {
                 <Inline key={"inline-type"} alignItems='center' space='between'>
                 <Text4 light key={'type-state'}>{t('STATE')}</Text4>
                     <Inline>
-                        {props.final && indexStep != 2 && <Inline>
+                        {props.final && <Inline>
                             <Tag Icon={IconLockOpenRegular} type="success">{t('OPEN')}</Tag>
                             <IconArrowLineRightRegular key={'arrow'} size={16} />
                             <Tag Icon={IconLockClosedRegular} type="error">{t('CLOSED')}</Tag>
@@ -165,7 +165,7 @@ function AssetActionScreen(props) {
                                 create={element.create} 
                                 type={element.ref.type} 
                                 title={element.ref.title} 
-                                final={final && indexStep != 2}
+                                final={(final && indexStep != 2) || indexStep == 1}
                                 assetId={chooseAssetId(element)} 
                                 metadata={element.ref.metadata}>
                             </TableResume>
