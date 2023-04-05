@@ -47,7 +47,7 @@ function Step(props){
 
 function TableResume(props) {
     const { colors } = React.useContext(ThemeContext)
-    const {title, type, create, assetId, metadata, stepFinal} = props
+    const {title, type, create, assetId, metadata} = props
     const { t } = useTranslation() //i18n instance
 
     return (
@@ -63,12 +63,13 @@ function TableResume(props) {
                 <Inline key={"inline-type"} alignItems='center' space='between'>
                 <Text4 light key={'type-state'}>{t('STATE')}</Text4>
                     <Inline>
-                        {!stepFinal && props.final && <Inline>
+                        {props.final && indexStep != 2 && <Inline>
                             <Tag Icon={IconLockOpenRegular} type="success">{t('OPEN')}</Tag>
                             <IconArrowLineRightRegular key={'arrow'} size={16} />
                             <Tag Icon={IconLockClosedRegular} type="error">{t('CLOSED')}</Tag>
-                        </Inline>}
-                        {stepFinal && <Inline>
+                        </Inline> 
+                        ||
+                        <Inline>
                             <Tag Icon={IconLockOpenRegular} type="success">{t('OPEN')}</Tag>
                         </Inline>}
                     </Inline>
@@ -126,8 +127,10 @@ function AssetActionScreen(props) {
     }
     const stepIncrement = () => {
         if([stepInput, stepAction, stepOutput][step].some((element => metadataIsEmpty(element.ref.metadata)))){
+            setErrorNextstepFinalTransaction(false)
             setErrorNextStepEmpty(true)
-        }else if([stepInput, stepAction, stepOutput][step].some((element => element.ref.metadata.final != null ? element.ref.metadata.final : true))){
+        }else if([stepInput, stepAction, stepOutput][step].some((element => element.ref.metadata.final != null ? element.ref.metadata.final : step === 0))){
+            setErrorNextStepEmpty(false)
             setErrorNextstepFinalTransaction(true)
         }else{
             setErrorNextStepEmpty(false)
@@ -152,19 +155,18 @@ function AssetActionScreen(props) {
     function tablesSteps(final){
         return (
             <Box>
-                {[stepInput, stepAction, stepOutput].map((step, index) => {
+                {[stepInput, stepAction, stepOutput].map((step, indexStep) => {
                     return (
-                    <View key={"step-" + index} style={styles.tablesSteps}>
-                        <View style={styles.titleTable}><Text5 key={"title-" + index} decoration='underline'>{steps[index]}</Text5></View>
+                    <View key={"step-" + indexStep} style={styles.tablesSteps}>
+                        <View style={styles.titleTable}><Text5 key={"title-" + indexStep} decoration='underline'>{steps[indexStep]}</Text5></View>
                         {step.map((element, index) => (
                             <TableResume 
                                 key={element.title + index}
                                 create={element.create} 
                                 type={element.ref.type} 
                                 title={element.ref.title} 
-                                final={final}
+                                final={final && indexStep != 2}
                                 assetId={chooseAssetId(element)} 
-                                stepFinal={step === stepOutput}
                                 metadata={element.ref.metadata}>
                             </TableResume>
                         ))}
@@ -189,14 +191,14 @@ function AssetActionScreen(props) {
 
                 // always close the action because you cant do anything with the action 
                 // and known that the action it is done
-                if(step == stepAction) newMetadata.final = true 
+                if(indexStep == 1) newMetadata.final = true 
                 else {
-                // closed asset in the step input
-                if(step == stepInput && final == true) {
-                    newMetadata.final = true
-                }else {
-                    newMetadata.final = false
-                }
+                    // closed asset in the step input
+                    if(indexStep == 0 && final == true) {
+                        newMetadata.final = true
+                    }else {
+                        newMetadata.final = false
+                    }
                 }
 
           

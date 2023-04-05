@@ -59,7 +59,7 @@ public class AssetService {
 
         JsonObject transactionJson = new JsonObject();
         for (TransactionDTO transaction : transactions) {
-            transactionJson.addProperty(transaction.getName().toString().trim().replace(" ", "_"), "0");
+            transactionJson.addProperty(transaction.getName().toString().trim().replace(" ", "_"), 0 );
         }
         newMetadata.put("actions", transactionJson);
         assetDTO.setMetadata(newMetadata);

@@ -99,7 +99,7 @@ function MyAssetsScreen(props) {
       <View style={styles.header}>
           <SearchField onChangeValue={search} fullWidth name="search" label={t('SEARCH')} />
 
-          <ButtonPrimary
+          {products && products.length > 0 && <ButtonPrimary
             onPress={() => {
               getAssetsCreate()
               confirm({
@@ -125,7 +125,7 @@ function MyAssetsScreen(props) {
             }}>
             <IconAddMoreRegular color="currentColor" />
             {t('CREATE')}
-          </ButtonPrimary>
+          </ButtonPrimary>}
         </View>
         <View style={styles.content}>
           <View style={styles.list}>

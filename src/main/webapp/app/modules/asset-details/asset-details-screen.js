@@ -27,6 +27,7 @@ import {
   Callout,
   IconSuccess,
   IconLockClosedRegular,
+  IconInfinityRegular
 } from '@telefonica/mistica'
 import { getPermissions } from '../../shared/components/metadata/metadata.utils'
 
@@ -151,8 +152,16 @@ function AssetDetailsScreen(props) {
                         (<ButtonSecondary 
                           key={action.name} 
                           disabled={edit_fields} 
-                          onPress={() => navigation.navigate('AssetAction', { action: action.name, final: action.finalTransaction })}>
-                          {action.finalTransaction && <IconLockClosedRegular color="currentColor" />}
+                          onPress={() => navigation.navigate('AssetAction', { 
+                            action: action.name, 
+                            final: (action.finalTransaction && asset.metadata.actions ?  
+                                      asset.metadata.actions[action.name.trim().replace(" ", "_")] + 1 === action.repeat 
+                                      : false)
+                          })}>
+                          {action.finalTransaction && asset.metadata.actions ?  
+                                      asset.metadata.actions[action.name.trim().replace(" ", "_")] + 1 === action.repeat : false &&
+                                       <IconLockClosedRegular color="currentColor" />}
+                          {!action.finalTransaction && action.repeat == -1 && <IconInfinityRegular color="currentColor" />}
                           {action.name}
                         </ButtonSecondary>)
                     )))}
