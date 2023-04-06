@@ -21,6 +21,7 @@ import {
   ButtonPrimary,
   Form,
   useWindowWidth,
+  alert
 } from '@telefonica/mistica'
 
 import Metadata from '../../shared/components/metadata/metadata'
@@ -46,7 +47,8 @@ function AssetTraceabilityScreen(props) {
     nodes,
     links,
     assetSelected,
-    changeAssetSelected
+    changeAssetSelected,
+    exportTraceability
   } = props
   const heightScreen = useWindowHeight()
   const widthScreen = useWindowWidth()
@@ -59,6 +61,22 @@ function AssetTraceabilityScreen(props) {
   useEffect(() => {
     getAssetTraceabilityAsset(isAuthorised, assetSelected)
   }, [assetSelected])
+
+  // const [text, setText] = useState('Prueba');
+  const filePath = `/home/devgram/traceability.txt`;
+
+  const createFile = async () => {
+    try {
+      exportTraceability()
+      alert({
+        title: 'File created',
+        message: 'File created traceability.txt',
+        acceptText: 'Ok',
+      })
+    } catch (e) {
+      console.log('error', e);
+    }
+  }
 
   return (
     <>
@@ -88,6 +106,9 @@ function AssetTraceabilityScreen(props) {
               onClickNode={changeAssetSelected}
               nodeSelected={assetSelected}
             />
+            <ButtonPrimary fullWidth onPress={createFile}>
+              {t('SAVE')}
+            </ButtonPrimary>
           </View>
           <View style={[styles.assetView]}>
             <View style={styles.asset}>
@@ -188,7 +209,8 @@ const mapDispatchToProps = (dispatch) => {
     setTimestampInit: (timestampInit) => dispatch(AssetTraceabilityActions.assetTraceabilitySetTimestampInit(timestampInit)),
     setTimestampEnd: (timestampEnd) => dispatch(AssetTraceabilityActions.assetTraceabilitySetTimestampEnd(timestampEnd)),
     getAssetTraceabilityBefore: (assetId) => dispatch(AssetTraceabilityActions.assetTraceabilityRequestAssetBefore(assetId)),
-    changeAssetSelected : (assetId, nodes) => dispatch(AssetTraceabilityActions.assetTraceabilityChangeAssetSelected(assetId, nodes))
+    changeAssetSelected : (assetId, nodes) => dispatch(AssetTraceabilityActions.assetTraceabilityChangeAssetSelected(assetId, nodes)),
+    exportTraceability : () => dispatch(AssetTraceabilityActions.assetTraceabilityExport())
   }
 }
 export default connect(mapStateToProps, mapDispatchToProps)(AssetTraceabilityScreen)

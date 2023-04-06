@@ -14,7 +14,8 @@ const { Types, Creators } = createActions({
   assetTraceabilitySetTimestampEnd: ['timestampEnd'],
   assetTraceabilityRequestAssetBefore: ['assetId'],
   assetTraceabilitySuccessAssetBefore: ['nodes', 'links'],
-  assetTraceabilityChangeAssetSelected: ['assetId', 'nodes']
+  assetTraceabilityChangeAssetSelected: ['assetId', 'nodes'],
+  assetTraceabilityExport: ['assetId'],
 })
 
 export const AssetTraceabilityTypes = Types
@@ -110,6 +111,8 @@ export const changeSelected = (state, { assetId, nodes }) =>
     nodes, 
 })
 
+export const exportTraceability = (state) => state
+
 /* ------------- Hookup Reducers To Types ------------- */
 
 export const reducer = createReducer(INITIAL_STATE, {
@@ -123,4 +126,5 @@ export const reducer = createReducer(INITIAL_STATE, {
   [Types.ASSET_TRACEABILITY_REQUEST_ASSET_BEFORE]: requestAssetBefore,
   [Types.ASSET_TRACEABILITY_SUCCESS_ASSET_BEFORE]: successAssetBefore,
   [Types.ASSET_TRACEABILITY_CHANGE_ASSET_SELECTED]: changeSelected,
+  [Types.ASSET_TRACEABILITY_EXPORT]: exportTraceability,
 })

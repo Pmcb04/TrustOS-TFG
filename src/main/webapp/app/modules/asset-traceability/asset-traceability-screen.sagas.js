@@ -47,6 +47,65 @@ function* getAssetBefore(api, son, fathers, nodes, links){
 
 }
 
+
+export function* exportTraceabilityComplete(api){
+
+  const assetId = yield select(selectAssetId)
+
+  let nodes = []
+  let links = []
+
+  const response = yield getAsset(api, assetId)
+  nodes.push({node : response.data})
+
+  const [newNodes, newLinks] = yield getTraceabilityComplete(api, response, response.data.assetBefore, nodes, links)
+  download(JSON.stringify({nodes : newNodes, relations : newLinks}), "traceability_" + assetId +".json", "text")
+}
+
+// Function to download data to a file
+function download(data, filename, type) {
+  var file = new Blob([data], {type: type});
+  if (window.navigator.msSaveOrOpenBlob) // IE10+
+      window.navigator.msSaveOrOpenBlob(file, filename);
+  else { // Others
+      var a = document.createElement("a"),
+              url = URL.createObjectURL(file);
+      a.href = url;
+      a.download = filename;
+      document.body.appendChild(a);
+      a.click();
+      setTimeout(function() {
+          document.body.removeChild(a);
+          window.URL.revokeObjectURL(url);  
+      }, 0); 
+  }
+}
+
+function* getTraceabilityComplete(api, son, fathers, nodes, links){
+
+  // add the firsts node to graph
+  if(fathers){
+
+    // get all asset before 
+    const assetsFather = yield all(fathers.map(father => getAsset(api, father)))
+
+    assetsFather.forEach((assetFather) => {
+        // add the asset before to graph
+        nodes.push({ node: assetFather })
+        // link the asset with the asset before
+        links.push({ son: assetFather.assetId, father: son.assetId })                
+    })
+
+    // calculate the next asset before
+    yield all(assetsFather.map((assetFather, index) => 
+      assetFather.data.assetBefore ? getTraceabilityComplete(api, assetFather, assetFather.data.assetBefore, nodes, links) : null                                  
+    ))
+
+  }
+  return [nodes, links]
+
+}
+
 function* getAsset(api, assetId) {
   const isAuthorised = false
 
