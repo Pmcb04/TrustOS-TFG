@@ -6,7 +6,7 @@
 [import TFG::TrustOS::Traceability::generate::main::data /]
 [import TFG::TrustOS::Traceability::generate::main::components /]
 [import TFG::TrustOS::Traceability::generate::main::util /]
-
+[import TFG::TrustOS::Traceability::generate::main::doc /]
 [**
  * The documentation of the template generateSystem.
  * @param aSystem

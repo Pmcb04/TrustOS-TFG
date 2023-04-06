@@ -3,8 +3,8 @@ export function permissionsCoche(rol) {
   let canEdit = []
   switch (rol) {
 		case 'Vendedor':
-		canView = ['altura','peso']
-		canEdit = ['altura','peso']
+		canView = ['peso','altura']
+		canEdit = ['peso','altura']
 		break
 		default:
 		break

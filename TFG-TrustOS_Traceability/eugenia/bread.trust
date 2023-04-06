@@ -330,15 +330,15 @@
   <children xmi:type="notation:Node" xmi:id="_0Uu5cMsmEe2zVO4uV_U7ww" type="2004">
     <children xmi:type="notation:DecorationNode" xmi:id="_0UvggMsmEe2zVO4uV_U7ww" type="5004"/>
     <children xmi:type="notation:BasicCompartment" xmi:id="_0UwHkMsmEe2zVO4uV_U7ww" type="7002">
-      <children xmi:type="notation:Shape" xmi:id="_tKfD0MsnEe2zVO4uV_U7ww" type="3001" fontName="Inter">
-        <children xmi:type="notation:DecorationNode" xmi:id="_tKfq4MsnEe2zVO4uV_U7ww" type="5020"/>
-        <children xmi:type="notation:BasicCompartment" xmi:id="_tKfq4csnEe2zVO4uV_U7ww" type="7006">
-          <styles xmi:type="notation:SortingStyle" xmi:id="_tKfq4ssnEe2zVO4uV_U7ww"/>
-          <styles xmi:type="notation:FilteringStyle" xmi:id="_tKfq48snEe2zVO4uV_U7ww"/>
+      <children xmi:type="notation:Shape" xmi:id="_Uu9SUNPpEe2vI52S4IM9kg" type="3001" fontName="Inter">
+        <children xmi:type="notation:DecorationNode" xmi:id="_Uu95YNPpEe2vI52S4IM9kg" type="5020"/>
+        <children xmi:type="notation:BasicCompartment" xmi:id="_Uu95YdPpEe2vI52S4IM9kg" type="7006">
+          <styles xmi:type="notation:SortingStyle" xmi:id="_Uu95YtPpEe2vI52S4IM9kg"/>
+          <styles xmi:type="notation:FilteringStyle" xmi:id="_Uu95Y9PpEe2vI52S4IM9kg"/>
         </children>
-        <styles xmi:type="notation:HintedDiagramLinkStyle" xmi:id="_tKfD0csnEe2zVO4uV_U7ww"/>
+        <styles xmi:type="notation:HintedDiagramLinkStyle" xmi:id="_Uu9SUdPpEe2vI52S4IM9kg"/>
         <element xmi:type="TraceabilityMM:Attribute" href="bread.trustd#//@assets.9/@properties.0"/>
-        <layoutConstraint xmi:type="notation:Bounds" xmi:id="_tKfD0ssnEe2zVO4uV_U7ww"/>
+        <layoutConstraint xmi:type="notation:Bounds" xmi:id="_Uu9SUtPpEe2vI52S4IM9kg"/>
       </children>
       <styles xmi:type="notation:SortingStyle" xmi:id="_0UwHkcsmEe2zVO4uV_U7ww"/>
       <styles xmi:type="notation:FilteringStyle" xmi:id="_0UwHkssmEe2zVO4uV_U7ww"/>
@@ -348,7 +348,7 @@
     <styles xmi:type="notation:FillStyle" xmi:id="_0Uu5c8smEe2zVO4uV_U7ww"/>
     <styles xmi:type="notation:HintedDiagramLinkStyle" xmi:id="_0Uu5dMsmEe2zVO4uV_U7ww"/>
     <element xmi:type="TraceabilityMM:ProductConf" href="bread.trustd#//@assets.9"/>
-    <layoutConstraint xmi:type="notation:Bounds" xmi:id="_0Uu5dcsmEe2zVO4uV_U7ww" x="578" y="728"/>
+    <layoutConstraint xmi:type="notation:Bounds" xmi:id="_0Uu5dcsmEe2zVO4uV_U7ww" x="546" y="728" width="106"/>
   </children>
   <children xmi:type="notation:Shape" xmi:id="_1NaN4MsmEe2zVO4uV_U7ww" type="2001" fontName="Inter">
     <children xmi:type="notation:DecorationNode" xmi:id="_1Na08MsmEe2zVO4uV_U7ww" type="5001"/>
@@ -764,17 +764,6 @@
     <styles xmi:type="notation:FontStyle" xmi:id="_Kc3_0ssoEe2zVO4uV_U7ww" fontName="Inter"/>
     <element xsi:nil="true"/>
     <bendpoints xmi:type="notation:RelativeBendpoints" xmi:id="_Kc3_08soEe2zVO4uV_U7ww" points="[-31, 10, 217, -75]$[-247, 64, 1, -21]"/>
-  </edges>
-  <edges xmi:type="notation:Edge" xmi:id="_LyfH4MsoEe2zVO4uV_U7ww" type="4005" source="_C5xawMsoEe2zVO4uV_U7ww" target="_tKfD0MsnEe2zVO4uV_U7ww">
-    <children xmi:type="notation:DecorationNode" xmi:id="_LyfH5MsoEe2zVO4uV_U7ww" type="6005">
-      <styles xmi:type="notation:DescriptionStyle" xmi:id="_LyfH5csoEe2zVO4uV_U7ww"/>
-      <layoutConstraint xmi:type="notation:Location" xmi:id="_LyfH5ssoEe2zVO4uV_U7ww" y="40"/>
-    </children>
-    <styles xmi:type="notation:RoutingStyle" xmi:id="_LyfH4csoEe2zVO4uV_U7ww"/>
-    <styles xmi:type="notation:FontStyle" xmi:id="_LyfH4ssoEe2zVO4uV_U7ww" fontName="Inter"/>
-    <element xsi:nil="true"/>
-    <bendpoints xmi:type="notation:RelativeBendpoints" xmi:id="_LyfH48soEe2zVO4uV_U7ww" points="[-15, 13, 198, -186]$[-207, 178, 6, -21]"/>
-    <sourceAnchor xmi:type="notation:IdentityAnchor" xmi:id="_LyiLMMsoEe2zVO4uV_U7ww" id="(0.23809523809523808,0.625)"/>
   </edges>
   <edges xmi:type="notation:Edge" xmi:id="_MLRbUMsoEe2zVO4uV_U7ww" type="4005" source="_C5xawMsoEe2zVO4uV_U7ww" target="_QRuIwMsnEe2zVO4uV_U7ww">
     <children xmi:type="notation:DecorationNode" xmi:id="_MLSCYMsoEe2zVO4uV_U7ww" type="6005">

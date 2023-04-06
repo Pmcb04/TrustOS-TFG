@@ -3,11 +3,11 @@ export function permissionsBase(rol) {
   let canEdit = []
   switch (rol) {
 		case 'Maquina':
-		canView = ['dimensiones','dimensiones.altura','dimensiones.anchura','identificador','peso']
-		canEdit = ['dimensiones','dimensiones.altura','dimensiones.anchura','identificador','peso']
+		canView = ['identificador','peso','dimensiones','dimensiones.altura','dimensiones.anchura']
+		canEdit = ['identificador','peso','dimensiones','dimensiones.altura','dimensiones.anchura']
 		break
 		case 'Operario':
-		canView = ['dimensiones','dimensiones.altura','dimensiones.anchura','peso']
+		canView = ['peso','dimensiones','dimensiones.altura','dimensiones.anchura']
 		canEdit = []
 		break
 		default:

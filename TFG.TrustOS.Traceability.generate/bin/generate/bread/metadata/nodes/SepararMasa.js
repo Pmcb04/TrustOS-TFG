@@ -1,7 +1,7 @@
 import React, {useEffect} from 'react'
 import Property from '../../property/property'
 import PropertyBox from '../../property-box/property-box'
-import { Select, TextField, Title1, IntegerField, DecimalField, DateTimeField, EmailField, DoubleField, Switch, Box, RowList } from '@telefonica/mistica'
+import { Select, TextField, Title1, IntegerField, DecimalField, DateTimeField, EmailField, DoubleField, Switch, Box, RowList, Checkbox } from '@telefonica/mistica'
 import { permissionsSepararMasa } from '../permissions/SepararMasa'
 
 function SepararMasa(props) {
@@ -22,7 +22,7 @@ function SepararMasa(props) {
 				  key={'property-fechaSeparacion'}
 				  value={data.fechaSeparacion ? data.fechaSeparacion.toString() : null}
 				  edit={create ? true : canEdit.includes('fechaSeparacion') ? edit : false}>
-				  <TextField
+				  <DateTimeField
 				   fullWidth name="fechaSeparacion" key={'property-fechaSeparacion'} defaultValue={data.fechaSeparacion ? data.fechaSeparacion.toString() : null} />
 				</Property>
 			)}

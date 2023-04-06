@@ -1,9 +1,9 @@
 product_id;transaction_id;authority_name
-1;3;Panadero
-3;2;Panadero
+1;4;Panadero
+2;3;Panadero
+3;4;Panadero
 4;1;Panadero
-5;3;Panadero
+5;4;Panadero
 6;4;Panadero
-7;3;Panadero
-8;3;Panadero
-9;3;Panadero
+7;2;Panadero
+8;4;Panadero

@@ -57,10 +57,10 @@
     <properties xsi:type="TraceabilityMM:Attribute" id="tiempoReposo" allow="//@permissions.0" type="Decimal"/>
   </assets>
   <assets xsi:type="TraceabilityMM:TransactionConf" type="SepararMasa" repeat="3" transaction="//@nodes.7">
-    <properties xsi:type="TraceabilityMM:Attribute" id="fechaSeparacion" allow="//@permissions.0"/>
+    <properties xsi:type="TraceabilityMM:Attribute" id="fechaSeparacion" allow="//@permissions.0" type="Date"/>
   </assets>
   <assets xsi:type="TraceabilityMM:ProductConf" type="Masa" product="//@nodes.8">
-    <properties xsi:type="TraceabilityMM:Attribute" id="integral" title="" allow="//@permissions.0" type="Boolean"/>
+    <properties xsi:type="TraceabilityMM:Attribute" id="gramos"/>
   </assets>
   <assets xsi:type="TraceabilityMM:TransactionConf" type="Cocinar" transaction="//@nodes.9">
     <properties xsi:type="TraceabilityMM:Attribute" id="fechaCocinado" allow="//@permissions.0" type="Date"/>
@@ -71,13 +71,13 @@
   <assets xsi:type="TraceabilityMM:RolConf" type="Proveedor" permissions="//@permissions.2">
     <properties xsi:type="TraceabilityMM:Attribute" id="contacto"/>
   </assets>
-  <assets xsi:type="TraceabilityMM:TransactionConf" type="Vender" final="true" transaction="//@nodes.11">
-    <properties xsi:type="TraceabilityMM:Attribute" id="fechaVendido" allow="//@permissions.0"/>
+  <assets xsi:type="TraceabilityMM:TransactionConf" type="Vender" transaction="//@nodes.11">
+    <properties xsi:type="TraceabilityMM:Attribute" id="fechaVendido" allow="//@permissions.0" type="Date"/>
   </assets>
   <assets xsi:type="TraceabilityMM:ProductConf" type="Dinero" product="//@nodes.12">
     <properties xsi:type="TraceabilityMM:Attribute" id="cantidad" title="" allow="//@permissions.0" type="Decimal"/>
   </assets>
-  <permissions refers="//@assets.6/@properties.0 //@assets.7/@properties.0 //@assets.8/@properties.0 //@assets.9/@properties.0 //@assets.10/@properties.0 //@assets.11/@properties.0 //@assets.13/@properties.0 //@assets.14/@properties.0" name="panadero"/>
+  <permissions refers="//@assets.6/@properties.0 //@assets.7/@properties.0 //@assets.8/@properties.0 //@assets.10/@properties.0 //@assets.11/@properties.0 //@assets.13/@properties.0 //@assets.14/@properties.0" name="panadero"/>
   <permissions xsi:type="TraceabilityMM:View" refers="//@assets.3/@properties.0 //@assets.2/@properties.0 //@assets.2/@properties.1 //@assets.4/@properties.0 //@assets.5/@properties.0 //@assets.1/@properties.0" name="panadero"/>
   <permissions refers="//@assets.1/@properties.0 //@assets.5/@properties.0 //@assets.4/@properties.0 //@assets.2/@properties.0 //@assets.2/@properties.1 //@assets.3/@properties.0" name="proveedor"/>
 </TraceabilityMM:System>

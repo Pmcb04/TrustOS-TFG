@@ -31,7 +31,7 @@ public class TermporalTransactionImpl extends TransactionImpl implements Termpor
 	 */
 	@Override
 	protected EClass eStaticClass() {
-		return TraceabilityMMPackage.Literals.TERMPORAL_TRANSACTION;
+		return TraceabilityMMPackage.Literals.TEMPORAL_TRANSACTION;
 	}
 
 } //TermporalTransactionImpl

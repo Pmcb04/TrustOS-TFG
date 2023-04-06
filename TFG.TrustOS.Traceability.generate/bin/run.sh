@@ -12,15 +12,17 @@ if [ -d "$DIR" ]; then
 
 	read numProyecto
 	
+	echo "Introduce ruta donde se va a generar el proyecto"
+	read pathProyecto
+	
 	echo "Generando proyecto [${projects[$numProject]}]..."
 
-	folderProjectApp="app/${projects[$numProject]}"
+	folderProjectApp="$pathProyecto/${projects[$numProject]}"
 	folderProjectGenerate="generate/${projects[$numProject]}"
 	
-	[ ! -d "app" ] && mkdir app
-	[ -d $folderProjectGenerate ] && rm -rf $folderProjectApp
+	[ -d $folderProjectApp ] && rm -rf $folderProjectApp
 	mkdir $folderProjectApp
-	unzip -o base.zip -d $folderProjectApp
+	git clone git@github.com:Pmcb04/TrustOS-TFG.git $folderProjectApp
 
 	ACTIONS_PATH="$folderProjectApp/src/main/webapp/app/modules/asset-action"
 	JAVA_PATH="$folderProjectApp/src/main/java/com/mycompany/myapp/security"

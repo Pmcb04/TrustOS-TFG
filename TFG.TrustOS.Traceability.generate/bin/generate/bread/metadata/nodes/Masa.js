@@ -1,7 +1,7 @@
 import React, {useEffect} from 'react'
 import Property from '../../property/property'
 import PropertyBox from '../../property-box/property-box'
-import { Select, TextField, Title1, IntegerField, DecimalField, DateTimeField, EmailField, DoubleField, Switch, Box, RowList } from '@telefonica/mistica'
+import { Select, TextField, Title1, IntegerField, DecimalField, DateTimeField, EmailField, DoubleField, Switch, Box, RowList, Checkbox } from '@telefonica/mistica'
 import { permissionsMasa } from '../permissions/Masa'
 
 function Masa(props) {
@@ -16,14 +16,14 @@ function Masa(props) {
 
 	return (
 	    <Box>
-			{(create || canView.includes('integral')) && (
+			{(create || canView.includes('gramos')) && (
 				<Property
-				  title="Integral"
-				  key={'property-integral'}
-				  value={data.integral ? data.integral.toString() : null}
-				  edit={create ? true : canEdit.includes('integral') ? edit : false}>
-				  <Checkbox name="integral" key={'property-integral'} checked={data.integral ? data.integral : false}/>
-				  
+				  title="Gramos"
+				  key={'property-gramos'}
+				  value={data.gramos ? data.gramos.toString() : null}
+				  edit={create ? true : canEdit.includes('gramos') ? edit : false}>
+				  <TextField
+				   fullWidth name="gramos" key={'property-gramos'} defaultValue={data.gramos ? data.gramos.toString() : null} />
 				</Property>
 			)}
 		</Box>

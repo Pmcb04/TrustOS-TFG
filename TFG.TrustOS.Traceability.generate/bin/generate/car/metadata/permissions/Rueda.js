@@ -2,13 +2,13 @@ export function permissionsRueda(rol) {
   let canView = [] 
   let canEdit = []
   switch (rol) {
+		case 'Operario':
+		canView = ['anchura','altura','diametro']
+		canEdit = []
+		break
 		case 'Administrador':
 		canView = []
-		canEdit = ['vMax','diametro','altura','indCarg','anchura']
-		break
-		case 'Operario':
-		canView = ['diametro','altura','anchura']
-		canEdit = []
+		canEdit = ['anchura','indCarg','altura','vMax','diametro']
 		break
 		default:
 		break
