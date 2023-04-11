@@ -1,5 +1,5 @@
 id;name;repeat;final_transaction
 1;SepararMasa;3;true
 2;Cocinar;1;true
-3;Vender;1;true
-4;RealizarMasa;1;true
+3;RealizarMasa;1;true
+4;Vender;1;true

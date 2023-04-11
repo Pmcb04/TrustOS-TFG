@@ -3,11 +3,11 @@ export function permissionsAceite(rol) {
   let canEdit = []
   switch (rol) {
 		case 'Proveedor':
-		canView = ['tipo','denominacion']
-		canEdit = ['tipo','denominacion']
+		canView = ['denominacion','tipo']
+		canEdit = ['denominacion','tipo']
 		break
 		case 'Panadero':
-		canView = ['tipo','denominacion']
+		canView = ['denominacion','tipo']
 		canEdit = []
 		break
 		default:
