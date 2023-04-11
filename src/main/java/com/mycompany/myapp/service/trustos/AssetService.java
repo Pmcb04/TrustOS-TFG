@@ -108,8 +108,8 @@ public class AssetService {
      */
     public Asset updateAsset(String assetId, Map<String, Object> metadata, boolean isAuthorised, String token) {
         // build the request
-        JsonObject body = new JsonObject();
-        body.add("metadata", JsonParser.parseString(metadata.toString()));
+        JsonObject body = new JsonObject(); 
+        body.add("metadata", JsonParser.parseString(gson.toJson(metadata)).getAsJsonObject());
 
         return new Gson()
             .fromJson(
