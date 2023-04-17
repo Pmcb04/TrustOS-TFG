@@ -23,7 +23,7 @@
 
 [file ('generate/' + system.name + '/data/authority.csv', false, 'UTF-8')]
 [row(OrderedSet{'name'})/]
-[for (rolConf : RolConf | getAllAssetsRolConfUnique(system))]
+[for (rolConf : RolConf | getAllAssetsRolConfUnique(system)) ]
 [row(OrderedSet{rolConf.type})/]
 [/for]
 [/file]
@@ -33,7 +33,8 @@
 [for (productConf : ProductConf | getAllAssetsProductConfUnique(system))]
 [for (transactionConf : TransactionConf | productConf.product.next_transaction.transactionconf->asSet())]
 [for (rolConf : RolConf | getRolesAccessTo(transactionConf))]
-[row(OrderedSet{ getIndexProductConf(system, productConf), getIndexTransactionConf(system, transactionConf), rolConf.type})/]
+[comment dont put row template, so the OrderedSet eliminate the value iguals of product_id and transaction_id /]
+[getIndexProductConf(system, productConf)/];[getIndexTransactionConf(system, transactionConf)/];[rolConf.type/]
 [/for]
 [/for]
 [/for]
@@ -49,7 +50,8 @@
 [file ('generate/' + system.name + '/data/transaction.csv', false, 'UTF-8')]
 [row (OrderedSet{ 'id', 'name', 'repeat', 'final_transaction'}) /]
 [for (transactionConf : TransactionConf | getAllAssetsTransactionConfUnique(system))]
-[row(OrderedSet{i, replaceUnderlineByWhitespaces(transactionConf.type), transactionConf.repeat, transactionConf.final})/]
+[comment dont put row template, so the OrderedSet eliminate the value iguals of index (i) and transaction.repeat /]
+[i/];[replaceUnderlineByWhitespaces(transactionConf.type)/];[transactionConf.repeat/];[transactionConf.final/]
 [/for]
 [/file]
 

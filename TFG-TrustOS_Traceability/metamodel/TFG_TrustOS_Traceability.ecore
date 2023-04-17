@@ -13,7 +13,7 @@
   </eAnnotations>
   <eClassifiers xsi:type="ecore:EClass" name="Node" abstract="true">
     <eAnnotations source="MyDSLDoc">
-      <details key="Description" value="Clase abstracta para definir un node"/>
+      <details key="Description" value="Clase abstracta que repesenta un nodo"/>
     </eAnnotations>
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="name" lowerBound="1" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
   </eClassifiers>
@@ -30,7 +30,7 @@
       <details key="archetype" value="Description"/>
     </eAnnotations>
     <eAnnotations source="MyDSLDoc">
-      <details key="Description" value="Clase abstracta para definir un node"/>
+      <details key="Description" value="Clase que representa una transacción"/>
     </eAnnotations>
     <eStructuralFeatures xsi:type="ecore:EReference" name="transactionconf" lowerBound="1"
         eType="#//TransactionConf" eOpposite="#//TransactionConf/transaction">
@@ -40,6 +40,10 @@
         <details key="color" value="0,38,175"/>
         <details key="tool.name" value="Transaction configuration"/>
         <details key="tool.description" value="Link a transaction to it configuration"/>
+      </eAnnotations>
+      <eAnnotations source="MyDSLDoc">
+        <details key="Upper bound" value="1"/>
+        <details key="Lower bound" value="1"/>
       </eAnnotations>
     </eStructuralFeatures>
     <eStructuralFeatures xsi:type="ecore:EReference" name="next_product" lowerBound="1"
@@ -53,9 +57,18 @@
         <details key="tool.name" value="Next product"/>
         <details key="tool.description" value="Link the transaction to next product"/>
       </eAnnotations>
+      <eAnnotations source="MyDSLDoc">
+        <details key="Upper bound" value="1"/>
+        <details key="Lower bound" value="*"/>
+      </eAnnotations>
     </eStructuralFeatures>
     <eStructuralFeatures xsi:type="ecore:EReference" name="previous_product" upperBound="-1"
-        eType="#//Product" eOpposite="#//Product/next_transaction"/>
+        eType="#//Product" eOpposite="#//Product/next_transaction">
+      <eAnnotations source="MyDSLDoc">
+        <details key="Upper bound" value="0"/>
+        <details key="Lower bound" value="*"/>
+      </eAnnotations>
+    </eStructuralFeatures>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="Product" eSuperTypes="#//Node">
     <eAnnotations source="gmf.node">
@@ -70,7 +83,7 @@
       <details key="archetype" value="Description"/>
     </eAnnotations>
     <eAnnotations source="MyDSLDoc">
-      <details key="Description" value="Clase abstracta para definir un node"/>
+      <details key="Description" value="Clase que representa a un producto"/>
     </eAnnotations>
     <eStructuralFeatures xsi:type="ecore:EReference" name="productconf" lowerBound="1"
         eType="#//ProductConf" eOpposite="#//ProductConf/product">
@@ -86,9 +99,18 @@
         <details key="tool.name" value="Product configuration"/>
         <details key="tool.description" value="Link a product to it configuration"/>
       </eAnnotations>
+      <eAnnotations source="MyDSLDoc">
+        <details key="Upper bound" value="1"/>
+        <details key="Lower bound" value="1"/>
+      </eAnnotations>
     </eStructuralFeatures>
     <eStructuralFeatures xsi:type="ecore:EReference" name="previous_transaction" upperBound="-1"
-        eType="#//Transaction" eOpposite="#//Transaction/next_product"/>
+        eType="#//Transaction" eOpposite="#//Transaction/next_product">
+      <eAnnotations source="MyDSLDoc">
+        <details key="Upper bound" value="0"/>
+        <details key="Lower bound" value="*"/>
+      </eAnnotations>
+    </eStructuralFeatures>
     <eStructuralFeatures xsi:type="ecore:EReference" name="next_transaction" upperBound="-1"
         eType="#//Transaction" eOpposite="#//Transaction/previous_product">
       <eAnnotations source="gmf.link">
@@ -99,6 +121,10 @@
         <details key="color" value="0,0,0"/>
         <details key="tool.name" value="Next transaction"/>
         <details key="tool.description" value="Link the product to next transaction"/>
+      </eAnnotations>
+      <eAnnotations source="MyDSLDoc">
+        <details key="Upper bound" value="0"/>
+        <details key="Lower bound" value="*"/>
       </eAnnotations>
     </eStructuralFeatures>
   </eClassifiers>
@@ -116,10 +142,15 @@
       <details key="tool.description" value="Create a configuration for transaction"/>
     </eAnnotations>
     <eAnnotations source="MyDSLDoc">
-      <details key="Description" value="Clase abstracta para definir un node"/>
+      <details key="Description" value="Clase que representa a la configuración de una transacción"/>
     </eAnnotations>
-    <eStructuralFeatures xsi:type="ecore:EAttribute" name="repeat" lowerBound="1"
-        eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EInt" defaultValueLiteral="1"/>
+    <eAnnotations source="http://www.eclipse.org/emf/2002/Ecore">
+      <details key="constraints" value="repeatDiferentZero repeatValues"/>
+    </eAnnotations>
+    <eAnnotations source="http://www.eclipse.org/emf/2002/Ecore/OCL/Pivot">
+      <details key="repeatDiferentZero" value="self.repeat &lt;> 0"/>
+      <details key="repeatValues" value="self.repeat = -1 or self.repeat > 0"/>
+    </eAnnotations>
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="final" lowerBound="1" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EBoolean"
         defaultValueLiteral="true"/>
     <eStructuralFeatures xsi:type="ecore:EReference" name="transaction" lowerBound="1"
@@ -138,6 +169,8 @@
         <details key="derivation" value="self.final"/>
       </eAnnotations>
     </eStructuralFeatures>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="repeat" lowerBound="1"
+        eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EInt" defaultValueLiteral="0"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="ProductConf" eSuperTypes="#//Asset">
     <eAnnotations source="http://www.obeo.fr/dsl/dnc/archetype">
@@ -152,17 +185,22 @@
       <details key="tool.name" value="Product Configuration"/>
       <details key="tool.description" value="Create a configuration for product"/>
     </eAnnotations>
+    <eAnnotations source="MyDSLDoc">
+      <details key="Description" value="Clase que representa a la configuración de un producto"/>
+    </eAnnotations>
     <eAnnotations source="http://www.eclipse.org/emf/2002/Ecore">
       <details key="constraints" value="transactionsFinals"/>
     </eAnnotations>
     <eAnnotations source="http://www.eclipse.org/emf/2002/Ecore/OCL/Pivot">
       <details key="transactionsFinals" value="self.product.next_transaction.transactionconf->select(isTransactionInfinite)->size() >= 1 implies self.product.next_transaction.transactionconf->select(isTransactionFinal)->size() >= 1"/>
     </eAnnotations>
-    <eAnnotations source="MyDSLDoc">
-      <details key="Description" value="Clase abstracta para definir un node"/>
-    </eAnnotations>
     <eStructuralFeatures xsi:type="ecore:EReference" name="product" lowerBound="1"
-        upperBound="-1" eType="#//Product" eOpposite="#//Product/productconf"/>
+        upperBound="-1" eType="#//Product" eOpposite="#//Product/productconf">
+      <eAnnotations source="MyDSLDoc">
+        <details key="Upper bound" value="1"/>
+        <details key="Lower bound" value="*"/>
+      </eAnnotations>
+    </eStructuralFeatures>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="RolConf" eSuperTypes="#//Asset">
     <eAnnotations source="gmf.node">
@@ -174,6 +212,9 @@
       <details key="tool.name" value="Rol Configuration"/>
       <details key="tool.description" value="Create a configuration for rol"/>
     </eAnnotations>
+    <eAnnotations source="MyDSLDoc">
+      <details key="Description" value="Clase que representa a la configuración de un rol"/>
+    </eAnnotations>
     <eAnnotations source="http://www.eclipse.org/emf/2002/Ecore">
       <details key="constraints" value="onePermissionTotal noMoreOneEdit noMoreOneView noMoreOneCreate"/>
     </eAnnotations>
@@ -183,9 +224,6 @@
       <details key="noMoreOneView" value="self.permissions->selectByType(View)->size() &lt;= 1"/>
       <details key="noMoreOneCreate" value="self.permissions->selectByType(Create)->size() &lt;= 1"/>
     </eAnnotations>
-    <eAnnotations source="MyDSLDoc">
-      <details key="Description" value="Clase abstracta para definir un node"/>
-    </eAnnotations>
     <eStructuralFeatures xsi:type="ecore:EReference" name="permissions" lowerBound="1"
         upperBound="-1" eType="#//Permission">
       <eAnnotations source="gmf.link">
@@ -194,6 +232,10 @@
         <details key="color" value="220,31,31"/>
         <details key="tool.name" value="Permission of a rol"/>
         <details key="tool.description" value="Link the rol to it permissions"/>
+      </eAnnotations>
+      <eAnnotations source="MyDSLDoc">
+        <details key="Upper bound" value="1"/>
+        <details key="Lower bound" value="*"/>
       </eAnnotations>
     </eStructuralFeatures>
   </eClassifiers>
@@ -223,7 +265,7 @@
       <details key="archetype" value="MomentInterval"/>
     </eAnnotations>
     <eAnnotations source="MyDSLDoc">
-      <details key="Description" value="Clase abstracta para definir un node"/>
+      <details key="Description" value="Clase que representa a un permiso total sobre una propiedad de un asset"/>
     </eAnnotations>
     <eStructuralFeatures xsi:type="ecore:EReference" name="refers" lowerBound="1"
         upperBound="-1" eType="#//Property" eOpposite="#//Property/allow">
@@ -233,6 +275,10 @@
         <details key="color" value="192,192,192"/>
         <details key="tool.name" value="Properties allow"/>
         <details key="tool.description" value="Link the properties that the permission allow"/>
+      </eAnnotations>
+      <eAnnotations source="MyDSLDoc">
+        <details key="Upper bound" value="1"/>
+        <details key="Lower bound" value="*"/>
       </eAnnotations>
     </eStructuralFeatures>
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="name" lowerBound="1" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
@@ -250,7 +296,7 @@
       <details key="archetype" value="MomentInterval"/>
     </eAnnotations>
     <eAnnotations source="MyDSLDoc">
-      <details key="Description" value="Clase abstracta para definir un node"/>
+      <details key="Description" value="Clase que representa a un permiso de editado sobre una propiedad de un asset"/>
     </eAnnotations>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="Create" eSuperTypes="#//Permission">
@@ -266,7 +312,7 @@
       <details key="archetype" value="MomentInterval"/>
     </eAnnotations>
     <eAnnotations source="MyDSLDoc">
-      <details key="Description" value="Clase abstracta para definir un node"/>
+      <details key="Description" value="Clase que representa a un permiso de creación sobre una propiedad de un asset"/>
     </eAnnotations>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="View" eSuperTypes="#//Permission">
@@ -282,7 +328,7 @@
       <details key="archetype" value="MomentInterval"/>
     </eAnnotations>
     <eAnnotations source="MyDSLDoc">
-      <details key="Description" value="Clase abstracta para definir un node"/>
+      <details key="Description" value="Clase que representa a un permiso de lectura sobre una propiedad de un asset"/>
     </eAnnotations>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="System">
@@ -299,17 +345,35 @@
     </eAnnotations>
     <eAnnotations source="MyDSLDoc">
       <details key="Authors" value="Pedro Miguel Carmona Broncano"/>
-      <details key="Last Updated" value="6 abr 2023"/>
+      <details key="Last Updated" value="17 abr 2023"/>
     </eAnnotations>
     <eStructuralFeatures xsi:type="ecore:EReference" name="nodes" upperBound="-1"
-        eType="#//Node" containment="true"/>
+        eType="#//Node" containment="true">
+      <eAnnotations source="MyDSLDoc">
+        <details key="Upper bound" value="0"/>
+        <details key="Lower bound" value="*"/>
+      </eAnnotations>
+    </eStructuralFeatures>
     <eStructuralFeatures xsi:type="ecore:EReference" name="assets" upperBound="-1"
-        eType="#//Asset" containment="true"/>
+        eType="#//Asset" containment="true">
+      <eAnnotations source="MyDSLDoc">
+        <details key="Upper bound" value="0"/>
+        <details key="Lower bound" value="*"/>
+      </eAnnotations>
+    </eStructuralFeatures>
     <eStructuralFeatures xsi:type="ecore:EReference" name="permissions" upperBound="-1"
-        eType="#//Permission" containment="true"/>
+        eType="#//Permission" containment="true">
+      <eAnnotations source="MyDSLDoc">
+        <details key="Upper bound" value="0"/>
+        <details key="Lower bound" value="*"/>
+      </eAnnotations>
+    </eStructuralFeatures>
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="name" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="Property" abstract="true">
+    <eAnnotations source="MyDSLDoc">
+      <details key="Description" value="Clase abstracta que representa a propiedad de un asset"/>
+    </eAnnotations>
     <eAnnotations source="http://www.eclipse.org/emf/2002/Ecore">
       <details key="constraints" value="propertiesAllow noFinalId"/>
     </eAnnotations>
@@ -317,13 +381,15 @@
       <details key="propertiesAllow" value=" (self.oclContainer().oclIsTypeOf(ProductConf) or self.oclContainer().oclIsTypeOf(TransactionConf)) implies self.allow->size() > 0"/>
       <details key="noFinalId" value="self.id.toLower() &lt;> 'final'"/>
     </eAnnotations>
-    <eAnnotations source="MyDSLDoc">
-      <details key="Description" value="Clase abstracta para definir un node"/>
-    </eAnnotations>
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="id" lowerBound="1" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="title" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
     <eStructuralFeatures xsi:type="ecore:EReference" name="allow" upperBound="-1"
-        eType="#//Permission" eOpposite="#//Permission/refers"/>
+        eType="#//Permission" eOpposite="#//Permission/refers">
+      <eAnnotations source="MyDSLDoc">
+        <details key="Upper bound" value="0"/>
+        <details key="Lower bound" value="*"/>
+      </eAnnotations>
+    </eStructuralFeatures>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="Attribute" eSuperTypes="#//Property">
     <eAnnotations source="gmf.node">
@@ -335,13 +401,17 @@
       <details key="tool.description" value="Create a attribute in a configuration"/>
     </eAnnotations>
     <eAnnotations source="MyDSLDoc">
-      <details key="Description" value="Clase abstracta para definir un node"/>
+      <details key="Description" value="Clase que representa a un atributo de un asset"/>
     </eAnnotations>
     <eStructuralFeatures xsi:type="ecore:EReference" name="values" upperBound="-1"
         eType="#//Value" containment="true">
       <eAnnotations source="gmf.compartment">
         <details key="collapsible" value="true"/>
         <details key="layout" value="list"/>
+      </eAnnotations>
+      <eAnnotations source="MyDSLDoc">
+        <details key="Upper bound" value="0"/>
+        <details key="Lower bound" value="*"/>
       </eAnnotations>
     </eStructuralFeatures>
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="type" lowerBound="1" eType="#//EType"/>
@@ -356,13 +426,17 @@
       <details key="tool.description" value="Create a object of attributes in a configuration"/>
     </eAnnotations>
     <eAnnotations source="MyDSLDoc">
-      <details key="Description" value="Clase abstracta para definir un node"/>
+      <details key="Description" value="Clase que representa a un objecto de atributos de un asset"/>
     </eAnnotations>
     <eStructuralFeatures xsi:type="ecore:EReference" name="properties" lowerBound="2"
         upperBound="-1" eType="#//Property" containment="true">
       <eAnnotations source="gmf.compartment">
         <details key="collapsible" value="true"/>
         <details key="layout" value="list"/>
+      </eAnnotations>
+      <eAnnotations source="MyDSLDoc">
+        <details key="Upper bound" value="2"/>
+        <details key="Lower bound" value="*"/>
       </eAnnotations>
     </eStructuralFeatures>
   </eClassifiers>
@@ -376,13 +450,13 @@
       <details key="tool.description" value="Create a value of one attribute"/>
     </eAnnotations>
     <eAnnotations source="MyDSLDoc">
-      <details key="Description" value="Clase abstracta para definir un node"/>
+      <details key="Description" value="Clase que representa a value de un atributo de un asset"/>
     </eAnnotations>
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="name" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EEnum" name="EType">
     <eAnnotations source="MyDSLDoc">
-      <details key="Description" value="Clase abstracta para definir un node"/>
+      <details key="Description" value="Enumeración de los tipos de campos que puede tener una propiedad de un asset"/>
     </eAnnotations>
     <eLiterals name="String"/>
     <eLiterals name="Number" value="1"/>
@@ -401,7 +475,7 @@
       <details key="tool.description" value="Create a temporal transaction"/>
     </eAnnotations>
     <eAnnotations source="MyDSLDoc">
-      <details key="Description" value="Clase abstracta para definir un node"/>
+      <details key="Description" value="Clase que representa a una transacción temporal"/>
     </eAnnotations>
   </eClassifiers>
 </ecore:EPackage>

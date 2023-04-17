@@ -1,3 +1,1 @@
-id;asset_id;login;password_hash;first_name;last_name;email;image_url;activated;lang_key;theme;activation_key;reset_key;created_by;created_date;reset_date;last_modified_by;last_modified_date
-952;Panadero@P2KDUH6rfE;panadero;$2a$10$DTyWb0iLph2ssefRJhbS9OzG5q6Pvha9mgQhIarZSd2EHW6O8girK;Juan;MARTINEZ PACHECHO;juanmp@gmail.com;;True;en;;eSlpo0QWxzFORlrIjunj;;anonymousUser;;;anonymousUser;
-953;Proveedor@T5bTRGXpM0;proveedor;$2a$10$OpudIRW56lHH2Sa4OqnpNeOg4qKEVufDHX40hseYnWFLgbjp6Anae;Maria;RUIZ GOMEZ;mariarg@gmail.com;;True;en;;p9klfqIUTHF6Mq7NnX6H;;anonymousUser;;;anonymousUser;
+id;asset_id;login;password_hash;first_name;last_name;email;image_url;activated;lang_key;theme;created_by;last_modified_by

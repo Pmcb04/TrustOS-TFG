@@ -39,9 +39,16 @@ attribute isTransactionFinal : Boolean[1] { derived transient volatile }
 	initial: self.final;
 }
 
+*Invariante para hacer que repeat sea diferente de 0 y que solo tenga lo valores o -1 o mayor a cero
+invariant repeatDiferentZero: self.repeat <> 0;
+invariant repeatValues: self.repeat = -1 or self.repeat > 0;
+
 				
 PROPERTY
 -----------------
 
 * Invariante para definir que los ProductConf y los TransactionConf deben tener sus propedades enlazadas a algun permiso
 invariant propertiesAllow: (self.oclContainer().oclIsTypeOf(ProductConf) or self.oclContainer().oclIsTypeOf(TransactionConf)) implies self.allow->size() > 0;
+
+*Invariante para definir que ninguna propiedad de ningun asset puede llamarse final, puesto que se utiliza como control para los assets
+invariant noFinalId: self.id.toLower() <> 'final';

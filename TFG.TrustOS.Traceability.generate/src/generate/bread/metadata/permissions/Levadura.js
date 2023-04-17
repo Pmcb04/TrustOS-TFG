@@ -2,13 +2,13 @@ export function permissionsLevadura(rol) {
   let canView = [] 
   let canEdit = []
   switch (rol) {
-		case 'Proveedor':
-		canView = ['marca']
-		canEdit = ['marca']
-		break
 		case 'Panadero':
 		canView = ['marca']
 		canEdit = []
+		break
+		case 'Proveedor':
+		canView = ['marca']
+		canEdit = ['marca']
 		break
 		default:
 		break

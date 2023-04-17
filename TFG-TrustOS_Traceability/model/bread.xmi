@@ -1,83 +1,241 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<TraceabilityMM:System xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:TraceabilityMM="http://www.example.org/TraceabilityMM" name="bread">
-  <nodes xsi:type="TraceabilityMM:Product" name="Sal" productconf="//@assets.5" next_transaction="//@nodes.5"/>
-  <nodes xsi:type="TraceabilityMM:Product" name="Azucar" productconf="//@assets.4" next_transaction="//@nodes.5"/>
-  <nodes xsi:type="TraceabilityMM:Product" name="Aceite" productconf="//@assets.2" next_transaction="//@nodes.5"/>
-  <nodes xsi:type="TraceabilityMM:Product" name="Harina" productconf="//@assets.1" next_transaction="//@nodes.5"/>
-  <nodes xsi:type="TraceabilityMM:Product" name="Levadura" productconf="//@assets.3" next_transaction="//@nodes.5"/>
-  <nodes xsi:type="TraceabilityMM:Transaction" name="RealizarMasa" transactionconf="//@assets.6" next_product="//@nodes.6" previous_product="//@nodes.3 //@nodes.0 //@nodes.1 //@nodes.2 //@nodes.4"/>
-  <nodes xsi:type="TraceabilityMM:Product" name="MasaMadre" productconf="//@assets.7" previous_transaction="//@nodes.5" next_transaction="//@nodes.7"/>
-  <nodes xsi:type="TraceabilityMM:Transaction" name="SepararMasa" transactionconf="//@assets.8" next_product="//@nodes.8" previous_product="//@nodes.6"/>
-  <nodes xsi:type="TraceabilityMM:Product" name="Masa" productconf="//@assets.9" previous_transaction="//@nodes.7" next_transaction="//@nodes.9"/>
-  <nodes xsi:type="TraceabilityMM:Transaction" name="Cocinar" transactionconf="//@assets.10" next_product="//@nodes.10" previous_product="//@nodes.8"/>
-  <nodes xsi:type="TraceabilityMM:Product" name="Pan" productconf="//@assets.11" previous_transaction="//@nodes.9" next_transaction="//@nodes.11"/>
-  <nodes xsi:type="TraceabilityMM:Transaction" name="Vender" transactionconf="//@assets.13" next_product="//@nodes.12" previous_product="//@nodes.10"/>
-  <nodes xsi:type="TraceabilityMM:Product" name="Dinero" productconf="//@assets.14" previous_transaction="//@nodes.11"/>
-  <assets xsi:type="TraceabilityMM:RolConf" type="Panadero" permissions="//@permissions.0 //@permissions.1">
-    <properties xsi:type="TraceabilityMM:Attribute" id="direccion"/>
+<TraceabilityMM:System
+    xmi:version="2.0"
+    xmlns:xmi="http://www.omg.org/XMI"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xmlns:TraceabilityMM="http://www.example.org/TraceabilityMM"
+    name="bread">
+  <nodes xsi:type="TraceabilityMM:Product"
+      name="Sal"
+      productconf="//@assets.5"
+      next_transaction="//@nodes.5"/>
+  <nodes xsi:type="TraceabilityMM:Product"
+      name="Azucar"
+      productconf="//@assets.4"
+      next_transaction="//@nodes.5"/>
+  <nodes xsi:type="TraceabilityMM:Product"
+      name="Aceite"
+      productconf="//@assets.2"
+      next_transaction="//@nodes.5"/>
+  <nodes xsi:type="TraceabilityMM:Product"
+      name="Harina"
+      productconf="//@assets.1"
+      next_transaction="//@nodes.5"/>
+  <nodes xsi:type="TraceabilityMM:Product"
+      name="Levadura"
+      productconf="//@assets.3"
+      next_transaction="//@nodes.5"/>
+  <nodes xsi:type="TraceabilityMM:Transaction"
+      name="RealizarMasa"
+      transactionconf="//@assets.6"
+      next_product="//@nodes.6"
+      previous_product="//@nodes.3 //@nodes.0 //@nodes.1 //@nodes.2 //@nodes.4"/>
+  <nodes xsi:type="TraceabilityMM:Product"
+      name="MasaMadre"
+      productconf="//@assets.7"
+      previous_transaction="//@nodes.5"
+      next_transaction="//@nodes.7"/>
+  <nodes xsi:type="TraceabilityMM:Transaction"
+      name="SepararMasa"
+      transactionconf="//@assets.8"
+      next_product="//@nodes.8"
+      previous_product="//@nodes.6"/>
+  <nodes xsi:type="TraceabilityMM:Product"
+      name="Masa"
+      productconf="//@assets.9"
+      previous_transaction="//@nodes.7"
+      next_transaction="//@nodes.9"/>
+  <nodes xsi:type="TraceabilityMM:Transaction"
+      name="Cocinar"
+      transactionconf="//@assets.10"
+      next_product="//@nodes.10"
+      previous_product="//@nodes.8"/>
+  <nodes xsi:type="TraceabilityMM:Product"
+      name="Pan"
+      productconf="//@assets.11"
+      previous_transaction="//@nodes.9"
+      next_transaction="//@nodes.11"/>
+  <nodes xsi:type="TraceabilityMM:Transaction"
+      name="Vender"
+      transactionconf="//@assets.13"
+      next_product="//@nodes.12"
+      previous_product="//@nodes.10"/>
+  <nodes xsi:type="TraceabilityMM:Product"
+      name="Dinero"
+      productconf="//@assets.14"
+      previous_transaction="//@nodes.11"/>
+  <assets xsi:type="TraceabilityMM:RolConf"
+      type="Panadero"
+      permissions="//@permissions.0 //@permissions.1">
+    <properties
+        xsi:type="TraceabilityMM:Attribute"
+        id="direccion"/>
   </assets>
-  <assets xsi:type="TraceabilityMM:ProductConf" type="Harina" product="//@nodes.3">
-    <properties xsi:type="TraceabilityMM:Attribute" id="Tipo" allow="//@permissions.1 //@permissions.2">
-      <values name="Maiz"/>
-      <values name="Avena"/>
-      <values name="Trigo"/>
-      <values name="Centeno"/>
+  <assets xsi:type="TraceabilityMM:ProductConf"
+      type="Harina"
+      product="//@nodes.3">
+    <properties
+        xsi:type="TraceabilityMM:Attribute"
+        id="Tipo"
+        allow="//@permissions.1 //@permissions.2">
+      <values
+          name="Maiz"/>
+      <values
+          name="Avena"/>
+      <values
+          name="Trigo"/>
+      <values
+          name="Centeno"/>
     </properties>
   </assets>
-  <assets xsi:type="TraceabilityMM:ProductConf" type="Aceite" product="//@nodes.2">
-    <properties xsi:type="TraceabilityMM:Attribute" id="denominacion" allow="//@permissions.1 //@permissions.2">
-      <values name="virgen"/>
-      <values name="virgen extra"/>
+  <assets xsi:type="TraceabilityMM:ProductConf"
+      type="Aceite"
+      product="//@nodes.2">
+    <properties
+        xsi:type="TraceabilityMM:Attribute"
+        id="denominacion"
+        allow="//@permissions.1 //@permissions.2">
+      <values
+          name="virgen"/>
+      <values
+          name="virgen extra"/>
     </properties>
-    <properties xsi:type="TraceabilityMM:Attribute" id="tipo" allow="//@permissions.1 //@permissions.2">
-      <values name="oliva"/>
-      <values name="girasol"/>
-    </properties>
-  </assets>
-  <assets xsi:type="TraceabilityMM:ProductConf" type="Levadura" product="//@nodes.4">
-    <properties xsi:type="TraceabilityMM:Attribute" id="marca" allow="//@permissions.1 //@permissions.2"/>
-  </assets>
-  <assets xsi:type="TraceabilityMM:ProductConf" type="Azucar" product="//@nodes.1">
-    <properties xsi:type="TraceabilityMM:Attribute" id="color" allow="//@permissions.1 //@permissions.2">
-      <values name="blanca"/>
-      <values name="morena"/>
-    </properties>
-  </assets>
-  <assets xsi:type="TraceabilityMM:ProductConf" type="Sal" product="//@nodes.0">
-    <properties xsi:type="TraceabilityMM:Attribute" id="Tipo" allow="//@permissions.1 //@permissions.2">
-      <values name="Marinada"/>
-      <values name="Yodada"/>
-      <values name="Himalaya"/>
+    <properties
+        xsi:type="TraceabilityMM:Attribute"
+        id="tipo"
+        allow="//@permissions.1 //@permissions.2">
+      <values
+          name="oliva"/>
+      <values
+          name="girasol"/>
     </properties>
   </assets>
-  <assets xsi:type="TraceabilityMM:TransactionConf" type="RealizarMasa" transaction="//@nodes.5">
-    <properties xsi:type="TraceabilityMM:Attribute" id="fechaAmasado" allow="//@permissions.0" type="Date"/>
+  <assets xsi:type="TraceabilityMM:ProductConf"
+      type="Levadura"
+      product="//@nodes.4">
+    <properties
+        xsi:type="TraceabilityMM:Attribute"
+        id="marca"
+        allow="//@permissions.1 //@permissions.2"/>
   </assets>
-  <assets xsi:type="TraceabilityMM:ProductConf" type="MasaMadre" product="//@nodes.6">
-    <properties xsi:type="TraceabilityMM:Attribute" id="tiempoReposo" allow="//@permissions.0" type="Decimal"/>
+  <assets xsi:type="TraceabilityMM:ProductConf"
+      type="Azucar"
+      product="//@nodes.1">
+    <properties
+        xsi:type="TraceabilityMM:Attribute"
+        id="color"
+        allow="//@permissions.1 //@permissions.2">
+      <values
+          name="blanca"/>
+      <values
+          name="morena"/>
+    </properties>
   </assets>
-  <assets xsi:type="TraceabilityMM:TransactionConf" type="SepararMasa" repeat="3" transaction="//@nodes.7">
-    <properties xsi:type="TraceabilityMM:Attribute" id="fechaSeparacion" allow="//@permissions.0" type="Date"/>
+  <assets xsi:type="TraceabilityMM:ProductConf"
+      type="Sal"
+      product="//@nodes.0">
+    <properties
+        xsi:type="TraceabilityMM:Attribute"
+        id="Tipo"
+        allow="//@permissions.1 //@permissions.2">
+      <values
+          name="Marinada"/>
+      <values
+          name="Yodada"/>
+      <values
+          name="Himalaya"/>
+    </properties>
   </assets>
-  <assets xsi:type="TraceabilityMM:ProductConf" type="Masa" product="//@nodes.8">
-    <properties xsi:type="TraceabilityMM:Attribute" id="gramos" allow="//@permissions.0"/>
+  <assets xsi:type="TraceabilityMM:TransactionConf"
+      type="RealizarMasa"
+      transaction="//@nodes.5"
+      repeat="1">
+    <properties
+        xsi:type="TraceabilityMM:Attribute"
+        id="fechaAmasado"
+        allow="//@permissions.0"
+        type="Date"/>
   </assets>
-  <assets xsi:type="TraceabilityMM:TransactionConf" type="Cocinar" transaction="//@nodes.9">
-    <properties xsi:type="TraceabilityMM:Attribute" id="fechaCocinado" allow="//@permissions.0" type="Date"/>
+  <assets xsi:type="TraceabilityMM:ProductConf"
+      type="MasaMadre"
+      product="//@nodes.6">
+    <properties
+        xsi:type="TraceabilityMM:Attribute"
+        id="tiempoReposo"
+        allow="//@permissions.0"
+        type="Decimal"/>
   </assets>
-  <assets xsi:type="TraceabilityMM:ProductConf" type="Pan" product="//@nodes.10">
-    <properties xsi:type="TraceabilityMM:Attribute" id="nombre" allow="//@permissions.0"/>
+  <assets xsi:type="TraceabilityMM:TransactionConf"
+      type="SepararMasa"
+      transaction="//@nodes.7"
+      repeat="3">
+    <properties
+        xsi:type="TraceabilityMM:Attribute"
+        id="fechaSeparacion"
+        allow="//@permissions.0"
+        type="Date"/>
   </assets>
-  <assets xsi:type="TraceabilityMM:RolConf" type="Proveedor" permissions="//@permissions.2">
-    <properties xsi:type="TraceabilityMM:Attribute" id="contacto"/>
+  <assets xsi:type="TraceabilityMM:ProductConf"
+      type="Masa"
+      product="//@nodes.8">
+    <properties
+        xsi:type="TraceabilityMM:Attribute"
+        id="gramos"
+        allow="//@permissions.0"/>
   </assets>
-  <assets xsi:type="TraceabilityMM:TransactionConf" type="Vender" transaction="//@nodes.11">
-    <properties xsi:type="TraceabilityMM:Attribute" id="fechaVendido" allow="//@permissions.0" type="Date"/>
+  <assets xsi:type="TraceabilityMM:TransactionConf"
+      type="Cocinar"
+      transaction="//@nodes.9"
+      repeat="1">
+    <properties
+        xsi:type="TraceabilityMM:Attribute"
+        id="fechaCocinado"
+        allow="//@permissions.0"
+        type="Date"/>
   </assets>
-  <assets xsi:type="TraceabilityMM:ProductConf" type="Dinero" product="//@nodes.12">
-    <properties xsi:type="TraceabilityMM:Attribute" id="cantidad" title="" allow="//@permissions.0" type="Decimal"/>
+  <assets xsi:type="TraceabilityMM:ProductConf"
+      type="Pan"
+      product="//@nodes.10">
+    <properties
+        xsi:type="TraceabilityMM:Attribute"
+        id="nombre"
+        allow="//@permissions.0"/>
   </assets>
-  <permissions refers="//@assets.6/@properties.0 //@assets.7/@properties.0 //@assets.8/@properties.0 //@assets.10/@properties.0 //@assets.11/@properties.0 //@assets.13/@properties.0 //@assets.14/@properties.0 //@assets.9/@properties.0" name="panadero"/>
-  <permissions xsi:type="TraceabilityMM:View" refers="//@assets.3/@properties.0 //@assets.2/@properties.0 //@assets.2/@properties.1 //@assets.4/@properties.0 //@assets.5/@properties.0 //@assets.1/@properties.0" name="panadero"/>
-  <permissions refers="//@assets.1/@properties.0 //@assets.5/@properties.0 //@assets.4/@properties.0 //@assets.2/@properties.0 //@assets.2/@properties.1 //@assets.3/@properties.0" name="proveedor"/>
+  <assets xsi:type="TraceabilityMM:RolConf"
+      type="Proveedor"
+      permissions="//@permissions.2">
+    <properties
+        xsi:type="TraceabilityMM:Attribute"
+        id="contacto"/>
+  </assets>
+  <assets xsi:type="TraceabilityMM:TransactionConf"
+      type="Vender"
+      transaction="//@nodes.11"
+      repeat="1">
+    <properties
+        xsi:type="TraceabilityMM:Attribute"
+        id="fechaVendido"
+        allow="//@permissions.0"
+        type="Date"/>
+  </assets>
+  <assets xsi:type="TraceabilityMM:ProductConf"
+      type="Dinero"
+      product="//@nodes.12">
+    <properties
+        xsi:type="TraceabilityMM:Attribute"
+        id="cantidad"
+        title=""
+        allow="//@permissions.0"
+        type="Decimal"/>
+  </assets>
+  <permissions
+      refers="//@assets.6/@properties.0 //@assets.7/@properties.0 //@assets.8/@properties.0 //@assets.10/@properties.0 //@assets.11/@properties.0 //@assets.13/@properties.0 //@assets.14/@properties.0 //@assets.9/@properties.0"
+      name="panadero"/>
+  <permissions
+      xsi:type="TraceabilityMM:View"
+      refers="//@assets.3/@properties.0 //@assets.2/@properties.0 //@assets.2/@properties.1 //@assets.4/@properties.0 //@assets.5/@properties.0 //@assets.1/@properties.0"
+      name="panadero"/>
+  <permissions
+      refers="//@assets.1/@properties.0 //@assets.5/@properties.0 //@assets.4/@properties.0 //@assets.2/@properties.0 //@assets.2/@properties.1 //@assets.3/@properties.0"
+      name="proveedor"/>
 </TraceabilityMM:System>
