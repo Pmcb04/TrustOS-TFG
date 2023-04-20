@@ -1,0 +1,356 @@
+
+<!DOCTYPE html>
+<html lang="es">
+	<head>
+		<meta charset="utf-8">
+		<title>TraceabilityMM</title>
+	
+		<!-- Autores : Pedro Miguel Carmona Broncano && Ruben Marin Lucas -->
+		<!-- Proyecto de la asignatura DMSS -->
+	
+		<link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+	
+	</head>
+
+	<body>
+
+	<p><b>Authors</b> : Pedro Miguel Carmona Broncano</p>
+	<p><b>Last updated</b> : 17 abr 2023</p>
+	<p><img src = "../metamodel/TFG_TrustOS_Traceability.jpg" alt = "TraceabilityDSL" height = "800" /></p>
+	<p><b>Name</b> : TraceabilityMM</p>
+	<p><b>NS Prefix</b> : TraceabilityMM</p>
+	<p><b>NS URI</b> : http://www.example.org/TraceabilityMM</p>
+
+	
+		<span style="background-color:LightGrey">EClass : Node</span> (abstracta) 
+		<p>Descripción : Clase abstracta que repesenta un nodo </p>
+		
+		<ul>
+			<li>(1...1) <b>name</b> : EString </li>
+		</ul>
+
+		<ul>
+		</ul>
+		
+		<ul>
+		</ul>
+		
+		<ul>
+		</ul>
+
+		<span style="background-color:LightGoldenRodYellow">EClass : Transaction</span> extends Node
+		<p>Descripción : Clase que representa una transacción </p>
+		
+		<ul>
+			<li>(1...1) <b>name</b> : EString </li>
+		</ul>
+
+		<ul>
+			<li>(1...1) <b>transaction#transactionconf</b> : TransactionConf  </li>
+			<li>(1...*) <b>previous_transaction#next_product</b> : Product  </li>
+			<li>(0...*) <b>next_transaction#previous_product</b> : Product  </li>
+		</ul>
+		
+		<ul>
+		</ul>
+		
+		<ul>
+		</ul>
+
+		<span style="background-color:LightGoldenRodYellow">EClass : Product</span> extends Node
+		<p>Descripción : Clase que representa a un producto </p>
+		
+		<ul>
+			<li>(1...1) <b>name</b> : EString </li>
+		</ul>
+
+		<ul>
+			<li>(1...1) <b>product#productconf</b> : ProductConf  </li>
+			<li>(0...*) <b>next_product#previous_transaction</b> : Transaction  </li>
+			<li>(0...*) <b>previous_product#next_transaction</b> : Transaction  </li>
+		</ul>
+		
+		<ul>
+		</ul>
+		
+		<ul>
+		</ul>
+
+		<span style="background-color:LightGoldenRodYellow">EClass : TransactionConf</span> extends Asset
+		<p>Descripción : Clase que representa a la configuración de una transacción </p>
+		
+		<ul>
+			<li>(1...1) <b>type</b> : EString </li>
+			<li>(1...1) <b>final</b> : EBoolean </li>
+			<li>(1...1) <b>isTransactionInfinite</b> : EBoolean (derived) = <span style ="color:blue">self.repeat = -1</span></li>
+			<li>(1...1) <b>isTransactionFinal</b> : EBoolean (derived) = <span style ="color:blue">self.final</span></li>
+			<li>(1...1) <b>repeat</b> : EInt </li>
+		</ul>
+
+		<ul>
+			<li>(1...*) <b>transactionconf#transaction</b> : Transaction  </li>
+		</ul>
+		
+		<ul>
+		<li>(1...*) <b>properties</b> : Property (Composition) </li>
+		</ul>
+		
+		<ul>
+			<li>invariant <b>repeatDiferentZero</b> : <span style ="color:blue">self.repeat <> 0</span></li>
+			<li>invariant <b>repeatValues</b> : <span style ="color:blue">self.repeat = -1 or self.repeat > 0</span></li>
+		</ul>
+
+		<span style="background-color:LightGoldenRodYellow">EClass : ProductConf</span> extends Asset
+		<p>Descripción : Clase que representa a la configuración de un producto </p>
+		
+		<ul>
+			<li>(1...1) <b>type</b> : EString </li>
+		</ul>
+
+		<ul>
+			<li>(1...*) <b>productconf#product</b> : Product  </li>
+		</ul>
+		
+		<ul>
+		<li>(1...*) <b>properties</b> : Property (Composition) </li>
+		</ul>
+		
+		<ul>
+			<li>invariant <b>transactionsFinals</b> : <span style ="color:blue">self.product.next_transaction.transactionconf->select(isTransactionInfinite)->size() >= 1 implies self.product.next_transaction.transactionconf->select(isTransactionFinal)->size() >= 1</span></li>
+		</ul>
+
+		<span style="background-color:LightGoldenRodYellow">EClass : RolConf</span> extends Asset
+		<p>Descripción : Clase que representa a la configuración de un rol </p>
+		
+		<ul>
+			<li>(1...1) <b>type</b> : EString </li>
+		</ul>
+
+		<ul>
+			<li>(1...*) <b>permissions</b> : Permission  </li>
+		</ul>
+		
+		<ul>
+		<li>(1...*) <b>properties</b> : Property (Composition) </li>
+		</ul>
+		
+		<ul>
+			<li>invariant <b>onePermissionTotal</b> : <span style ="color:blue">self.permissions->selectByType(Permission)->size() <= 1</span></li>
+			<li>invariant <b>noMoreOneEdit</b> : <span style ="color:blue">self.permissions->selectByType(Edit)->size() <= 1</span></li>
+			<li>invariant <b>noMoreOneView</b> : <span style ="color:blue">self.permissions->selectByType(View)->size() <= 1</span></li>
+			<li>invariant <b>noMoreOneCreate</b> : <span style ="color:blue">self.permissions->selectByType(Create)->size() <= 1</span></li>
+		</ul>
+
+		<span style="background-color:LightGrey">EClass : Asset</span> (abstracta) 
+		<p>Descripción : Clase abstracta para definir un node </p>
+		
+		<ul>
+			<li>(1...1) <b>type</b> : EString </li>
+		</ul>
+
+		<ul>
+			<li>(1...*) <b>properties</b> : Property (Composition) </li>
+		</ul>
+		
+		<ul>
+		</ul>
+		
+		<ul>
+		</ul>
+
+		<span style="background-color:LightGoldenRodYellow">EClass : Permission</span> 
+		<p>Descripción : Clase que representa a un permiso total sobre una propiedad de un asset </p>
+		
+		<ul>
+			<li>(1...1) <b>name</b> : EString </li>
+		</ul>
+
+		<ul>
+			<li>(1...*) <b>allow#refers</b> : Property  </li>
+		</ul>
+		
+		<ul>
+		</ul>
+		
+		<ul>
+		</ul>
+
+		<span style="background-color:LightGoldenRodYellow">EClass : Edit</span> extends Permission
+		<p>Descripción : Clase que representa a un permiso de editado sobre una propiedad de un asset </p>
+		
+		<ul>
+			<li>(1...1) <b>name</b> : EString </li>
+		</ul>
+
+		<ul>
+		</ul>
+		
+		<ul>
+		<li>(1...*) <b>allow#refers</b> : Property  </li>
+		</ul>
+		
+		<ul>
+		</ul>
+
+		<span style="background-color:LightGoldenRodYellow">EClass : Create</span> extends Permission
+		<p>Descripción : Clase que representa a un permiso de creación sobre una propiedad de un asset </p>
+		
+		<ul>
+			<li>(1...1) <b>name</b> : EString </li>
+		</ul>
+
+		<ul>
+		</ul>
+		
+		<ul>
+		<li>(1...*) <b>allow#refers</b> : Property  </li>
+		</ul>
+		
+		<ul>
+		</ul>
+
+		<span style="background-color:LightGoldenRodYellow">EClass : View</span> extends Permission
+		<p>Descripción : Clase que representa a un permiso de lectura sobre una propiedad de un asset </p>
+		
+		<ul>
+			<li>(1...1) <b>name</b> : EString </li>
+		</ul>
+
+		<ul>
+		</ul>
+		
+		<ul>
+		<li>(1...*) <b>allow#refers</b> : Property  </li>
+		</ul>
+		
+		<ul>
+		</ul>
+
+		<span style="background-color:LightGoldenRodYellow">EClass : System</span> 
+		<p>Descripción :  </p>
+		
+		<ul>
+			<li>(0...1) <b>name</b> : EString </li>
+		</ul>
+
+		<ul>
+			<li>(0...*) <b>nodes</b> : Node (Composition) </li>
+			<li>(0...*) <b>assets</b> : Asset (Composition) </li>
+			<li>(0...*) <b>permissions</b> : Permission (Composition) </li>
+		</ul>
+		
+		<ul>
+		</ul>
+		
+		<ul>
+		</ul>
+
+		<span style="background-color:LightGrey">EClass : Property</span> (abstracta) 
+		<p>Descripción : Clase abstracta que representa a propiedad de un asset </p>
+		
+		<ul>
+			<li>(1...1) <b>id</b> : EString </li>
+			<li>(0...1) <b>title</b> : EString </li>
+		</ul>
+
+		<ul>
+			<li>(0...*) <b>refers#allow</b> : Permission  </li>
+		</ul>
+		
+		<ul>
+		</ul>
+		
+		<ul>
+			<li>invariant <b>propertiesAllow</b> : <span style ="color:blue"> (self.oclContainer().oclIsTypeOf(ProductConf) or self.oclContainer().oclIsTypeOf(TransactionConf)) implies self.allow->size() > 0</span></li>
+			<li>invariant <b>noFinalId</b> : <span style ="color:blue">self.id.toLower() <> 'final'</span></li>
+		</ul>
+
+		<span style="background-color:LightGoldenRodYellow">EClass : Attribute</span> extends Property
+		<p>Descripción : Clase que representa a un atributo de un asset </p>
+		
+		<ul>
+			<li>(1...1) <b>id</b> : EString </li>
+			<li>(0...1) <b>title</b> : EString </li>
+			<li>(1...1) <b>type</b> : EType </li>
+		</ul>
+
+		<ul>
+			<li>(0...*) <b>values</b> : Value (Composition) </li>
+		</ul>
+		
+		<ul>
+		<li>(0...*) <b>refers#allow</b> : Permission  </li>
+		</ul>
+		
+		<ul>
+		</ul>
+
+		<span style="background-color:LightGoldenRodYellow">EClass : Object</span> extends Property
+		<p>Descripción : Clase que representa a un objecto de atributos de un asset </p>
+		
+		<ul>
+			<li>(1...1) <b>id</b> : EString </li>
+			<li>(0...1) <b>title</b> : EString </li>
+		</ul>
+
+		<ul>
+			<li>(2...*) <b>properties</b> : Property (Composition) </li>
+		</ul>
+		
+		<ul>
+		<li>(0...*) <b>refers#allow</b> : Permission  </li>
+		</ul>
+		
+		<ul>
+		</ul>
+
+		<span style="background-color:LightGoldenRodYellow">EClass : Value</span> 
+		<p>Descripción : Clase que representa a value de un atributo de un asset </p>
+		
+		<ul>
+			<li>(0...1) <b>name</b> : EString </li>
+		</ul>
+
+		<ul>
+		</ul>
+		
+		<ul>
+		</ul>
+		
+		<ul>
+		</ul>
+
+		<span style="background-color:LightGoldenRodYellow">EClass : TemporalTransaction</span> extends Transaction
+		<p>Descripción : Clase que representa a una transacción temporal </p>
+		
+		<ul>
+			<li>(1...1) <b>name</b> : EString </li>
+		</ul>
+
+		<ul>
+		</ul>
+		
+		<ul>
+		<li>(1...1) <b>transaction#transactionconf</b> : TransactionConf  </li>
+		<li>(1...*) <b>previous_transaction#next_product</b> : Product  </li>
+		<li>(0...*) <b>next_transaction#previous_product</b> : Product  </li>
+		</ul>
+		
+		<ul>
+		</ul>
+
+
+	<span style="background-color:#e6ffe6">EEnum : EType</span> 
+
+		<ul>
+			<li>0 : String</li>
+			<li>1 : Number</li>
+			<li>2 : Decimal</li>
+			<li>3 : Boolean</li>
+			<li>4 : Date</li>
+			<li>5 : Email</li>
+		</ul>
+	
+	
+	</body>
+</html>

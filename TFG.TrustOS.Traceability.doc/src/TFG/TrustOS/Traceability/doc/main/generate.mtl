@@ -78,7 +78,7 @@
 
 	<p><b>Authors</b> : [anEPackage.eClassifiers->select(name = 'System').eAnnotations->select(source = 'MyDSLDoc').details->select(key = 'Authors').value/]</p>
 	<p><b>Last updated</b> : [anEPackage.eClassifiers->select(name = 'System').eAnnotations->select(source = 'MyDSLDoc').details->select(key = 'Last Updated').value/]</p>
-	<p><img src = "../metamodel/dataWebDeskDSL.jpg" alt = "dataWebDeskDSL" height = "800" /></p>
+	<p><img src = "../metamodel/TFG_TrustOS_Traceability.jpg" alt = "TraceabilityDSL" height = "800" /></p>
 	<p><b>Name</b> : [anEPackage.name/]</p>
 	<p><b>NS Prefix</b> : [anEPackage.nsPrefix/]</p>
 	<p><b>NS URI</b> : [anEPackage.nsURI/]</p>
@@ -86,7 +86,7 @@
 	
 	[for (it :  EClass | anEPackage.eClassifiers->selectByType(EClass))]
 		<span style="background-color:[if (it.abstract)]LightGrey[else]LightGoldenRodYellow[/if]">[it.eClass().name/] : [it.name/]</span> [if (it.abstract)](abstracta) [/if] [if(it.eSuperTypes.name->size() < 1)][else]extends [it.eSuperTypes.name/][/if]
-		<p>Description : [it.eAnnotations->select(source = 'MyDSLDoc').details->select(key = 'Description').value/] </p>
+		<p>Descripción : [it.eAnnotations->select(source = 'MyDSLDoc').details->select(key = 'Description').value/] </p>
 		
 		<ul>
 		[for (attr : EAttribute | it.eAllAttributes)]

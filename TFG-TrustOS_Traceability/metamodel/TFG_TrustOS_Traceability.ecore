@@ -154,7 +154,12 @@
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="final" lowerBound="1" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EBoolean"
         defaultValueLiteral="true"/>
     <eStructuralFeatures xsi:type="ecore:EReference" name="transaction" lowerBound="1"
-        upperBound="-1" eType="#//Transaction" eOpposite="#//Transaction/transactionconf"/>
+        upperBound="-1" eType="#//Transaction" eOpposite="#//Transaction/transactionconf">
+      <eAnnotations source="MyDSLDoc">
+        <details key="Upper bound" value="1"/>
+        <details key="Lower bound" value="*"/>
+      </eAnnotations>
+    </eStructuralFeatures>
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="isTransactionInfinite"
         lowerBound="1" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EBoolean"
         volatile="true" transient="true" defaultValueLiteral="false" derived="true">
@@ -249,6 +254,10 @@
       <eAnnotations source="gmf.compartment">
         <details key="collapsible" value="true"/>
         <details key="layout" value="list"/>
+      </eAnnotations>
+      <eAnnotations source="MyDSLDoc">
+        <details key="Upper bound" value="1"/>
+        <details key="Lower bound" value="*"/>
       </eAnnotations>
     </eStructuralFeatures>
   </eClassifiers>
