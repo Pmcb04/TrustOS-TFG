@@ -1,146 +1,48 @@
-# TrustOSTFG
+# Proyecto TFG TrustOS
 
-This application was generated using JHipster 7.9.0, you can find documentation and help at [https://www.jhipster.tech/documentation-archive/v7.9.0](https://www.jhipster.tech/documentation-archive/v7.9.0).
+Proyecto realizado para trabajo de fin de grado en la carrera de Ingeniería Informática en Ingeniería del software en la Universidad de Extremadura. Mayo 2023.
 
-## Project Structure
+Este trabajo consiste en la realización de un metamodelado en Eclipse, para modelar las distintas cadenas de producción que existe, para luego generar una página web que podamos interactuar con esa cadena y lo más importante relizar una trazabilidad de los activos incluidos en ella.
 
-Node is required for generation and recommended for development. `package.json` is always generated for a better development experience with prettier, commit hooks, scripts and so on.
+Para realizar esta trazabilidad utilizaremos blockchain, a través de la API desarrollada por Telefonica, llamada trustOS, la cual se puede consultar la información de esta [en este enlace](https://trustos.readthedocs.io/en/latest/).
 
-In the project root, JHipster generates configuration files for tools like git, prettier, eslint, husky, and others that are well known and you can find references in the web.
 
-`/src/*` structure follows default Java structure.
+## Sobre esta rama
+En esta rama se encuentra la base de una aplicación web realizada para poder interacturar con los modelos generados, para realizar un modelo de una cadena de producción consultar la rama *modeling*.
 
-- `.yo-rc.json` - Yeoman configuration file
-  JHipster configuration is stored in this file at `generator-jhipster` key. You may find `generator-jhipster-*` for specific blueprints configuration.
-- `.yo-resolve` (optional) - Yeoman conflict resolver
-  Allows to use a specific action when conflicts are found skipping prompts for files that matches a pattern. Each line should match `[pattern] [action]` with pattern been a [Minimatch](https://github.com/isaacs/minimatch#minimatch) pattern and action been one of skip (default if ommited) or force. Lines starting with `#` are considered comments and are ignored.
-- `.jhipster/*.json` - JHipster entity configuration files
-- `/src/main/docker` - Docker configurations for the application and services that the application depends on
+## Paginas dentro de la web
 
-## Development
+Una de las primeras págians que nos encontraremos al iniciar la aplicación es la de login y register.
 
-To start your application in the dev profile, run:
+![Login Screen](https://github.com/Pmcb04/TrustOS-TFG/blob/master/assets/img/login.png)
+![Register Screen](https://github.com/Pmcb04/TrustOS-TFG/blob/master/assets/img/register.png)
 
-```
-./gradlew
-```
+En la pantalla de register podremos elegir el rol que queremos registrar e introducir los datos relativos a este, los cuales se guardarán en la blockchain.
 
-For further instructions on how to develop with JHipster, have a look at [Using JHipster in development][].
+Luego de esto, al logearse con el usuario creado, nos encontraremos con la pantalla que lista todos los assets que podemos visualizar.
 
-### JHipster Control Center
+![Assets Screen](https://github.com/Pmcb04/TrustOS-TFG/blob/master/assets/img/assets.png)
 
-JHipster Control Center can help you manage and control your application(s). You can start a local control center server (accessible on http://localhost:7419) with:
+Y pinchando en uno de ellos veremos más información sobre él.
 
-```
-docker-compose -f src/main/docker/jhipster-control-center.yml up
-```
+![Asset View Screen](https://github.com/Pmcb04/TrustOS-TFG/blob/master/assets/img/assetView.png)
 
-## Building for production
+Si pinchamos sobre el botón editar, podemos editar las propiedades del asset, si pinchamos sobre el botón trazabilidad, podemos ver un grafo sobre todo el camino recorrido hasta llegar a el asset que estamos visualizando.
 
-### Packaging as jar
+![Traceability Screen](https://github.com/Pmcb04/TrustOS-TFG/blob/master/assets/img/trazceability.png)
 
-To build the final jar and optimize the TrustOSTFG application for production, run:
+Y si pinchamos sobre los demás botones que se muestran podremos realizar diferentes acciones sobre el asset que se está visualizando.
 
-```
-./gradlew -Pprod clean bootJar
-```
+![Action 1 Screen](https://github.com/Pmcb04/TrustOS-TFG/blob/master/assets/img/assetAction1.png)
+![Action 2 Screen](https://github.com/Pmcb04/TrustOS-TFG/blob/master/assets/img/assetAction2.png)
 
-To ensure everything worked, run:
+Al final nos aparecerá un desglose de como se van cerrando y abriendo nuevos asset en la cadena.
 
-```
-java -jar build/libs/*.jar
-```
+Otra pantalla que podemos ver en la aplicación es la relativa a la pantalla de usuario, en donde podremos editar, datos relativos al rol, datos relativos a su persona un poco más personales como es el nombre y el email y la contraseña del usuario para acceder a la aplicación.
 
-Refer to [Using JHipster in production][] for more details.
+![Profile 1 Screen](https://github.com/Pmcb04/TrustOS-TFG/blob/master/assets/img/profile1.png)
+![Profile 2 Screen](https://github.com/Pmcb04/TrustOS-TFG/blob/master/assets/img/profile2.png)
 
-### Packaging as war
+## Sobre el desarrollo
 
-To package your application as a war in order to deploy it to an application server, run:
-
-```
-./gradlew -Pprod -Pwar clean bootWar
-```
-
-## Testing
-
-To launch your application's tests, run:
-
-```
-./gradlew test integrationTest jacocoTestReport
-```
-
-For more information, refer to the [Running tests page][].
-
-### Code quality
-
-Sonar is used to analyse code quality. You can start a local Sonar server (accessible on http://localhost:9001) with:
-
-```
-docker-compose -f src/main/docker/sonar.yml up -d
-```
-
-Note: we have turned off authentication in [src/main/docker/sonar.yml](src/main/docker/sonar.yml) for out of the box experience while trying out SonarQube, for real use cases turn it back on.
-
-You can run a Sonar analysis with using the [sonar-scanner](https://docs.sonarqube.org/display/SCAN/Analyzing+with+SonarQube+Scanner) or by using the gradle plugin.
-
-Then, run a Sonar analysis:
-
-```
-./gradlew -Pprod clean check jacocoTestReport sonarqube
-```
-
-For more information, refer to the [Code quality page][].
-
-## Using Docker to simplify development (optional)
-
-You can use Docker to improve your JHipster development experience. A number of docker-compose configuration are available in the [src/main/docker](src/main/docker) folder to launch required third party services.
-
-For example, to start a postgresql database in a docker container, run:
-
-```
-docker-compose -f src/main/docker/postgresql.yml up -d
-```
-
-To stop it and remove the container, run:
-
-```
-docker-compose -f src/main/docker/postgresql.yml down
-```
-
-You can also fully dockerize your application and all the services that it depends on.
-To achieve this, first build a docker image of your app by running:
-
-```
-npm run java:docker
-```
-
-Or build a arm64 docker image when using an arm64 processor os like MacOS with M1 processor family running:
-
-```
-npm run java:docker:arm64
-```
-
-Then run:
-
-```
-docker-compose -f src/main/docker/app.yml up -d
-```
-
-When running Docker Desktop on MacOS Big Sur or later, consider enabling experimental `Use the new Virtualization framework` for better processing performance ([disk access performance is worse](https://github.com/docker/roadmap/issues/7)).
-
-For more information refer to [Using Docker and Docker-Compose][], this page also contains information on the docker-compose sub-generator (`jhipster docker-compose`), which is able to generate docker configurations for one or several JHipster applications.
-
-## Continuous Integration (optional)
-
-To configure CI for your project, run the ci-cd sub-generator (`jhipster ci-cd`), this will let you generate configuration files for a number of Continuous Integration systems. Consult the [Setting up Continuous Integration][] page for more information.
-
-[jhipster homepage and latest documentation]: https://www.jhipster.tech
-[jhipster 7.9.0 archive]: https://www.jhipster.tech/documentation-archive/v7.9.0
-[using jhipster in development]: https://www.jhipster.tech/documentation-archive/v7.9.0/development/
-[using docker and docker-compose]: https://www.jhipster.tech/documentation-archive/v7.9.0/docker-compose
-[using jhipster in production]: https://www.jhipster.tech/documentation-archive/v7.9.0/production/
-[running tests page]: https://www.jhipster.tech/documentation-archive/v7.9.0/running-tests/
-[code quality page]: https://www.jhipster.tech/documentation-archive/v7.9.0/code-quality/
-[setting up continuous integration]: https://www.jhipster.tech/documentation-archive/v7.9.0/setting-up-ci/
-[node.js]: https://nodejs.org/
-[npm]: https://www.npmjs.com/
+Si se desea consultar como está realizado el desarrollo mirar el fichero README.jhipster.md
