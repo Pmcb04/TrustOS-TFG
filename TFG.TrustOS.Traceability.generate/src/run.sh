@@ -14,11 +14,14 @@ if [ -d "$DIR" ]; then
 	
 	echo "Introduce ruta donde se va a generar el proyecto"
 	read pathProyecto
-	
-	echo "Generando proyecto [${projects[$numProject]}]..."
 
-	folderProjectApp="$pathProyecto/${projects[$numProject]}"
-	folderProjectGenerate="generate/${projects[$numProject]}"
+	echo $numProyecto
+	echo "${projects[1]}"
+	
+	echo "Generando proyecto [${projects[$numProyecto]}]..."
+
+	folderProjectApp="$pathProyecto/${projects[$numProyecto]}"
+	folderProjectGenerate="generate/${projects[$numProyecto]}"
 	
 	[ -d $folderProjectApp ] && rm -rf $folderProjectApp
 	mkdir $folderProjectApp
