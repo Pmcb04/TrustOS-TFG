@@ -29,7 +29,7 @@ Y pinchando en uno de ellos veremos más información sobre él.
 
 Si pinchamos sobre el botón editar, podemos editar las propiedades del asset, si pinchamos sobre el botón trazabilidad, podemos ver un grafo sobre todo el camino recorrido hasta llegar a el asset que estamos visualizando.
 
-![Traceability Screen](https://github.com/Pmcb04/TrustOS-TFG/blob/master/assets/img/trazceability.png)
+![Traceability Screen](https://github.com/Pmcb04/TrustOS-TFG/blob/master/assets/img/traceability.png)
 
 Y si pinchamos sobre los demás botones que se muestran podremos realizar diferentes acciones sobre el asset que se está visualizando.
 
