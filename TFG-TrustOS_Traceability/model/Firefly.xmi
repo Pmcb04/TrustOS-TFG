@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<TraceabilityMM:System
+    xmi:version="2.0"
+    xmlns:xmi="http://www.omg.org/XMI"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xmlns:TraceabilityMM="http://www.example.org/TraceabilityMM">
+  <nodes xsi:type="TraceabilityMM:Product"
+      name="aceite"
+      productconf="//@assets.0"/>
+  <assets xsi:type="TraceabilityMM:ProductConf"
+      type="Aceite"
+      product="//@nodes.0">
+    <properties
+        xsi:type="TraceabilityMM:Attribute"
+        id="acidez"
+        title="Acidez"/>
+  </assets>
+</TraceabilityMM:System>
