@@ -98,18 +98,18 @@ import React from 'react'
 import { TYPES } from '../../util/nodes-types'
 
 [for (asset : Asset | getAllAssetsUnique(system))]
-import [eliminateWhitespaces(asset.type)/] from './nodes/[eliminateWhitespaces(asset.type)/]'
+import [replaceWhitespaceByUnderline(asset.type)/] from './nodes/[replaceWhitespaceByUnderline(asset.type)/]'
 [/for]
 
 [for (asset : Asset | getAllAssetsUnique(system))]
-import { permissions[eliminateWhitespaces(asset.type)/] } from './permissions/[eliminateWhitespaces(asset.type)/]'
+import { permissions[replaceWhitespaceByUnderline(asset.type)/] } from './permissions/[replaceWhitespaceByUnderline(asset.type)/]'
 [/for]
 
 export function process(data, edit_fields, create, type, rol) {
   switch (type) {
 	[for (asset : Asset | getAllAssetsUnique(system))]
       case TYPES.[replaceWhitespaceByUnderline(asset.type.toUpper())/]:
-        return <[eliminateWhitespaces(asset.type)/] data={data} edit={edit_fields} create={create} rol={rol} />
+        return <[replaceWhitespaceByUnderline(asset.type)/] data={data} edit={edit_fields} create={create} rol={rol} />
 	[/for]
   }
 }
@@ -120,7 +120,7 @@ export function getPermissions(type, rol) {
   switch (type) {
 	[for (asset : Asset | getAllAssetsUnique(system))]
 	case TYPES.[replaceWhitespaceByUnderline(asset.type.toUpper())/]:
-        return permissions[asset.type/](rol)
+        return permissions[replaceWhitespaceByUnderline(asset.type)/](rol)
 	[/for]
 	default: 
     return { canView, canEdit }
@@ -150,7 +150,7 @@ public final class AuthoritiesConstants {
     public static final String ANONYMOUS = "ROLE_ANONYMOUS";
 
 	[for (rol : RolConf | getRoles(system))]
-    public static final String [rol.type.toUpper()/] = "[rol.type.toUpper()/]";
+    public static final String [replaceWhitespaceByUnderline(rol.type.toUpper())/] = "[replaceWhitespaceByUnderline(rol.type.toUpper())/]";
  
 	[/for]
 

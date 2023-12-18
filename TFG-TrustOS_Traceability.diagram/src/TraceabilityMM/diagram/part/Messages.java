@@ -416,12 +416,12 @@ public class Messages extends NLS {
 	/**
 	* @generated
 	*/
-	public static String Productconf4CreationTool_title;
+	public static String Productconfiguration4CreationTool_title;
 
 	/**
 	* @generated
 	*/
-	public static String Productconf4CreationTool_desc;
+	public static String Productconfiguration4CreationTool_desc;
 
 	/**
 	* @generated

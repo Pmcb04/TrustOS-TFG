@@ -22,18 +22,20 @@
         <border xsi:type="gmfgraph:MarginBorder">
           <insets top="5" left="5" bottom="5" right="5"/>
         </border>
-        <children xsi:type="gmfgraph:Label" name="TransactionLabelFigure" text="Transaction"/>
       </actualFigure>
-      <accessors accessor="getFigureTransactionLabelFigure" figure="//@figures.0/@descriptors.0/@actualFigure/@children.0"/>
+    </descriptors>
+    <descriptors name="TransactionLabelFigure">
+      <actualFigure xsi:type="gmfgraph:Label" name="TransactionLabelFigure" text="Transaction"/>
     </descriptors>
     <descriptors name="ProductFigure">
       <actualFigure xsi:type="gmfgraph:SVGFigure" name="ProductFigure" documentURI="platform:/plugin/TFG-TrustOS_Traceability/icons/SVG/product.svg">
         <border xsi:type="gmfgraph:MarginBorder">
           <insets top="5" left="5" bottom="5" right="5"/>
         </border>
-        <children xsi:type="gmfgraph:Label" name="ProductLabelFigure" text="Product"/>
       </actualFigure>
-      <accessors accessor="getFigureProductLabelFigure" figure="//@figures.0/@descriptors.1/@actualFigure/@children.0"/>
+    </descriptors>
+    <descriptors name="ProductLabelFigure">
+      <actualFigure xsi:type="gmfgraph:Label" name="ProductLabelFigure" text="Product"/>
     </descriptors>
     <descriptors name="TransactionConfFigure">
       <actualFigure xsi:type="gmfgraph:RoundedRectangle" name="TransactionConfFigure" lineWidth="0">
@@ -41,13 +43,14 @@
         <border xsi:type="gmfgraph:MarginBorder">
           <insets top="5" left="5" bottom="5" right="5"/>
         </border>
-        <children xsi:type="gmfgraph:Label" name="TransactionConfLabelFigure" text="TransactionConf">
-          <maximumSize dx="10000" dy="50"/>
-        </children>
         <children xsi:type="gmfgraph:Rectangle" name="TransactionConfPropertiesCompartmentFigure" outline="false"/>
       </actualFigure>
-      <accessors accessor="getFigureTransactionConfLabelFigure" figure="//@figures.0/@descriptors.2/@actualFigure/@children.0"/>
-      <accessors accessor="getTransactionConfPropertiesCompartmentFigure" figure="//@figures.0/@descriptors.2/@actualFigure/@children.1"/>
+      <accessors accessor="getTransactionConfPropertiesCompartmentFigure" figure="//@figures.0/@descriptors.4/@actualFigure/@children.0"/>
+    </descriptors>
+    <descriptors name="TransactionConfLabelFigure">
+      <actualFigure xsi:type="gmfgraph:Label" name="TransactionConfLabelFigure" text="TransactionConf">
+        <maximumSize dx="10000" dy="50"/>
+      </actualFigure>
     </descriptors>
     <descriptors name="ProductConfFigure">
       <actualFigure xsi:type="gmfgraph:RoundedRectangle" name="ProductConfFigure" lineWidth="0">
@@ -55,13 +58,14 @@
         <border xsi:type="gmfgraph:MarginBorder">
           <insets top="5" left="5" bottom="5" right="5"/>
         </border>
-        <children xsi:type="gmfgraph:Label" name="ProductConfLabelFigure" text="ProductConf">
-          <maximumSize dx="10000" dy="50"/>
-        </children>
         <children xsi:type="gmfgraph:Rectangle" name="ProductConfPropertiesCompartmentFigure" outline="false"/>
       </actualFigure>
-      <accessors accessor="getFigureProductConfLabelFigure" figure="//@figures.0/@descriptors.3/@actualFigure/@children.0"/>
-      <accessors accessor="getProductConfPropertiesCompartmentFigure" figure="//@figures.0/@descriptors.3/@actualFigure/@children.1"/>
+      <accessors accessor="getProductConfPropertiesCompartmentFigure" figure="//@figures.0/@descriptors.6/@actualFigure/@children.0"/>
+    </descriptors>
+    <descriptors name="ProductConfLabelFigure">
+      <actualFigure xsi:type="gmfgraph:Label" name="ProductConfLabelFigure" text="ProductConf">
+        <maximumSize dx="10000" dy="50"/>
+      </actualFigure>
     </descriptors>
     <descriptors name="RolConfFigure">
       <actualFigure xsi:type="gmfgraph:RoundedRectangle" name="RolConfFigure" lineWidth="0">
@@ -69,49 +73,54 @@
         <border xsi:type="gmfgraph:MarginBorder">
           <insets top="5" left="5" bottom="5" right="5"/>
         </border>
-        <children xsi:type="gmfgraph:Label" name="RolConfLabelFigure" text="RolConf">
-          <maximumSize dx="10000" dy="50"/>
-        </children>
         <children xsi:type="gmfgraph:Rectangle" name="RolConfPropertiesCompartmentFigure" outline="false"/>
       </actualFigure>
-      <accessors accessor="getFigureRolConfLabelFigure" figure="//@figures.0/@descriptors.4/@actualFigure/@children.0"/>
-      <accessors accessor="getRolConfPropertiesCompartmentFigure" figure="//@figures.0/@descriptors.4/@actualFigure/@children.1"/>
+      <accessors accessor="getRolConfPropertiesCompartmentFigure" figure="//@figures.0/@descriptors.8/@actualFigure/@children.0"/>
+    </descriptors>
+    <descriptors name="RolConfLabelFigure">
+      <actualFigure xsi:type="gmfgraph:Label" name="RolConfLabelFigure" text="RolConf">
+        <maximumSize dx="10000" dy="50"/>
+      </actualFigure>
     </descriptors>
     <descriptors name="PermissionFigure">
       <actualFigure xsi:type="gmfgraph:SVGFigure" name="PermissionFigure" documentURI="platform:/plugin/TFG-TrustOS_Traceability/icons/SVG/permission.svg">
         <border xsi:type="gmfgraph:MarginBorder">
           <insets top="5" left="5" bottom="5" right="5"/>
         </border>
-        <children xsi:type="gmfgraph:Label" name="PermissionLabelFigure" text="Permission"/>
       </actualFigure>
-      <accessors accessor="getFigurePermissionLabelFigure" figure="//@figures.0/@descriptors.5/@actualFigure/@children.0"/>
+    </descriptors>
+    <descriptors name="PermissionLabelFigure">
+      <actualFigure xsi:type="gmfgraph:Label" name="PermissionLabelFigure" text="Permission"/>
     </descriptors>
     <descriptors name="EditFigure">
       <actualFigure xsi:type="gmfgraph:SVGFigure" name="EditFigure" documentURI="platform:/plugin/TFG-TrustOS_Traceability/icons/SVG/edit.svg">
         <border xsi:type="gmfgraph:MarginBorder">
           <insets top="5" left="5" bottom="5" right="5"/>
         </border>
-        <children xsi:type="gmfgraph:Label" name="EditLabelFigure" text="Edit"/>
       </actualFigure>
-      <accessors accessor="getFigureEditLabelFigure" figure="//@figures.0/@descriptors.6/@actualFigure/@children.0"/>
+    </descriptors>
+    <descriptors name="EditLabelFigure">
+      <actualFigure xsi:type="gmfgraph:Label" name="EditLabelFigure" text="Edit"/>
     </descriptors>
     <descriptors name="CreateFigure">
       <actualFigure xsi:type="gmfgraph:SVGFigure" name="CreateFigure" documentURI="platform:/plugin/TFG-TrustOS_Traceability/icons/SVG/create.svg">
         <border xsi:type="gmfgraph:MarginBorder">
           <insets top="5" left="5" bottom="5" right="5"/>
         </border>
-        <children xsi:type="gmfgraph:Label" name="CreateLabelFigure" text="Create"/>
       </actualFigure>
-      <accessors accessor="getFigureCreateLabelFigure" figure="//@figures.0/@descriptors.7/@actualFigure/@children.0"/>
+    </descriptors>
+    <descriptors name="CreateLabelFigure">
+      <actualFigure xsi:type="gmfgraph:Label" name="CreateLabelFigure" text="Create"/>
     </descriptors>
     <descriptors name="ViewFigure">
       <actualFigure xsi:type="gmfgraph:SVGFigure" name="ViewFigure" documentURI="platform:/plugin/TFG-TrustOS_Traceability/icons/SVG/view.svg">
         <border xsi:type="gmfgraph:MarginBorder">
           <insets top="5" left="5" bottom="5" right="5"/>
         </border>
-        <children xsi:type="gmfgraph:Label" name="ViewLabelFigure" text="View"/>
       </actualFigure>
-      <accessors accessor="getFigureViewLabelFigure" figure="//@figures.0/@descriptors.8/@actualFigure/@children.0"/>
+    </descriptors>
+    <descriptors name="ViewLabelFigure">
+      <actualFigure xsi:type="gmfgraph:Label" name="ViewLabelFigure" text="View"/>
     </descriptors>
     <descriptors name="AttributeFigure">
       <actualFigure xsi:type="gmfgraph:SVGFigure" name="AttributeFigure" documentURI="platform:/plugin/TFG-TrustOS_Traceability/icons/SVG/attribute.svg">
@@ -123,11 +132,11 @@
         </children>
         <children xsi:type="gmfgraph:Rectangle" name="AttributeValuesCompartmentFigure" outline="false"/>
       </actualFigure>
-      <accessors accessor="getFigureAttributeLabelFigure" figure="//@figures.0/@descriptors.9/@actualFigure/@children.0"/>
-      <accessors accessor="getAttributeValuesCompartmentFigure" figure="//@figures.0/@descriptors.9/@actualFigure/@children.1"/>
+      <accessors accessor="getFigureAttributeLabelFigure" figure="//@figures.0/@descriptors.18/@actualFigure/@children.0"/>
+      <accessors accessor="getAttributeValuesCompartmentFigure" figure="//@figures.0/@descriptors.18/@actualFigure/@children.1"/>
     </descriptors>
     <descriptors name="ObjectFigure">
-      <actualFigure xsi:type="gmfgraph:SVGFigure" name="ObjectFigure" documentURI="platform:/plugin/TFG-TrustOS_Traceability/icons/SVG/objet.svg">
+      <actualFigure xsi:type="gmfgraph:SVGFigure" name="ObjectFigure" documentURI="platform:/plugin/TFG-TrustOS_Traceability/icons/SVG/object.svg">
         <border xsi:type="gmfgraph:MarginBorder">
           <insets top="5" left="5" bottom="5" right="5"/>
         </border>
@@ -136,8 +145,8 @@
         </children>
         <children xsi:type="gmfgraph:Rectangle" name="ObjectPropertiesCompartmentFigure" outline="false"/>
       </actualFigure>
-      <accessors accessor="getFigureObjectLabelFigure" figure="//@figures.0/@descriptors.10/@actualFigure/@children.0"/>
-      <accessors accessor="getObjectPropertiesCompartmentFigure" figure="//@figures.0/@descriptors.10/@actualFigure/@children.1"/>
+      <accessors accessor="getFigureObjectLabelFigure" figure="//@figures.0/@descriptors.19/@actualFigure/@children.0"/>
+      <accessors accessor="getObjectPropertiesCompartmentFigure" figure="//@figures.0/@descriptors.19/@actualFigure/@children.1"/>
     </descriptors>
     <descriptors name="ValueFigure">
       <actualFigure xsi:type="gmfgraph:SVGFigure" name="ValueFigure" documentURI="platform:/plugin/TFG-TrustOS_Traceability/icons/SVG/value.svg">
@@ -146,16 +155,17 @@
         </border>
         <children xsi:type="gmfgraph:Label" name="ValueLabelFigure" text="Value"/>
       </actualFigure>
-      <accessors accessor="getFigureValueLabelFigure" figure="//@figures.0/@descriptors.11/@actualFigure/@children.0"/>
+      <accessors accessor="getFigureValueLabelFigure" figure="//@figures.0/@descriptors.20/@actualFigure/@children.0"/>
     </descriptors>
     <descriptors name="TemporalTransactionFigure">
       <actualFigure xsi:type="gmfgraph:SVGFigure" name="TemporalTransactionFigure" documentURI="platform:/plugin/TFG-TrustOS_Traceability/icons/SVG/temporalTransaction.svg">
         <border xsi:type="gmfgraph:MarginBorder">
           <insets top="5" left="5" bottom="5" right="5"/>
         </border>
-        <children xsi:type="gmfgraph:Label" name="TemporalTransactionLabelFigure" text="TemporalTransaction"/>
       </actualFigure>
-      <accessors accessor="getFigureTemporalTransactionLabelFigure" figure="//@figures.0/@descriptors.12/@actualFigure/@children.0"/>
+    </descriptors>
+    <descriptors name="TemporalTransactionLabelFigure">
+      <actualFigure xsi:type="gmfgraph:Label" name="TemporalTransactionLabelFigure" text="TemporalTransaction"/>
     </descriptors>
     <descriptors name="TransactionTransactionconfFigure">
       <actualFigure xsi:type="gmfgraph:PolylineConnection" name="TransactionTransactionconfFigure" lineKind="LINE_DASH" targetDecoration="//@figures.0/@figures.0">
@@ -225,24 +235,24 @@
   <connections name="ProductNext_transaction" figure="ProductNext_transactionFigure"/>
   <connections name="RolConfPermissions" figure="RolConfPermissionsFigure"/>
   <connections name="PermissionRefers" figure="PermissionRefersFigure"/>
-  <compartments name="TransactionConfPropertiesCompartment" figure="TransactionConfFigure" collapsible="true" accessor="//@figures.0/@descriptors.2/@accessors.1"/>
-  <compartments name="ProductConfPropertiesCompartment" figure="ProductConfFigure" collapsible="true" accessor="//@figures.0/@descriptors.3/@accessors.1"/>
-  <compartments name="RolConfPropertiesCompartment" figure="RolConfFigure" collapsible="true" accessor="//@figures.0/@descriptors.4/@accessors.1"/>
-  <compartments name="AttributeValuesCompartment" figure="AttributeFigure" collapsible="true" accessor="//@figures.0/@descriptors.9/@accessors.1"/>
-  <compartments name="ObjectPropertiesCompartment" figure="ObjectFigure" collapsible="true" accessor="//@figures.0/@descriptors.10/@accessors.1"/>
-  <labels name="TransactionLabel" figure="TransactionFigure" elementIcon="false" accessor="//@figures.0/@descriptors.0/@accessors.0"/>
-  <labels name="ProductLabel" figure="ProductFigure" elementIcon="false" accessor="//@figures.0/@descriptors.1/@accessors.0"/>
-  <labels name="TransactionConfLabel" figure="TransactionConfFigure" accessor="//@figures.0/@descriptors.2/@accessors.0"/>
-  <labels name="ProductConfLabel" figure="ProductConfFigure" accessor="//@figures.0/@descriptors.3/@accessors.0"/>
-  <labels name="RolConfLabel" figure="RolConfFigure" accessor="//@figures.0/@descriptors.4/@accessors.0"/>
-  <labels name="PermissionLabel" figure="PermissionFigure" elementIcon="false" accessor="//@figures.0/@descriptors.5/@accessors.0"/>
-  <labels name="EditLabel" figure="EditFigure" elementIcon="false" accessor="//@figures.0/@descriptors.6/@accessors.0"/>
-  <labels name="CreateLabel" figure="CreateFigure" elementIcon="false" accessor="//@figures.0/@descriptors.7/@accessors.0"/>
-  <labels name="ViewLabel" figure="ViewFigure" elementIcon="false" accessor="//@figures.0/@descriptors.8/@accessors.0"/>
-  <labels name="AttributeLabel" figure="AttributeFigure" elementIcon="false" accessor="//@figures.0/@descriptors.9/@accessors.0"/>
-  <labels name="ObjectLabel" figure="ObjectFigure" elementIcon="false" accessor="//@figures.0/@descriptors.10/@accessors.0"/>
-  <labels name="ValueLabel" figure="ValueFigure" elementIcon="false" accessor="//@figures.0/@descriptors.11/@accessors.0"/>
-  <labels name="TemporalTransactionLabel" figure="TemporalTransactionFigure" elementIcon="false" accessor="//@figures.0/@descriptors.12/@accessors.0"/>
+  <compartments name="TransactionConfPropertiesCompartment" figure="TransactionConfFigure" collapsible="true" accessor="//@figures.0/@descriptors.4/@accessors.0"/>
+  <compartments name="ProductConfPropertiesCompartment" figure="ProductConfFigure" collapsible="true" accessor="//@figures.0/@descriptors.6/@accessors.0"/>
+  <compartments name="RolConfPropertiesCompartment" figure="RolConfFigure" collapsible="true" accessor="//@figures.0/@descriptors.8/@accessors.0"/>
+  <compartments name="AttributeValuesCompartment" figure="AttributeFigure" collapsible="true" accessor="//@figures.0/@descriptors.18/@accessors.1"/>
+  <compartments name="ObjectPropertiesCompartment" figure="ObjectFigure" collapsible="true" accessor="//@figures.0/@descriptors.19/@accessors.1"/>
+  <labels name="TransactionLabel" figure="TransactionLabelFigure" elementIcon="false"/>
+  <labels name="ProductLabel" figure="ProductLabelFigure" elementIcon="false"/>
+  <labels name="TransactionConfLabel" figure="TransactionConfLabelFigure"/>
+  <labels name="ProductConfLabel" figure="ProductConfLabelFigure"/>
+  <labels name="RolConfLabel" figure="RolConfLabelFigure"/>
+  <labels name="PermissionLabel" figure="PermissionLabelFigure" elementIcon="false"/>
+  <labels name="EditLabel" figure="EditLabelFigure" elementIcon="false"/>
+  <labels name="CreateLabel" figure="CreateLabelFigure" elementIcon="false"/>
+  <labels name="ViewLabel" figure="ViewLabelFigure" elementIcon="false"/>
+  <labels name="AttributeLabel" figure="AttributeFigure" elementIcon="false" accessor="//@figures.0/@descriptors.18/@accessors.0"/>
+  <labels name="ObjectLabel" figure="ObjectFigure" elementIcon="false" accessor="//@figures.0/@descriptors.19/@accessors.0"/>
+  <labels name="ValueLabel" figure="ValueFigure" elementIcon="false" accessor="//@figures.0/@descriptors.20/@accessors.0"/>
+  <labels name="TemporalTransactionLabel" figure="TemporalTransactionLabelFigure" elementIcon="false"/>
   <labels name="TransactionTransactionconfExternalLabel" figure="TransactionTransactionconfExternalLabelFigure" elementIcon="false"/>
   <labels name="TransactionNext_productExternalLabel" figure="TransactionNext_productExternalLabelFigure" elementIcon="false"/>
   <labels name="ProductProductconfExternalLabel" figure="ProductProductconfExternalLabelFigure" elementIcon="false"/>

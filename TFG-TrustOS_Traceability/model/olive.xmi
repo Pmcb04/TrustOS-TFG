@@ -1,0 +1,79 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<TraceabilityMM:System xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:TraceabilityMM="http://www.example.org/TraceabilityMM" name="olive">
+  <nodes xsi:type="TraceabilityMM:Product" name="Olive batch phase 3" productconf="//@assets.0" previous_transaction="//@nodes.1" next_transaction="//@nodes.2"/>
+  <nodes xsi:type="TraceabilityMM:Transaction" name="Weighing" transactionconf="//@assets.1" next_product="//@nodes.0" previous_product="//@nodes.15"/>
+  <nodes xsi:type="TraceabilityMM:Transaction" name="Griding" transactionconf="//@assets.4" next_product="//@nodes.16" previous_product="//@nodes.0"/>
+  <nodes xsi:type="TraceabilityMM:Transaction" name="Mixing" transactionconf="//@assets.4" next_product="//@nodes.7" previous_product="//@nodes.16"/>
+  <nodes xsi:type="TraceabilityMM:Transaction" name="Horizontal Centrifugin" transactionconf="//@assets.4" next_product="//@nodes.8" previous_product="//@nodes.7"/>
+  <nodes xsi:type="TraceabilityMM:Transaction" name="Vertical Centrifuging" transactionconf="//@assets.4" next_product="//@nodes.17" previous_product="//@nodes.8"/>
+  <nodes xsi:type="TraceabilityMM:Transaction" name="Decanting" transactionconf="//@assets.4" next_product="//@nodes.9" previous_product="//@nodes.17"/>
+  <nodes xsi:type="TraceabilityMM:Product" name="Olive paste phase 2" productconf="//@assets.14" previous_transaction="//@nodes.3" next_transaction="//@nodes.4"/>
+  <nodes xsi:type="TraceabilityMM:Product" name="Dirty oil phase 1" productconf="//@assets.8" previous_transaction="//@nodes.4" next_transaction="//@nodes.5"/>
+  <nodes xsi:type="TraceabilityMM:Product" name="Clean oil" productconf="//@assets.9" previous_transaction="//@nodes.6" next_transaction="//@nodes.10 //@nodes.12"/>
+  <nodes xsi:type="TraceabilityMM:Transaction" name="Sampling" transactionconf="//@assets.5" next_product="//@nodes.11" previous_product="//@nodes.9"/>
+  <nodes xsi:type="TraceabilityMM:Product" name="Report" productconf="//@assets.6" previous_transaction="//@nodes.10" next_transaction="//@nodes.12"/>
+  <nodes xsi:type="TraceabilityMM:Transaction" name="Packaging" transactionconf="//@assets.2" next_product="//@nodes.14" previous_product="//@nodes.9 //@nodes.11"/>
+  <nodes xsi:type="TraceabilityMM:Transaction" name="Labelling" transactionconf="//@assets.3" next_product="//@nodes.18" previous_product="//@nodes.14"/>
+  <nodes xsi:type="TraceabilityMM:Product" name="Oil bottle phase 1" productconf="//@assets.7" previous_transaction="//@nodes.12" next_transaction="//@nodes.13"/>
+  <nodes xsi:type="TraceabilityMM:Product" name="Olive batch phase 2" productconf="//@assets.0" previous_transaction="//@nodes.20" next_transaction="//@nodes.1"/>
+  <nodes xsi:type="TraceabilityMM:Product" name="Olive paste phase 1" productconf="//@assets.14" previous_transaction="//@nodes.2" next_transaction="//@nodes.3"/>
+  <nodes xsi:type="TraceabilityMM:Product" name="Dirty oil phase 2" productconf="//@assets.8" previous_transaction="//@nodes.5" next_transaction="//@nodes.6"/>
+  <nodes xsi:type="TraceabilityMM:Product" name="Oil bottle phase 2" productconf="//@assets.7" previous_transaction="//@nodes.13"/>
+  <nodes xsi:type="TraceabilityMM:Product" name="Olive batch phase 1" productconf="//@assets.12" next_transaction="//@nodes.20"/>
+  <nodes xsi:type="TraceabilityMM:Transaction" name="Collect" transactionconf="//@assets.10" next_product="//@nodes.15" previous_product="//@nodes.19"/>
+  <assets xsi:type="TraceabilityMM:ProductConf" type="Olive batch" product="//@nodes.0 //@nodes.15">
+    <properties xsi:type="TraceabilityMM:Attribute" id="num_batch" title="Number of batch" allow="//@permissions.1"/>
+    <properties xsi:type="TraceabilityMM:Attribute" id="owner" title="" allow="//@permissions.1"/>
+    <properties xsi:type="TraceabilityMM:Attribute" id="variety_oil" title="Variery of olive" allow="//@permissions.1"/>
+  </assets>
+  <assets xsi:type="TraceabilityMM:TransactionConf" type="Weiging" transaction="//@nodes.1">
+    <properties xsi:type="TraceabilityMM:Attribute" id="num_kg" title="Number of kilos" allow="//@permissions.1" type="Decimal"/>
+  </assets>
+  <assets xsi:type="TraceabilityMM:TransactionConf" type="Packaging" final="false" transaction="//@nodes.12">
+    <properties xsi:type="TraceabilityMM:Attribute" id="date_packaging" title="Date of packaging" allow="//@permissions.1"/>
+  </assets>
+  <assets xsi:type="TraceabilityMM:TransactionConf" type="Labelling" transaction="//@nodes.13">
+    <properties xsi:type="TraceabilityMM:Attribute" id="expirity_date" title="Expirity date" allow="//@permissions.1" type="Date"/>
+  </assets>
+  <assets xsi:type="TraceabilityMM:TransactionConf" type="machine" transaction="//@nodes.2 //@nodes.6 //@nodes.3 //@nodes.5 //@nodes.4">
+    <properties xsi:type="TraceabilityMM:Attribute" id="date_exec" title="Date executed" allow="//@permissions.1" type="Date"/>
+  </assets>
+  <assets xsi:type="TraceabilityMM:TransactionConf" type="Sampling" transaction="//@nodes.10">
+    <properties xsi:type="TraceabilityMM:Attribute" id="date_sampling" title="Date of sampling" allow="//@permissions.1" type="Date"/>
+  </assets>
+  <assets xsi:type="TraceabilityMM:ProductConf" type="Report" product="//@nodes.11">
+    <properties xsi:type="TraceabilityMM:Attribute" id="acidity" title="" allow="//@permissions.1" type="Decimal"/>
+  </assets>
+  <assets xsi:type="TraceabilityMM:ProductConf" type="Oil bottle" product="//@nodes.14 //@nodes.18">
+    <properties xsi:type="TraceabilityMM:Attribute" id="type_oil" title="Type of oil" allow="//@permissions.1">
+      <values name="EVOO"/>
+      <values name="VOO"/>
+    </properties>
+  </assets>
+  <assets xsi:type="TraceabilityMM:ProductConf" type="Dirty oil" product="//@nodes.8 //@nodes.17">
+    <properties xsi:type="TraceabilityMM:Attribute" id="contamination" allow="//@permissions.1" type="Number"/>
+  </assets>
+  <assets xsi:type="TraceabilityMM:ProductConf" type="Clean oil" product="//@nodes.9">
+    <properties xsi:type="TraceabilityMM:Attribute" id="purity" allow="//@permissions.1"/>
+  </assets>
+  <assets xsi:type="TraceabilityMM:TransactionConf" type="Collect" transaction="//@nodes.20">
+    <properties xsi:type="TraceabilityMM:Attribute" id="season" allow="//@permissions.1"/>
+  </assets>
+  <assets xsi:type="TraceabilityMM:RolConf" type="Farmer" permissions="//@permissions.0">
+    <properties xsi:type="TraceabilityMM:Attribute" id="name"/>
+  </assets>
+  <assets xsi:type="TraceabilityMM:ProductConf" type="Olive" product="//@nodes.19">
+    <properties xsi:type="TraceabilityMM:Attribute" id="pick_up_date" allow="//@permissions.0 //@permissions.2" type="Date"/>
+  </assets>
+  <assets xsi:type="TraceabilityMM:RolConf" type="Oil mill" permissions="//@permissions.1 //@permissions.2">
+    <properties xsi:type="TraceabilityMM:Attribute" id="ubication"/>
+    <properties xsi:type="TraceabilityMM:Attribute" id="name"/>
+  </assets>
+  <assets xsi:type="TraceabilityMM:ProductConf" type="Olive paste" product="//@nodes.16 //@nodes.7">
+    <properties xsi:type="TraceabilityMM:Attribute" id="humidity" allow="//@permissions.1"/>
+    <properties xsi:type="TraceabilityMM:Attribute" id="temperature" allow="//@permissions.1"/>
+  </assets>
+  <permissions refers="//@assets.12/@properties.0" name="farmer"/>
+  <permissions refers="//@assets.10/@properties.0 //@assets.0/@properties.0 //@assets.0/@properties.1 //@assets.0/@properties.2 //@assets.1/@properties.0 //@assets.8/@properties.0 //@assets.4/@properties.0 //@assets.9/@properties.0 //@assets.5/@properties.0 //@assets.6/@properties.0 //@assets.2/@properties.0 //@assets.3/@properties.0 //@assets.7/@properties.0 //@assets.14/@properties.0 //@assets.14/@properties.1" name="oli mill"/>
+  <permissions xsi:type="TraceabilityMM:View" refers="//@assets.12/@properties.0" name="oil mill"/>
+</TraceabilityMM:System>

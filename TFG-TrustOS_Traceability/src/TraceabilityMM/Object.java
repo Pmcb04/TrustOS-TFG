@@ -17,7 +17,7 @@ import org.eclipse.emf.common.util.EList;
  * </ul>
  *
  * @see TraceabilityMM.TraceabilityMMPackage#getObject()
- * @model annotation="gmf.node label='id' label.icon='false' figure='svg' svg.uri='platform:/plugin/TFG-TrustOS_Traceability/icons/SVG/objet.svg' tool.name='Object' tool.description='Create a object of attributes in a configuration'"
+ * @model annotation="gmf.node label='id' label.icon='false' figure='svg' svg.uri='platform:/plugin/TFG-TrustOS_Traceability/icons/SVG/object.svg' tool.name='Object' tool.description='Create a object of attributes in a configuration'"
  * @generated
  */
 public interface Object extends Property {

@@ -19,7 +19,7 @@ import org.eclipse.emf.common.util.EList;
  * </ul>
  *
  * @see TraceabilityMM.TraceabilityMMPackage#getTransaction()
- * @model annotation="gmf.node label='name' label.icon='false' figure='svg' svg.uri='platform:/plugin/TFG-TrustOS_Traceability/icons/SVG/transaction.svg' tool.name='Transaction' tool.description='Create a transaction'"
+ * @model annotation="gmf.node label='name' label.icon='false' label.placement='external' figure='svg' svg.uri='platform:/plugin/TFG-TrustOS_Traceability/icons/SVG/transaction.svg' tool.name='Transaction' tool.description='Create a transaction'"
  *        annotation="http://www.obeo.fr/dsl/dnc/archetype archetype='Description'"
  * @generated
  */

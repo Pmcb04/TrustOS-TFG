@@ -62,7 +62,7 @@ public class TraceabilityMMPaletteFactory {
 		paletteContainer.add(createNextproduct1CreationTool());
 		paletteContainer.add(createNexttransaction2CreationTool());
 		paletteContainer.add(createPermissionofarol3CreationTool());
-		paletteContainer.add(createProductconf4CreationTool());
+		paletteContainer.add(createProductconfiguration4CreationTool());
 		paletteContainer.add(createPropertiesallow5CreationTool());
 		paletteContainer.add(createTransactionconfiguration6CreationTool());
 		return paletteContainer;
@@ -316,12 +316,12 @@ public class TraceabilityMMPaletteFactory {
 	/**
 	* @generated
 	*/
-	private ToolEntry createProductconf4CreationTool() {
+	private ToolEntry createProductconfiguration4CreationTool() {
 		DefaultLinkToolEntry entry = new DefaultLinkToolEntry(
-				TraceabilityMM.diagram.part.Messages.Productconf4CreationTool_title,
-				TraceabilityMM.diagram.part.Messages.Productconf4CreationTool_desc, Collections.singletonList(
+				TraceabilityMM.diagram.part.Messages.Productconfiguration4CreationTool_title,
+				TraceabilityMM.diagram.part.Messages.Productconfiguration4CreationTool_desc, Collections.singletonList(
 						TraceabilityMM.diagram.providers.TraceabilityMMElementTypes.ProductProductconf_4003));
-		entry.setId("createProductconf4CreationTool"); //$NON-NLS-1$
+		entry.setId("createProductconfiguration4CreationTool"); //$NON-NLS-1$
 		entry.setSmallIcon(TraceabilityMM.diagram.providers.TraceabilityMMElementTypes.getImageDescriptor(
 				TraceabilityMM.diagram.providers.TraceabilityMMElementTypes.ProductProductconf_4003));
 		entry.setLargeIcon(entry.getSmallIcon());

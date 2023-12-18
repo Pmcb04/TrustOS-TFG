@@ -308,7 +308,7 @@ public class Object2EditPart extends ShapeNodeEditPart {
 		 * @generated
 		 */
 		public ObjectFigure() {
-			this.setURI("platform:/plugin/TFG-TrustOS_Traceability/icons/SVG/objet.svg");
+			this.setURI("platform:/plugin/TFG-TrustOS_Traceability/icons/SVG/object.svg");
 			this.setBorder(new MarginBorder(getMapMode().DPtoLP(5), getMapMode().DPtoLP(5), getMapMode().DPtoLP(5),
 					getMapMode().DPtoLP(5)));
 			createContents();

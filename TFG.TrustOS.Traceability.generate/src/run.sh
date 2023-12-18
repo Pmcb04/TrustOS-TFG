@@ -14,9 +14,6 @@ if [ -d "$DIR" ]; then
 	
 	echo "Introduce ruta donde se va a generar el proyecto"
 	read pathProyecto
-
-	echo $numProyecto
-	echo "${projects[1]}"
 	
 	echo "Generando proyecto [${projects[$numProyecto]}]..."
 

@@ -3,8 +3,12 @@
  */
 package TraceabilityMM.diagram.edit.parts;
 
+import java.util.Collections;
+import java.util.List;
+
 import org.eclipse.draw2d.IFigure;
 import org.eclipse.draw2d.MarginBorder;
+import org.eclipse.draw2d.PositionConstants;
 import org.eclipse.draw2d.RectangleFigure;
 import org.eclipse.draw2d.RoundedRectangle;
 import org.eclipse.draw2d.Shape;
@@ -14,18 +18,22 @@ import org.eclipse.emf.common.notify.Notification;
 import org.eclipse.emf.ecore.EcorePackage;
 import org.eclipse.gef.EditPart;
 import org.eclipse.gef.EditPolicy;
+import org.eclipse.gef.GraphicalEditPart;
 import org.eclipse.gef.Request;
 import org.eclipse.gef.commands.Command;
 import org.eclipse.gef.editpolicies.LayoutEditPolicy;
 import org.eclipse.gef.editpolicies.NonResizableEditPolicy;
+import org.eclipse.gef.handles.MoveHandle;
 import org.eclipse.gef.requests.CreateRequest;
 import org.eclipse.gmf.runtime.diagram.core.edithelpers.CreateElementRequestAdapter;
+import org.eclipse.gmf.runtime.diagram.ui.editparts.AbstractBorderedShapeEditPart;
+import org.eclipse.gmf.runtime.diagram.ui.editparts.IBorderItemEditPart;
 import org.eclipse.gmf.runtime.diagram.ui.editparts.IGraphicalEditPart;
-import org.eclipse.gmf.runtime.diagram.ui.editparts.ShapeNodeEditPart;
+import org.eclipse.gmf.runtime.diagram.ui.editpolicies.BorderItemSelectionEditPolicy;
 import org.eclipse.gmf.runtime.diagram.ui.editpolicies.EditPolicyRoles;
+import org.eclipse.gmf.runtime.diagram.ui.figures.BorderItemLocator;
 import org.eclipse.gmf.runtime.diagram.ui.requests.CreateViewAndElementRequest;
 import org.eclipse.gmf.runtime.draw2d.ui.figures.ConstrainedToolbarLayout;
-import org.eclipse.gmf.runtime.draw2d.ui.figures.WrappingLabel;
 import org.eclipse.gmf.runtime.emf.type.core.IElementType;
 import org.eclipse.gmf.runtime.gef.ui.figures.DefaultSizeNodeFigure;
 import org.eclipse.gmf.runtime.gef.ui.figures.NodeFigure;
@@ -36,7 +44,7 @@ import org.eclipse.swt.graphics.Color;
 /**
  * @generated
  */
-public class ProductConfEditPart extends ShapeNodeEditPart {
+public class ProductConfEditPart extends AbstractBorderedShapeEditPart {
 
 	/**
 	* @generated
@@ -81,6 +89,18 @@ public class ProductConfEditPart extends ShapeNodeEditPart {
 		org.eclipse.gmf.runtime.diagram.ui.editpolicies.LayoutEditPolicy lep = new org.eclipse.gmf.runtime.diagram.ui.editpolicies.LayoutEditPolicy() {
 
 			protected EditPolicy createChildEditPolicy(EditPart child) {
+				View childView = (View) child.getModel();
+				switch (TraceabilityMM.diagram.part.TraceabilityMMVisualIDRegistry.getVisualID(childView)) {
+				case TraceabilityMM.diagram.edit.parts.ProductConfTypeEditPart.VISUAL_ID:
+					return new BorderItemSelectionEditPolicy() {
+
+						protected List createSelectionHandles() {
+							MoveHandle mh = new MoveHandle((GraphicalEditPart) getHost());
+							mh.setBorder(null);
+							return Collections.singletonList(mh);
+						}
+					};
+				}
 				EditPolicy result = child.getEditPolicy(EditPolicy.PRIMARY_DRAG_ROLE);
 				if (result == null) {
 					result = new NonResizableEditPolicy();
@@ -117,11 +137,6 @@ public class ProductConfEditPart extends ShapeNodeEditPart {
 	* @generated
 	*/
 	protected boolean addFixedChild(EditPart childEditPart) {
-		if (childEditPart instanceof TraceabilityMM.diagram.edit.parts.ProductConfTypeEditPart) {
-			((TraceabilityMM.diagram.edit.parts.ProductConfTypeEditPart) childEditPart)
-					.setLabel(getPrimaryShape().getFigureProductConfLabelFigure());
-			return true;
-		}
 		if (childEditPart instanceof TraceabilityMM.diagram.edit.parts.ProductConfProductConfPropertiesCompartmentEditPart) {
 			IFigure pane = getPrimaryShape().getProductConfPropertiesCompartmentFigure();
 			setupContentPane(pane); // FIXME each comparment should handle his content pane in his own way 
@@ -137,9 +152,6 @@ public class ProductConfEditPart extends ShapeNodeEditPart {
 	* @generated
 	*/
 	protected boolean removeFixedChild(EditPart childEditPart) {
-		if (childEditPart instanceof TraceabilityMM.diagram.edit.parts.ProductConfTypeEditPart) {
-			return true;
-		}
 		if (childEditPart instanceof TraceabilityMM.diagram.edit.parts.ProductConfProductConfPropertiesCompartmentEditPart) {
 			IFigure pane = getPrimaryShape().getProductConfPropertiesCompartmentFigure();
 			pane.remove(
@@ -177,7 +189,23 @@ public class ProductConfEditPart extends ShapeNodeEditPart {
 		if (editPart instanceof TraceabilityMM.diagram.edit.parts.ProductConfProductConfPropertiesCompartmentEditPart) {
 			return getPrimaryShape().getProductConfPropertiesCompartmentFigure();
 		}
+		if (editPart instanceof IBorderItemEditPart) {
+			return getBorderedFigure().getBorderItemContainer();
+		}
 		return getContentPane();
+	}
+
+	/**
+	* @generated
+	*/
+	protected void addBorderItem(IFigure borderItemContainer, IBorderItemEditPart borderItemEditPart) {
+		if (borderItemEditPart instanceof TraceabilityMM.diagram.edit.parts.ProductConfTypeEditPart) {
+			BorderItemLocator locator = new BorderItemLocator(getMainFigure(), PositionConstants.SOUTH);
+			locator.setBorderItemOffset(new Dimension(-20, -20));
+			borderItemContainer.add(borderItemEditPart.getFigure(), locator);
+		} else {
+			super.addBorderItem(borderItemContainer, borderItemEditPart);
+		}
 	}
 
 	/**
@@ -196,7 +224,7 @@ public class ProductConfEditPart extends ShapeNodeEditPart {
 	* 
 	* @generated
 	*/
-	protected NodeFigure createNodeFigure() {
+	protected NodeFigure createMainFigure() {
 		NodeFigure figure = createNodePlate();
 		figure.setLayoutManager(new StackLayout());
 		IFigure shape = createNodeShape();
@@ -314,10 +342,6 @@ public class ProductConfEditPart extends ShapeNodeEditPart {
 		/**
 		 * @generated
 		 */
-		private WrappingLabel fFigureProductConfLabelFigure;
-		/**
-		 * @generated
-		 */
 		private RectangleFigure fProductConfPropertiesCompartmentFigure;
 
 		/**
@@ -337,27 +361,12 @@ public class ProductConfEditPart extends ShapeNodeEditPart {
 		 */
 		private void createContents() {
 
-			fFigureProductConfLabelFigure = new WrappingLabel();
-
-			fFigureProductConfLabelFigure.setText("ProductConf");
-			fFigureProductConfLabelFigure
-					.setMaximumSize(new Dimension(getMapMode().DPtoLP(10000), getMapMode().DPtoLP(50)));
-
-			this.add(fFigureProductConfLabelFigure);
-
 			fProductConfPropertiesCompartmentFigure = new RectangleFigure();
 
 			fProductConfPropertiesCompartmentFigure.setOutline(false);
 
 			this.add(fProductConfPropertiesCompartmentFigure);
 
-		}
-
-		/**
-		 * @generated
-		 */
-		public WrappingLabel getFigureProductConfLabelFigure() {
-			return fFigureProductConfLabelFigure;
 		}
 
 		/**

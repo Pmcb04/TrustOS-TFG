@@ -317,6 +317,10 @@ public class TraceabilityMMViewProvider extends AbstractProvider implements IVie
 				FigureUtilities.RGBToInteger(fillRGB));
 		Node label5026 = createLabel(node, TraceabilityMM.diagram.part.TraceabilityMMVisualIDRegistry
 				.getType(TraceabilityMM.diagram.edit.parts.TemporalTransactionNameEditPart.VISUAL_ID));
+		label5026.setLayoutConstraint(NotationFactory.eINSTANCE.createLocation());
+		Location location5026 = (Location) label5026.getLayoutConstraint();
+		location5026.setX(0);
+		location5026.setY(5);
 		return node;
 	}
 
@@ -356,6 +360,10 @@ public class TraceabilityMMViewProvider extends AbstractProvider implements IVie
 				FigureUtilities.RGBToInteger(fillRGB));
 		Node label5001 = createLabel(node, TraceabilityMM.diagram.part.TraceabilityMMVisualIDRegistry
 				.getType(TraceabilityMM.diagram.edit.parts.TransactionNameEditPart.VISUAL_ID));
+		label5001.setLayoutConstraint(NotationFactory.eINSTANCE.createLocation());
+		Location location5001 = (Location) label5001.getLayoutConstraint();
+		location5001.setX(0);
+		location5001.setY(5);
 		return node;
 	}
 
@@ -395,6 +403,10 @@ public class TraceabilityMMViewProvider extends AbstractProvider implements IVie
 				FigureUtilities.RGBToInteger(fillRGB));
 		Node label5002 = createLabel(node, TraceabilityMM.diagram.part.TraceabilityMMVisualIDRegistry
 				.getType(TraceabilityMM.diagram.edit.parts.ProductNameEditPart.VISUAL_ID));
+		label5002.setLayoutConstraint(NotationFactory.eINSTANCE.createLocation());
+		Location location5002 = (Location) label5002.getLayoutConstraint();
+		location5002.setX(0);
+		location5002.setY(5);
 		return node;
 	}
 
@@ -433,6 +445,10 @@ public class TraceabilityMMViewProvider extends AbstractProvider implements IVie
 				FigureUtilities.RGBToInteger(fillRGB));
 		Node label5003 = createLabel(node, TraceabilityMM.diagram.part.TraceabilityMMVisualIDRegistry
 				.getType(TraceabilityMM.diagram.edit.parts.TransactionConfTypeEditPart.VISUAL_ID));
+		label5003.setLayoutConstraint(NotationFactory.eINSTANCE.createLocation());
+		Location location5003 = (Location) label5003.getLayoutConstraint();
+		location5003.setX(0);
+		location5003.setY(5);
 		createCompartment(node, TraceabilityMM.diagram.part.TraceabilityMMVisualIDRegistry.getType(
 				TraceabilityMM.diagram.edit.parts.TransactionConfTransactionConfPropertiesCompartmentEditPart.VISUAL_ID),
 				true, false, true, true);
@@ -474,6 +490,10 @@ public class TraceabilityMMViewProvider extends AbstractProvider implements IVie
 				FigureUtilities.RGBToInteger(fillRGB));
 		Node label5004 = createLabel(node, TraceabilityMM.diagram.part.TraceabilityMMVisualIDRegistry
 				.getType(TraceabilityMM.diagram.edit.parts.ProductConfTypeEditPart.VISUAL_ID));
+		label5004.setLayoutConstraint(NotationFactory.eINSTANCE.createLocation());
+		Location location5004 = (Location) label5004.getLayoutConstraint();
+		location5004.setX(0);
+		location5004.setY(5);
 		createCompartment(node, TraceabilityMM.diagram.part.TraceabilityMMVisualIDRegistry.getType(
 				TraceabilityMM.diagram.edit.parts.ProductConfProductConfPropertiesCompartmentEditPart.VISUAL_ID), true,
 				false, true, true);
@@ -515,6 +535,10 @@ public class TraceabilityMMViewProvider extends AbstractProvider implements IVie
 				FigureUtilities.RGBToInteger(fillRGB));
 		Node label5019 = createLabel(node, TraceabilityMM.diagram.part.TraceabilityMMVisualIDRegistry
 				.getType(TraceabilityMM.diagram.edit.parts.RolConfTypeEditPart.VISUAL_ID));
+		label5019.setLayoutConstraint(NotationFactory.eINSTANCE.createLocation());
+		Location location5019 = (Location) label5019.getLayoutConstraint();
+		location5019.setX(0);
+		location5019.setY(5);
 		createCompartment(node,
 				TraceabilityMM.diagram.part.TraceabilityMMVisualIDRegistry.getType(
 						TraceabilityMM.diagram.edit.parts.RolConfRolConfPropertiesCompartmentEditPart.VISUAL_ID),
@@ -558,6 +582,10 @@ public class TraceabilityMMViewProvider extends AbstractProvider implements IVie
 				FigureUtilities.RGBToInteger(fillRGB));
 		Node label5011 = createLabel(node, TraceabilityMM.diagram.part.TraceabilityMMVisualIDRegistry
 				.getType(TraceabilityMM.diagram.edit.parts.EditNameEditPart.VISUAL_ID));
+		label5011.setLayoutConstraint(NotationFactory.eINSTANCE.createLocation());
+		Location location5011 = (Location) label5011.getLayoutConstraint();
+		location5011.setX(0);
+		location5011.setY(5);
 		return node;
 	}
 
@@ -597,6 +625,10 @@ public class TraceabilityMMViewProvider extends AbstractProvider implements IVie
 				FigureUtilities.RGBToInteger(fillRGB));
 		Node label5012 = createLabel(node, TraceabilityMM.diagram.part.TraceabilityMMVisualIDRegistry
 				.getType(TraceabilityMM.diagram.edit.parts.CreateNameEditPart.VISUAL_ID));
+		label5012.setLayoutConstraint(NotationFactory.eINSTANCE.createLocation());
+		Location location5012 = (Location) label5012.getLayoutConstraint();
+		location5012.setX(0);
+		location5012.setY(5);
 		return node;
 	}
 
@@ -636,6 +668,10 @@ public class TraceabilityMMViewProvider extends AbstractProvider implements IVie
 				FigureUtilities.RGBToInteger(fillRGB));
 		Node label5013 = createLabel(node, TraceabilityMM.diagram.part.TraceabilityMMVisualIDRegistry
 				.getType(TraceabilityMM.diagram.edit.parts.ViewNameEditPart.VISUAL_ID));
+		label5013.setLayoutConstraint(NotationFactory.eINSTANCE.createLocation());
+		Location location5013 = (Location) label5013.getLayoutConstraint();
+		location5013.setX(0);
+		location5013.setY(5);
 		return node;
 	}
 
@@ -675,6 +711,10 @@ public class TraceabilityMMViewProvider extends AbstractProvider implements IVie
 				FigureUtilities.RGBToInteger(fillRGB));
 		Node label5014 = createLabel(node, TraceabilityMM.diagram.part.TraceabilityMMVisualIDRegistry
 				.getType(TraceabilityMM.diagram.edit.parts.PermissionNameEditPart.VISUAL_ID));
+		label5014.setLayoutConstraint(NotationFactory.eINSTANCE.createLocation());
+		Location location5014 = (Location) label5014.getLayoutConstraint();
+		location5014.setX(0);
+		location5014.setY(5);
 		return node;
 	}
 

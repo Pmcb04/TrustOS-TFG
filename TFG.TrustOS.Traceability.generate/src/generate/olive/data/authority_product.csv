@@ -1,0 +1,9 @@
+authority_name;product_id;canCreate
+Oil mill;1;true
+Oil mill;2;true
+Oil mill;3;true
+Oil mill;4;false
+Oil mill;5;true
+Oil mill;6;true
+Oil mill;7;true
+Farmer;4;true

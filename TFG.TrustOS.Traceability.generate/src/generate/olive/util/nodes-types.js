@@ -1,0 +1,17 @@
+export const TYPES = {
+	WEIGING: 'Weiging',
+	DIRTY_OIL: 'Dirty oil',
+	OLIVE_PASTE: 'Olive paste',
+	SAMPLING: 'Sampling',
+	LABELLING: 'Labelling',
+	OLIVE_BATCH: 'Olive batch',
+	OIL_BOTTLE: 'Oil bottle',
+	FARMER: 'Farmer',
+	OIL_MILL: 'Oil mill',
+	PACKAGING: 'Packaging',
+	COLLECT: 'Collect',
+	OLIVE: 'Olive',
+	CLEAN_OIL: 'Clean oil',
+	MACHINE: 'Machine',
+	REPORT: 'Report',
+}

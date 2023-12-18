@@ -19,7 +19,7 @@ import org.eclipse.emf.common.util.EList;
  *
  * @see TraceabilityMM.TraceabilityMMPackage#getProductConf()
  * @model annotation="http://www.obeo.fr/dsl/dnc/archetype archetype='Description'"
- *        annotation="gmf.node label='type' border.width='0' border.color='0,174,102' border.style='solid' svg.uri='platform:/plugin/TFG-TrustOS_Traceability/icons/SVG/productConf.svg' tool.name='Product Configuration' tool.description='Create a configuration for product'"
+ *        annotation="gmf.node label='type' label.placement='external' border.width='0' border.color='0,174,102' border.style='solid' svg.uri='platform:/plugin/TFG-TrustOS_Traceability/icons/SVG/productConf.svg' tool.name='Product Configuration' tool.description='Create a configuration for product'"
  *        annotation="http://www.eclipse.org/emf/2002/Ecore constraints='transactionsFinals'"
  *        annotation="http://www.eclipse.org/emf/2002/Ecore/OCL/Pivot transactionsFinals='self.product.next_transaction.transactionconf-&gt;select(isTransactionInfinite)-&gt;size() &gt;= 1 implies self.product.next_transaction.transactionconf-&gt;select(isTransactionFinal)-&gt;size() &gt;= 1'"
  * @generated

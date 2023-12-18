@@ -23,17 +23,17 @@
  * @param pathSystem : name of folder that begin the page to generate
  */]
 [template private generateComponent(asset : Asset, pathSystem : String)]
-[file ('generate/' + pathSystem + '/metadata/nodes/' + eliminateWhitespaces(asset.type) + '.js', false, 'UTF-8')]
+[file ('generate/' + pathSystem + '/metadata/nodes/' + replaceWhitespaceByUnderline(asset.type) + '.js', false, 'UTF-8')]
 import React, {useEffect} from 'react'
 import Property from '../../property/property'
 import PropertyBox from '../../property-box/property-box'
 import { Select, TextField, Title1, IntegerField, DecimalField, DateTimeField, EmailField, DoubleField, Switch, Box, RowList, Checkbox } from '@telefonica/mistica'
-import { permissions[asset.type/] } from '../permissions/[asset.type/]'
+import { permissions[replaceWhitespaceByUnderline(asset.type)/] } from '../permissions/[replaceWhitespaceByUnderline(asset.type)/]'
 
-function [eliminateWhitespaces(asset.type)/](props) {
+function [replaceWhitespaceByUnderline(asset.type)/](props) {
 
 	const { data, rol, create, edit } = props
-	const { canView, canEdit } = permissions[asset.type/](rol)
+	const { canView, canEdit } = permissions[replaceWhitespaceByUnderline(asset.type)/](rol)
 	[for (property: Property | asset.properties)]
 	[generateStates(property, null, false)/]
 	[/for]
@@ -53,7 +53,7 @@ function [eliminateWhitespaces(asset.type)/](props) {
 	)
 }
 
-export default [eliminateWhitespaces(asset.type)/]
+export default [replaceWhitespaceByUnderline(asset.type)/]
 [/file]
 [/template]
 
@@ -190,8 +190,8 @@ export default [eliminateWhitespaces(asset.type)/]
  * @param pathSystem : name of folder that begin the page to generate
  */]
 [template private generatePermissions(asset: Asset, pathSystem: String)]
-[file ('generate/' +  pathSystem + '/metadata/permissions/' + eliminateWhitespaces(asset.type) + '.js', false, 'UTF-8')]
-export function permissions[eliminateWhitespaces(asset.type)/](rol) {
+[file ('generate/' +  pathSystem + '/metadata/permissions/' + replaceWhitespaceByUnderline(asset.type) + '.js', false, 'UTF-8')]
+export function permissions[replaceWhitespaceByUnderline(asset.type)/](rol) {
   let canView = [ '[' /][ ']' /] 
   let canEdit = [ '[' /][ ']' /]
   switch (rol) {

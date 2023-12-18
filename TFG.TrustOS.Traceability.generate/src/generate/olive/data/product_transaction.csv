@@ -1,0 +1,10 @@
+product_id;transaction_id;authority_name
+1;6;Oil mill
+2;6;Oil mill
+3;1;Oil mill
+3;6;Oil mill
+4;5;Oil mill
+5;2;Oil mill
+5;3;Oil mill
+6;2;Oil mill
+7;4;Oil mill

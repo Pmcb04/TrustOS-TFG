@@ -123,6 +123,10 @@
         <children xmi:type="notation:Node" xmi:id="_aRLykMlmEe2SEaax0w7tKg" type="2003" element="_aQ3pgMlmEe2SEaax0w7tKg">
           <children xmi:type="notation:Node" xmi:id="_aRVjkMlmEe2SEaax0w7tKg" type="5007"/>
           <children xmi:type="notation:Node" xmi:id="_aRVjkclmEe2SEaax0w7tKg" type="7004">
+            <children xmi:type="notation:Node" xmi:id="_OSEoYNnREe2s0Ns8IQmqUw" type="3010" element="_OKKCgNnREe2s0Ns8IQmqUw">
+              <styles xmi:type="notation:FontStyle" xmi:id="_OSEoYdnREe2s0Ns8IQmqUw" fontColor="2697711" fontName="Inter" fontHeight="8"/>
+              <layoutConstraint xmi:type="notation:Location" xmi:id="_OSEoYtnREe2s0Ns8IQmqUw"/>
+            </children>
             <children xmi:type="notation:Node" xmi:id="_h8YjsMlmEe2SEaax0w7tKg" type="3010" element="_h8PZwMlmEe2SEaax0w7tKg">
               <styles xmi:type="notation:FontStyle" xmi:id="_h8YjsclmEe2SEaax0w7tKg" fontColor="2697711" fontName="Inter" fontHeight="8"/>
               <layoutConstraint xmi:type="notation:Location" xmi:id="_h8YjsslmEe2SEaax0w7tKg"/>
@@ -134,10 +138,6 @@
             <children xmi:type="notation:Node" xmi:id="_sF4b8MsWEe2ldtSt56TmWw" type="3010" element="_sEMZ4MsWEe2ldtSt56TmWw">
               <styles xmi:type="notation:FontStyle" xmi:id="_sF4b8csWEe2ldtSt56TmWw" fontColor="7490599" fontName="Inter" fontHeight="8" bold="true"/>
               <layoutConstraint xmi:type="notation:Location" xmi:id="_sF4b8ssWEe2ldtSt56TmWw"/>
-            </children>
-            <children xmi:type="notation:Node" xmi:id="_OSEoYNnREe2s0Ns8IQmqUw" type="3010" element="_OKKCgNnREe2s0Ns8IQmqUw">
-              <styles xmi:type="notation:FontStyle" xmi:id="_OSEoYdnREe2s0Ns8IQmqUw" fontColor="2697711" fontName="Inter" fontHeight="8"/>
-              <layoutConstraint xmi:type="notation:Location" xmi:id="_OSEoYtnREe2s0Ns8IQmqUw"/>
             </children>
             <styles xmi:type="notation:SortingStyle" xmi:id="_aRVjkslmEe2SEaax0w7tKg"/>
             <styles xmi:type="notation:FilteringStyle" xmi:id="_aRVjk8lmEe2SEaax0w7tKg"/>
@@ -746,6 +746,14 @@
         <description xmi:type="style:FlatContainerStyleDescription" href="platform:/plugin/org.eclipse.emf.ecoretools.design/description/ecore.odesign#//@ownedViewpoints[name='Design']/@ownedRepresentations[name='Entities']/@defaultLayer/@containerMappings[name='EC%20EClass']/@style"/>
       </ownedStyle>
       <actualMapping xmi:type="description_1:ContainerMapping" href="platform:/plugin/org.eclipse.emf.ecoretools.design/description/ecore.odesign#//@ownedViewpoints[name='Design']/@ownedRepresentations[name='Entities']/@defaultLayer/@containerMappings[name='EC%20EClass']"/>
+      <ownedElements xmi:type="diagram:DNodeListElement" xmi:id="_OKKCgNnREe2s0Ns8IQmqUw" name="repeat : EInt = 1" tooltipText="">
+        <target xmi:type="ecore:EAttribute" href="TFG_TrustOS_Traceability.ecore#//TransactionConf/repeat"/>
+        <semanticElements xmi:type="ecore:EAttribute" href="TFG_TrustOS_Traceability.ecore#//TransactionConf/repeat"/>
+        <ownedStyle xmi:type="diagram:BundledImage" xmi:id="_UxvagNnREe2s0Ns8IQmqUw" labelAlignment="LEFT" description="_BGIp8MlnEe2SEaax0w7tKg">
+          <labelFormat>bold</labelFormat>
+        </ownedStyle>
+        <actualMapping xmi:type="description_1:NodeMapping" href="platform:/plugin/org.eclipse.emf.ecoretools.design/description/ecore.odesign#//@ownedViewpoints[name='Design']/@ownedRepresentations[name='Entities']/@defaultLayer/@containerMappings[name='EC%20EClass']/@subNodeMappings[name='EC%20EAttribute']"/>
+      </ownedElements>
       <ownedElements xmi:type="diagram:DNodeListElement" xmi:id="_h8PZwMlmEe2SEaax0w7tKg" name="final : EBoolean = true" tooltipText="">
         <target xmi:type="ecore:EAttribute" href="TFG_TrustOS_Traceability.ecore#//TransactionConf/final"/>
         <semanticElements xmi:type="ecore:EAttribute" href="TFG_TrustOS_Traceability.ecore#//TransactionConf/final"/>
@@ -766,14 +774,6 @@
         <target xmi:type="ecore:EAttribute" href="TFG_TrustOS_Traceability.ecore#//TransactionConf/isTransactionFinal"/>
         <semanticElements xmi:type="ecore:EAttribute" href="TFG_TrustOS_Traceability.ecore#//TransactionConf/isTransactionFinal"/>
         <ownedStyle xmi:type="diagram:BundledImage" xmi:id="_sFDVgMsWEe2ldtSt56TmWw" labelColor="39,76,114" labelAlignment="LEFT" description="_sELLwMsWEe2ldtSt56TmWw">
-          <labelFormat>bold</labelFormat>
-        </ownedStyle>
-        <actualMapping xmi:type="description_1:NodeMapping" href="platform:/plugin/org.eclipse.emf.ecoretools.design/description/ecore.odesign#//@ownedViewpoints[name='Design']/@ownedRepresentations[name='Entities']/@defaultLayer/@containerMappings[name='EC%20EClass']/@subNodeMappings[name='EC%20EAttribute']"/>
-      </ownedElements>
-      <ownedElements xmi:type="diagram:DNodeListElement" xmi:id="_OKKCgNnREe2s0Ns8IQmqUw" name="repeat : EInt = 0" tooltipText="">
-        <target xmi:type="ecore:EAttribute" href="TFG_TrustOS_Traceability.ecore#//TransactionConf/repeat"/>
-        <semanticElements xmi:type="ecore:EAttribute" href="TFG_TrustOS_Traceability.ecore#//TransactionConf/repeat"/>
-        <ownedStyle xmi:type="diagram:BundledImage" xmi:id="_UxvagNnREe2s0Ns8IQmqUw" labelAlignment="LEFT" description="_BGIp8MlnEe2SEaax0w7tKg">
           <labelFormat>bold</labelFormat>
         </ownedStyle>
         <actualMapping xmi:type="description_1:NodeMapping" href="platform:/plugin/org.eclipse.emf.ecoretools.design/description/ecore.odesign#//@ownedViewpoints[name='Design']/@ownedRepresentations[name='Entities']/@defaultLayer/@containerMappings[name='EC%20EClass']/@subNodeMappings[name='EC%20EAttribute']"/>

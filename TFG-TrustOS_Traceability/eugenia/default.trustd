@@ -1,0 +1,74 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<TraceabilityMM:System xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:TraceabilityMM="http://www.example.org/TraceabilityMM">
+  <nodes xsi:type="TraceabilityMM:Product" name="Product input" productconf="//@assets.0" next_transaction="//@nodes.1"/>
+  <nodes xsi:type="TraceabilityMM:Transaction" transactionconf="//@assets.2" next_product="//@nodes.2" previous_product="//@nodes.0"/>
+  <nodes xsi:type="TraceabilityMM:Product" name="Product output" productconf="//@assets.1" previous_transaction="//@nodes.1"/>
+  <nodes xsi:type="TraceabilityMM:Product" name="Product input 1" productconf="//@assets.3" next_transaction="//@nodes.7"/>
+  <nodes xsi:type="TraceabilityMM:Product" name="Product input 2" productconf="//@assets.5" next_transaction="//@nodes.7"/>
+  <nodes xsi:type="TraceabilityMM:Product" name="Product input 3" productconf="//@assets.4" next_transaction="//@nodes.7"/>
+  <nodes xsi:type="TraceabilityMM:Product" name="Product output" productconf="//@assets.16" previous_transaction="//@nodes.7"/>
+  <nodes xsi:type="TraceabilityMM:Transaction" next_product="//@nodes.6" previous_product="//@nodes.3 //@nodes.4 //@nodes.5"/>
+  <nodes xsi:type="TraceabilityMM:Product" name="Product input" productconf="//@assets.9" next_transaction="//@nodes.12"/>
+  <nodes xsi:type="TraceabilityMM:Product" name="Product output 1" productconf="//@assets.7" previous_transaction="//@nodes.12"/>
+  <nodes xsi:type="TraceabilityMM:Product" name="Product output 2" productconf="//@assets.6" previous_transaction="//@nodes.12"/>
+  <nodes xsi:type="TraceabilityMM:Product" name="Product output 3" productconf="//@assets.8" previous_transaction="//@nodes.12"/>
+  <nodes xsi:type="TraceabilityMM:Transaction" next_product="//@nodes.9 //@nodes.10 //@nodes.11" previous_product="//@nodes.8"/>
+  <nodes xsi:type="TraceabilityMM:Product" name="Product input 1" productconf="//@assets.10" next_transaction="//@nodes.19"/>
+  <nodes xsi:type="TraceabilityMM:Product" name="Product input 2" productconf="//@assets.11" next_transaction="//@nodes.19"/>
+  <nodes xsi:type="TraceabilityMM:Product" name="Product input 3" productconf="//@assets.12" next_transaction="//@nodes.19"/>
+  <nodes xsi:type="TraceabilityMM:Product" name="Product output 1" productconf="//@assets.13" previous_transaction="//@nodes.19"/>
+  <nodes xsi:type="TraceabilityMM:Product" name="Product output 2" productconf="//@assets.14" previous_transaction="//@nodes.19"/>
+  <nodes xsi:type="TraceabilityMM:Product" name="Product output 3" productconf="//@assets.15" previous_transaction="//@nodes.19"/>
+  <nodes xsi:type="TraceabilityMM:Transaction" next_product="//@nodes.16 //@nodes.17 //@nodes.18" previous_product="//@nodes.13 //@nodes.14 //@nodes.15"/>
+  <assets xsi:type="TraceabilityMM:ProductConf" type="Product input" product="//@nodes.0">
+    <properties xsi:type="TraceabilityMM:Attribute" id="attribute 1"/>
+  </assets>
+  <assets xsi:type="TraceabilityMM:ProductConf" type="Product output" product="//@nodes.2">
+    <properties xsi:type="TraceabilityMM:Attribute" id="attribute 1"/>
+  </assets>
+  <assets xsi:type="TraceabilityMM:TransactionConf" type="Transaction" transaction="//@nodes.1">
+    <properties xsi:type="TraceabilityMM:Attribute" id="atribute 1"/>
+  </assets>
+  <assets xsi:type="TraceabilityMM:ProductConf" type="Product input 1" product="//@nodes.3">
+    <properties xsi:type="TraceabilityMM:Attribute" id="attribute 1"/>
+  </assets>
+  <assets xsi:type="TraceabilityMM:ProductConf" type="Product input 3" product="//@nodes.5">
+    <properties xsi:type="TraceabilityMM:Attribute" id="attribute1"/>
+  </assets>
+  <assets xsi:type="TraceabilityMM:ProductConf" type="Product input 2" product="//@nodes.4">
+    <properties xsi:type="TraceabilityMM:Attribute" id="attribute 1"/>
+  </assets>
+  <assets xsi:type="TraceabilityMM:ProductConf" type="Product output 2" product="//@nodes.10">
+    <properties xsi:type="TraceabilityMM:Attribute" id="attribute 1"/>
+  </assets>
+  <assets xsi:type="TraceabilityMM:ProductConf" type="Product output 1" product="//@nodes.9">
+    <properties xsi:type="TraceabilityMM:Attribute" id="attribute 1"/>
+  </assets>
+  <assets xsi:type="TraceabilityMM:ProductConf" type="Product output 3" product="//@nodes.11">
+    <properties xsi:type="TraceabilityMM:Attribute" id="attribute 1"/>
+  </assets>
+  <assets xsi:type="TraceabilityMM:ProductConf" type="Product input" product="//@nodes.8">
+    <properties xsi:type="TraceabilityMM:Attribute" id="attribute 1"/>
+  </assets>
+  <assets xsi:type="TraceabilityMM:ProductConf" type="Product input 1" product="//@nodes.13">
+    <properties xsi:type="TraceabilityMM:Attribute" id="attribute 1"/>
+  </assets>
+  <assets xsi:type="TraceabilityMM:ProductConf" type="Product input 1" product="//@nodes.14">
+    <properties xsi:type="TraceabilityMM:Attribute" id="attribute 1"/>
+  </assets>
+  <assets xsi:type="TraceabilityMM:ProductConf" type="Product input 3" product="//@nodes.15">
+    <properties xsi:type="TraceabilityMM:Attribute" id="attribute 1"/>
+  </assets>
+  <assets xsi:type="TraceabilityMM:ProductConf" type="Product output 1" product="//@nodes.16">
+    <properties xsi:type="TraceabilityMM:Attribute" id="attribute 1"/>
+  </assets>
+  <assets xsi:type="TraceabilityMM:ProductConf" type="Product output 2" product="//@nodes.17">
+    <properties xsi:type="TraceabilityMM:Attribute" id="attribute 1"/>
+  </assets>
+  <assets xsi:type="TraceabilityMM:ProductConf" type="Porduct output 3" product="//@nodes.18">
+    <properties xsi:type="TraceabilityMM:Attribute" id="attribute 1"/>
+  </assets>
+  <assets xsi:type="TraceabilityMM:ProductConf" type="Product output" product="//@nodes.6">
+    <properties xsi:type="TraceabilityMM:Attribute" id="attribute 1"/>
+  </assets>
+</TraceabilityMM:System>

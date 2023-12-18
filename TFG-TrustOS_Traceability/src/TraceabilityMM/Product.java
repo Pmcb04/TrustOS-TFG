@@ -19,7 +19,7 @@ import org.eclipse.emf.common.util.EList;
  * </ul>
  *
  * @see TraceabilityMM.TraceabilityMMPackage#getProduct()
- * @model annotation="gmf.node label='name' label.icon='false' figure='svg' svg.uri='platform:/plugin/TFG-TrustOS_Traceability/icons/SVG/product.svg' tool.name='Product' tool.description='Create a product'"
+ * @model annotation="gmf.node label='name' label.icon='false' figure='svg' label.placement='external' svg.uri='platform:/plugin/TFG-TrustOS_Traceability/icons/SVG/product.svg' tool.name='Product' tool.description='Create a product'"
  *        annotation="http://www.obeo.fr/dsl/dnc/archetype archetype='Description'"
  * @generated
  */
@@ -38,7 +38,6 @@ public interface Product extends Node {
 	 * @see TraceabilityMM.TraceabilityMMPackage#getProduct_Productconf()
 	 * @see TraceabilityMM.ProductConf#getProduct
 	 * @model opposite="product" required="true"
-	 *        annotation="gmf.link target.decoration='arrow' style='dash' color='0,174,102'"
 	 *        annotation="gmf.link target.decoration='arrow' style='dash' color='0,174,102' tool.name='Product configuration' tool.description='Link a product to it configuration'"
 	 * @generated
 	 */

@@ -1,0 +1,7 @@
+id;name;repeat;final_transaction
+1;Weiging;1;true
+2;Packaging;1;false
+3;Sampling;1;true
+4;Labelling;1;true
+5;Collect;1;true
+6;Machine;1;true

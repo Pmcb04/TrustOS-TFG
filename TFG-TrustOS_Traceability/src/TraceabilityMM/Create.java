@@ -10,7 +10,7 @@ package TraceabilityMM;
  *
  *
  * @see TraceabilityMM.TraceabilityMMPackage#getCreate()
- * @model annotation="gmf.node label='name' label.icon='false' figure='svg' svg.uri='platform:/plugin/TFG-TrustOS_Traceability/icons/SVG/create.svg' tool.name='Permission to create' tool.description='Create a permission to create for a rol'"
+ * @model annotation="gmf.node label='name' label.icon='false' label.placement='external' figure='svg' svg.uri='platform:/plugin/TFG-TrustOS_Traceability/icons/SVG/create.svg' tool.name='Permission to create' tool.description='Create a permission to create for a rol'"
  *        annotation="http://www.obeo.fr/dsl/dnc/archetype archetype='MomentInterval'"
  * @generated
  */

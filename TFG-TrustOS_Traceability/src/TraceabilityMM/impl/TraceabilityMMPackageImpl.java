@@ -1039,6 +1039,7 @@ public class TraceabilityMMPackageImpl extends EPackageImpl implements Traceabil
 		   new String[] {
 			   "label", "name",
 			   "label.icon", "false",
+			   "label.placement", "external",
 			   "figure", "svg",
 			   "svg.uri", "platform:/plugin/TFG-TrustOS_Traceability/icons/SVG/transaction.svg",
 			   "tool.name", "Transaction",
@@ -1051,6 +1052,7 @@ public class TraceabilityMMPackageImpl extends EPackageImpl implements Traceabil
 			   "label", "name",
 			   "label.icon", "false",
 			   "figure", "svg",
+			   "label.placement", "external",
 			   "svg.uri", "platform:/plugin/TFG-TrustOS_Traceability/icons/SVG/product.svg",
 			   "tool.name", "Product",
 			   "tool.description", "Create a product"
@@ -1060,6 +1062,7 @@ public class TraceabilityMMPackageImpl extends EPackageImpl implements Traceabil
 		   source,
 		   new String[] {
 			   "label", "type",
+			   "label.placement", "external",
 			   "border.width", "0",
 			   "border.color", "0,38,175",
 			   "border.style", "solid",
@@ -1072,6 +1075,7 @@ public class TraceabilityMMPackageImpl extends EPackageImpl implements Traceabil
 		   source,
 		   new String[] {
 			   "label", "type",
+			   "label.placement", "external",
 			   "border.width", "0",
 			   "border.color", "0,174,102",
 			   "border.style", "solid",
@@ -1084,6 +1088,7 @@ public class TraceabilityMMPackageImpl extends EPackageImpl implements Traceabil
 		   source,
 		   new String[] {
 			   "label", "type",
+			   "label.placement", "external",
 			   "border.width", "0",
 			   "border.color", "220,31,31",
 			   "border.style", "solid",
@@ -1097,6 +1102,7 @@ public class TraceabilityMMPackageImpl extends EPackageImpl implements Traceabil
 		   new String[] {
 			   "label", "name",
 			   "label.icon", "false",
+			   "label.placement", "external",
 			   "figure", "svg",
 			   "svg.uri", "platform:/plugin/TFG-TrustOS_Traceability/icons/SVG/permission.svg",
 			   "tool.name", "Permission to do all",
@@ -1108,6 +1114,7 @@ public class TraceabilityMMPackageImpl extends EPackageImpl implements Traceabil
 		   new String[] {
 			   "label", "name",
 			   "label.icon", "false",
+			   "label.placement", "external",
 			   "figure", "svg",
 			   "svg.uri", "platform:/plugin/TFG-TrustOS_Traceability/icons/SVG/edit.svg",
 			   "tool.name", "Permission to edit",
@@ -1119,6 +1126,7 @@ public class TraceabilityMMPackageImpl extends EPackageImpl implements Traceabil
 		   new String[] {
 			   "label", "name",
 			   "label.icon", "false",
+			   "label.placement", "external",
 			   "figure", "svg",
 			   "svg.uri", "platform:/plugin/TFG-TrustOS_Traceability/icons/SVG/create.svg",
 			   "tool.name", "Permission to create",
@@ -1130,6 +1138,7 @@ public class TraceabilityMMPackageImpl extends EPackageImpl implements Traceabil
 		   new String[] {
 			   "label", "name",
 			   "label.icon", "false",
+			   "label.placement", "external",
 			   "figure", "svg",
 			   "svg.uri", "platform:/plugin/TFG-TrustOS_Traceability/icons/SVG/view.svg",
 			   "tool.name", "Permission to view",
@@ -1153,7 +1162,7 @@ public class TraceabilityMMPackageImpl extends EPackageImpl implements Traceabil
 			   "label", "id",
 			   "label.icon", "false",
 			   "figure", "svg",
-			   "svg.uri", "platform:/plugin/TFG-TrustOS_Traceability/icons/SVG/objet.svg",
+			   "svg.uri", "platform:/plugin/TFG-TrustOS_Traceability/icons/SVG/object.svg",
 			   "tool.name", "Object",
 			   "tool.description", "Create a object of attributes in a configuration"
 		   });
@@ -1244,14 +1253,6 @@ public class TraceabilityMMPackageImpl extends EPackageImpl implements Traceabil
 			   "color", "0,0,0",
 			   "tool.name", "Next product",
 			   "tool.description", "Link the transaction to next product"
-		   });
-		addAnnotation
-		  (getProduct_Productconf(),
-		   source,
-		   new String[] {
-			   "target.decoration", "arrow",
-			   "style", "dash",
-			   "color", "0,174,102"
 		   });
 		addAnnotation
 		  (getProduct_Productconf(),

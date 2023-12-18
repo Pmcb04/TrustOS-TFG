@@ -23,7 +23,7 @@ import org.eclipse.emf.common.util.EList;
  *
  * @see TraceabilityMM.TraceabilityMMPackage#getTransactionConf()
  * @model annotation="http://www.obeo.fr/dsl/dnc/archetype archetype='MomentInterval'"
- *        annotation="gmf.node label='type' border.width='0' border.color='0,38,175' border.style='solid' svg.uri='platform:/plugin/TFG-TrustOS_Traceability/icons/SVG/transactionConf.svg' tool.name='Transaction Configuration' tool.description='Create a configuration for transaction'"
+ *        annotation="gmf.node label='type' label.placement='external' border.width='0' border.color='0,38,175' border.style='solid' svg.uri='platform:/plugin/TFG-TrustOS_Traceability/icons/SVG/transactionConf.svg' tool.name='Transaction Configuration' tool.description='Create a configuration for transaction'"
  * @generated
  */
 public interface TransactionConf extends Asset {

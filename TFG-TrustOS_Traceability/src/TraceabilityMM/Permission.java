@@ -20,7 +20,7 @@ import org.eclipse.emf.ecore.EObject;
  * </ul>
  *
  * @see TraceabilityMM.TraceabilityMMPackage#getPermission()
- * @model annotation="gmf.node label='name' label.icon='false' figure='svg' svg.uri='platform:/plugin/TFG-TrustOS_Traceability/icons/SVG/permission.svg' tool.name='Permission to do all' tool.description='Create a permission to do all for a rol'"
+ * @model annotation="gmf.node label='name' label.icon='false' label.placement='external' figure='svg' svg.uri='platform:/plugin/TFG-TrustOS_Traceability/icons/SVG/permission.svg' tool.name='Permission to do all' tool.description='Create a permission to do all for a rol'"
  *        annotation="http://www.obeo.fr/dsl/dnc/archetype archetype='MomentInterval'"
  * @generated
  */
